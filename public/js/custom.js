@@ -1,6 +1,6 @@
 (function ($) {
 	"use strict";
-	
+
 	//Hide Loading Box (Preloader)
 	function handlePreloader() {
 		if($('.preloader').length){
@@ -16,14 +16,14 @@
 			});
 		};
 	}
-	// sticky header 
+	// sticky header
 	function stickyHeader () {
 		var headerScrollPos = $('header').next().offset().top;
 		if($(window).scrollTop() > headerScrollPos) {
-			$('header').addClass('header-fixed gradient-overlay'); 
+			$('header').addClass('header-fixed gradient-overlay');
 		}
 		else if($(this).scrollTop() <= headerScrollPos) {
-			$('header').removeClass('header-fixed gradient-overlay'); 
+			$('header').removeClass('header-fixed gradient-overlay');
 		}
 	}
 	function SmoothMenuScroll () {
@@ -65,21 +65,21 @@
 	        $('.mainmenu li:first').addClass('current');
 	    }
 	}
-	// gallery fancybox activator 
+	// gallery fancybox activator
     function GalleryFancyboxActivator () {
     	var galleryFcb = $('.fancybox');
     	if(galleryFcb.length){
     		galleryFcb.fancybox();
     	}
     }
-    // upcoming event filter 
+    // upcoming event filter
     function upcomingEventFilter () {
     	var upcomingEventFilterContent = $('#upcoming-event .tab-content-wrap');
     	if (upcomingEventFilterContent) {
 	    	upcomingEventFilterContent.mixItUp();
     	};
     }
-    // testimonial slider 
+    // testimonial slider
     function testimonialSlide () {
     	var sliderContainer = $('.testimonial-slide');
     	var customPager = $('.testimonial.custom-pager li[data-slide-index]');
@@ -92,7 +92,7 @@
 				autoHover: true,
 		    	minSlides: 1,
 		    	onSlideNext: function () {
-		    		var current = slider.getCurrentSlide();		    		
+		    		var current = slider.getCurrentSlide();
 					customPager.each(function () {
 						var Slef = $(this);
 						var slideIndex = $(this).data('slide-index');
@@ -155,21 +155,21 @@
 			});
     	}
     }
-    // twitter feed widget 
-    function twitterFeedWidget () {
-    	if ($('.twitter').length) {
-    		$.ajax({
-	            method: "POST",
-	            url: "includes/twitter/tweet-api.php",
-	            data: {}
-	        })
-	        .done(function(msg) {
-	            $(".twitter").append(function () {
-	            	return msg;
-	            });
-	        });
-    	};
-    }
+    // twitter feed widget
+    // function twitterFeedWidget () {
+    // 	if ($('.twitter').length) {
+    // 		$.ajax({
+	  //           method: "POST",
+	  //           url: "includes/twitter/tweet-api.php",
+	  //           data: {}
+	  //       })
+	  //       .done(function(msg) {
+	  //           $(".twitter").append(function () {
+	  //           	return msg;
+	  //           });
+	  //       });
+    // 	};
+    // }
     function CounterNumberChanger () {
 		var timer = $('.timer');
 		if(timer.length) {
@@ -206,7 +206,7 @@
 					});
 
 				});
-				Self.appear(function () {					
+				Self.appear(function () {
 					Self.circleProgress({
 						value: value,
 						size: size,
@@ -247,7 +247,7 @@
 			});
 		}
 	}
-	// revolution slider 
+	// revolution slider
 	function revolutionSliderActiver () {
 		var banner = $('#banner .banner');
 		if (banner.length) {
@@ -333,7 +333,7 @@
 			});
 		};
 	}
-	// wow activator 
+	// wow activator
 	function wowActivator () {
 		var wow = new WOW ({
     		offset: 0
@@ -378,7 +378,7 @@
 						required: true
 					}
 				},
-				submitHandler: function (form) { 
+				submitHandler: function (form) {
 					// sending value with ajax request
 					$.post($(form).attr('action'), $(form).serialize(), function (response) {
 						$(form).parent('div').append(response);
@@ -400,7 +400,7 @@
 		upcomingEventFilter();
 		testimonialSlide();
 		sponsorLogo();
-		twitterFeedWidget();
+		// twitterFeedWidget();
 		CounterNumberChanger();
 		expertizeRoundCircle();
 		featureListTab();
