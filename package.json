@@ -1,0 +1,33 @@
+{
+  "name": "danktickets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "build": "browserify ./public/js/services/createService.js -o ./public/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arik92/danktickets.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arik92/danktickets/issues"
+  },
+  "homepage": "https://github.com/Arik92/danktickets#readme",
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.3",
+    "angular": "^1.6.5",
+    "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.15.4",
+    "express-session": "^1.15.4",
+    "font-awesome": "^4.7.0",
+    "mongoose": "^4.11.4",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  }
+}
