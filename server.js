@@ -32,5 +32,5 @@ app.use(function(err, req, res, next) {
 
 
 app.listen(8000, function() {
-  console.log("Fullstack project. Listening on 8000.");
+  console.log("Dank tickets, tick-it-up! Listening on 8000.");
 });
