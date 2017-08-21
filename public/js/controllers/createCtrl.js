@@ -103,18 +103,44 @@ function writeMapScript() {
   // document.body.appendChild(script);
 
   }
-/////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
-function addScript( src ) {
-  var s = document.createElement( 'script' );
-  s.setAttribute( 'src', src );
-  document.body.appendChild( s );
-}//addScript
+  function addScript( src ) {
+    var s = document.createElement( 'script' );
+    s.setAttribute( 'src', src );
+    document.body.appendChild( s );
+  }//addScript
 
-//calling the addScript function
-var mapSrc = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places";
-addScript(mapSrc);
-//when the window has finished loading all the scripts, only THEN call autocomplete()
-window.onload = function(){
-  initAutocomplete();
-}
+  //calling the addScript function
+  var mapSrc = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places";
+  addScript(mapSrc);
+  //when the window has finished loading all the scripts, only THEN call autocomplete()
+  window.onload = function(){
+    initAutocomplete();
+  }
+/////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
+
+///////////////////////////////////////////form validation ////////////////////////////////////////////////////////
+function checkNames() {
+    var patt = /w+/;
+    if (!$scope.eName) {
+      alert("fill enter an event name");
+      return false;
+    }
+    return true;
+  }//checkNames
+
+$scope.validate = function() {
+  // var validCheck=true;
+  // validCheck = checkNames();
+  //
+  // if (ok) {
+  //   //makeEvent();
+  // }//if
+  console.log("image ", document.getElementById('fileItem').files[0]);
+  console.log("starting date", $scope.startDate);
+  console.log("end date", $scope.endDate);
+}//validate
+
+///////////////////////////////////////////form validation ////////////////////////////////////////////////////////
+
+
 }]);
