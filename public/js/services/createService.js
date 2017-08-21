@@ -1,5 +1,5 @@
 app.factory('createService', function(){
-  // var config = require('../config.js');
+  //  var config = require('../config.js');
   var currentTickets = [];
 
   function getTempTicks() {
@@ -13,6 +13,9 @@ app.factory('createService', function(){
   function deleteTempTick(index) {
     currentTickets.splice(index, 1);
   }
+  // function getKey() {
+  //   return config.MAPS_API_KEY;
+  // };
   return {
     getTempTicks: getTempTicks,
     addticket: addticket,

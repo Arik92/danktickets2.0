@@ -44,9 +44,6 @@ app.controller('createCtrl',['createService','$scope' , function(createService, 
 function initAutocomplete() {
   // Create the autocomplete object, restricting the search to geographical
   // location types.
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyC_eBhhNCMbLP2jTOwrbaa9tu2KSn02jzs&libraries=places";
   autocomplete = new google.maps.places.Autocomplete(
     /** @type {!HTMLInputElement} */
     (document.getElementById('autocomplete')), {
@@ -98,8 +95,26 @@ $scope.getDistanceFromLatLonInKm = function(lat1, lon1, lat2, lon2) {
 function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
-initAutocomplete();
-// $scope.mapKey = createService.getKey();
-/////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
+function writeMapScript() {
+  var src = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places";
+  document.body.innerHTML+="<script src="+src+"</script>";
+  var script = document.createElement("script");
+   script.type = 'text/javascript';
+  // document.body.appendChild(script);
 
+  }
+/////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
+function addScript( src ) {
+  var s = document.createElement( 'script' );
+  s.setAttribute( 'src', src );
+  document.body.appendChild( s );
+}//addScript
+
+//calling the addScript function
+var mapSrc = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places";
+addScript(mapSrc);
+//when the window has finished loading all the scripts, only THEN call autocomplete()
+window.onload = function(){
+  initAutocomplete();
+}
 }]);
