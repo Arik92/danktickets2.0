@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "build": "browserify ./public/js/services/createService.js -o ./public/bundle.js"
+    "build": "browserify ./public/js/controllers/createCtrl.js -o ./public/bundle.js"
   },
   "repository": {
     "type": "git",

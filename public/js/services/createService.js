@@ -1,5 +1,5 @@
 app.factory('createService', function(){
-  var config = require('../config.js');
+  // var config = require('../config.js');
   var currentTickets = [];
 
   function getTempTicks() {

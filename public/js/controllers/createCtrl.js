@@ -3,6 +3,9 @@ app.controller('createCtrl',['createService','$scope' , function(createService, 
   //   // createService.createInstance
   //
   // }//makeTicket
+  var config = require('../config.js');
+  $scope.mapKey = config.MAPS_API_KEY;
+  console.log("key is: ", $scope.mapKey);
   $scope.add = function(type) {
     var isFree = false;
     if (type==='Free') {
@@ -41,6 +44,9 @@ app.controller('createCtrl',['createService','$scope' , function(createService, 
 function initAutocomplete() {
   // Create the autocomplete object, restricting the search to geographical
   // location types.
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyC_eBhhNCMbLP2jTOwrbaa9tu2KSn02jzs&libraries=places";
   autocomplete = new google.maps.places.Autocomplete(
     /** @type {!HTMLInputElement} */
     (document.getElementById('autocomplete')), {
@@ -93,7 +99,7 @@ function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
 initAutocomplete();
-$scope.mapKey = createServic.getKey();
+// $scope.mapKey = createService.getKey();
 /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
 
 }]);
