@@ -1,8 +1,37 @@
-app.controller('createCtrl',['createService','$scope' , function(createService, $scope){
+app.controller('createCtrl',['createService','$scope' ,'Upload','$window' function(createService, $scope, Upload, $window){
   // $scope.makeTicket = function(ticketType) {
   //   // createService.createInstance
   //
   // }//makeTicket
+  //////////////////////file upload /////////////////////////////////////////////////////////////
+        // $scope.submit = function(){ //function to call on form submit
+        //     if ($scope.upload_form.file.$valid &amp;&amp; $scope.file) { //check if from is valid
+        //         $scope.upload($scope.file); //call upload function
+        //     }
+        // }
+        // $scope.upload = function (file) {
+        //     Upload.upload({
+        //         url: 'http://localhost:8000/addevent', //webAPI exposed to upload the file
+        //         data:{file:file} //pass file as data, should be user ng-model
+        //     }).then(function (resp) { //upload function returns a promise
+        //         if(resp.data.error_code === 0){ //validate success
+        //             $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+        //         } else {
+        //             $window.alert('an error occured');
+        //         }
+        //     }, function (resp) { //catch error
+        //         console.log('Error status: ' + resp.status);
+        //         $window.alert('Error status: ' + resp.status);
+        //     }, function (evt) {
+        //         console.log(evt);
+        //         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        //         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        //         $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
+        //     });
+        // };//file
+
+  //////////////////////file upload /////////////////////////////////////////////////////////////
+
   var config = require('../config.js');
   $scope.mapKey = config.MAPS_API_KEY;
   console.log("key is: ", $scope.mapKey);
@@ -32,15 +61,12 @@ app.controller('createCtrl',['createService','$scope' , function(createService, 
       $scope.totalTickets+=$scope.tempTicks[i].ticketQ;
     }//for
   }//updateQ
-
   $scope.delete = function(index) {
     createService.deleteTempTick(index);
     $scope.getCurrentTickets();
   }
   /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
-
   var placeSearch, autocomplete;
-
 function initAutocomplete() {
   // Create the autocomplete object, restricting the search to geographical
   // location types.
@@ -50,12 +76,9 @@ function initAutocomplete() {
       types: ['geocode']
     });
   console.log('autocomplete is', autocomplete)
-
-
   // console.log('autocomplete', autocomplete);
   autocomplete.addListener('place_changed', fillInAddress);
 }
-
 function fillInAddress() {
   // Get the place details from the autocomplete object.
   $scope.selectedPlace = autocomplete.getPlace();
@@ -91,7 +114,6 @@ $scope.getDistanceFromLatLonInKm = function(lat1, lon1, lat2, lon2) {
   var d = R * c; // Distance in km
   return d;
 }
-
 function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
@@ -117,8 +139,29 @@ function writeMapScript() {
     initAutocomplete();
   }
 /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
-
-///////////////////////////////////////////form validation ////////////////////////////////////////////////////////
+/////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
+$scope.preview = function() {
+    var file = document.getElementById('fileItem').files[0];
+    var img = document.createElement("img");
+    img.classList.add("obj");
+    img.file = file;
+    img.height = 250;
+    img.width = 250;
+    console.log("img object to be added", img);
+    document.getElementById('preview').removeChild(document.getElementById('preview').firstChild);
+    document.getElementById('preview').appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+      //TODO: need to specify preview size
+      //file reader
+    var reader = new FileReader();
+    reader.onload = (function(aImg) {
+       return function(e) {
+     aImg.src = e.target.result;
+     console.log("reader result:", reader.result);
+     };
+     })
+     (img);
+    reader.readAsDataURL(file);
+}//handleFiles
 function checkNames() {
     var patt = /w+/;
     if (!$scope.eName) {
@@ -127,20 +170,4 @@ function checkNames() {
     }
     return true;
   }//checkNames
-
-$scope.validate = function() {
-  // var validCheck=true;
-  // validCheck = checkNames();
-  //
-  // if (ok) {
-  //   //makeEvent();
-  // }//if
-  console.log("image ", document.getElementById('fileItem').files[0]);
-  console.log("starting date", $scope.startDate);
-  console.log("end date", $scope.endDate);
-}//validate
-
-///////////////////////////////////////////form validation ////////////////////////////////////////////////////////
-
-
 }]);
