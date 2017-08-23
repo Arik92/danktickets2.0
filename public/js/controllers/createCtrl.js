@@ -1,34 +1,34 @@
-app.controller('createCtrl',['createService','$scope' ,'Upload','$window' function(createService, $scope, Upload, $window){
+app.controller('createCtrl',['createService','$scope' ,'Upload','$window', function(createService, $scope, Upload, $window){
   // $scope.makeTicket = function(ticketType) {
   //   // createService.createInstance
   //
   // }//makeTicket
-  //////////////////////file upload /////////////////////////////////////////////////////////////
-        // $scope.submit = function(){ //function to call on form submit
-        //     if ($scope.upload_form.file.$valid &amp;&amp; $scope.file) { //check if from is valid
-        //         $scope.upload($scope.file); //call upload function
-        //     }
-        // }
-        // $scope.upload = function (file) {
-        //     Upload.upload({
-        //         url: 'http://localhost:8000/addevent', //webAPI exposed to upload the file
-        //         data:{file:file} //pass file as data, should be user ng-model
-        //     }).then(function (resp) { //upload function returns a promise
-        //         if(resp.data.error_code === 0){ //validate success
-        //             $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
-        //         } else {
-        //             $window.alert('an error occured');
-        //         }
-        //     }, function (resp) { //catch error
-        //         console.log('Error status: ' + resp.status);
-        //         $window.alert('Error status: ' + resp.status);
-        //     }, function (evt) {
-        //         console.log(evt);
-        //         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        //         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        //         $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
-        //     });
-        // };//file
+  ////////////////////file upload /////////////////////////////////////////////////////////////
+        $scope.submit = function(){ //function to call on form submit
+              //TODO: check if from is valid
+              console.log("in submit! uploading...")
+                $scope.upload($scope.file); //call upload function
+        }
+        $scope.upload = function (file) {
+            Upload.upload({
+                url: 'http://localhost:8000/addevent', //webAPI exposed to upload the file
+                data:{file:file} //pass file as data, should be user ng-model
+            }).then(function (resp) { //upload function returns a promise
+                if(resp.data.error_code === 0){ //validate success
+                  //  $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+                } else {
+                    $window.alert('an error occured');
+                }
+            }, function (resp) { //catch error
+                console.log('Error status: ' + resp.status);
+                $window.alert('Error status: ' + resp.status);
+            }, function (evt) {
+                console.log(evt);
+                // var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                // $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
+            });
+        };//file
 
   //////////////////////file upload /////////////////////////////////////////////////////////////
 
@@ -156,7 +156,7 @@ $scope.preview = function() {
     reader.onload = (function(aImg) {
        return function(e) {
      aImg.src = e.target.result;
-     console.log("reader result:", reader.result);
+     //console.log("reader result:", reader.result);
      };
      })
      (img);

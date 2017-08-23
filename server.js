@@ -1,7 +1,18 @@
 var express = require('express');
+var app = express();
 //var expressSession = require('express-session');
 var bodyParser = require('body-parser');
 var multer  = require('multer');
+app.use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "http://localhost");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
+    app.use(express.static('public'));
+    app.use(express.static('node_modules'));
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads/')
@@ -18,14 +29,6 @@ var upload = multer({ storage: storage }).single('file');
 // var beerRoutes = require('./routes/beerRoutes');
 // var userRoutes = require('./routes/userRoutes');
 // var User = require('./models/userModel');
-var app = express();
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-app.use(express.static('public'));
-app.use(express.static('node_modules'));
-
 /////////////////////////////////   multer
 app.post('/addevent', function(req, res) {
         upload(req,res,function(err){
