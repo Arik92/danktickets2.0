@@ -15,7 +15,9 @@ var eventSchema = new Schema({
   description: String,
   tickets: [ticketSchema],
   numTickets: Number //tickets remaining
-
+  //TODO: image, organizer name, 
+  isPrivate: Boolean,
+  showRemainingTicks: Boolean
 });
 
 

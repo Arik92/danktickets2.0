@@ -1,5 +1,5 @@
 //var app = angular.module('beerList', ['ui.router']);
-var app = angular.module('dankTickets', ['ui.router']);
+var app = angular.module('dankTickets', ['ui.router','ngFileUpload']);
 
 app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
@@ -8,12 +8,12 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
   .state('index', {
       url: '/home',
       templateUrl: '/templates/index.html',
- 
+
     })
     .state('event', {
       url: '/event',
       templateUrl: '/templates/event.html',
- 
+
     })
     .state('aboutus', {
       url: '/about',
@@ -31,5 +31,5 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/page-contact',
       templateUrl: '/templates/page-contact.html',
     })
- 
+
 });
