@@ -1,4 +1,4 @@
-app.directive("footerdirective", function(){
+app.directive("footerDirective", function(){
 	return {
 		templateUrl: 'footer.html',
 	};
