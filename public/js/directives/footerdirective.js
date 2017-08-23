@@ -1,5 +1,5 @@
 app.directive("footerDirective", function(){
 	return {
-		templateUrl: 'footer.html',
+		templateUrl: 'footer.html'
 	};
 });

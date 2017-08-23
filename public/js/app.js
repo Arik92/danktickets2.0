@@ -1,19 +1,19 @@
-//var app = angular.module('beerList', ['ui.router']);
-var app = angular.module('dankTickets', ['ui.router','ngFileUpload']);
+var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload']);
 
 app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
-  $urlRouterProvider.otherwise('/home');
+   $urlRouterProvider.otherwise('/home');
   $stateProvider
-  .state('index', {
+  .state('home', {
       url: '/home',
       templateUrl: '/templates/index.html',
-
+      controller: function($rootScope, $scope) {
+        console.log("in home state");
+      } //controller
     })
     .state('event', {
       url: '/event',
       templateUrl: '/templates/event.html',
-
     })
     .state('aboutus', {
       url: '/about',
@@ -21,7 +21,8 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     })
     .state('createevent', {
       url: '/createevent',
-      templateUrl: '/templates/createEvent.html'
+      templateUrl: '/templates/createEvent.html',
+      controller: 'createCtrl'
     })
     .state('services', {
       url: '/services',
@@ -29,7 +30,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     })
     .state('page-contact', {
       url: '/page-contact',
-      templateUrl: '/templates/page-contact.html',
+      templateUrl: '/templates/page-contact.html'
     })
 
 });

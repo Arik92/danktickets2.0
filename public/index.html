@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="dankTickets">
 <head>
-	<meta charset="UTF-8">
+	 <meta charset="UTF-8">
+	 <base href="/">
 	<title>DankTickets </title>
 
 	<!-- Responsive Meta Tag -->
@@ -10,22 +11,18 @@
 <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 	<!-- main stylesheet -->
 	<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
-
-
 	<link rel="stylesheet" href="css/style.css">
 	<!-- responsive stylesheet -->
 	<link rel="stylesheet" href="css/responsive.css">
 
 </head>
 <body>
-
 	<nav-directive></nav-directive>
 	<!-- #banner -->
 	<section id="banner">
 		<div class="banner-container">
 			<div class="banner">
 				<ul>
-
 					<li
 						data-transition="fade"
 						data-slotamount="7"
@@ -902,7 +899,6 @@
 	<!-- /#event-sponsor -->
 
 	<!-- #subscribe-newsletter -->
-<<<<<<< HEAD
 	<section id="subscribe-newsletter">
 		<div class="container">
 			<div class="gradient-overlay">
@@ -998,9 +994,12 @@
 	</section>
 	<!-- /#bottom-bar -->
 
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<footer-directive></footer-directive>
+	<!-- node modules -->
 	<script src="/angular/angular.js"></script>
-		<script src="/@uirouter/angularjs/release/angular-ui-router.js"></script>
+	<script src="/@uirouter/angularjs/release/angular-ui-router.js"></script>
+	<script src="ng-file-upload/dist/ng-file-upload.min.js"></script>
+	<!-- js folders -->
 	<script src="js/app.js"></script>
   <script src="js/services/createService.js"></script>
   <script src="/bundle.js"></script>
@@ -1019,38 +1018,7 @@
 	<script src="js/wow.js"></script>
 	<script src="js/validate.js"></script>
 	<script src="js/custom.js"></script>
-=======
->>>>>>> b69af9759b0ecb8125afceea285543c4ee925570
-
-	<footer-directive></footer-directive>
-<<<<<<< HEAD
-=======
-
-	<!-- node modules -->
-	<script src="/angular/angular.js"></script>
-	<script src="/@uirouter/angularjs/release/angular-ui-router.js"></script>
-
-	<!-- js folder -->
-	<script src="js/app.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery.themepunch.tools.min.js"></script>
-	<script src="js/jquery.themepunch.revolution.min.js"></script>
-	<script src="js/countdown.min.js"></script>
-	<script src="js/jquery.easing.min.js"></script>
-	<script src="js/jquery.fancybox.pack.js"></script>
-	<script src="js/jquery.mixitup.min.js"></script>
-	<script src="js/jquery.bxslider.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.appear.js"></script>
-	<script src="js/jquery.countTo.js"></script>
-	<script src="js/circle-progress.js"></script>
-	<script src="js/wow.js"></script>
-	<script src="js/validate.js"></script>
-	<script src="js/custom.js"></script>
 	<script src="js/directives/navDirective.js"></script>
 	<script src="js/directives/footerDirective.js"></script>
-
 </body>
 </html>
->>>>>>> 68227f8c6ccf92aa2f83a46775423927724f7565
