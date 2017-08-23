@@ -6,7 +6,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
   $stateProvider
   .state('home', {
       url: '/home',
-      templateUrl: '/templates/index.html',
+      templateUrl: '/templates/home.html',
       controller: function($rootScope, $scope) {
         console.log("in home state");
       } //controller
