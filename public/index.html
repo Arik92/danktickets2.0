@@ -20,9 +20,267 @@
 	<!-- .preloader -->
 	<div class="preloader"></div>
 	<!-- /.preloader -->
-	
+	<!-- #header -->
+	<header id="header">
+		<div class="container">
+			<div class="row">
+				<!-- .logo -->
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 logo">
+					<a href="index.html"><img src="img/resources/logo.png" alt="Logo Image" style="max-width: 150PX;padding:5px;margin-top: 10px;margin-right: 90px;"></a>
+				</div>
+				<!-- /.logo -->
+
+				<!-- .mainmenu-container -->
+				<nav class="col-lg-9 col-md-9 col-sm-6 col-xs-6 mainmenu-container">
+					<button class="nav-toggler"> <i class="fa fa-bars"></i></button>
+					<ul class="mainmenu clearfix">
+						<li class="nav-closer"><i class="fa fa-close"></i></li>
+						<!-- <li class="current scrollToLink dropdown">
+							<a href="#banner">HOME</a>
+							<ul class="submenu">
+								<li class="deadlink dropdown">
+									<a href="#">HOME Variations</a>
+									<ul class="submenu">
+										<li><a href="index.html">HOME V1</a></li>
+										<li><a href="index-v2.html">HOME V2</a></li>
+									</ul>
+								</li>
+							</ul>
+						</li> -->
+						<li class="deadlink">
+							<a href="#">DankTickets</a>
+							<ul class="submenu">
+								<li><a href="#">About Us</a></li>
+								<li class="dropdown">
+									<a href="services.html">Services</a>
+									<!-- <ul class="submenu">
+										<li class="deadlink"><a href="#">Third Level Menu</a></li>
+									</ul> -->
+								</li>
+							</ul>
+						</li>
+						<li class="scrollToLink"><a href="#upcoming-event">BROWSE EVENT</a></li>
+						<li class="scrollToLink"><a ui-sref="createevent({scrollTo: 'createevent'})">CREATE EVENTS</a></li>
+						<!-- <li class="scrollToLink"><a href="#event-speakers">CREATE EVENTS</a></li> -->
+						<li class="scrollToLink"><a href="#gallery">GALLERY</a></li>
+
+						<!-- <li class="scrollToLink dropdown">
+							<a href="#blog">BLOG</a>
+							<ul class="submenu">
+								<li><a href="blog.html">Blog Archive</a></li>
+								<li><a href="blog-single.html">Blog Single</a></li>
+							</ul>
+						</li> -->
+						<li class="scrollToLink"><a href="#contact">CONTACT</a></li>
+
+						<li class="scrollToLink"><a href="#pricing-table">SIGN IN</a></li>
+						<!-- <li class="scrollToLink"><a href="#event-sponsor">SPONSOR</a></li> -->
+					</ul>
+				</nav>
+				<!-- /.mainmenu-container -->
+			</div>
+		</div>
+	</header>
+	<!-- /#header -->
+
+	<!-- #banner -->
+	<section id="banner">
+		<div class="banner-container">
+			<div class="banner">
+				<ul>
+					<li
+						data-transition="fade"
+						data-slotamount="7"
+						class="slider-1 text-center gradient-overlay"
+						data-thumb="img/background/banner-bg.jpg"
+						data-title="EXPERTISE YOU CAN TRUST">
+						<img
+							src="img/background/banner-bg.jpg"
+							data-bgposition="center center"
+							data-kenburns="on"
+							data-duration="20000"
+							data-ease="Linear.easeNone"
+							data-bgfit="100"
+							data-bgfitend="130"
+							data-bgpositionend="center center"
+							alt="slider image">
+						<div
+							class="caption sfb tp-resizeme text-center"
+							data-x="0"
+							data-y="220"
+							data-speed="700"
+							data-start="1000"
+							data-easing="easeOutBack">
+
+							<div class="date">
+								December 31, 2015 23:59pm
+							</div>
+						</div>
+
+						<div
+							class="caption sfb tp-resizeme"
+							data-x="0"
+							data-y="290"
+							data-speed="700"
+							data-start="1500"
+							data-easing="easeOutBack">
+
+							<h1>DANK TICKETS CONFERENCE</h1>
+						</div>
+						<div
+							class="caption sfb tp-resizeme input-box"
+							data-x="0"
+							data-y="370"
+							data-speed="700"
+							data-start="2200"
+							data-easing="easeOutBack">
+
+							<ul class="count-down"></ul>
+						</div>
+
+						<ul
+							class="caption sfb tp-resizeme banner-buttons"
+							data-x="0"
+							data-y="530"
+							data-speed="700"
+							data-start="2500"
+							data-easing="easeOutBack">
+
+							<li class="scrollToLink"><a href="#register-now" class="colored hvr-bounce-to-right">Register Now</a></li>
+							<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Get Tickets</a></li>
+
+						</ul>
+					</li>
+					<li
+						data-transition="fade"
+						data-slotamount="7"
+						class="slider-2 text-center gradient-overlay"
+						data-thumb="img/background/subscribe-section-bg.jpg"
+						data-title="EXPERTISE YOU CAN TRUST">
+
+						<img
+							src="img/background/subscribe-section-bg.jpg"
+							data-bgposition="center center"
+							data-kenburns="on"
+							data-duration="20000"
+							data-ease="Linear.easeNone"
+							data-bgfit="100"
+							data-bgfitend="130"
+							data-bgpositionend="center center"
+							alt="slider image">
+
+						<div
+							class="caption sfb tp-resizeme text-center"
+							data-x="0"
+							data-y="300"
+							data-speed="700"
+							data-start="1000"
+							data-easing="easeOutBack">
+
+							<h1>DONT MISS THE EVENT</h1>
+						</div>
+
+						<div
+							class="caption sfb tp-resizeme"
+							data-x="0"
+							data-y="370"
+							data-speed="700"
+							data-start="1500"
+							data-easing="easeOutBack">
+
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, neque,  <br> nam? Sed at dolor, perferendis, quaerat, esse dignissimos praesentium unde dolore.</p>
+						</div>
+						<ul
+							class="caption sfb tp-resizeme banner-buttons"
+							data-x="0"
+							data-y="450"
+							data-speed="700"
+							data-start="2500"
+							data-easing="easeOutBack">
+
+							<li class="scrollToLink"><button type="submit" class="colored hvr-bounce-to-right">Register Now</button></li>
+							<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Watch Video</a></li>
+
+						</ul>
+					</li>
+					<li
+						data-transition="fade"
+						data-slotamount="7"
+						class="slider-3 text-center gradient-overlay"
+						data-thumb="img/background/register-bg.jpg"
+						data-title="EXPERTISE YOU CAN TRUST">
+
+						<img
+							src="img/background/register-bg.jpg"
+							data-bgposition="center center"
+							data-kenburns="on"
+							data-duration="20000"
+							data-ease="Linear.easeNone"
+							data-bgfit="100"
+							data-bgfitend="130"
+							data-bgpositionend="center center"
+							alt="slider image">
+
+						<div
+							class="caption sfb tp-resizeme text-center"
+							data-x="0"
+							data-y="220"
+							data-speed="700"
+							data-start="1000"
+							data-easing="easeOutBack">
+
+							<div class="date">
+								December 31, 2015 23:59pm
+							</div>
+						</div>
+
+						<div
+							class="caption sfb tp-resizeme"
+							data-x="0"
+							data-y="290"
+							data-speed="700"
+							data-start="1500"
+							data-easing="easeOutBack">
+
+							<h1>DANK TICKETS EVENT</h1>
+						</div>
+						<div
+							class="caption sfb tp-resizeme input-box"
+							data-x="0"
+							data-y="370"
+							data-speed="700"
+							data-start="2200"
+							data-easing="easeOutBack">
+
+							<ul>
+								<li><span><input type="text" placeholder="Your Name"></span></li>
+								<li><span><input type="text" placeholder="Your Email"></span></li>
+								<li><span><input type="text" placeholder="Your Phone"></span></li>
+							</ul>
+						</div>
+
+						<ul
+							class="caption sfb tp-resizeme banner-buttons"
+							data-x="0"
+							data-y="450"
+							data-speed="700"
+							data-start="2500"
+							data-easing="easeOutBack">
+
+							<li class="scrollToLink"><button type="submit" class="colored hvr-bounce-to-right">Register Now</button></li>
+							<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Watch Video</a></li>
+
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</section> <!-- /#banner -->
+
+
 	<nav-directive></nav-directive>
-	
+
 	<div ui-view></div>
 
 	<footer-directive></footer-directive>
@@ -34,9 +292,9 @@
 	<script src="ng-file-upload/dist/ng-file-upload.min.js"></script>
 	<!-- js folders -->
 	<script src="js/app.js"></script>
-  	<script src="js/services/createService.js"></script>
-  	<script src="/labeled-stream-splicer/test/bundle.js"></script>
-	
+	<script src="js/services/createService.js"></script>
+	<script src="/bundle.js"></script>
+
 	<script src="js/jquery.themepunch.tools.min.js"></script>
 	<script src="js/jquery.themepunch.revolution.min.js"></script>
 	<script src="js/countdown.min.js"></script>

@@ -22,7 +22,13 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     .state('createevent', {
       url: '/createevent',
       templateUrl: '/templates/createEvent.html',
-      controller: 'createCtrl'
+      controller: 'createCtrl',
+      onEnter: function ($location, $stateParams, $anchorScroll, $timeout) {
+        $timeout(function() {
+          $location.hash($stateParams.scrollTo);
+          $anchorScroll()
+        }, 100)
+      }
     })
     .state('services', {
       url: '/services',
