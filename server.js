@@ -30,12 +30,13 @@ var upload = multer({ storage: storage }).single('file');
 // var userRoutes = require('./routes/userRoutes');
 // var User = require('./models/userModel');
 /////////////////////////////////   multer
-app.post('/addevent', function(req, res) {
+app.post('/upload', function(req, res) {
         upload(req,res,function(err){
             if(err){
                  res.json({error_code:1,err_desc:err});
                  return;
             }
+            console.log("reached upload success route, here are the deets", req);
              res.json({error_code:0,err_desc:null});
         })
     });

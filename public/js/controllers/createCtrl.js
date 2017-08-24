@@ -4,18 +4,22 @@ app.controller('createCtrl',['createService','$scope' ,'Upload','$window', funct
   //
   // }//makeTicket
   ////////////////////file upload /////////////////////////////////////////////////////////////
+
         $scope.submit = function(){ //function to call on form submit
               //TODO: check if from is valid
-              console.log("in submit! uploading...")
-                $scope.upload($scope.file); //call upload function
+              var submitExp = document.getElementById('fileItem').files[0];
+
+              console.log("in submit! uploading...", submitExp);
+                $scope.upload(submitExp); //call upload function
         }
         $scope.upload = function (file) {
             Upload.upload({
-                url: 'http://localhost:8000/addevent', //webAPI exposed to upload the file
+                url: 'http://localhost:8000/upload', //webAPI exposed to upload the file
                 data:{file:file} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
                 if(resp.data.error_code === 0){ //validate success
-                  //  $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+                  console.log("controller response is", resp);
+                    $window.alert('Success ');// + resp.config.data.file.name + 'uploaded. Response: ');
                 } else {
                     $window.alert('an error occured');
                 }
@@ -143,10 +147,10 @@ function writeMapScript() {
 /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
 /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
 $scope.preview = function() {
-    var file = document.getElementById('fileItem').files[0];
+    var prevFile = document.getElementById('fileItem').files[0];
     var img = document.createElement("img");
     img.classList.add("obj");
-    img.file = file;
+    img.file = prevFile;
     img.height = 250;
     img.width = 250;
     console.log("img object to be added", img);
@@ -162,7 +166,7 @@ $scope.preview = function() {
      };
      })
      (img);
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(prevFile);
 }//handleFiles
 function checkNames() {
     var patt = /w+/;
