@@ -20,6 +20,7 @@
   "dependencies": {
     "@uirouter/angularjs": "^1.0.3",
     "angular": "^1.6.5",
+    "angular-file-upload": "^2.5.0",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
     "browserify": "^14.4.0",
