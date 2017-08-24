@@ -126,9 +126,11 @@ function writeMapScript() {
 
   }
   function addScript( src ) {
+    // if ($('script').length) {
     var s = document.createElement( 'script' );
     s.setAttribute( 'src', src );
     document.body.appendChild( s );
+  // }
   }//addScript
 
   //calling the addScript function
