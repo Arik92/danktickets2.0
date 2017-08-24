@@ -1,17 +1,19 @@
-//var app = angular.module('beerList', ['ui.router']);
-var app = angular.module('dankTickets', ['ui.router','angularFileUpload']);
+var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload']);
 
 app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
-  $urlRouterProvider.otherwise('/home');
+   $urlRouterProvider.otherwise('/home');
   $stateProvider
-  .state('index', {
+  .state('home', {
       url: '/home',
-      templateUrl: '/templates/index.html'
+      templateUrl: '/templates/home.html',
+      controller: function($rootScope, $scope) {
+        console.log("in home state");
+      } //controller
     })
     .state('event', {
       url: '/event',
-      templateUrl: '/templates/event.html'
+      templateUrl: '/templates/event.html',
     })
     .state('aboutus', {
       url: '/about',
@@ -19,7 +21,14 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     })
     .state('createevent', {
       url: '/createevent',
-      templateUrl: '/templates/createEvent.html'
+      templateUrl: '/templates/createEvent.html',
+      controller: 'createCtrl',
+      onEnter: function ($location, $stateParams, $anchorScroll, $timeout) {
+        $timeout(function() {
+          $location.hash($stateParams.scrollTo);
+          $anchorScroll()
+        }, 100)
+      }
     })
     .state('services', {
       url: '/services',

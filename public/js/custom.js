@@ -18,6 +18,7 @@
 	}
 	// sticky header
 	function stickyHeader () {
+		var headerScroll = $('header');
 		var headerScrollPos = $('header').next().offset().top;
 		if($(window).scrollTop() > headerScrollPos) {
 			$('header').addClass('header-fixed gradient-overlay');
@@ -27,43 +28,43 @@
 		}
 	}
 	function SmoothMenuScroll () {
-		var anchor = $('.scrollToLink');
-		if(anchor.length){
-			anchor.children('a').bind('click', function (event) {
-				var headerH = '95';
-				var target = $(this);
-				$('html, body').stop().animate({
-					scrollTop: $(target.attr('href')).offset().top - headerH + 'px'
-				}, 1200, 'easeInOutExpo');
-				anchor.removeClass('current');
-				target.parent().addClass('current');
-				event.preventDefault();
-			});
-		}
+		// var anchor = $('.scrollToLink');
+		// if(anchor.length){
+		// 	anchor.children('a').bind('click', function (event) {
+		// 		var headerH = '95';
+		// 		var target = $(this);
+		// 		// $('html, body').stop().animate({
+		// 		// 	scrollTop: $(target.attr('href')).offset().top - headerH + 'px'
+		// 		// }, 1200, 'easeInOutExpo');
+		// 		anchor.removeClass('current');
+		// 		target.parent().addClass('current');
+		// 		event.preventDefault();
+		// 	});
+		// }
 	}
 	// adding active class to menu while scroll to section
 	function OnePageMenuScroll () {
-	    var windscroll = $(window).scrollTop();
-	    if (windscroll >= 100) {
-	    	$('.mainmenu .scrollToLink').find('a').each(function (){
-	    		// grabing section id dynamically
-	    		var sections = $(this).attr('href');
-		        $(sections).each(function() {
-		        	// checking is scroll bar are in section
-		            if ($(this).offset().top <= windscroll + 100) {
-		            	// grabing the dynamic id of section
-		        		var Sectionid = $(sections).attr('id');
-		        		// removing current class from others
-		        		$('.mainmenu').find('li').removeClass('current');
-		        		// adding current class to related navigation
-		        		$('.mainmenu').find('a[href=#'+Sectionid+']').parent().addClass('current');
-		            }
-		        });
-	    	});
-	    } else {
-	        $('.mainmenu li.current').removeClass('current');
-	        $('.mainmenu li:first').addClass('current');
-	    }
+	    // var windscroll = $(window).scrollTop();
+	    // if (windscroll >= 100) {
+	    // 	$('.mainmenu .scrollToLink').find('a').each(function (){
+	    // 		// grabing section id dynamically
+	    // 		var sections = $(this).attr('href');
+		  //       $(sections).each(function() {
+		  //       	// checking is scroll bar are in section
+		  //           if ($(this).offset().top <= windscroll + 100) {
+		  //           	// grabing the dynamic id of section
+		  //       		var Sectionid = $(sections).attr('id');
+		  //       		// removing current class from others
+		  //       		$('.mainmenu').find('li').removeClass('current');
+		  //       		// adding current class to related navigation
+		  //       		$('.mainmenu').find('a[href=#'+Sectionid+']').parent().addClass('current');
+		  //           }
+		  //       });
+	    // 	});
+	    // } else {
+	    //     $('.mainmenu li.current').removeClass('current');
+	    //     $('.mainmenu li:first').addClass('current');
+	    // }
 	}
 	// gallery fancybox activator
     function GalleryFancyboxActivator () {
