@@ -38,5 +38,8 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/page-contact',
       templateUrl: '/templates/page-contact.html'
     })
-
+.state('terms', {
+      url: '/termsofservice',
+      templateUrl: '/templates/terms.html'
+    })
 });
