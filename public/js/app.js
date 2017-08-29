@@ -42,4 +42,16 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/termsofservice',
       templateUrl: '/templates/terms.html'
     })
+.state('privacypolicy', {
+      url: '/privacypolicy',
+      templateUrl: '/templates/privacypolicy.html'
+    })
+.state('login', {
+      url: '/login',
+      templateUrl: '/templates/login.html'
+    })
+.state('signup', {
+      url: '/signup',
+      templateUrl: '/templates/signup.html'
+    })
 });
