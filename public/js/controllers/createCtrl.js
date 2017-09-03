@@ -7,10 +7,12 @@ app.controller('createCtrl',['createService','$scope' ,'Upload','$window', funct
 
         $scope.submit = function(){ //function to call on form submit
               //TODO: check if from is valid
-              var submitExp = document.getElementById('fileItem').files[0];
-
-              console.log("in submit! uploading...", submitExp);
-                $scope.upload(submitExp); //call upload function
+              // var submitExp = document.getElementById('fileItem').files[0];
+              //
+              // console.log("in submit! uploading...", submitExp);
+              //   $scope.upload(submitExp); //call upload function
+              console.log($scope.startDate);
+              console.log("its a ", $scope.startDate.value);
         }
         $scope.upload = function (file) {
             Upload.upload({
@@ -38,7 +40,7 @@ app.controller('createCtrl',['createService','$scope' ,'Upload','$window', funct
 
   var config = require('../config.js');
   $scope.mapKey = config.MAPS_API_KEY;
-  console.log("key is: ", $scope.mapKey);
+  //console.log("key is: ", $scope.mapKey);
   $scope.add = function(type) {
     var isFree = false;
     if (type==='Free') {
@@ -71,7 +73,7 @@ app.controller('createCtrl',['createService','$scope' ,'Upload','$window', funct
   }
   /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
   var placeSearch, autocomplete;
-function initAutocomplete() {
+function initAutocomplete(){
   // Create the autocomplete object, restricting the search to geographical
   // location types.
   autocomplete = new google.maps.places.Autocomplete(
@@ -121,29 +123,29 @@ $scope.getDistanceFromLatLonInKm = function(lat1, lon1, lat2, lon2) {
 function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
-function writeMapScript() {
-  var src = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places";
-  document.body.innerHTML+="<script src="+src+"</script>";
-  var script = document.createElement("script");
-   script.type = 'text/javascript';
-  // document.body.appendChild(script);
 
-  }
-  function addScript( src ) {
-    // if ($('script').length) {
+function addScript( src ) {
+  var tag = document.getElementById("maptag");
+    if (!tag)  {
     var s = document.createElement( 'script' );
     s.setAttribute( 'src', src );
+    s.setAttribute('id', "maptag");
     document.body.appendChild( s );
-  // }
-  }//addScript
+    console.log("adding tag for first time in the run");
+    s.onload = initAutocomplete;
+  } else {
+    console.log("tag alredy added");
+    initAutocomplete();
+  }//else
+    // when the script has finished loading, only THEN call autocomplete()
+}//addScript
 
   //calling the addScript function
   var mapSrc = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places";
   addScript(mapSrc);
-  //when the window has finished loading all the scripts, only THEN call autocomplete()
-  window.onload = function(){
-    initAutocomplete();
-  }
+
+
+
 /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
 /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
 $scope.preview = function() {
