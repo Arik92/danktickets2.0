@@ -36,7 +36,7 @@ app.controller('createCtrl',['createService','$scope' ,'Upload','$window', funct
   disableMobile: true // Conditionally disabled on mobile devices.
 });
 
-var startDatepicker = datepicker('#end_date', {
+var endDatepicker = datepicker('#end_date', {
 position: 'br', // Top right.
 startDate: new Date(), // This month.
 dateSelected: new Date(), // Today is selected.
