@@ -1,18 +1,103 @@
 app.controller('createCtrl',['createService','$scope' ,'Upload','$window', function(createService, $scope, Upload, $window){
-  // $scope.makeTicket = function(ticketType) {
-  //   // createService.createInstance
-  //
-  // }//makeTicket
-  ////////////////////file upload /////////////////////////////////////////////////////////////
 
+  //////////////////////////////////// initializing pickers ////////////////////////////////////////////
+  //TODO: when loading an event, set the start/end dates accordingly
+  var startDatepicker = datepicker('#start_date', {
+  position: 'br', // Top right.
+  startDate: new Date(), // This month.
+  dateSelected: new Date(), // Today is selected.
+  minDate: new Date(), // June 1st, 2016.
+  maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
+  noWeekends: false,
+  formatter: function(el, date) {
+    // This will display the date as `1/1/2017`.
+    el.value = date.toDateString();
+  },
+  onSelect: function(instance) {
+    // Show which date was selected.
+    console.log("start date: ", instance.dateSelected);
+    $scope.startDate = instance.dateSelected;
+    console.log("as string?", $scope.startDate.toDateString());
+  },
+  onShow: function(instance) {
+    console.log('Calendar showing.');
+  },
+  onHide: function(instance) {
+    console.log('Calendar hidden.');
+  },
+  onMonthChange: function(instance) {
+    // Show the month of the selected date.
+    console.log(instance.currentMonthName);
+  },
+  customMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
+  overlayPlaceholder: 'Enter a 4-digit year',
+  overlayButton: 'Go!',
+  disableMobile: true // Conditionally disabled on mobile devices.
+});
+
+var startDatepicker = datepicker('#end_date', {
+position: 'br', // Top right.
+startDate: new Date(), // This month.
+dateSelected: new Date(), // Today is selected.
+minDate: new Date(), // June 1st, 2016.
+maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
+noWeekends: false,
+formatter: function(el, date) {
+  // This will display the date as `1/1/2017`.
+  el.value = date.toDateString();
+},
+onSelect: function(instance) {
+  // Show which date was selected.
+  console.log("End date: ", instance.dateSelected);
+  $scope.endDate = instance.dateSelected;
+  console.log("as string", $scope.endDate.toDateString());
+},
+onShow: function(instance) {
+  console.log('Calendar showing.');
+},
+onHide: function(instance) {
+  console.log('Calendar hidden.');
+},
+onMonthChange: function(instance) {
+  // Show the month of the selected date.
+  console.log(instance.currentMonthName);
+},
+customMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
+overlayPlaceholder: 'Enter a 4-digit year',
+overlayButton: 'Go!',
+disableMobile: true // Conditionally disabled on mobile devices.
+});
+
+        ////////////////////file upload /////////////////////////////////////////////////////////////
+        $scope.showPrivates = function() {
+          alert($scope.isPrivate);
+        }
+       $scope.compareDates = function() {
+         var diff = $scope.endDate.getTime()- $scope.startDate.getTime();
+         if (diff>0) {
+           console.log("end date is bigger than start")
+         } else if (diff<0) {
+           console.log("invalid date!!!");
+         } else {
+           console.log("same day");
+         }//else
+       }//compareDates
         $scope.submit = function(){ //function to call on form submit
               //TODO: check if from is valid
               // var submitExp = document.getElementById('fileItem').files[0];
               //
               // console.log("in submit! uploading...", submitExp);
               //   $scope.upload(submitExp); //call upload function
-              console.log($scope.startDate);
-              console.log("its a ", $scope.startDate.value);
+              // var s = "g";
+              console.log("scope's starting date is", $scope.startDate);
+              console.log("its a ", typeof($scope.startDate));
+              // s.concat($scope.startDate);
+              // console.log("s is ", s);
+              var x = document.getElementById("start");
+              console.log("x is", x);
+              //console.log("x value is ", x.value);
         }
         $scope.upload = function (file) {
             Upload.upload({
