@@ -11,11 +11,13 @@ var eventSchema = new Schema({
   type: String, //NOTE: possible options: show, movie, gallery? for search purposes
   location: locationSchema,
   //image?
-  time: Date,
+  startTime: Date,
+  endTime: Date,
+  //can be an object containig both starting time and ending time representation
   description: String,
   tickets: [ticketSchema],
   numTickets: Number //tickets remaining
-  //TODO: image, organizer name, 
+  //TODO: image, organizer name,
   isPrivate: Boolean,
   showRemainingTicks: Boolean
 });
