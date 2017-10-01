@@ -1,11 +1,13 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var eventRoutes = require('./routes/eventRoutes');
-var bodyParser = require('body-parser');
-var multer  = require('multer');
+//mongoose.connect("mongodb://localhost/events");
 var app = express();
 //var expressSession = require('express-session');
-mongoose.connect("mongodb://localhost/events");
+var bodyParser = require('body-parser');
+var multer  = require('multer');
+
+mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/users");
 
 app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "http://localhost");
@@ -59,6 +61,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(8000, function() {
+app.listen(process.env.PORT || '8000', function() {
   console.log("Dank tickets, tick-it-up! Listening on 8000.");
 });
