@@ -5,15 +5,15 @@ var locationSchema = new Schema({
   venue: String,
   address: String,
   address2: String
+  //NOTE: lattitude? longtitude?
 });
 var eventSchema = new Schema({
   title: String,
   type: String, //NOTE: possible options: show, movie, gallery? for search purposes
   location: locationSchema,
-  //image?
+  image: String,
   startTime: Date,
   endTime: Date,
-  //can be an object containig both starting time and ending time representation
   description: String,
   tickets: [ticketSchema],
   numTickets: Number //tickets remaining

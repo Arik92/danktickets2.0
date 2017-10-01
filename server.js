@@ -1,8 +1,12 @@
 var express = require('express');
-var app = express();
-//var expressSession = require('express-session');
+var mongoose = require('mongoose');
+var eventRoutes = require('./routes/eventRoutes');
 var bodyParser = require('body-parser');
 var multer  = require('multer');
+var app = express();
+//var expressSession = require('express-session');
+mongoose.connect("mongodb://localhost/events");
+
 app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "http://localhost");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -25,8 +29,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }).single('file');
 //var passport = require('passport');
 // var localStrategy = require('passport-local').strategy;
-// var mongoose = require('mongoose');
-// var beerRoutes = require('./routes/beerRoutes');
+
 // var userRoutes = require('./routes/userRoutes');
 // var User = require('./models/userModel');
 /////////////////////////////////   multer
@@ -36,8 +39,8 @@ app.post('/upload', function(req, res) {
                  res.json({error_code:1,err_desc:err});
                  return;
             }
-            console.log("reached upload success route, here are the deets", req);
-             res.json({error_code:0,err_desc:null});
+            console.log("file name:", req.file.filename);
+             res.json({error_code:0,err_desc:null, file_name: req.file.filename});
         })
     });
 /////////////////////////////////   multer
@@ -55,7 +58,6 @@ app.use(function(err, req, res, next) {
     error: err
   });
 });
-
 
 app.listen(8000, function() {
   console.log("Dank tickets, tick-it-up! Listening on 8000.");

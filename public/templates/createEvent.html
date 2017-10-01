@@ -7,7 +7,16 @@
           <div class="form-group">
             <label class="control-label" for="source_name">Title</label>
             <div>
-              <input id="source_name" class="form-control" name="source_name" ng-model="eName" type="text" placeholder="Fancy Feast" class="form-control input-md">
+              <input id="source_name" class="form-control input-md" name="source_name" ng-model="eName" type="text" placeholder="Fancy Feast">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="source_name">Event Type</label>
+            <div>
+              <p>selected item is : {{selectedType}}</p>
+        <select ng-model="selectedType" class="form-control input-md">
+          <option ng-repeat="type in typeOptions" value="{{type}}">{{type}}</option>
+        </select>
             </div>
           </div>
           <div class="form-group">
