@@ -49,4 +49,8 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/page-contact',
       templateUrl: '/templates/page-contact.html'
     })
+    .state('login', {
+      url: '/login',
+      templateUrl: '/templates/login.html'
+    })
 });
