@@ -1,5 +1,11 @@
 app.controller('createCtrl',['createService','$scope' ,'Upload','$window', function(createService, $scope, Upload, $window){
-
+  $scope.typeOptions = [
+    'Concert',
+    'Meeting',
+    'Convention',
+    'Party',
+    'Other'
+  ];
   //////////////////////////////////// initializing pickers ////////////////////////////////////////////
   //TODO: when loading an event, set the start/end dates accordingly
   var startDatepicker = datepicker('#start_date', {
@@ -86,17 +92,16 @@ disableMobile: true // Conditionally disabled on mobile devices.
        }//compareDates
         $scope.submit = function(){ //function to call on form submit
               //TODO: check if from is valid
-              // var submitExp = document.getElementById('fileItem').files[0];
-              //
-              // console.log("in submit! uploading...", submitExp);
-              //   $scope.upload(submitExp); //call upload function
+              var submitExp = document.getElementById('fileItem').files[0];
+              console.log("in submit! uploading...", submitExp);
+                $scope.upload(submitExp); //call upload function
               // var s = "g";
-              console.log("scope's starting date is", $scope.startDate);
-              console.log("its a ", typeof($scope.startDate));
+              // console.log("scope's starting date is", $scope.startDate);
+              // console.log("its a ", typeof($scope.startDate));
               // s.concat($scope.startDate);
               // console.log("s is ", s);
-              var x = document.getElementById("start");
-              console.log("x is", x);
+              // var x = document.getElementById("start");
+              // console.log("x is", x);
               //console.log("x value is ", x.value);
         }
         $scope.upload = function (file) {
@@ -106,7 +111,9 @@ disableMobile: true // Conditionally disabled on mobile devices.
             }).then(function (resp) { //upload function returns a promise
                 if(resp.data.error_code === 0){ //validate success
                   console.log("controller response is", resp);
-                    $window.alert('Success ');// + resp.config.data.file.name + 'uploaded. Response: ');
+                  console.log("response file object", resp.config.data.file);
+                    $window.alert('Success'  + resp.config.data.file.name + ' uploaded');
+                    $scope.uploadedImage = resp.config.data.file_name;
                 } else {
                     $window.alert('an error occured');
                 }

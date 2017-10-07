@@ -1,6 +1,8 @@
 var ticketSchema = new Schema({
   type: String,
   price: Number,
+  name: String,
+  //isFree: Boolean
   //seat?
   //id or serial number. aside from mongoID
   description: String //NOTE: special notes to guests?

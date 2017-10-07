@@ -30,6 +30,17 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
         }, 100)
       }
     })
+    .state('createorganizer', {
+      url: '/createorganizer',
+      templateUrl: '/templates/createOrganizer.html',
+      controller: 'orCtrl',
+      onEnter: function ($location, $stateParams, $anchorScroll, $timeout) {
+        $timeout(function() {
+          $location.hash($stateParams.scrollTo);
+          $anchorScroll()
+        }, 100)
+      }
+    })
     .state('services', {
       url: '/services',
       templateUrl: '/templates/services.html'
