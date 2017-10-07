@@ -24,6 +24,7 @@ router.get('/:id', function(req, res, next){
 
 router.post('/', function (req, res, next) {
   var e = new Event(req.body);
+  console.log("reached post route");
   e.save(function(error, result){
     if (error) {
       console.log(error);

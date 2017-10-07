@@ -1,12 +1,13 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var app = express();
 //var expressSession = require('express-session');
-var eventRoutes = require('./routes/eventRoutes');
 var bodyParser = require('body-parser');
 var multer  = require('multer');
+var eventRoutes = require('./routes/eventRoutes');
 
-mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/users");
+
+mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
+var app = express();
 
 app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "http://localhost");
@@ -46,8 +47,11 @@ app.post('/upload', function(req, res) {
     });
 /////////////////////////////////   multer
 
-app.all('*', function(req, res) {
-  res.sendFile(__dirname + "/public/index.html");
+app.use('/events', eventRoutes);
+
+app.all('[^.]+', function(req, res) {
+  //res.sendFile(__dirname + "/public/index.html");
+  res.send("GOD DAMN!!!!!!!!!!!!!");
 });
 
 //main error handler
@@ -60,11 +64,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
-<<<<<<< HEAD
-app.listen(8000, function() {
-=======
+
 
 app.listen(process.env.PORT || '8000', function() {
->>>>>>> 84397f50f64875d70354aa40918873d83dbb89de
   console.log("Dank tickets, tick-it-up! Listening on 8000.");
 });
