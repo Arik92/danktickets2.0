@@ -1,13 +1,23 @@
 var express = require('express');
 var mongoose = require('mongoose');
+<<<<<<< HEAD
+=======
+var eventRoutes = require('./routes/eventRoutes');
+//mongoose.connect("mongodb://localhost/events");
+var app = express();
+>>>>>>> dbe02aaa71816bb39ab4bc09c88f474bc91b3dc7
 //var expressSession = require('express-session');
 var bodyParser = require('body-parser');
 var multer  = require('multer');
 var eventRoutes = require('./routes/eventRoutes');
 
 
+<<<<<<< HEAD
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 var app = express();
+=======
+mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/users");
+>>>>>>> dbe02aaa71816bb39ab4bc09c88f474bc91b3dc7
 
 app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "http://localhost");
@@ -63,8 +73,6 @@ app.use(function(err, req, res, next) {
     error: err
   });
 });
-
-
 
 app.listen(process.env.PORT || '8000', function() {
   console.log("Dank tickets, tick-it-up! Listening on 8000.");
