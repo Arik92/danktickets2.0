@@ -10,6 +10,7 @@ var locationSchema = new Schema({
 var eventSchema = new Schema({
   title: String,
   type: String, //NOTE: possible options: show, movie, gallery? for search purposes
+  publisher: String,
   location: locationSchema,
   image: String,
   startTime: Date,

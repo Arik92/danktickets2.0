@@ -1,23 +1,19 @@
 var express = require('express');
 var mongoose = require('mongoose');
-<<<<<<< HEAD
-=======
 var eventRoutes = require('./routes/eventRoutes');
-//mongoose.connect("mongodb://localhost/events");
-var app = express();
->>>>>>> dbe02aaa71816bb39ab4bc09c88f474bc91b3dc7
+mongoose.connect("mongodb://localhost/events");
 //var expressSession = require('express-session');
 var bodyParser = require('body-parser');
 var multer  = require('multer');
+//var passport = require('passport');
+//var LocalStrategy = require('passport-local').Strategy;
+//var User = require('./models/usermodel');
+var userRoutes = require('./routes/userRoutes');
 var eventRoutes = require('./routes/eventRoutes');
 
-
-<<<<<<< HEAD
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
+//mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/users");
 var app = express();
-=======
-mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/users");
->>>>>>> dbe02aaa71816bb39ab4bc09c88f474bc91b3dc7
 
 app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "http://localhost");
