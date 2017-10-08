@@ -1,21 +1,119 @@
 app.controller('createCtrl',['createService','$scope' ,'Upload','$window', function(createService, $scope, Upload, $window){
-  // $scope.makeTicket = function(ticketType) {
-  //   // createService.createInstance
-  //
-  // }//makeTicket
-  ////////////////////file upload /////////////////////////////////////////////////////////////
+  $scope.typeOptions = [
+    'Concert',
+    'Meeting',
+    'Convention',
+    'Party',
+    'Other'
+  ];
+  //////////////////////////////////// initializing pickers ////////////////////////////////////////////
+  //TODO: when loading an event, set the start/end dates accordingly
+  var startDatepicker = datepicker('#start_date', {
+  position: 'br', // Top right.
+  startDate: new Date(), // This month.
+  dateSelected: new Date(), // Today is selected.
+  minDate: new Date(), // June 1st, 2016.
+  maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
+  noWeekends: false,
+  formatter: function(el, date) {
+    // This will display the date as `1/1/2017`.
+    el.value = date.toDateString();
+  },
+  onSelect: function(instance) {
+    // Show which date was selected.
+    console.log("start date: ", instance.dateSelected);
+    $scope.startDate = instance.dateSelected;
+    console.log("as string?", $scope.startDate.toDateString());
+  },
+  onShow: function(instance) {
+    console.log('Calendar showing.');
+  },
+  onHide: function(instance) {
+    console.log('Calendar hidden.');
+  },
+  onMonthChange: function(instance) {
+    // Show the month of the selected date.
+    console.log(instance.currentMonthName);
+  },
+  customMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
+  overlayPlaceholder: 'Enter a 4-digit year',
+  overlayButton: 'Go!',
+  disableMobile: true // Conditionally disabled on mobile devices.
+});
+
+var endDatepicker = datepicker('#end_date', {
+position: 'br', // Top right.
+startDate: new Date(), // This month.
+dateSelected: new Date(), // Today is selected.
+minDate: new Date(), // June 1st, 2016.
+maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
+noWeekends: false,
+formatter: function(el, date) {
+  // This will display the date as `1/1/2017`.
+  el.value = date.toDateString();
+},
+onSelect: function(instance) {
+  // Show which date was selected.
+  console.log("End date: ", instance.dateSelected);
+  $scope.endDate = instance.dateSelected;
+  console.log("as string", $scope.endDate.toDateString());
+},
+onShow: function(instance) {
+  console.log('Calendar showing.');
+},
+onHide: function(instance) {
+  console.log('Calendar hidden.');
+},
+onMonthChange: function(instance) {
+  // Show the month of the selected date.
+  console.log(instance.currentMonthName);
+},
+customMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
+overlayPlaceholder: 'Enter a 4-digit year',
+overlayButton: 'Go!',
+disableMobile: true // Conditionally disabled on mobile devices.
+});
+
+        ////////////////////file upload /////////////////////////////////////////////////////////////
+        $scope.showPrivates = function() {
+          alert($scope.isPrivate);
+        }
+       $scope.compareDates = function() {
+         var diff = $scope.endDate.getTime()- $scope.startDate.getTime();
+         if (diff>0) {
+           console.log("end date is bigger than start")
+         } else if (diff<0) {
+           console.log("invalid date!!!");
+         } else {
+           console.log("same day");
+         }//else
+       }//compareDates
         $scope.submit = function(){ //function to call on form submit
               //TODO: check if from is valid
-              console.log("in submit! uploading...")
-                $scope.upload($scope.file); //call upload function
+              var submitExp = document.getElementById('fileItem').files[0];
+              console.log("in submit! uploading...", submitExp);
+                $scope.upload(submitExp); //call upload function
+              // var s = "g";
+              // console.log("scope's starting date is", $scope.startDate);
+              // console.log("its a ", typeof($scope.startDate));
+              // s.concat($scope.startDate);
+              // console.log("s is ", s);
+              // var x = document.getElementById("start");
+              // console.log("x is", x);
+              //console.log("x value is ", x.value);
         }
         $scope.upload = function (file) {
             Upload.upload({
-                url: 'http://localhost:8000/addevent', //webAPI exposed to upload the file
+                url: 'http://localhost:8000/upload', //webAPI exposed to upload the file
                 data:{file:file} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
                 if(resp.data.error_code === 0){ //validate success
-                  //  $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+                  console.log("controller response is", resp);
+                  console.log("response file object", resp.config.data.file);
+                    $window.alert('Success'  + resp.config.data.file.name + ' uploaded');
+                    $scope.uploadedImage = resp.config.data.file_name;
                 } else {
                     $window.alert('an error occured');
                 }
@@ -34,7 +132,7 @@ app.controller('createCtrl',['createService','$scope' ,'Upload','$window', funct
 
   var config = require('../config.js');
   $scope.mapKey = config.MAPS_API_KEY;
-  console.log("key is: ", $scope.mapKey);
+  //console.log("key is: ", $scope.mapKey);
   $scope.add = function(type) {
     var isFree = false;
     if (type==='Free') {
@@ -67,7 +165,7 @@ app.controller('createCtrl',['createService','$scope' ,'Upload','$window', funct
   }
   /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
   var placeSearch, autocomplete;
-function initAutocomplete() {
+function initAutocomplete(){
   // Create the autocomplete object, restricting the search to geographical
   // location types.
   autocomplete = new google.maps.places.Autocomplete(
@@ -117,36 +215,36 @@ $scope.getDistanceFromLatLonInKm = function(lat1, lon1, lat2, lon2) {
 function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
-function writeMapScript() {
-  var src = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places";
-  document.body.innerHTML+="<script src="+src+"</script>";
-  var script = document.createElement("script");
-   script.type = 'text/javascript';
-  // document.body.appendChild(script);
 
-  }
-  function addScript( src ) {
-    // if ($('script').length) {
+function addScript( src ) {
+  var tag = document.getElementById("maptag");
+    if (!tag)  {
     var s = document.createElement( 'script' );
     s.setAttribute( 'src', src );
+    s.setAttribute('id', "maptag");
     document.body.appendChild( s );
-  // }
-  }//addScript
+    console.log("adding tag for first time in the run");
+    s.onload = initAutocomplete;
+  } else {
+    console.log("tag alredy added");
+    initAutocomplete();
+  }//else
+    // when the script has finished loading, only THEN call autocomplete()
+}//addScript
 
   //calling the addScript function
   var mapSrc = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places";
   addScript(mapSrc);
-  //when the window has finished loading all the scripts, only THEN call autocomplete()
-  window.onload = function(){
-    initAutocomplete();
-  }
+
+
+
 /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
 /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
 $scope.preview = function() {
-    var file = document.getElementById('fileItem').files[0];
+    var prevFile = document.getElementById('fileItem').files[0];
     var img = document.createElement("img");
     img.classList.add("obj");
-    img.file = file;
+    img.file = prevFile;
     img.height = 250;
     img.width = 250;
     console.log("img object to be added", img);
@@ -162,7 +260,7 @@ $scope.preview = function() {
      };
      })
      (img);
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(prevFile);
 }//handleFiles
 function checkNames() {
     var patt = /w+/;

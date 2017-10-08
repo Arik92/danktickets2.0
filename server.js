@@ -1,8 +1,24 @@
 var express = require('express');
+var mongoose = require('mongoose');
+<<<<<<< HEAD
+=======
+var eventRoutes = require('./routes/eventRoutes');
+//mongoose.connect("mongodb://localhost/events");
 var app = express();
+>>>>>>> dbe02aaa71816bb39ab4bc09c88f474bc91b3dc7
 //var expressSession = require('express-session');
 var bodyParser = require('body-parser');
 var multer  = require('multer');
+var eventRoutes = require('./routes/eventRoutes');
+
+
+<<<<<<< HEAD
+mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
+var app = express();
+=======
+mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/users");
+>>>>>>> dbe02aaa71816bb39ab4bc09c88f474bc91b3dc7
+
 app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "http://localhost");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -25,24 +41,27 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }).single('file');
 //var passport = require('passport');
 // var localStrategy = require('passport-local').strategy;
-// var mongoose = require('mongoose');
-// var beerRoutes = require('./routes/beerRoutes');
+
 // var userRoutes = require('./routes/userRoutes');
 // var User = require('./models/userModel');
 /////////////////////////////////   multer
-app.post('/addevent', function(req, res) {
+app.post('/upload', function(req, res) {
         upload(req,res,function(err){
             if(err){
                  res.json({error_code:1,err_desc:err});
                  return;
             }
-             res.json({error_code:0,err_desc:null});
+            console.log("file name:", req.file.filename);
+             res.json({error_code:0,err_desc:null, file_name: req.file.filename});
         })
     });
 /////////////////////////////////   multer
 
-app.all('*', function(req, res) {
-  res.sendFile(__dirname + "/public/index.html");
+app.use('/events', eventRoutes);
+
+app.all('[^.]+', function(req, res) {
+  //res.sendFile(__dirname + "/public/index.html");
+  res.send("GOD DAMN!!!!!!!!!!!!!");
 });
 
 //main error handler
@@ -55,7 +74,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
-app.listen(8000, function() {
+app.listen(process.env.PORT || '8000', function() {
   console.log("Dank tickets, tick-it-up! Listening on 8000.");
 });

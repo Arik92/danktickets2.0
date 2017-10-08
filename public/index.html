@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<!-- responsive stylesheet -->
 	<link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="/js-datepicker/datepicker.css">
 
 </head>
 <body>
@@ -60,7 +61,8 @@
 							</ul>
 						</li>
 						<li class="scrollToLink"><a href="#upcoming-event">BROWSE EVENT</a></li>
-						<li class="scrollToLink"><a ui-sref="createevent({scrollTo: 'createevent'})">CREATE EVENTS</a></li>
+						<li class="scrollToLink"><a ui-sref="createevent">CREATE EVENTS</a></li>
+
 						<!-- <li class="scrollToLink"><a href="#event-speakers">CREATE EVENTS</a></li> -->
 						<li class="scrollToLink"><a href="#gallery">GALLERY</a></li>
 
@@ -73,7 +75,7 @@
 						</li> -->
 						<li class="scrollToLink"><a href="#contact">CONTACT</a></li>
 
-						<li class="scrollToLink"><a href="#pricing-table">SIGN IN</a></li>
+						<li class="scrollToLink"><a ui-sref="login">SIGN IN</a></li>
 						<!-- <li class="scrollToLink"><a href="#event-sponsor">SPONSOR</a></li> -->
 					</ul>
 				</nav>
@@ -251,14 +253,12 @@
 							data-speed="700"
 							data-start="2200"
 							data-easing="easeOutBack">
-
 							<ul>
 								<li><span><input type="text" placeholder="Your Name"></span></li>
 								<li><span><input type="text" placeholder="Your Email"></span></li>
 								<li><span><input type="text" placeholder="Your Phone"></span></li>
 							</ul>
 						</div>
-
 						<ul
 							class="caption sfb tp-resizeme banner-buttons"
 							data-x="0"
@@ -266,17 +266,18 @@
 							data-speed="700"
 							data-start="2500"
 							data-easing="easeOutBack">
-
 							<li class="scrollToLink"><button type="submit" class="colored hvr-bounce-to-right">Register Now</button></li>
 							<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Watch Video</a></li>
-
 						</ul>
 					</li>
-
 				</ul>
 			</div>
 		</div>
+<<<<<<< HEAD
 	</section> --> <!-- /#banner -->
+=======
+	</section> <!-- /#banner -->
+>>>>>>> 12a2597648a45152656d3fc16f9300a5844b80e7
 
 	<nav-directive></nav-directive>
 
@@ -287,13 +288,14 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="/angular/angular.js"></script>
 	<script src="/@uirouter/angularjs/release/angular-ui-router.js"></script>
-
 	<script src="ng-file-upload/dist/ng-file-upload.min.js"></script>
 	<!-- js folders -->
+	<script src="js-datepicker/datepicker.min.js"></script>
 	<script src="js/app.js"></script>
+	<script src="js/services/orService.js"></script>
 	<script src="js/services/createService.js"></script>
 	<script src="/bundle.js"></script>
-
+	<script src="js/controllers/orCtrl.js"></script>
 	<script src="js/jquery.themepunch.tools.min.js"></script>
 	<script src="js/jquery.themepunch.revolution.min.js"></script>
 	<script src="js/countdown.min.js"></script>

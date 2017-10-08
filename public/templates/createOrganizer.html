@@ -1,0 +1,65 @@
+<section id="createorganizer" >
+  <form enctype="multipart/form-data" name="upload_form">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="page-header"><h2>Create Organizer profile</h2></div>
+          <div class="form-group">
+            <label class="control-label" for="source_name">Organizer Name</label>
+            <div>
+              <input id="source_name" class="form-control" name="source_name" ng-model="oName" type="text" placeholder="Organizer name" class="form-control input-md">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="source_name">About You</label>
+            <div>
+              <textarea id="source_name" class="form-control" name="source_name" ng-model="oDesc" placeholder="This is who we are. This is what we do" class="form-control input-md"></textarea>
+            </div>
+          </div>
+           <div class="form-group">
+             <label class="control-label" for="source_name">Image</label>
+             <div>
+               <input id="fileItem" type="file" name="eventPic" ng-model="file"
+               ngf-pattern="'image/*'"
+               accept="image/*"
+               ngf-max-size="20MB" >
+             </div>
+           </div>
+           <div class="form-group">
+             <button class="btn btn-success" ng-click="preview()">Preview:</button>
+             <div id="preview">
+             </div>
+           </div>
+           <br /><!--input -->
+           <div class="page-header"><h4>Social Media</h4></div>
+           <div class="form-group">
+             <label class="control-label" for="source_name">Website</label>
+             <div>
+               <input id="source_name" class="form-control" name="source_name" ng-model="oSite" type="text" placeholder="Danksite.com" class="form-control input-md">
+             </div>
+           </div>
+           <div class="form-group">
+             <label class="control-label" for="source_name">Facebook:</label>
+             <div>
+               <input id="source_name" class="form-control" name="source_name" ng-model="oFace" type="text" placeholder="face@fb.com" class="form-control input-md">
+             </div>
+           </div>
+           <div class="form-group">
+             <label class="control-label" for="source_name">Instagram:</label>
+             <div>
+               <input id="source_name" class="form-control" name="source_name" ng-model="oInst" type="text" placeholder="insta" class="form-control input-md">
+             </div>
+           </div>
+           <div class="form-group">
+             <label class="control-label" for="source_name">Twitter:</label>
+             <div>
+               <input id="source_name" class="form-control" name="source_name" ng-model="oTwitt" type="text" placeholder="tweet" class="form-control input-md">
+             </div>
+           </div>
+                <Button  class="btn btn-danger" ng-click="reset()">Reset   </Button>
+          <Button class="btn btn-success" ng-click="submit()">Create Profile </Button>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

@@ -1,28 +1,37 @@
-<div>
+<section id="createevent" >
   <form enctype="multipart/form-data" name="upload_form">
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
-          <div class="page-header">
-            <h2>Create Your Event</h2></div>
+          <div class="page-header"><h2>Create Your Event</h2></div>
           <div class="form-group">
             <label class="control-label" for="source_name">Title</label>
             <div>
-              <input id="source_name" class="form-control" name="source_name" ng-model="eName" type="text" placeholder="Fancy Feast" class="form-control input-md">
+              <input id="source_name" class="form-control input-md" name="source_name" ng-model="eName" type="text" placeholder="Fancy Feast">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="source_name">Event Type</label>
+            <div>
+              <p>selected item is : {{selectedType}}</p>
+        <select ng-model="selectedType" class="form-control input-md">
+          <option ng-repeat="type in typeOptions" value="{{type}}">{{type}}</option>
+        </select>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label" for="source_name">Starts at: </label>
             <div>
-              <input id="source_name" class="form-control" name="source_name" ng-model="startDate" type="date" class="form-control input-md">
+              <input  id="start_date" ng-model="startDate"class="form-control input-md" required>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label" for="source_name">Ends at:</label>
             <div>
-              <input id="source_name" class="form-control" name="source_name" ng-model="endDate" type="date" class="form-control input-md">
+            <input id="end_date" ng-model="endDate" class="form-control input-md" required>
             </div>
           </div>
+          <button class="btn btn-submit" ng-click="compareDates()">Check dates</button>
           <div class="form-group">
             <label class="control-label" for="source_name">Description</label>
             <div>
@@ -35,83 +44,80 @@
               <input id="source_name" class="form-control" name="source_name" ng-model="eDisp" type="text" placeholder="Most awesome events everr" class="form-control input-md">
             </div>
           </div>
-          <div class="form-group">
-            <label class="control-label" for="source_name">Image</label>
-            <div>
-              <input id="fileItem" type="file" name="eventPic" ng-model="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB">
-            </div>
-          </div>
-          <div class="form-group">
-            <button class="btn btn-success" ng-click="preview()">preview:</button>
-            <div id="preview">
-            </div>
-          </div>
-          <br />
-          <!--input -->
-          <div class="form-group">
-            <label class="control-label" for="source_name">Event Location: </label>
-            <div>
+           <div class="form-group">
+             <label class="control-label" for="source_name">Image</label>
+             <div>
+               <input id="fileItem" type="file" name="eventPic" ng-model="file"
+               ngf-pattern="'image/*'"
+               accept="image/*"
+               ngf-max-size="20MB" >
+             </div>
+           </div>
+           <div class="form-group">
+             <button class="btn btn-success" ng-click="preview()">preview:</button>
+             <div id="preview">
+             </div>
+           </div>
+           <br /><!--input -->
+           <div class="form-group">
+             <label class="control-label" for="source_name">Event Location: </label>
+             <div>
               <h3>Enter any location</h3>
-              <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter city">
-            </div>
-          </div>
-          <br />
-          <!--input -->
-          <div class="form-group">
-            <label class="control-label" for="source_name">Is this a public event?</label>
-            <div>
-              <input type="radio" name="source_name" value="public"> Public
-              <input type="radio" name="source_name" value="private"> Private(invite only)
-            </div>
-          </div>
-          <br />
-          <!--input -->
-          <div class="page-header">
-            <h2>Event Tickets</h2></div>
-          <div class="form-group">
-            <label class="control-label" for="source_name">Choose a ticket type:</label>
-            <div>
-              <button class="btn btn-primary" ng-click="add('Free')">Free</button>
-              <button class="btn btn-success" ng-click="add('Paid')">Paid</button>
-              <button class="btn btn-warning" ng-click="add('Donation')">Dontaion</button>
-              <ul class="list-unstyled list-group" float="left">
-                <li ng-repeat="ticket in tempTicks track by $index">
-                  <br />
-                  <div class="row">
-                    <div class="col-md-3">Ticket name: </div>
-                    <div class="col-md-3">Price:
-                    </div>
-                    <div class="col-md-3">Quantity:</div>
-                    <div class="col-md-3"></div>
-                  </div>
-                  <div class="row">
+                <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter city">
+             </div>
+           </div>
+           <br /><!--input -->
+           <div class="form-group">
+             <label class="control-label" for="source_name">Is this a public event?</label>
+             <div>
+               <input type="radio" ng-model="isPrivate" value="false"> Public
+               <input type="radio" ng-model="isPrivate" value="true"> Private(invite only)
+             </div>
+             <!-- <button class="btn" ng-click="showPrivates()">show privates</button> -->
+           </div>
+           <br /><!--input -->
+           <div class="page-header"><h2>Event Tickets</h2></div>
+           <div class="form-group">
+             <label class="control-label" for="source_name">Choose a ticket type:</label>
+             <div>
+               <button class="btn btn-primary" ng-click="add('Free')">Free</button>
+               <button class="btn btn-success" ng-click="add('Paid')">Paid</button>
+               <button class="btn btn-warning" ng-click="add('Donation')">Dontaion</button>
+               <ul class="list-unstyled list-group" float="left">
+                 <li ng-repeat="ticket in tempTicks track by $index" >
+                   <br />
+                   <div class="row">
+                   <div class="col-md-3">Ticket name: </div>
+                   <div class="col-md-3">Price:
+                   </div>
+                   <div class="col-md-3">Quantity:</div>
+                   <div class="col-md-3"></div>
+                   </div>
+                    <div class="row">
                     <div class="col-md-3"><input ng-model="ticket.ticketName" type="text" placeHolder="Ticket name" class="form-control input-md"></div>
-                    <div class="col-md-3"><input ng-hide="ticket.free" ng-model="ticket.ticketPrice" type="number" min="0" placeHolder="Price" class="form-control input-md">
-                      <input ng-show="ticket.free" type="text" placeHolder="free" class="form-control input-md" disabled></div>
+                    <div class="col-md-3"><input  ng-hide="ticket.free" ng-model="ticket.ticketPrice" type="number"  min="0" placeHolder="Price" class="form-control input-md">
+                    <input  ng-show="ticket.free" type="text" placeHolder="free" class="form-control input-md" disabled></div>
                     <div class="col-md-3"><input ng-model="ticket.ticketQ" type="number" placeHolder="How many?" min="0" class="form-control input-md" ng-change="updateQ()"></div>
                     <div class="col-md-3"><button class="btn btn-danger" ng-click="delete($index)"><i class="fa fa-trash-o " aria-hidden="true"></i></button></div>
-                  </div>
-                  <br />
-                </li>
-                <div class="row">
-                  <div class="col-md-12">Total Ticket amount: {{totalTickets}}</div>
-                </div>
-              </ul>
-            </div>
-          </div>
-          <div class="form-group">
-            <div>
-              <input type="checkbox" name="source_name" value="showRemain"> Publicly show remaining tickets
-            </div>
-          </div>
-          <br />
-          <!--input -->
-          <Button class="btn btn-danger" ng-click="reset()">Reset   </Button>
+                    </div>
+                   <br />
+                 </li>
+                 <div class="row">
+                 <div class="col-md-12">Total Ticket amount: {{totalTickets}}</div>
+               </div>
+               </ul>
+             </div>
+           </div>
+           <div class="form-group">
+             <div>
+               <input type="checkbox" name="source_name" value="showRemain"> Publicly show remaining tickets
+             </div>
+           </div>
+            <br /><!--input -->
+                <Button  class="btn btn-danger" ng-click="reset()">Reset   </Button>
           <Button class="btn btn-success" ng-click="submit()">Create Event </Button>
         </div>
       </div>
     </div>
   </form>
-  <!-- <script src="js/services/createService.js"></script>
-  <script src="/bundle.js"></script> --> -->
-</div>
+</section>
