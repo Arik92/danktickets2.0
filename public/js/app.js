@@ -54,4 +54,8 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/signup',
       templateUrl: '/templates/signup.html'
     })
+.state('dashboard', {
+      url: '/dashboard',
+      templateUrl: '/templates/dashboard.html'
+    })
 });
