@@ -49,7 +49,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/page-contact',
       templateUrl: '/templates/page-contact.html'
     })
-<<<<<<< HEAD
+
 .state('terms', {
       url: '/termsofservice',
       templateUrl: '/templates/terms.html'
@@ -70,10 +70,10 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/dashboard',
       templateUrl: '/templates/dashboard.html'
     })
-=======
+
     .state('login', {
       url: '/login',
       templateUrl: '/templates/login.html'
     })
->>>>>>> 12a2597648a45152656d3fc16f9300a5844b80e7
+
 });
