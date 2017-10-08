@@ -49,8 +49,31 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/page-contact',
       templateUrl: '/templates/page-contact.html'
     })
+
+.state('terms', {
+      url: '/termsofservice',
+      templateUrl: '/templates/terms.html'
+    })
+.state('privacypolicy', {
+      url: '/privacypolicy',
+      templateUrl: '/templates/privacypolicy.html'
+    })
+.state('login', {
+      url: '/login',
+      templateUrl: '/templates/login.html'
+    })
+.state('signup', {
+      url: '/signup',
+      templateUrl: '/templates/signup.html'
+    })
+.state('dashboard', {
+      url: '/dashboard',
+      templateUrl: '/templates/dashboard.html'
+    })
+
     .state('login', {
       url: '/login',
       templateUrl: '/templates/login.html'
     })
+
 });
