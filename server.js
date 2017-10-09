@@ -63,13 +63,17 @@ app.post('/users', function(req, res){
   user.email = req.body.email;
   user.tickets = req.body.tickets;
   user.image = req.body.image;
-  user.save(function(err, newUser){
-    if (err) {
-      throw (err)
-    } else {
-      res.send(newUser);
+  if (req.body.username == null || req.body.username == '' || req.body.password == null || req.body.password == '' || req.body.email == null || req.body.email == '') {
+    res.send('Ensure Username, Email and Password were provided');
+  } else {
+      user.save(function(err, newUser){
+        if (err) {
+          throw ('Username or Email already exist')
+        } else {
+          res.send(newUser);
+        }
+      });
     }
-  });
 });
 
 app.use('/events', eventRoutes);
