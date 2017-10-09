@@ -1,7 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var eventRoutes = require('./routes/eventRoutes');
-mongoose.connect("mongodb://localhost/events");
 //var expressSession = require('express-session');
 var bodyParser = require('body-parser');
 var multer  = require('multer');
@@ -56,8 +55,8 @@ app.post('/upload', function(req, res) {
 app.use('/events', eventRoutes);
 
 app.all('[^.]+', function(req, res) {
-  //res.sendFile(__dirname + "/public/index.html");
-  res.send("GOD DAMN!!!!!!!!!!!!!");
+  res.sendFile(__dirname + "/public/index.html");
+  // res.send("GOD DAMN!!!!!!!!!!!!!");
 });
 
 //main error handler

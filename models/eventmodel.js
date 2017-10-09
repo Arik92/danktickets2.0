@@ -7,6 +7,15 @@ var locationSchema = new Schema({
   address2: String
   //NOTE: lattitude? longtitude?
 });
+var ticketSchema = new Schema({
+  type: String,
+  price: Number,
+  name: String,
+  //isFree: Boolean
+  //seat?
+  //id or serial number. aside from mongoID
+  description: String //NOTE: special notes to guests?
+});
 var eventSchema = new Schema({
   title: String,
   type: String, //NOTE: possible options: show, movie, gallery? for search purposes
@@ -16,7 +25,7 @@ var eventSchema = new Schema({
   startTime: Date,
   endTime: Date,
   description: String,
-  //tickets: [ticketSchema],
+  tickets: [ticketSchema], //o
   numTickets: Number, //tickets remaining
   //TODO: image, organizer name,
   isPrivate: Boolean,
