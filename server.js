@@ -1,10 +1,8 @@
 var express     = require('express');
 var mongoose    = require('mongoose');
 var eventRoutes = require('./routes/eventRoutes');
-<<<<<<< HEAD
 // mongoose.connect("mongodb://localhost/events");
-=======
->>>>>>> 810e82acdcb7546eab10000c404cb83d6d99d143
+
 //var expressSession = require('express-session');
 var bodyParser  = require('body-parser');
 var multer      = require('multer');
