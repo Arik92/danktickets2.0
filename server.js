@@ -1,19 +1,22 @@
-var express = require('express');
-var mongoose = require('mongoose');
+var express     = require('express');
+var mongoose    = require('mongoose');
 var eventRoutes = require('./routes/eventRoutes');
+// mongoose.connect("mongodb://localhost/events");
+
 //var expressSession = require('express-session');
-var bodyParser = require('body-parser');
-var multer  = require('multer');
+var bodyParser  = require('body-parser');
+var multer      = require('multer');
 //var passport = require('passport');
 //var LocalStrategy = require('passport-local').Strategy;
-//var User = require('./models/usermodel');
+var User        = require('./models/usermodel');
 // var userRoutes = require('./routes/userRoutes');
 var eventRoutes = require('./routes/eventRoutes');
 
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 //mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/users");
-var app = express();
-var port = process.env.PORT || '8000';
+var app         = express();
+var port        = process.env.PORT || '8000';
+var morgan      = require('morgan');
 
 app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "http://localhost");
@@ -52,6 +55,22 @@ app.post('/upload', function(req, res) {
         })
     });
 /////////////////////////////////   multer
+// http://localhost:8000/users
+app.post('/users', function(req, res){
+  var user = new User();
+  user.username = req.body.username;
+  user.password = req.body.password;
+  user.email = req.body.email;
+  user.tickets = req.body.tickets;
+  user.image = req.body.image;
+  user.save(function(err, newUser){
+    if (err) {
+      throw (err)
+    } else {
+      res.send(newUser);
+    }
+  });
+});
 
 app.use('/events', eventRoutes);
 
