@@ -2,6 +2,7 @@ var express     = require('express');
 var mongoose    = require('mongoose');
 var eventRoutes = require('./routes/eventRoutes');
 // mongoose.connect("mongodb://localhost/events");
+
 //var expressSession = require('express-session');
 var bodyParser  = require('body-parser');
 var multer      = require('multer');

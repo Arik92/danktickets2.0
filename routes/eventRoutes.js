@@ -13,14 +13,24 @@ router.get('/', function (req, res, next) {
 });//get all events that were ever published
 
 router.get('/:id', function(req, res, next){
-  Event.findOne({_id: req.params.id}, function(err, resultEvent){
+  Event.find({publisher: req.params.id}, function(err, resultEvents){
     if (err) {
       console.log(err);
     } else {
-      res.send(resultEvent);
+      res.send(resultEvents);
     }//else
-  })//findOneCB
-}) // get specific event
+  })//findCb
+}) // get event by publisher
+
+router.get('/searchByActivity/:type', function(req, res, next){
+  Event.find({type: req.params.type}, function(err, resultEvents){
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(resultEvents);
+    }//else
+  })//findCb
+}) //NOTE: get event by a specific type criteria. for future use
 
 router.post('/', function (req, res, next) {
   var e = new Event(req.body);
@@ -33,61 +43,6 @@ router.post('/', function (req, res, next) {
     }//else
   });
 });//post event
-
-// router.post('/:id/reviews', function(req, res, next) {
-//   //var r = new Review();
-//   Event.findOne({_id: req.params.id }, function(err, event){
-//     if (err) {
-//       console.log(err);
-//       res.send(err);
-//
-//     } else {
-//       console.log("found beer is: ");
-//       console.log(beer);
-//       beer.reviews.push(req.body);
-//       beer.save(function(error, resolve){
-//         if (error) {
-//           console.log(error);
-//         } else {
-//           console.log(resolve);
-//           res.send(resolve);
-//         }
-//       }); //beer save
-//     } // else found beer
-//   })// finding beer in mongod
-//
-// });// add review to a beer NOTE: might be repurposed for event tickets
-
-// router.delete('/:id/reviews/:revId', function(req, res, next) {
-//   Beer.findOne({_id: req.params.id }, function(err, beer){
-//     if (err) {
-//       console.log(err);
-//       res.send(err);
-//     } else {
-//       console.log("found beer is: ");
-//       console.log(beer);
-//       var index = -1;
-//         for (var i = 0;i<beer.reviews.length;i++) {
-//         if (beer.reviews[i].id===req.params.revId) {
-//           index = i;
-//         }//if finding review index
-//       }//for i
-//       if (index!=-1) {
-//         beer.reviews.splice(index,1);
-//         beer.save(function(error, resolve){
-//           if (error) {
-//             console.log(error);
-//           } else {
-//             console.log(resolve);
-//             console.log("Object deleted");
-//             res.send(resolve);
-//           }// else resolve
-//       });
-//       }//if -1
-//     } // else found beer
-//   })// finding beer in mongod
-//
-// });// add review to a beer NOTE: might be repurposed for event tickets
 
 router.delete("/:id",function(req,res){
   Event.findOneAndRemove({ _id: req.params.id }, function(err, event) {
@@ -110,15 +65,5 @@ router.put('/:id', function(req, res, next) {
     }
   });
 });
-// router.put('/rate/:id', function(req, res, next) {
-//   Beer.findOneAndUpdate({ _id: req.params.id },  {$inc:  {ratings: req.body.currentRating, numRate: 1}}, { new: true }, function(err, beer) {
-//     if (err) {
-//       console.error(err)
-//       return next(err);
-//     } else {
-//       console.log(beer);
-//       res.send(beer);
-//     }
-//   });
-// }); NOTE: might be repurposed for event tickets
+
 module.exports = router;
