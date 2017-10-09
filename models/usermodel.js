@@ -1,10 +1,6 @@
 var mongoose   = require('mongoose');
 var Schema     = mongoose.Schema;
 
-
-
-
-
 var UserSchema = new Schema({
   username: { type: String, lowercase: true, required: true, unique: true },
   password: { type: String, required: true },
@@ -12,6 +8,20 @@ var UserSchema = new Schema({
   tickets:  { type: Schema.Types.ObjectId, ref:"" },
   image: String
 });
+
+//encrypt password mongoose middlware
+UserSchema.pre('save', function(next) {
+  var user = this;
+  //bcrypt encrypts password
+  bcrypt.hash(user.password, null, null, function(err, hash) {
+    if (err) return next(err);
+    // Store hash in your password DB.
+    user.password = hash;
+    next();
+  });
+});
+
+
 
 var User       = mongoose.model("User", UserSchema);
 module.exports = User;
