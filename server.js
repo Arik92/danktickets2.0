@@ -8,7 +8,7 @@ var multer  = require('multer');
 //var passport = require('passport');
 //var LocalStrategy = require('passport-local').Strategy;
 //var User = require('./models/usermodel');
-var userRoutes = require('./routes/userRoutes');
+// var userRoutes = require('./routes/userRoutes');
 var eventRoutes = require('./routes/eventRoutes');
 
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
