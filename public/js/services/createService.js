@@ -53,6 +53,7 @@ var deleteEvent = function(oId) {
 } // delete a battle
 
 var updateEvent = function(id, evnt) {
+  // the event
   return $http.put('/events/' + event._id, event).then(function(result) {
     return result.data;
   }, function(error) {
