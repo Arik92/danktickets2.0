@@ -14,6 +14,7 @@ var eventRoutes = require('./routes/eventRoutes');
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 //mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/users");
 var app = express();
+var port = process.env.PORT || '8000';
 
 app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "http://localhost");
@@ -56,8 +57,8 @@ app.post('/upload', function(req, res) {
 app.use('/events', eventRoutes);
 
 app.all('[^.]+', function(req, res) {
-  //res.sendFile(__dirname + "/public/index.html");
-  res.send("GOD DAMN!!!!!!!!!!!!!");
+  res.sendFile(__dirname + "/public/index.html");
+  // res.send("GOD DAMN!!!!!!!!!!!!!");
 });
 
 //main error handler
@@ -70,6 +71,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(process.env.PORT || '8000', function() {
-  console.log("Dank tickets, tick-it-up! Listening on 8000.");
+app.listen(port, function() {
+  console.log("Dank tickets, tick-it-up! Listening on " + port);
 });
