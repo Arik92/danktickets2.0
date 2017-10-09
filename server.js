@@ -7,7 +7,7 @@ var bodyParser  = require('body-parser');
 var multer      = require('multer');
 //var passport = require('passport');
 //var LocalStrategy = require('passport-local').Strategy;
-//var User = require('./models/usermodel');
+var User        = require('./models/usermodel');
 // var userRoutes = require('./routes/userRoutes');
 var eventRoutes = require('./routes/eventRoutes');
 
