@@ -2,14 +2,13 @@ var express     = require('express');
 var mongoose    = require('mongoose');
 var eventRoutes = require('./routes/eventRoutes');
 // mongoose.connect("mongodb://localhost/events");
-
 //var expressSession = require('express-session');
 var bodyParser  = require('body-parser');
 var multer      = require('multer');
 //var passport = require('passport');
 //var LocalStrategy = require('passport-local').Strategy;
-var User        = require('./models/usermodel');
-// var userRoutes = require('./routes/userRoutes');
+var router = express.Router();
+var userRoutes = require('./routes/userRoutes')(router);
 var eventRoutes = require('./routes/eventRoutes');
 
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
@@ -55,28 +54,9 @@ app.post('/upload', function(req, res) {
         })
     });
 /////////////////////////////////   multer
-// http://localhost:8000/users
-app.post('/users', function(req, res){
-  var user = new User();
-  user.username = req.body.username;
-  user.password = req.body.password;
-  user.email = req.body.email;
-  user.tickets = req.body.tickets;
-  user.image = req.body.image;
-  if (req.body.username == null || req.body.username == '' || req.body.password == null || req.body.password == '' || req.body.email == null || req.body.email == '') {
-    res.send('Ensure Username, Email and Password were provided');
-  } else {
-      user.save(function(err, newUser){
-        if (err) {
-          throw ('Username or Email already exist')
-        } else {
-          res.send(newUser);
-        }
-      });
-    }
-});
 
 app.use('/events', eventRoutes);
+app.use('/users', userRoutes);
 
 app.all('[^.]+', function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
