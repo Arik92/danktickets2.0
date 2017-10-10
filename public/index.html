@@ -28,6 +28,9 @@
 	<script src="/bundle.js"></script>
 	<script src="js/controllers/orCtrl.js"></script>
 	<script src="js/controllers/userCtrl.js"></script>
+  <script src="js/controllers/createCtrl.js"></script>
+	<script src="js/controllers/browseCtrl.js"></script>
+	<script src="js/controllers/editCtrl.js"></script>
 	<script src="js/jquery.themepunch.tools.min.js"></script>
 	<script src="js/jquery.themepunch.revolution.min.js"></script>
 	<script src="js/countdown.min.js"></script>
@@ -49,7 +52,7 @@
 	<!-- .preloader -->
 	<div class="preloader"></div>
 	<!-- /.preloader -->
-		
+
 	<!-- #header -->
 	<header id="header">
 		<div class="container">
@@ -91,6 +94,7 @@
 						</li> -->
 						<li class="scrollToLink"><a href="#upcoming-event">BROWSE EVENTS</a></li>
 						<li class="scrollToLink"><a ui-sref="create-event">CREATE EVENT</a></li>
+
 						<li class="scrollToLink"><a href="#gallery">GALLERY</a></li>
 
 						<!-- <li class="scrollToLink dropdown">
@@ -304,6 +308,7 @@
 	<!-- /#banner -->
 
   <nav-directive></nav-directive>
+
 	<div ui-view></div>
 
 	<footer-directive></footer-directive>
