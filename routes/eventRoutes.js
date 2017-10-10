@@ -34,11 +34,12 @@ router.get('/searchByActivity/:type', function(req, res, next){
 
 router.post('/', function (req, res, next) {
   var e = new Event(req.body);
-  console.log("reached post route");
   e.save(function(error, result){
     if (error) {
+      console.log("reached error route");
       console.log(error);
     } else {
+      console.log("reached result route");
       res.send(result);
     }//else
   });
