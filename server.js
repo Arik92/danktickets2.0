@@ -26,6 +26,7 @@ app.use(function(req, res, next) {
     app.use(bodyParser.json());
     app.use(express.static('public'));
     app.use(express.static('node_modules'));
+    app.use(express.static('uploads'));//for pics
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
