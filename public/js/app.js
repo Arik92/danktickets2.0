@@ -49,28 +49,32 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/page-contact',
       templateUrl: '/templates/page-contact.html'
     })
-
-.state('terms', {
-      url: '/termsofservice',
-      templateUrl: '/templates/terms.html'
-    })
-.state('privacypolicy', {
-      url: '/privacypolicy',
-      templateUrl: '/templates/privacypolicy.html'
-    })
-.state('signup', {
-      url: '/signup',
-      templateUrl: '/templates/signup.html',
-      controller: 'regCtrl'
-    })
-.state('login', {
-      url: '/login',
-      templateUrl: '/templates/login.html'
-    })
-.state('dashboard', {
-      url: '/dashboard',
-      templateUrl: '/templates/dashboard.html'
-    })
+    .state('terms', {
+          url: '/terms-of-service',
+          templateUrl: '/templates/terms.html'
+        })
+    .state('privacypolicy', {
+          url: '/privacy-policy',
+          templateUrl: '/templates/privacypolicy.html'
+        })
+    .state('signup', {
+          url: '/sign-up',
+          templateUrl: '/templates/signup.html',
+          controller: 'regCtrl',
+          controllerAs: 'register'
+        })
+    .state('signin', {
+          url: '/sign-in',
+          templateUrl: '/templates/login.html'
+        })
+    .state('dashboard', {
+          url: '/dashboard',
+          templateUrl: '/templates/dashboard.html'
+        })
+    .state('contact', {
+          url: '/contact',
+          templateUrl: '/templates/contact.html'
+        })
     .state('browse', {
           url: '/browse-events',
           templateUrl: '/templates/browseEvents.html',
@@ -83,3 +87,5 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       controller: 'editCtrl'
     })
 });
+
+
