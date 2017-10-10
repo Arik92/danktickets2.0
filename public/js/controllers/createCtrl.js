@@ -92,17 +92,9 @@ disableMobile: true // Conditionally disabled on mobile devices.
        }//compareDates
         $scope.submit = function(){ //function to call on form submit
               //TODO: check if from is valid
-              var submitExp = document.getElementById('fileItem').files[0];
-              console.log("in submit! uploading...", submitExp);
-                $scope.upload(submitExp); //call upload function
-              // var s = "g";
-              // console.log("scope's starting date is", $scope.startDate);
-              // console.log("its a ", typeof($scope.startDate));
-              // s.concat($scope.startDate);
-              // console.log("s is ", s);
-              // var x = document.getElementById("start");
-              // console.log("x is", x);
-              //console.log("x value is ", x.value);
+              var submitPic = document.getElementById('fileItem').files[0];
+              console.log("in submit! uploading...", submitPic);
+                $scope.upload(submitPic)
         }
         $scope.upload = function (file) {
             Upload.upload({
@@ -110,10 +102,12 @@ disableMobile: true // Conditionally disabled on mobile devices.
                 data:{file:file} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
                 if(resp.data.error_code === 0){ //validate success
-                  console.log("controller response is", resp);
+                  //console.log("controller response is", resp);
                   console.log("response file object", resp.config.data.file);
-                    $window.alert('Success'  + resp.config.data.file.name + ' uploaded');
-                    $scope.uploadedImage = resp.config.data.file_name;
+                    //$window.alert('Success'  + resp.config.data.file.name + ' uploaded');
+                    $scope.imageName = resp.config.data.file.name;
+                    publishEvent();
+                  // call a function to submit the whole event
                 } else {
                     $window.alert('an error occured');
                 }
@@ -127,6 +121,32 @@ disableMobile: true // Conditionally disabled on mobile devices.
                 // $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
             });
         };//file
+        function publishEvent() {
+          var evt = {
+            title: $scope.eName,
+            type: $scope.selectedType,
+            //publisher: ,
+            location: $scope.selectedPlace,
+            image: $scope.imageName,
+            startTime: $scope.startDate,
+            endTime: $scope.endDate,
+            description: $scope.eDesc,
+            numTickets: $scope.totalTickets, //tickets remaining
+            isPrivate: $scope.isPrivate,
+            showRemainingTicks: $scope.showRemain
+          }// event post object
+          evt.tickets = [];
+          for (var i=0;i<$scope.tempTicks.length;i++) {
+            evt.tickets.push($scope.tempTicks[i]);
+          }// for filling ticket array
+          createService.postEvent(evt).then(function(res){
+            console.log("added event successfully!");
+          }, function(err){
+            console.log("controller error promise");
+            console.error(err);
+          });
+
+        }//publishEvent
 
   //////////////////////file upload /////////////////////////////////////////////////////////////
 
@@ -187,19 +207,6 @@ function fillInAddress() {
   $scope.selectedLng = $scope.selectedPlace.geometry.location.lng();
 } //fillInAdress
 
-// Bias the autocomplete object to the user's geographical location,
-// as supplied by the browser's 'navigator.geolocation' object.
-// $scope.geolocate = function() {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(function(position) {
-//       var geolocation = {
-//         lat: position.coords.latitude,
-//         lng: position.coords.longitude
-//       }; //geolocation object
-//       console.log("my current location ", geolocation);
-//     }); //navigation callback
-//   }//if
-// } //geoLocate
 $scope.getDistanceFromLatLonInKm = function(lat1, lon1, lat2, lon2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2 - lat1); // deg2rad below
@@ -212,6 +219,7 @@ $scope.getDistanceFromLatLonInKm = function(lat1, lon1, lat2, lon2) {
   var d = R * c; // Distance in km
   return d;
 }
+
 function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
@@ -236,8 +244,6 @@ function addScript( src ) {
   var mapSrc = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places";
   addScript(mapSrc);
 
-
-
 /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
 /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
 $scope.preview = function() {
@@ -247,7 +253,7 @@ $scope.preview = function() {
     img.file = prevFile;
     img.height = 250;
     img.width = 250;
-    console.log("img object to be added", img);
+    //console.log("img object to be added", img);
     document.getElementById('preview').removeChild(document.getElementById('preview').firstChild);
     document.getElementById('preview').appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
       //TODO: need to specify preview size
@@ -262,6 +268,7 @@ $scope.preview = function() {
      (img);
     reader.readAsDataURL(prevFile);
 }//handleFiles
+
 function checkNames() {
     var patt = /w+/;
     if (!$scope.eName) {

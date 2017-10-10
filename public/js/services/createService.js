@@ -25,7 +25,7 @@ var getEvents = function() {
 } // get all current events. NOTE: In the future its possible to have event states like voutr. should that be wanted.
 // Do they want to view past events?
 
-var getEventsbyPublisher = function(userName) {
+var getEventsByPublisher = function(userName) {
   return $http.get('/events/' +userName)
     .then(function(response) {
       return response.data;
@@ -36,9 +36,10 @@ var getEventsbyPublisher = function(userName) {
 
 var postEvent = function(event) {
 return $http.post('/events', event).then(function(result) {
-  console.log("event added! ", result.data);
+  console.log("service result");
   return result.data;
 }, function(error) {
+  console.log("service error");
   throw (error);
 }) // add promise
 }// post event
@@ -89,10 +90,10 @@ var deleteEvent = function(oId) {
     getTempTicks: getTempTicks,
     addticket: addticket,
     deleteTempTick: deleteTempTick,
-    postEvent: postEvent
+    postEvent: postEvent,
     getEvents: getEvents,
     getEventsByPublisher: getEventsByPublisher,
     updateEvent: updateEvent,
-    deleteEventL deleteEvent
+    deleteEvent: deleteEvent
   };
 });
