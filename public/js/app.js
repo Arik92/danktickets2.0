@@ -58,13 +58,14 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/privacypolicy',
       templateUrl: '/templates/privacypolicy.html'
     })
+.state('signup', {
+      url: '/signup',
+      templateUrl: '/templates/signup.html',
+      controller: 'regCtrl'
+    })
 .state('login', {
       url: '/login',
       templateUrl: '/templates/login.html'
-    })
-.state('signup', {
-      url: '/signup',
-      templateUrl: '/templates/signup.html'
     })
 .state('dashboard', {
       url: '/dashboard',
