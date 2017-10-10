@@ -19,8 +19,8 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/about',
       templateUrl: '/templates/about-us.html'
     })
-    .state('createevent', {
-      url: '/createevent',
+    .state('create', {
+      url: '/create-event',
       templateUrl: '/templates/createEvent.html',
       controller: 'createCtrl',
       onEnter: function ($location, $stateParams, $anchorScroll, $timeout) {
@@ -70,5 +70,16 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 .state('dashboard', {
       url: '/dashboard',
       templateUrl: '/templates/dashboard.html'
+    })
+    .state('browse', {
+          url: '/browse-events',
+          templateUrl: '/templates/browseEvents.html',
+          controller: 'browseCtrl'
+        })
+    .state('/edit', {
+      url: '/edit-event/:id',
+        params: {eventParam: null},
+      templateUrl: '/templates/edit-event.html',
+      controller: 'editCtrl'
     })
 });
