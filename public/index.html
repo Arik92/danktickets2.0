@@ -8,14 +8,42 @@
 	<!-- Responsive Meta Tag -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css"/>
-<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 	<!-- main stylesheet -->
 	<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="css/style.css">
 	<!-- responsive stylesheet -->
 	<link rel="stylesheet" href="css/responsive.css">
 	<link rel="stylesheet" href="/js-datepicker/datepicker.css">
-
+	<!-- node modules -->
+	<script src="/angular/angular.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="/@uirouter/angularjs/release/angular-ui-router.js"></script>
+	<script src="ng-file-upload/dist/ng-file-upload.min.js"></script>
+	<!-- js folders -->
+	<script src="js-datepicker/datepicker.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/services/orService.js"></script>
+	<script src="js/services/createService.js"></script>
+	<script src="/bundle.js"></script>
+	<script src="js/controllers/orCtrl.js"></script>
+	<script src="js/controllers/userCtrl.js"></script>
+	<script src="js/jquery.themepunch.tools.min.js"></script>
+	<script src="js/jquery.themepunch.revolution.min.js"></script>
+	<script src="js/countdown.min.js"></script>
+	<script src="js/jquery.easing.min.js"></script>
+	<script src="js/jquery.fancybox.pack.js"></script>
+	<script src="js/jquery.mixitup.min.js"></script>
+	<script src="js/jquery.bxslider.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.appear.js"></script>
+	<script src="js/jquery.countTo.js"></script>
+	<script src="js/circle-progress.js"></script>
+	<script src="js/wow.js"></script>
+	<script src="js/validate.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/directives/navDirective.js"></script>
+	<script src="js/directives/footerDirective.js"></script>
 </head>
 <body>
 	<!-- .preloader -->
@@ -28,7 +56,7 @@
 			<div class="row">
 				<!-- .logo -->
 				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 logo">
-					<a href="index.html"><img src="img/resources/logo.png" alt="Logo Image" style="max-width: 150PX;padding:5px;margin-top: 10px;margin-right: 90px;"></a>
+					<a ui-sref="home"><img src="img/resources/logo.png" alt="Logo Image" style="max-width: 150PX;padding:5px;margin-top: 10px;margin-right: 90px;"></a>
 				</div>
 				<!-- /.logo -->
 
@@ -49,22 +77,20 @@
 								</li>
 							</ul>
 						</li> -->
-						<li class="deadlink">
+						<!-- <li class="deadlink">
 							<a href="#">DankTickets</a>
 							<ul class="submenu">
 								<li><a href="#">About Us</a></li>
 								<li class="dropdown">
 									<a href="services.html">Services</a>
-									<!-- <ul class="submenu">
+									<ul class="submenu">
 										<li class="deadlink"><a href="#">Third Level Menu</a></li>
-									</ul> -->
+									</ul>
 								</li>
 							</ul>
-						</li>
-						<li class="scrollToLink"><a href="#upcoming-event">BROWSE EVENT</a></li>
-						<li class="scrollToLink"><a ui-sref="createevent">CREATE EVENTS</a></li>
-
-						<!-- <li class="scrollToLink"><a href="#event-speakers">CREATE EVENTS</a></li> -->
+						</li> -->
+						<li class="scrollToLink"><a href="#upcoming-event">BROWSE EVENTS</a></li>
+						<li class="scrollToLink"><a ui-sref="create-event">CREATE EVENT</a></li>
 						<li class="scrollToLink"><a href="#gallery">GALLERY</a></li>
 
 						<!-- <li class="scrollToLink dropdown">
@@ -74,9 +100,9 @@
 								<li><a href="blog-single.html">Blog Single</a></li>
 							</ul>
 						</li> -->
-						<li class="scrollToLink"><a href="#contact">CONTACT</a></li>
-
-						<li class="scrollToLink"><a ui-sref="login">SIGN IN</a></li>
+						<li class="scrollToLink"><a ui-sref="contact">CONTACT</a></li>
+						<li class="scrollToLink"><a ui-sref="signin">SIGN IN</a></li>
+						<li class="scrollToLink"><a ui-sref="signup">SIGN UP</a></li>
 						<!-- <li class="scrollToLink"><a href="#event-sponsor">SPONSOR</a></li> -->
 					</ul>
 				</nav>
@@ -87,7 +113,7 @@
 	<!-- /#header -->
 
 	<!-- #banner -->
-<!-- 	<section id="banner">
+	<section id="banner">
 		<div class="banner-container">
 			<div class="banner">
 				<ul>
@@ -154,7 +180,7 @@
 
 						</ul>
 					</li>
-					<li
+<!-- 					<li
 						data-transition="fade"
 						data-slotamount="7"
 						class="slider-2 text-center gradient-overlay"
@@ -270,45 +296,17 @@
 							<li class="scrollToLink"><button type="submit" class="colored hvr-bounce-to-right">Register Now</button></li>
 							<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Watch Video</a></li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 		</div>
-<<<<<<< HEAD
-	</section> --> <!-- /#banner -->
+	</section> 
+	<!-- /#banner -->
+
   <nav-directive></nav-directive>
-	
 	<div ui-view></div>
 
 	<footer-directive></footer-directive>
-	<!-- node modules -->
-	<script src="js/jquery.min.js"></script>
-	<script src="/angular/angular.js"></script>
-	<script src="/@uirouter/angularjs/release/angular-ui-router.js"></script>
-	<script src="ng-file-upload/dist/ng-file-upload.min.js"></script>
-	<!-- js folders -->
-	<script src="js-datepicker/datepicker.min.js"></script>
-	<script src="js/app.js"></script>
-	<script src="js/services/orService.js"></script>
-	<script src="js/services/createService.js"></script>
-	<script src="/bundle.js"></script>
-	<script src="js/controllers/orCtrl.js"></script>
-	<script src="js/controllers/userCtrl.js"></script>
-	<script src="js/jquery.themepunch.tools.min.js"></script>
-	<script src="js/jquery.themepunch.revolution.min.js"></script>
-	<script src="js/countdown.min.js"></script>
-	<script src="js/jquery.easing.min.js"></script>
-	<script src="js/jquery.fancybox.pack.js"></script>
-	<script src="js/jquery.mixitup.min.js"></script>
-	<script src="js/jquery.bxslider.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.appear.js"></script>
-	<script src="js/jquery.countTo.js"></script>
-	<script src="js/circle-progress.js"></script>
-	<script src="js/wow.js"></script>
-	<script src="js/validate.js"></script>
-	<script src="js/custom.js"></script>
-	<script src="js/directives/navDirective.js"></script>
-	<script src="js/directives/footerDirective.js"></script>
+
 </body>
 </html>
