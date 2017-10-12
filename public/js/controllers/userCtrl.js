@@ -1,5 +1,6 @@
-angular.module('userControllers', [])
-
-.controller('regCtrl', function() {
-  console.log('testing reg cntrl');
+app.controller('regCtrl', function() {
+  this.regUser = function (regData) {
+    console.log('form submitted');
+    console.log(this.regData);
+  };
 });
