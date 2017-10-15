@@ -1,12 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var locationSchema = new Schema({
-  venue: String,
-  address: String,
-  address2: String
-  //NOTE: lattitude? longtitude?
-});
 var ticketSchema = new Schema({
   type: String,
   price: Number,
@@ -20,10 +14,11 @@ var eventSchema = new Schema({
   title: String,
   type: String, //NOTE: possible options: show, movie, gallery? for search purposes
   publisher: String,
-  location: locationSchema,
+  location: Object,
+  locationMapUrl: String,
   image: String,
-  startTime: Date,
-  endTime: Date,
+  startTime: String,
+  endTime: String,
   description: String,
   tickets: [ticketSchema], //o
   numTickets: Number, //tickets remaining

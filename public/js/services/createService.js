@@ -20,7 +20,8 @@ var getEvents = function() {
     console.log(result.data);
     return result.data;
   }, function(error) {
-    throw (error);
+    console.error(error);
+    // throw (error);
   }) // add promise
 } // get all current events. NOTE: In the future its possible to have event states like voutr. should that be wanted.
 // Do they want to view past events?
@@ -39,7 +40,7 @@ return $http.post('/events', event).then(function(result) {
   console.log("service result");
   return result.data;
 }, function(error) {
-  console.log("service error");
+  console.error(error);
   throw (error);
 }) // add promise
 }// post event
