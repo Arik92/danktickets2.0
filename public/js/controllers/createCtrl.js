@@ -126,11 +126,11 @@ disableMobile: true // Conditionally disabled on mobile devices.
                 url: 'http://localhost:8000/upload', //webAPI exposed to upload the file
                 data:{file:file} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
+                console.log("controller response is", resp);
                 if(resp.data.error_code === 0){ //validate success
-                  console.log("controller response is", resp);
                   console.log("response file object", resp.config.data.file);
                     //$window.alert('Success'  + resp.config.data.file.name + ' uploaded');
-                    $scope.imageName = resp.config.data.file.name;
+                    $scope.imageName = resp.data.file_name;
                     publishEvent(); // call a function to submit the whole event
                 } else {
                     $window.alert('an error occured');

@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './public/uploads/')
+        cb(null, './public/img/uploads')
     },
     filename: function (req, file, cb) {
             var datetimestamp = Date.now();
