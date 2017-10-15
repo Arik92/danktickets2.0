@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
     } else {
       res.send(result);
     }//else
-  })//find()
+  })//find()  
 });//get all events that were ever published
 
 router.get('/:id', function(req, res, next){
