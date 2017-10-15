@@ -10,13 +10,13 @@ module.exports = function (router) {
     user.tickets = req.body.tickets;
     user.image = req.body.image;
     if (req.body.username == null || req.body.username == '' || req.body.password == null || req.body.password == '' || req.body.email == null || req.body.email == '') {
-      res.send('Ensure Username, Email and Password were provided');
+      res.json({ success: false, message: 'Ensure Username, Email and Password were provided' });
     } else {
         user.save(function(err, newUser){
           if (err) {
-            throw ('Username or Email already exist')
+            res.json({ success: false, message: 'Username or Email already exist' });
           } else {
-            res.send(newUser);
+            res.json({ success: true, message: 'User created!' });
           }
         });
       }
