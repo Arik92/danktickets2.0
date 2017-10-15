@@ -1,6 +1,9 @@
-app.controller('regCtrl', function() {
+app.controller('regCtrl', function($http) {
   this.regUser = function (regData) {
     console.log('form submitted');
-    console.log(this.regData);
+    $http.post('/users/users', this.regData).then(function(data) {
+      console.log(data);
+    });
   };
 });
+
