@@ -5,7 +5,7 @@ app.controller('regCtrl', function(userService, $http, $location, $timeout) {
   this.regUser = function (regData) {
     msg.loading = true;
     msg.errorMsg = false;
-    $http.post('/users/users', this.regData).then(function(data) {
+    userService.create(msg.regData).then(function(data) {
       if (data.data.success) {
         msg.loading = false;
         //create success message
