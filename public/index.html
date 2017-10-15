@@ -16,37 +16,6 @@
 	<link rel="stylesheet" href="css/responsive.css">
 	<link rel="stylesheet" href="/js-datepicker/datepicker.css">
 	<!-- node modules -->
-	<script src="/angular/angular.js"></script>
-	<script src="js/jquery.min.js"></script>
-	<script src="/@uirouter/angularjs/release/angular-ui-router.js"></script>
-	<script src="ng-file-upload/dist/ng-file-upload.min.js"></script>
-	<!-- js folders -->
-	<script src="js-datepicker/datepicker.min.js"></script>
-	<script src="js/app.js"></script>
-	<script src="js/services/orService.js"></script>
-	<script src="js/services/createService.js"></script>
-	<script src="/bundle.js"></script>
-	<script src="js/controllers/orCtrl.js"></script>
-	<script src="js/controllers/userCtrl.js"></script>
-  <script src="js/controllers/createCtrl.js"></script>
-	<script src="js/controllers/browseCtrl.js"></script>
-	<script src="js/controllers/editCtrl.js"></script>
-	<script src="js/jquery.themepunch.tools.min.js"></script>
-	<script src="js/jquery.themepunch.revolution.min.js"></script>
-	<script src="js/countdown.min.js"></script>
-	<script src="js/jquery.easing.min.js"></script>
-	<script src="js/jquery.fancybox.pack.js"></script>
-	<script src="js/jquery.mixitup.min.js"></script>
-	<script src="js/jquery.bxslider.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.appear.js"></script>
-	<script src="js/jquery.countTo.js"></script>
-	<script src="js/circle-progress.js"></script>
-	<script src="js/wow.js"></script>
-	<script src="js/validate.js"></script>
-	<script src="js/custom.js"></script>
-	<script src="js/directives/navDirective.js"></script>
-	<script src="js/directives/footerDirective.js"></script>
 </head>
 <body>
 	<!-- .preloader -->
@@ -92,8 +61,8 @@
 								</li>
 							</ul>
 						</li> -->
-						<li class="scrollToLink"><a href="#upcoming-event">BROWSE EVENTS</a></li>
-						<li class="scrollToLink"><a ui-sref="create-event">CREATE EVENT</a></li>
+						<li class="scrollToLink"><a ui-sref="browse">BROWSE EVENTS</a></li>
+						<li class="scrollToLink"><a ui-sref="create">CREATE EVENT</a></li>
 
 						<li class="scrollToLink"><a href="#gallery">GALLERY</a></li>
 
@@ -304,7 +273,7 @@
 				</ul>
 			</div>
 		</div>
-	</section> 
+	</section>
 	<!-- /#banner -->
 
   <nav-directive></nav-directive>
@@ -312,6 +281,35 @@
 	<div ui-view></div>
 
 	<footer-directive></footer-directive>
-
+	<script src="/angular/angular.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="/@uirouter/angularjs/release/angular-ui-router.js"></script>
+	<script src="ng-file-upload/dist/ng-file-upload.min.js"></script>
+	<!-- js folders -->
+	<script src="js-datepicker/datepicker.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/services/orService.js"></script>
+	<script src="js/services/createService.js"></script>
+	<script src="/bundle.js"></script>
+	<script src="js/controllers/orCtrl.js"></script>
+	<script src="js/controllers/userCtrl.js"></script>
+	<script src="js/controllers/browseCtrl.js"></script>
+	<script src="js/controllers/editCtrl.js"></script>
+	<script src="js/jquery.themepunch.tools.min.js"></script>
+	<script src="js/jquery.themepunch.revolution.min.js"></script>
+	<script src="js/countdown.min.js"></script>
+	<script src="js/jquery.easing.min.js"></script>
+	<script src="js/jquery.fancybox.pack.js"></script>
+	<script src="js/jquery.mixitup.min.js"></script>
+	<script src="js/jquery.bxslider.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.appear.js"></script>
+	<script src="js/jquery.countTo.js"></script>
+	<script src="js/circle-progress.js"></script>
+	<script src="js/wow.js"></script>
+	<script src="js/validate.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/directives/navDirective.js"></script>
+	<script src="js/directives/footerDirective.js"></script>
 </body>
 </html>
