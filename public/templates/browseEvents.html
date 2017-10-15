@@ -6,19 +6,20 @@
   </head>
   <body>
     <div class="container row">
-      <div ng-repeat="event in events track by $index">
-        <div "col-md-4">        
-          <img ng-src={{event.imgPath}}>
+      <h1 class="col-md-6 col-md-offset-5 page-header">Browse events</h1>
+      <div class="col-md-3" ng-repeat="event in events track by $index">
+        Event name: {{event.title}} <br/>
+          <img width=200 height=200 ng-src={{event.imgPath}}> <br/>          
+          type: {{event.type}} <br/>
+          desctiption: {{event.description}} <br/>
+          <button class="btn btn-success" >Get ticks</button>
+        <!-- <div class="col-md-4">Event name: {{event.title}}
         </div>
-        <div class="col-md-4">{{event.title}}
+        <div class="col-md-4">type: {{event.type}}
 
         </div>
-        <div class="col-md-4">{{event.type}}
-
-        </div>
-        <button class="btn btn-success" >Get ticks</button>
+        <button class="btn btn-success" >Get ticks</button> -->
       </div>
-
     </div>
   </body>
 </html>
