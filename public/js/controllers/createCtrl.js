@@ -90,11 +90,36 @@ disableMobile: true // Conditionally disabled on mobile devices.
            console.log("same day");
          }//else
        }//compareDates
+       function publishEvent() {
+         var evt = {
+           title: $scope.eName,
+           type: $scope.selectedType,
+           //publisher: ,
+           location: $scope.selectedPlace,
+           image: $scope.imageName,
+           startTime: $scope.startDate,
+           endTime: $scope.endDate,
+           description: $scope.eDesc,
+           numTickets: $scope.totalTickets, //tickets remaining
+           isPrivate: $scope.isPrivate,
+           showRemainingTicks: $scope.showRemain
+         };// event post object
+         evt.tickets = [];
+         for (var i=0;i<$scope.tempTicks.length;i++) {
+           evt.tickets.push($scope.tempTicks[i]);
+         }// for filling ticket array
+         createService.postEvent(evt).then(function(res){
+           console.log("added event successfully!");
+         }, function(err){
+           console.log("controller error promise");
+           console.error(err);
+         });
+       }//publishEvent
         $scope.submit = function(){ //function to call on form submit
               //TODO: check if from is valid
               var submitPic = document.getElementById('fileItem').files[0];
               console.log("in submit! uploading...", submitPic);
-                $scope.upload(submitPic)
+                $scope.upload(submitPic);
         }
         $scope.upload = function (file) {
             Upload.upload({
@@ -102,51 +127,25 @@ disableMobile: true // Conditionally disabled on mobile devices.
                 data:{file:file} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
                 if(resp.data.error_code === 0){ //validate success
-                  //console.log("controller response is", resp);
+                  console.log("controller response is", resp);
                   console.log("response file object", resp.config.data.file);
                     //$window.alert('Success'  + resp.config.data.file.name + ' uploaded');
                     $scope.imageName = resp.config.data.file.name;
-                    publishEvent();
-                  // call a function to submit the whole event
+                    publishEvent(); // call a function to submit the whole event
                 } else {
                     $window.alert('an error occured');
                 }
-            }, function (resp) { //catch error
+            }, function (error) { //catch error
                 console.log('Error status: ' + resp.status);
                 $window.alert('Error status: ' + resp.status);
-            }, function (evt) {
-                console.log(evt);
-                // var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                // $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
-            });
-        };//file
-        function publishEvent() {
-          var evt = {
-            title: $scope.eName,
-            type: $scope.selectedType,
-            //publisher: ,
-            location: $scope.selectedPlace,
-            image: $scope.imageName,
-            startTime: $scope.startDate,
-            endTime: $scope.endDate,
-            description: $scope.eDesc,
-            numTickets: $scope.totalTickets, //tickets remaining
-            isPrivate: $scope.isPrivate,
-            showRemainingTicks: $scope.showRemain
-          }// event post object
-          evt.tickets = [];
-          for (var i=0;i<$scope.tempTicks.length;i++) {
-            evt.tickets.push($scope.tempTicks[i]);
-          }// for filling ticket array
-          createService.postEvent(evt).then(function(res){
-            console.log("added event successfully!");
-          }, function(err){
-            console.log("controller error promise");
-            console.error(err);
+            // }, function (evt) {
+            //     console.log(evt);
+            //     // var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            //     // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            //     // $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
+            // });
           });
-
-        }//publishEvent
+        };//scope.upload
 
   //////////////////////file upload /////////////////////////////////////////////////////////////
 

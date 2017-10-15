@@ -5,9 +5,18 @@
     <title>Browse events</title>
   </head>
   <body>
-    <div class="container">
-      <div>
+    <div class="container row">
+      <div ng-repeat="event in events track by $index">
+        <div "col-md-4">        
+          <img ng-src={{event.imgPath}}>
+        </div>
+        <div class="col-md-4">{{event.title}}
 
+        </div>
+        <div class="col-md-4">{{event.type}}
+
+        </div>
+        <button class="btn btn-success" >Get ticks</button>
       </div>
 
     </div>
