@@ -34,9 +34,22 @@
               <li>
                 <div class="input-wrap">
                   <button type="submit" class="hvr-bounce-to-right">REGISTER</button>
+                  
                 </div>
+                <br>
+                <button type="button" class="btn btn-default" ng-show="msg.loading">
+                  <span class="glyphicon glyphicon-repeat fast-right-spinner"> Loading...</span>
+                </button>
               </li>
             </ul>
+            <br>
+            <div class="row show-hide-message" ng-show="register.successMsg">
+              <div class="alert alert-success">{{ register.successMsg }}</div>
+            </div>
+            <br>
+            <div class="row show-hide-message" ng-show="register.errorMsg">
+              <div class="alert alert-danger">{{ register.errorMsg }}</div>
+            </div>
           </form>
         </div>
       </div>
@@ -117,3 +130,4 @@
 </div>
 </div>
 </div></section> -->
+
