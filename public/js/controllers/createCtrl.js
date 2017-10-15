@@ -131,6 +131,7 @@ disableMobile: true // Conditionally disabled on mobile devices.
                   console.log("response file object", resp.config.data.file);
                     //$window.alert('Success'  + resp.config.data.file.name + ' uploaded');
                     $scope.imageName = resp.data.file_name;
+                    console.log("image name will be?", $scope.imageName);
                     publishEvent(); // call a function to submit the whole event
                 } else {
                     $window.alert('an error occured');
