@@ -95,10 +95,17 @@ disableMobile: true // Conditionally disabled on mobile devices.
            title: $scope.eName,
            type: $scope.selectedType,
            //publisher: ,
-           location: $scope.selectedPlace,
+            location: {
+               locationMapUrl: $scope.selectedPlace.url,
+                 latlng: {
+                 lat: $scope.selectedLat,
+                 lng: $scope.selectedLng
+                },
+               locationName: $scope.selectedPlace.formatted_address
+             },
            image: $scope.imageName,
-           startTime: $scope.startDate,
-           endTime: $scope.endDate,
+           startTime: $scope.startDate.toDateString(),
+           endTime: $scope.endDate.toDateString(),
            description: $scope.eDesc,
            numTickets: $scope.totalTickets, //tickets remaining
            isPrivate: $scope.isPrivate,
@@ -201,10 +208,10 @@ function fillInAddress() {
   // Get the place details from the autocomplete object.
   $scope.selectedPlace = autocomplete.getPlace();
   console.log('place is', $scope.selectedPlace);
-  console.log('place lat is', $scope.selectedPlace.geometry.location.lat());
-  console.log('place langtitude is', $scope.selectedPlace.geometry.location.lng());
   $scope.selectedLat = $scope.selectedPlace.geometry.location.lat(); // NOTE: setting current lattitude/longitude for distance calculation
   $scope.selectedLng = $scope.selectedPlace.geometry.location.lng();
+  console.log('place lat is', $scope.selectedLat);
+  console.log('place langtitude is', $scope.selectedLng);
 } //fillInAdress
 
 $scope.getDistanceFromLatLonInKm = function(lat1, lon1, lat2, lon2) {
@@ -241,7 +248,7 @@ function addScript( src ) {
 }//addScript
 
   //calling the addScript function
-  var mapSrc = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places";
+  var mapSrc = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places&language=en";
   addScript(mapSrc);
 
 /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
