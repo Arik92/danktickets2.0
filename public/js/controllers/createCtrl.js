@@ -52,12 +52,14 @@ noWeekends: false,
 formatter: function(el, date) {
   // This will display the date as `1/1/2017`.
   el.value = date.toDateString();
+  $scope.exampleDate = date;
 },
 onSelect: function(instance) {
   // Show which date was selected.
   console.log("End date: ", instance.dateSelected);
   $scope.endDate = instance.dateSelected;
-  console.log("as string", $scope.endDate.toDateString());
+  console.log("as object", $scope.endDate);
+  console.log("exp date", $scope.exampleDate);
 },
 onShow: function(instance) {
   console.log('Calendar showing.');
@@ -75,7 +77,114 @@ overlayPlaceholder: 'Enter a 4-digit year',
 overlayButton: 'Go!',
 disableMobile: true // Conditionally disabled on mobile devices.
 });
-
+$scope.startHrCalender = [
+  '',
+  '12:00 AM',
+  '12:30 AM',
+  '01:00 AM',
+  '01:30 AM',
+  '02:00 AM',
+  '02:30 AM',
+  '03:00 AM',
+  '03:30 AM',
+  '04:00 AM',
+  '04:30 AM',
+  '05:00 AM',
+  '05:30 AM',
+  '06:00 AM',
+  '06:30 AM',
+  '07:00 AM',
+  '07:30 AM',
+  '08:00 AM',
+  '08:30 AM',
+  '09:00 AM',
+  '09:30 AM',
+  '10:00 AM',
+  '10:30 AM',
+  '11:00 AM',
+  '11:30 AM',
+  '12:00 AM',
+  '12:30 AM',
+  '01:00 PM',
+  '01:30 PM',
+  '02:00 PM',
+  '02:30 PM',
+  '03:00 PM',
+  '03:30 PM',
+  '04:00 PM',
+  '04:30 PM',
+  '05:00 PM',
+  '05:30 PM',
+  '06:00 PM',
+  '06:30 PM',
+  '07:00 PM',
+  '07:30 PM',
+  '08:00 PM',
+  '08:30 PM',
+  '09:00 PM',
+  '09:30 PM',
+  '10:00 PM',
+  '10:30 PM',
+  '11:00 PM',
+  '11:30 PM',
+];
+// $scope.startHr = $scope.startHrCalender[0];
+$scope.endHrCalender = [
+  '',
+  '12:00 AM',
+  '12:30 AM',
+  '01:00 AM',
+  '01:30 AM',
+  '02:00 AM',
+  '02:30 AM',
+  '03:00 AM',
+  '03:30 AM',
+  '04:00 AM',
+  '04:30 AM',
+  '05:00 AM',
+  '05:30 AM',
+  '06:00 AM',
+  '06:30 AM',
+  '07:00 AM',
+  '07:30 AM',
+  '08:00 AM',
+  '08:30 AM',
+  '09:00 AM',
+  '09:30 AM',
+  '10:00 AM',
+  '10:30 AM',
+  '11:00 AM',
+  '11:30 AM',
+  '12:00 AM',
+  '12:30 AM',
+  '01:00 PM',
+  '01:30 PM',
+  '02:00 PM',
+  '02:30 PM',
+  '03:00 PM',
+  '03:30 PM',
+  '04:00 PM',
+  '04:30 PM',
+  '05:00 PM',
+  '05:30 PM',
+  '06:00 PM',
+  '06:30 PM',
+  '07:00 PM',
+  '07:30 PM',
+  '08:00 PM',
+  '08:30 PM',
+  '09:00 PM',
+  '09:30 PM',
+  '10:00 PM',
+  '10:30 PM',
+  '11:00 PM',
+  '11:30 PM',
+];
+$scope.endHr = $scope.endHrCalender[0];
+$scope.updateEndHr = function() {
+  console.log("start hour is", $scope.startHr);
+  $scope.endHr = $scope.startHr;
+};
         ////////////////////file upload /////////////////////////////////////////////////////////////
         $scope.showPrivates = function() {
           alert($scope.isPrivate);
