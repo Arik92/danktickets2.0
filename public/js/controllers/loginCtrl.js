@@ -1,11 +1,10 @@
-app.controller('regCtrl', function(userService, $http, $location, $timeout) {
-
+app.controller('loginCtrl', function(authService, $timeout, $location) {
   var msg = this;
 
-  this.regUser = function (regData) {
+  this.doLogin = function (loginData) {
     msg.loading = true;
     msg.errorMsg = false;
-    userService.create(msg.regData).then(function(data) {
+    authService.login(msg.loginData).then(function(data) {
       if (data.data.success) {
         msg.loading = false;
         //create success message
@@ -21,7 +20,5 @@ app.controller('regCtrl', function(userService, $http, $location, $timeout) {
       }
     });
   };
-});
-
-
+}); 
 
