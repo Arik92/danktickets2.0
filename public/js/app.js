@@ -1,5 +1,9 @@
 var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload']);
 
+app.config(function($httpProvider) {
+  $httpProvider.interceptors.push('authServiceInterceptors');
+})
+
 app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
    $urlRouterProvider.otherwise('/home');
@@ -14,6 +18,10 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     .state('event', {
       url: '/event',
       templateUrl: '/templates/event.html',
+    })
+    .state('profile', {
+      url: '/profile',
+      templateUrl: '/templates/profile.html',
     })
     .state('aboutus', {
       url: '/about',
