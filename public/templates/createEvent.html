@@ -20,18 +20,26 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label" for="source_name">Starts at: </label>
+            <label class="control-label" for="source_name">Starts: </label>
             <div>
-              <input  id="start_date" ng-model="startDate"class="form-control input-md" required>
+              <input  id="start_date" ng-model="startDate" class="col-md-5 input-md" required>
+              <select ng-change="updateEndHr()" ng-model="startHr" class="col-md-5 input-md col-md-offset-2" required>
+                <option ng-repeat="hour in startHrCalender track by $index" value="{{hour}}">{{hour}}</option>
+              </select>
             </div>
           </div>
+          <br/>
           <div class="form-group">
-            <label class="control-label" for="source_name">Ends at:</label>
+            <label class="control-label" for="source_name">Ends:</label>
             <div>
-            <input id="end_date" ng-model="endDate" class="form-control input-md" required>
+            <input id="end_date" ng-model="endDate" class="col-md-5 input-md" required>
+            <select ng-model="endHr" class="col-md-5 input-md col-md-offset-2" required>
+              <option ng-repeat="hour in endHrCalender track by $index" value="{{hour}}">{{hour}}</option>
+            </select>
             </div>
           </div>
-          <button class="btn btn-submit" ng-click="compareDates()">Check dates</button>
+          <br/>
+          <!-- <button class="btn btn-submit" ng-click="compareDates()">Check dates</button> -->
           <div class="form-group">
             <label class="control-label" for="source_name">Description</label>
             <div>
