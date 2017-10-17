@@ -19,6 +19,10 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/event',
       templateUrl: '/templates/event.html',
     })
+    .state('profile', {
+      url: '/profile',
+      templateUrl: '/templates/profile.html',
+    })
     .state('aboutus', {
       url: '/about',
       templateUrl: '/templates/about-us.html'
