@@ -61,14 +61,8 @@
 								</li>
 							</ul>
 						</li> -->
-
-
 						<li class="scrollToLink"><a ui-sref="browse">BROWSE EVENTS</a></li>
-
-						<li class="scrollToLink"><a ui-sref="create">CREATE EVENT</a></li>
-
-						<li class="scrollToLink"><a href="#gallery">GALLERY</a></li>
-
+						<li class="scrollToLink"><a href=".home#gallery">GALLERY</a></li>
 						<!-- <li class="scrollToLink dropdown">
 							<a href="#blog">BLOG</a>
 							<ul class="submenu">
@@ -77,9 +71,17 @@
 							</ul>
 						</li> -->
 						<li class="scrollToLink"><a ui-sref="contact">CONTACT</a></li>
-						<li class="scrollToLink"><a ui-sref="signin">SIGN IN</a></li>
-						<li class="scrollToLink"><a ui-sref="signup">SIGN UP</a></li>
-						<li class="scrollToLink"><a ui-sref="signup" ng-click="login.logout()">LOG OUT</a></li>
+						<li class="scrollToLink" ng-hide="login.username"><a ui-sref="signin">SIGN IN</a></li>
+						<li class="scrollToLink" ng-hide="login.username"><a ui-sref="signup">SIGN UP</a></li>
+						<li class="scrollToLink" ng-show="login.username"><a ui-sref="create">CREATE EVENT</a></li>
+						<li class="scrollToLink dropdown"><a ui-sref="signup">{{ login.username }}</a>
+							<ul class="submenu">
+								<li class="scrollToLink"><a ui-sref="signup">MANAGE EVENTS</a></li>
+								<li class="scrollToLink"><a ui-sref="signup">ORGANIZER PROFILE</a></li>
+								<li class="scrollToLink"><a ui-sref="signup">PROFILE SETTINGS</a></li>
+								<li class="scrollToLink"><a ui-sref="signup" ng-click="login.logout()">LOG OUT</a></li>
+							</ul>
+						</li>
 						<!-- <li class="scrollToLink"><a href="#event-sponsor">SPONSOR</a></li> -->
 					</ul>
 				</nav>

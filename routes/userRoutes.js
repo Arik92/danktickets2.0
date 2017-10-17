@@ -46,10 +46,30 @@ module.exports = function (router) {
       }
     });
   }); 
+
+  router.use(function (req, res, next) {
+    var token = req.body.token || req.body.query || req.headers['x-access-token'];
+    if (token) {
+      // verify a token symmetric
+      jwt.verify(token, secret, function(err, decoded) {
+        if (err) {
+          res.json({ success: false, message: 'token invalid' });
+        } else {
+          req.decoded = decoded;
+          next();
+        }
+      });
+    } else {
+      res.json({ success: false, message: 'No token provided' });
+    }
+  });
+
+  router.post('/currentUser', function(req, res) {
+    res.send(req.decoded);
+  });
+
+
   return router;
 }
 
 
-jwt.sign({
-  data: 'foobar'
-}, 'secret', { expiresIn: '1h' });
