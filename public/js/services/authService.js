@@ -16,6 +16,16 @@ app.factory('authService', function($http, authToken){
       return false;
     }
   };
+
+  //authService.getUser();
+  authFactory.getUser = function() {
+    if (authToken.getToken) {
+      return $http.post('/users/currentUser');
+    } else {
+      $q.reject({ message: 'User has no token' });
+    }
+  };
+
   //authService.logout()
   authFactory.logout = function() {
     authToken.setToken();
@@ -39,4 +49,14 @@ app.factory('authToken', function($window) {
     return $window.localStorage.getItem('token');
   };
   return authTokenFactory;
+})
+
+app.factory('authServiceInterceptors', function(authToken) {
+  var authServiceInterceptors = {};
+  authServiceInterceptors.request = function(config) {
+    var token = authToken.getToken();
+    if (token) config.headers['x-access-token'] = token;
+    return config;
+  }
+  return authServiceInterceptors;
 })
