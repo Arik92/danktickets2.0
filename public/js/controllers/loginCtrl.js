@@ -1,11 +1,20 @@
-app.controller('loginCtrl', function(authService, $timeout, $location) {
+app.controller('loginCtrl', function(authService, $timeout, $location, $rootScope) {
   var msg = this;
 
-  if (authService.isLoggedIn()) {
-    console.log('success user is logged in');
-  } else {
-    console.log('failure user is not logged in');
-  }
+  //video part 8 35:22 https://www.youtube.com/watch?v=fRPwKuIz8Os&t=1114s
+  $rootScope.$on('$locationChangeStart', function() {
+    if (authService.isLoggedIn()) {
+      console.log('success user is logged in');
+      authService.getUser().then(function(data) {
+        console.log(data.data.username);
+        msg.username = data.data.username;
+      });
+    } else {
+      console.log('failure user is not logged in');
+      msg.username = '';
+    }
+  });
+
 
   this.doLogin = function (loginData) {
     msg.loading = true;
@@ -18,6 +27,8 @@ app.controller('loginCtrl', function(authService, $timeout, $location) {
         msg.successMsg = data.data.message + ' ...Redirecting';
         $timeout(function() {
           $location.path('/');
+          msg.loginData = '';
+          msg.successMsg = false;
         }, 2000);     
       }  else {
         msg.loading = false;
@@ -31,4 +42,6 @@ app.controller('loginCtrl', function(authService, $timeout, $location) {
     $location.path('/');
   }
 }); 
+
+
 

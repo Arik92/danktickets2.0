@@ -1,5 +1,9 @@
 var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload']);
 
+app.config(function($httpProvider) {
+  $httpProvider.interceptors.push('authServiceInterceptors');
+})
+
 app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
    $urlRouterProvider.otherwise('/home');
