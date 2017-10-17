@@ -1,17 +1,19 @@
 app.controller('loginCtrl', function(authService, $timeout, $location, $rootScope) {
   var msg = this;
 
+
+  msg.loader = false;
   //video part 8 35:22 https://www.youtube.com/watch?v=fRPwKuIz8Os&t=1114s
   $rootScope.$on('$locationChangeStart', function() {
     if (authService.isLoggedIn()) {
-      console.log('success user is logged in');
       authService.getUser().then(function(data) {
-        console.log(data.data.username);
         msg.username = data.data.username;
+        msg.email = data.data.email;
+        msg.loader = true;
       });
     } else {
-      console.log('failure user is not logged in');
       msg.username = '';
+      msg.loader = true;
     }
   });
 
