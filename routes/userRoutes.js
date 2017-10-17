@@ -1,4 +1,6 @@
-var User = require('../models/usermodel');
+var User   = require('../models/usermodel');
+var jwt    = require('jsonwebtoken');
+var secret = 'urgonnadieclown865626';
 
 module.exports = function (router) {
   // http://localhost:8000/users/users
@@ -38,10 +40,16 @@ module.exports = function (router) {
         if (!validPassword) {
           res.json({ success: false, message: 'could not authenticate password' });
         } else {
-          res.json({ success: true, message: 'User authenticated' });
+          var token = jwt.sign({ username: user.username, email: user.email }, secret, { expiresIn: '72h' } );
+          res.json({ success: true, message: 'User authenticated', token: token });
         }
       }
     });
   }); 
   return router;
 }
+
+
+jwt.sign({
+  data: 'foobar'
+}, 'secret', { expiresIn: '1h' });
