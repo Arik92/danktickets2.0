@@ -14,6 +14,10 @@ app.factory('createService', function($http){
     currentTickets.splice(index, 1);
   }
 
+  var resetTicks = function() {
+    currentsTicks = [];
+  }
+
 var getEvents = function() {
   return $http.get('/events').then(function(result) {
     console.log("result from create service: ");
@@ -95,6 +99,7 @@ var deleteEvent = function(oId) {
     getEvents: getEvents,
     getEventsByPublisher: getEventsByPublisher,
     updateEvent: updateEvent,
-    deleteEvent: deleteEvent
+    deleteEvent: deleteEvent,
+    resetTicks: resetTicks
   };
 });
