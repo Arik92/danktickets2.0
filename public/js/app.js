@@ -88,12 +88,15 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
           templateUrl: '/templates/browseEvents.html',
           controller: 'browseCtrl'
         })
-    .state('/edit', {
+    .state('manage', {
+      url: '/manage-events',
+      templateUrl: '/templates/manageEvents.html',
+      controller: 'manageCtrl'
+    })
+    .state('edit', {
       url: '/edit-event/:id',
         params: {eventParam: null},
-      templateUrl: '/templates/edit-event.html',
+      templateUrl: '/templates/editEvent.html',
       controller: 'editCtrl'
     })
 });
-
-

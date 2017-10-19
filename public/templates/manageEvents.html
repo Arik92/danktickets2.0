@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Browse events</title>
-  </head>
-  <body>
-    <div class="container row">
-      <h1 class="col-md-6 col-md-offset-5 page-header">Browse events</h1>
+<div class="container row">
+      <h1 class="col-md-6 col-md-offset-5 page-header">Manage your events - select an event to edit it</h1>
       <div class="col-md-3" ng-repeat="event in events track by $index">
         Event name: {{event.title}} <br/>
         By: {{event.publisher}} <br/>
@@ -17,14 +10,7 @@
           <!-- At lat: {{event.location.latlng.lat}} and longitude: {{event.location.latlng.lng}} <br/> -->
           <a href={{event.location.locationMapUrl}}>See it on the map</a> <br/>
           From {{event.startTime}}, {{event.startHr}} until {{event.endTime}}, {{event.endHr}} <br/>
-          <button class="btn btn-success" >Get ticks</button>
-        <!-- <div class="col-md-4">Event name: {{event.title}}
-        </div>
-        <div class="col-md-4">type: {{event.type}}
-
-        </div>
-        <button class="btn btn-success" >Get ticks</button> -->
+          <a ui-sref="edit({ eventParam: event, id: event._id })" > <button class="btn btn-success"> Edit this event </button></a>
+          <button class="btn btn-danger">Delete</button>
       </div>
     </div>
-  </body>
-</html>
