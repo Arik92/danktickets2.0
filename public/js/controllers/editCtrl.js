@@ -123,24 +123,7 @@ disableMobile: true // Conditionally disabled on mobile devices.
             });
         };//file
         function updateEvent() {
-          var evt = {
-            title: $scope.eName,
-            type: $scope.selectedType,
-            publisher: $scope.publisher,
-            location: $scope.selectedPlace,
-            image: $scope.imageName,
-            startTime: $scope.startDate,
-            endTime: $scope.endDate,
-            description: $scope.eDesc,
-            numTickets: $scope.totalTickets, //tickets remaining
-            isPrivate: $scope.isPrivate,
-            showRemainingTicks: $scope.showRemain
-          }// event post object
-          evt.tickets = [];
-          for (var i=0;i<$scope.tempTicks.length;i++) {
-            evt.tickets.push($scope.tempTicks[i]);
-          }// for filling ticket array
-          createService.postEvent(evt).then(function(res){
+          createService.updateEvent($scope.event).then(function(res){
             console.log("added event successfully!");
           }, function(err){
             console.log("controller error promise");
@@ -279,4 +262,11 @@ function checkNames() {
     }
     return true;
   }//checkNames
+  function init() {
+    //TODO here:
+    // set calander to reflect event's currently selected day. they are date object while this one is a string
+    // capture index as well perhaps?
+    // 
+
+  }//init
 }]);
