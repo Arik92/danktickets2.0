@@ -1,4 +1,4 @@
-app.controller('editCtrl',['createService','$scope' ,'Upload','$window', function(createService, $scope, Upload, $window){
+app.controller('editCtrl',['createService','$scope' ,'Upload','$window','$stateParams', function(createService, $scope, Upload, $window, $stateParams){
   //$scope.video = $stateParams.videoParam;
   $scope.typeOptions = [
     'Concert',
@@ -244,7 +244,8 @@ function addScript( src ) {
   //calling the addScript function
   var mapSrc = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places";
   addScript(mapSrc);
-
+  $scope.event = $stateParams.eventParam;
+  console.log("received event obj is ", $scope.event);
 /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
 /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
 $scope.preview = function() {
