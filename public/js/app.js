@@ -94,6 +94,11 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/edit-event.html',
       controller: 'editCtrl'
     })
+    .state('/facebook/:token', {
+      url:'/facebook/token',
+        // params: {socialParam: null},
+      templateUrl: '/templates/social/social.html'
+    })
 });
 
 
