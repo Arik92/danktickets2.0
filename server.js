@@ -5,10 +5,9 @@ var eventRoutes = require('./routes/eventRoutes');
 //var expressSession = require('express-session');
 var bodyParser  = require('body-parser');
 var multer      = require('multer');
-//var passport = require('passport');
 //var LocalStrategy = require('passport-local').Strategy;
-var router = express.Router();
-var userRoutes = require('./routes/userRoutes')(router);
+var router      = express.Router();
+var userRoutes  = require('./routes/userRoutes')(router);
 var eventRoutes = require('./routes/eventRoutes');
 
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
@@ -16,6 +15,8 @@ mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets
 var app         = express();
 var port        = process.env.PORT || '8000';
 var morgan      = require('morgan');
+var passport    = require('passport');
+var social      = require('./passport/passport')(app, passport);
 
 app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "http://localhost");
