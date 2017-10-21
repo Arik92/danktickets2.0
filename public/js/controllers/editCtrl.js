@@ -7,76 +7,6 @@ app.controller('editCtrl',['createService','$scope' ,'Upload','$window','$stateP
     'Party',
     'Other'
   ];
-  //////////////////////////////////// initializing pickers ////////////////////////////////////////////
-  //TODO: when loading an event, set the start/end dates accordingly
-  var startDatepicker = datepicker('#start_date', {
-  position: 'br', // Top right.
-  startDate: new Date(), // This month.
-  dateSelected: new Date(), // Today is selected.
-  minDate: new Date(), // June 1st, 2016.
-  maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
-  noWeekends: false,
-  formatter: function(el, date) {
-    // This will display the date as `1/1/2017`.
-    el.value = date.toDateString();
-  },
-  onSelect: function(instance) {
-    // Show which date was selected.
-    console.log("start date: ", instance.dateSelected);
-    $scope.startDate = instance.dateSelected;
-    console.log("as string?", $scope.startDate.toDateString());
-  },
-  onShow: function(instance) {
-    console.log('Calendar showing.');
-  },
-  onHide: function(instance) {
-    console.log('Calendar hidden.');
-  },
-  onMonthChange: function(instance) {
-    // Show the month of the selected date.
-    console.log(instance.currentMonthName);
-  },
-  customMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
-  overlayPlaceholder: 'Enter a 4-digit year',
-  overlayButton: 'Go!',
-  disableMobile: true // Conditionally disabled on mobile devices.
-});
-
-var endDatepicker = datepicker('#end_date', {
-position: 'br', // Top right.
-startDate: new Date(), // This month.
-dateSelected: new Date(), // Today is selected.
-minDate: new Date(), // June 1st, 2016.
-maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
-noWeekends: false,
-formatter: function(el, date) {
-  // This will display the date as `1/1/2017`.
-  el.value = date.toDateString();
-},
-onSelect: function(instance) {
-  // Show which date was selected.
-  console.log("End date: ", instance.dateSelected);
-  $scope.endDate = instance.dateSelected;
-  console.log("as string", $scope.endDate.toDateString());
-},
-onShow: function(instance) {
-  console.log('Calendar showing.');
-},
-onHide: function(instance) {
-  console.log('Calendar hidden.');
-},
-onMonthChange: function(instance) {
-  // Show the month of the selected date.
-  console.log(instance.currentMonthName);
-},
-customMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
-overlayPlaceholder: 'Enter a 4-digit year',
-overlayButton: 'Go!',
-disableMobile: true // Conditionally disabled on mobile devices.
-});
-
         ////////////////////file upload /////////////////////////////////////////////////////////////
         $scope.showPrivates = function() {
           alert($scope.isPrivate);
@@ -95,7 +25,8 @@ disableMobile: true // Conditionally disabled on mobile devices.
               //TODO: check if from is valid
               var submitPic = document.getElementById('fileItem').files[0];
               console.log("in submit! uploading...", submitPic);
-                $scope.upload(submitPic)
+                //$scope.upload(submitPic);
+                updateEvent();
         }
         $scope.upload = function (file) {
             Upload.upload({
@@ -107,7 +38,7 @@ disableMobile: true // Conditionally disabled on mobile devices.
                   console.log("response file object", resp.config.data.file);
                     //$window.alert('Success'  + resp.config.data.file.name + ' uploaded');
                     $scope.imageName = resp.config.data.file.name;
-                    publishEvent();
+                    updateEvent();
                   // call a function to submit the whole event
                 } else {
                     $window.alert('an error occured');
@@ -123,12 +54,19 @@ disableMobile: true // Conditionally disabled on mobile devices.
             });
         };//file
         function updateEvent() {
-          createService.updateEvent($scope.event).then(function(res){
-            console.log("added event successfully!");
-          }, function(err){
-            console.log("controller error promise");
-            console.error(err);
-          });
+          if (($scope.event.location.locationName!= $scope.selectedPlace.formatted_address)&&($scope.selectedPlace.formatted_address)) {
+          $scope.event.location.locationMapUrl = $scope.selectedPlace.url;
+          $scope.event.location.latlng.lat = $scope.selectedLat;
+          $scope.event.location.latlng.lng = $scope.selectedLng;
+          $scope.event.location.locationName = $scope.selectedPlace.formatted_address;
+        }
+          console.log("added event would be", $scope.event);
+          // createService.updateEvent($scope.event).then(function(res){
+          //   console.log("update event successfully!");
+          // }, function(err){
+          //   console.log("controller error promise");
+          //   console.error(err);
+          // });
 
         }//publishEvent
 
@@ -225,10 +163,8 @@ function addScript( src ) {
 }//addScript
 
   //calling the addScript function
-  var mapSrc = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places";
-  addScript(mapSrc);
-  $scope.event = $stateParams.eventParam;
-  console.log("received event obj is ", $scope.event);
+  var mapSrc = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places&language=en";
+
 /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
 /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
 $scope.preview = function() {
@@ -266,7 +202,187 @@ function checkNames() {
     //TODO here:
     // set calander to reflect event's currently selected day. they are date object while this one is a string
     // capture index as well perhaps?
-    // 
-
+    //
+    addScript(mapSrc);
+    $scope.event = $stateParams.eventParam;
+    console.log("received event obj is ", $stateParams.eventParam);
   }//init
+  init();
+
+  //////////////////////////////////// initializing pickers ////////////////////////////////////////////
+
+  var startDatepicker = datepicker('#start_date', {
+  position: 'br', // Top right.
+  startDate: new Date($scope.event.startTime), // This month.
+  dateSelected: new Date($scope.event.startTime), // Today is selected.
+  minDate: new Date($scope.event.startTime), // June 1st, 2016.
+  maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
+  noWeekends: false,
+  formatter: function(el, date) {
+    // This will display the date as `1/1/2017`.
+    el.value = date.toDateString();
+  },
+  onSelect: function(instance) {
+    // Show which date was selected.
+    $scope.event.startDate = instance.dateSelected.toDateString();
+    console.log("NEW start date is ", $scope.event.startDate);
+  },
+  onShow: function(instance) {
+    console.log('Calendar showing.');
+  },
+  onHide: function(instance) {
+    console.log('Calendar hidden.');
+  },
+  onMonthChange: function(instance) {
+    // Show the month of the selected date.
+    console.log(instance.currentMonthName);
+  },
+  customMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
+  overlayPlaceholder: 'Enter a 4-digit year',
+  overlayButton: 'Go!',
+  disableMobile: true // Conditionally disabled on mobile devices.
+});
+
+var endDatepicker = datepicker('#end_date', {
+position: 'br', // Top right.
+startDate: new Date(), // This month.
+dateSelected: new Date($scope.event.endTime), // Today is selected.
+minDate: new Date($scope.event.endTime), // June 1st, 2016.
+maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
+noWeekends: false,
+formatter: function(el, date) {
+  // This will display the date as `1/1/2017`.
+  el.value = date.toDateString();
+},
+onSelect: function(instance) {
+  // Show which date was selected.
+  console.log("End date: ", instance.dateSelected);
+  $scope.event.endDate = instance.dateSelected.toDateString();
+  console.log("NEW end date is ", $scope.event.endDate);
+},
+onShow: function(instance) {
+  console.log('Calendar showing.');
+},
+onHide: function(instance) {
+  console.log('Calendar hidden.');
+},
+onMonthChange: function(instance) {
+  // Show the month of the selected date.
+  console.log(instance.currentMonthName);
+},
+customMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
+overlayPlaceholder: 'Enter a 4-digit year',
+overlayButton: 'Go!',
+disableMobile: true // Conditionally disabled on mobile devices.
+});
+$scope.startHrCalender = [
+  '',
+  '12:00 AM',
+  '12:30 AM',
+  '01:00 AM',
+  '01:30 AM',
+  '02:00 AM',
+  '02:30 AM',
+  '03:00 AM',
+  '03:30 AM',
+  '04:00 AM',
+  '04:30 AM',
+  '05:00 AM',
+  '05:30 AM',
+  '06:00 AM',
+  '06:30 AM',
+  '07:00 AM',
+  '07:30 AM',
+  '08:00 AM',
+  '08:30 AM',
+  '09:00 AM',
+  '09:30 AM',
+  '10:00 AM',
+  '10:30 AM',
+  '11:00 AM',
+  '11:30 AM',
+  '12:00 AM',
+  '12:30 AM',
+  '01:00 PM',
+  '01:30 PM',
+  '02:00 PM',
+  '02:30 PM',
+  '03:00 PM',
+  '03:30 PM',
+  '04:00 PM',
+  '04:30 PM',
+  '05:00 PM',
+  '05:30 PM',
+  '06:00 PM',
+  '06:30 PM',
+  '07:00 PM',
+  '07:30 PM',
+  '08:00 PM',
+  '08:30 PM',
+  '09:00 PM',
+  '09:30 PM',
+  '10:00 PM',
+  '10:30 PM',
+  '11:00 PM',
+  '11:30 PM',
+];
+// $scope.startHr = $scope.startHrCalender[0];
+$scope.endHrCalender = [
+  '',
+  '12:00 AM',
+  '12:30 AM',
+  '01:00 AM',
+  '01:30 AM',
+  '02:00 AM',
+  '02:30 AM',
+  '03:00 AM',
+  '03:30 AM',
+  '04:00 AM',
+  '04:30 AM',
+  '05:00 AM',
+  '05:30 AM',
+  '06:00 AM',
+  '06:30 AM',
+  '07:00 AM',
+  '07:30 AM',
+  '08:00 AM',
+  '08:30 AM',
+  '09:00 AM',
+  '09:30 AM',
+  '10:00 AM',
+  '10:30 AM',
+  '11:00 AM',
+  '11:30 AM',
+  '12:00 AM',
+  '12:30 AM',
+  '01:00 PM',
+  '01:30 PM',
+  '02:00 PM',
+  '02:30 PM',
+  '03:00 PM',
+  '03:30 PM',
+  '04:00 PM',
+  '04:30 PM',
+  '05:00 PM',
+  '05:30 PM',
+  '06:00 PM',
+  '06:30 PM',
+  '07:00 PM',
+  '07:30 PM',
+  '08:00 PM',
+  '08:30 PM',
+  '09:00 PM',
+  '09:30 PM',
+  '10:00 PM',
+  '10:30 PM',
+  '11:00 PM',
+  '11:30 PM',
+];
+$scope.endHr = $scope.endHrCalender[0];
+$scope.updateEndHr = function() {
+  console.log("start hour is", $scope.startHr);
+};
+  //init calenders and hour pickers
 }]);
