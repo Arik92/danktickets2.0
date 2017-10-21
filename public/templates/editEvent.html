@@ -29,8 +29,8 @@
           <div class="form-group">
             <label class="control-label" for="source_name">Starts: </label>
             <div>
-              <input  id="start_date" ng-model="event.startDate" class="col-md-5 input-md" required>
-              <select ng-change="updateEndHr()" ng-model="event.startHr" class="col-md-5 input-md col-md-offset-2" required>
+              <input  id="start_date" ng-model="event.startDate" class="col-md-5 input-md" >
+              <select ng-change="updateEndHr()" ng-model="event.startHr" class="col-md-5 input-md col-md-offset-2" >
                 <option ng-repeat="hour in startHrCalender track by $index" value="{{hour}}">{{hour}}</option>
               </select>
             </div>
@@ -39,8 +39,8 @@
           <div class="form-group">
             <label class="control-label" for="source_name">Ends:</label>
             <div>
-            <input id="end_date" ng-model="event.endDate" class="col-md-5 input-md" required>
-            <select ng-model="event.endHr" class="col-md-5 input-md col-md-offset-2" required>
+            <input id="end_date" ng-model="event.endDate" class="col-md-5 input-md" >
+            <select ng-model="event.endHr" class="col-md-5 input-md col-md-offset-2" >
               <option ng-repeat="hour in endHrCalender track by $index" value="{{hour}}">{{hour}}</option>
             </select>
             </div>
@@ -82,8 +82,8 @@
            <div class="form-group">
              <label class="control-label" for="source_name">Is this a public event?</label>
              <div>
-               <input type="radio" ng-model="event.isPrivate" value="false"> Public
-               <input type="radio" ng-model="event.isPrivate" value="true"> Private(invite only)
+               <input type="radio" ng-model="event.isPrivate" value="false" ng-value="false"> Public
+               <input type="radio" ng-model="event.isPrivate" value="true" ng-value="true"> Private(invite only)
              </div>
              <!-- <button class="btn" ng-click="showPrivates()">show privates</button> -->
            </div>
@@ -122,7 +122,7 @@
            </div>
            <div class="form-group">
              <div>
-               <input type="checkbox" name="source_name" ng-model="showRemain"> Publicly show remaining tickets
+               <input type="checkbox" name="source_name" ng-model="event.showRemainingTicks" ng-init="event.showRemainingTicks"> Publicly show remaining tickets
              </div>
            </div>
             <br /><!--input -->
