@@ -105,8 +105,8 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/social/social.html'
     })
 
-.state('dashboard', {
-      url: '/dashboard',
-      templateUrl: '/templates/dashboard.html'
-    })
+// .state('dashboard', {
+//       url: '/dashboard',
+//       templateUrl: '/templates/dashboard.html'
+//     })
 });
