@@ -1,3 +1,4 @@
+
 var express     = require('express');
 var mongoose    = require('mongoose');
 var eventRoutes = require('./routes/eventRoutes');
@@ -8,6 +9,7 @@ var router      = express.Router();
 var userRoutes  = require('./routes/userRoutes')(router);
 var eventRoutes = require('./routes/eventRoutes');
 
+
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 
 var app         = express();
@@ -15,6 +17,7 @@ var port        = process.env.PORT || '8000';
 var morgan      = require('morgan');
 var passport    = require('passport');
 var social      = require('./passport/passport')(app, passport);
+
 
 app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "http://localhost");
