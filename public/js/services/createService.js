@@ -49,7 +49,7 @@ return $http.post('/events', event).then(function(result) {
 }) // add promise
 }// post event
 
-var updateEvent = function(id, event) {
+var updateEvent = function(event) {
   return $http.put('/events/' + event._id, event).then(function(result) {
     return result.data;
   }, function(error) {
