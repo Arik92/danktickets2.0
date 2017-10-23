@@ -104,4 +104,9 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
         // params: {socialParam: null},
       templateUrl: '/templates/social/social.html'
     })
+
+.state('dashboard', {
+      url: '/dashboard',
+      templateUrl: '/templates/dashboard.html'
+    })
 });
