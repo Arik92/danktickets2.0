@@ -2,6 +2,21 @@ var express = require('express');
 var router = express.Router();
 var Event = require("../models/eventmodel");
 
+/////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
+var multer = require('multer');
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/img/uploads')
+    },
+    filename: function (req, file, cb) {
+            var datetimestamp = Date.now();
+            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
+        }
+});
+var upload = multer({ storage: storage }).single('file');
+/////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
+
 router.get('/', function (req, res, next) {
   Event.find(function(error, result){
     if (error) {
@@ -13,83 +28,65 @@ router.get('/', function (req, res, next) {
 });//get all events that were ever published
 
 router.get('/:id', function(req, res, next){
-  Event.findOne({_id: req.params.id}, function(err, resultEvent){
+  Event.find({publisher: req.params.id}, function(err, resultEvents){
     if (err) {
       console.log(err);
     } else {
-      res.send(resultEvent);
+      res.send(resultEvents);
     }//else
-  })//findOneCB
-}) // get specific event
+  })//findCb
+}) // get event by publisher
 
-router.post('/', function (req, res, next) {
-  var e = new Event(req.body);
-  console.log("reached post route");
-  e.save(function(error, result){
-    if (error) {
-      console.log(error);
+router.get('/searchByActivity/:type', function(req, res, next){
+  Event.find({type: req.params.type}, function(err, resultEvents){
+    if (err) {
+      console.log(err);
     } else {
-      res.send(result);
+      res.send(resultEvents);
+    }//else
+  })//findCb
+}) //NOTE: get event by a specific type criteria. for future use
+
+router.post('/upload', function (req, res1, next) {
+  upload(req,res1,function(err){
+             if(err){
+                  res.json({error_code:1,err_desc:err});
+                  return;
+             }
+             console.log("request to work with is", req.body);
+             console.log("file name:", req.file.filename);
+              var e = new Event(req.body.event);
+              e.image = req.file.filename;
+              e.save(function(error, result){
+                if (error) {
+                  console.log("reached error route");
+                  console.log(error);
+                } else {
+                  console.log("reached result route");
+                  // res.send(result);
+                  res1.send({error_code:0,err_desc:null, file_name: req.file.filename});
+                }//else
+              });
+         })
+     });// path for regular uploads
+
+router.post('/', function (req, res1, next) {
+ var e = new Event(req.body.event);
+ //e.image = req.file.filename; //TODO: save some default image
+ e.save(function(error, result){
+ if (error) {
+ console.log("reached error route");
+ console.log(error);
+  } else {
+    console.log("reached result route");
+    // res.send(result);
+    res1.send(result);
     }//else
   });
-});//post event
-
-// router.post('/:id/reviews', function(req, res, next) {
-//   //var r = new Review();
-//   Event.findOne({_id: req.params.id }, function(err, event){
-//     if (err) {
-//       console.log(err);
-//       res.send(err);
-//
-//     } else {
-//       console.log("found beer is: ");
-//       console.log(beer);
-//       beer.reviews.push(req.body);
-//       beer.save(function(error, resolve){
-//         if (error) {
-//           console.log(error);
-//         } else {
-//           console.log(resolve);
-//           res.send(resolve);
-//         }
-//       }); //beer save
-//     } // else found beer
-//   })// finding beer in mongod
-//
-// });// add review to a beer NOTE: might be repurposed for event tickets
-
-// router.delete('/:id/reviews/:revId', function(req, res, next) {
-//   Beer.findOne({_id: req.params.id }, function(err, beer){
-//     if (err) {
-//       console.log(err);
-//       res.send(err);
-//     } else {
-//       console.log("found beer is: ");
-//       console.log(beer);
-//       var index = -1;
-//         for (var i = 0;i<beer.reviews.length;i++) {
-//         if (beer.reviews[i].id===req.params.revId) {
-//           index = i;
-//         }//if finding review index
-//       }//for i
-//       if (index!=-1) {
-//         beer.reviews.splice(index,1);
-//         beer.save(function(error, resolve){
-//           if (error) {
-//             console.log(error);
-//           } else {
-//             console.log(resolve);
-//             console.log("Object deleted");
-//             res.send(resolve);
-//           }// else resolve
-//       });
-//       }//if -1
-//     } // else found beer
-//   })// finding beer in mongod
-//
-// });// add review to a beer NOTE: might be repurposed for event tickets
+})//regular uploads(no pic provided)
 
 router.delete("/:id",function(req,res){
+  //TODO: delete associated image
   Event.findOneAndRemove({ _id: req.params.id }, function(err, event) {
     if (err) {
       console.log(err);
@@ -100,25 +97,46 @@ router.delete("/:id",function(req,res){
     }
 });
 });
-router.put('/:id', function(req, res, next) {
-  Event.findByIdAndUpdate(req.params.id, req.body, { new: true }, function(error, event) {
+router.post('/deleteAndUpload', function(req, res1, next) {
+  //TODO: check if the image has changed. if it did, delete and replace it with the new one
+  upload(req,res1,function(err){
+           if(err){
+                res.json({error_code:1,err_desc:err});
+                return;
+           }
+           console.log("request to work with is", req.body);
+           if (req.body.event.imgPath!="/img/uploads/undefined") {
+           var fs = require('fs');
+           var addressToDelete = 'public/img/uploads/'+req.body.event.image
+         }//if there's no image, there is nothing to delete. TODO: change to default picture
+           console.log("file name:", req.file.filename);
+           req.body.event.image = req.file.filename;
+           Event.findByIdAndUpdate(req.body.event._id, req.body.event, { new: true }, function(error, event) {
+             if (error) {
+               console.error(error)
+               return next(error);
+             } else {
+               if (addressToDelete) {
+                 fs.unlink(addressToDelete,function(response){
+                   res1.send({error_code:0,err_desc:null, file_name: req.file.filename});
+                 }); //TODO: need the path for the file
+               } else {
+               res1.send({error_code:0,err_desc:null, file_name: req.file.filename});
+             }//else file wasnt deleted
+            }//else mongo
+           });
+         }); // path for updates
+       })// put request for also updating image
+
+router.put('/:id', function(req, res1, next) {
+  console.log("request body is", req.body);
+  Event.findByIdAndUpdate(req.body._id, req.body, { new: true }, function(error, event) {
     if (error) {
-      console.error(error)
-      return next(error);
+     console.error(error)
+     return next(error);
     } else {
-      res.send(event);
-    }
-  });
-});
-// router.put('/rate/:id', function(req, res, next) {
-//   Beer.findOneAndUpdate({ _id: req.params.id },  {$inc:  {ratings: req.body.currentRating, numRate: 1}}, { new: true }, function(err, beer) {
-//     if (err) {
-//       console.error(err)
-//       return next(err);
-//     } else {
-//       console.log(beer);
-//       res.send(beer);
-//     }
-//   });
-// }); NOTE: might be repurposed for event tickets
+     res1.send(event);
+   }//else
+  });//mongo CB
+})// put route - without updating pictures
 module.exports = router;

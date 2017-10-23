@@ -1,5 +1,9 @@
 var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload']);
 
+app.config(function($httpProvider) {
+  $httpProvider.interceptors.push('authServiceInterceptors');
+})
+
 app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
    $urlRouterProvider.otherwise('/home');
@@ -15,12 +19,16 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/event',
       templateUrl: '/templates/event.html',
     })
+    .state('profile', {
+      url: '/profile',
+      templateUrl: '/templates/profile.html',
+    })
     .state('aboutus', {
       url: '/about',
       templateUrl: '/templates/about-us.html'
     })
-    .state('createevent', {
-      url: '/createevent',
+    .state('create', {
+      url: '/create-event',
       templateUrl: '/templates/createEvent.html',
       controller: 'createCtrl',
       onEnter: function ($location, $stateParams, $anchorScroll, $timeout) {
@@ -49,28 +57,56 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/page-contact',
       templateUrl: '/templates/page-contact.html'
     })
+    .state('terms', {
+          url: '/terms-of-service',
+          templateUrl: '/templates/terms.html'
+        })
+    .state('privacypolicy', {
+          url: '/privacy-policy',
+          templateUrl: '/templates/privacypolicy.html'
+        })
+    .state('signup', {
+          url: '/sign-up',
+          templateUrl: '/templates/signup.html',
+          controller: 'regCtrl',
+          controllerAs: 'register'
+        })
+    .state('signin', {
+          url: '/sign-in',
+          templateUrl: '/templates/login.html'
+        })
+    .state('dashboard', {
+          url: '/dashboard',
+          templateUrl: '/templates/dashboard.html'
+        })
+    .state('contact', {
+          url: '/contact',
+          templateUrl: '/templates/contact.html'
+        })
+    .state('browse', {
+          url: '/browse-events',
+          templateUrl: '/templates/browseEvents.html',
+          controller: 'browseCtrl'
+        })
+    .state('manage', {
+      url: '/manage-events',
+      templateUrl: '/templates/manageEvents.html',
+      controller: 'manageCtrl'
+    })
+    .state('edit', {
+      url: '/edit-event/:id',
+        params: {eventParam: null},
+      templateUrl: '/templates/editEvent.html',
+      controller: 'editCtrl'
+    })
+    .state('/facebook/:token', {
+      url:'/facebook/token',
+        // params: {socialParam: null},
+      templateUrl: '/templates/social/social.html'
+    })
 
-.state('terms', {
-      url: '/termsofservice',
-      templateUrl: '/templates/terms.html'
-    })
-.state('privacypolicy', {
-      url: '/privacypolicy',
-      templateUrl: '/templates/privacypolicy.html'
-    })
-.state('login', {
-      url: '/login',
-      templateUrl: '/templates/login.html'
-    })
-.state('signup', {
-      url: '/signup',
-      templateUrl: '/templates/signup.html'
-    })
 .state('dashboard', {
       url: '/dashboard',
       templateUrl: '/templates/dashboard.html'
     })
-
-  
-
 });

@@ -1,0 +1,16 @@
+<div class="container row">
+      <h1 class="col-md-6 col-md-offset-5 page-header">Manage your events - select an event to edit it</h1>
+      <div class="col-md-3" ng-repeat="event in events track by $index">
+        Event name: {{event.title}} <br/>
+        By: {{event.publisher}} <br/>
+          <img width=200 height=200 ng-src={{event.imgPath}}> <br/>
+          type: {{event.type}} <br/>
+          desctiption: {{event.description}} <br/>
+          location: {{event.location.locationName}} <br/>
+          <!-- At lat: {{event.location.latlng.lat}} and longitude: {{event.location.latlng.lng}} <br/> -->
+          <a href={{event.location.locationMapUrl}}>See it on the map</a> <br/>
+          From {{event.startTime}}, {{event.startHr}} until {{event.endTime}}, {{event.endHr}} <br/>
+          <a ui-sref="edit({ eventParam: event, id: event._id })" > <button class="btn btn-success"> Edit this event </button></a>
+          <button class="btn btn-danger">Delete</button>
+      </div>
+    </div>

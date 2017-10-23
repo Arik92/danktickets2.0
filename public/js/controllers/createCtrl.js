@@ -1,4 +1,4 @@
-app.controller('createCtrl',['createService','$scope' ,'Upload','$window', function(createService, $scope, Upload, $window){
+app.controller('createCtrl',['createService','$scope' ,'Upload','$window','$timeout','$rootScope','$location', function(createService, $scope, Upload, $window, $timeout, $rootScope, $location){
   $scope.typeOptions = [
     'Concert',
     'Meeting',
@@ -52,12 +52,14 @@ noWeekends: false,
 formatter: function(el, date) {
   // This will display the date as `1/1/2017`.
   el.value = date.toDateString();
+  $scope.exampleDate = date;
 },
 onSelect: function(instance) {
   // Show which date was selected.
   console.log("End date: ", instance.dateSelected);
   $scope.endDate = instance.dateSelected;
-  console.log("as string", $scope.endDate.toDateString());
+  console.log("as object", $scope.endDate);
+  console.log("exp date", $scope.exampleDate);
 },
 onShow: function(instance) {
   console.log('Calendar showing.');
@@ -75,7 +77,114 @@ overlayPlaceholder: 'Enter a 4-digit year',
 overlayButton: 'Go!',
 disableMobile: true // Conditionally disabled on mobile devices.
 });
-
+$scope.startHrCalender = [
+  '',
+  '12:00 AM',
+  '12:30 AM',
+  '01:00 AM',
+  '01:30 AM',
+  '02:00 AM',
+  '02:30 AM',
+  '03:00 AM',
+  '03:30 AM',
+  '04:00 AM',
+  '04:30 AM',
+  '05:00 AM',
+  '05:30 AM',
+  '06:00 AM',
+  '06:30 AM',
+  '07:00 AM',
+  '07:30 AM',
+  '08:00 AM',
+  '08:30 AM',
+  '09:00 AM',
+  '09:30 AM',
+  '10:00 AM',
+  '10:30 AM',
+  '11:00 AM',
+  '11:30 AM',
+  '12:00 AM',
+  '12:30 AM',
+  '01:00 PM',
+  '01:30 PM',
+  '02:00 PM',
+  '02:30 PM',
+  '03:00 PM',
+  '03:30 PM',
+  '04:00 PM',
+  '04:30 PM',
+  '05:00 PM',
+  '05:30 PM',
+  '06:00 PM',
+  '06:30 PM',
+  '07:00 PM',
+  '07:30 PM',
+  '08:00 PM',
+  '08:30 PM',
+  '09:00 PM',
+  '09:30 PM',
+  '10:00 PM',
+  '10:30 PM',
+  '11:00 PM',
+  '11:30 PM',
+];
+// $scope.startHr = $scope.startHrCalender[0];
+$scope.endHrCalender = [
+  '',
+  '12:00 AM',
+  '12:30 AM',
+  '01:00 AM',
+  '01:30 AM',
+  '02:00 AM',
+  '02:30 AM',
+  '03:00 AM',
+  '03:30 AM',
+  '04:00 AM',
+  '04:30 AM',
+  '05:00 AM',
+  '05:30 AM',
+  '06:00 AM',
+  '06:30 AM',
+  '07:00 AM',
+  '07:30 AM',
+  '08:00 AM',
+  '08:30 AM',
+  '09:00 AM',
+  '09:30 AM',
+  '10:00 AM',
+  '10:30 AM',
+  '11:00 AM',
+  '11:30 AM',
+  '12:00 AM',
+  '12:30 AM',
+  '01:00 PM',
+  '01:30 PM',
+  '02:00 PM',
+  '02:30 PM',
+  '03:00 PM',
+  '03:30 PM',
+  '04:00 PM',
+  '04:30 PM',
+  '05:00 PM',
+  '05:30 PM',
+  '06:00 PM',
+  '06:30 PM',
+  '07:00 PM',
+  '07:30 PM',
+  '08:00 PM',
+  '08:30 PM',
+  '09:00 PM',
+  '09:30 PM',
+  '10:00 PM',
+  '10:30 PM',
+  '11:00 PM',
+  '11:30 PM',
+];
+$scope.endHr = $scope.endHrCalender[0];
+$scope.updateEndHr = function() {
+  console.log("start hour is", $scope.startHr);
+  $scope.endHr = $scope.startHr;
+};
         ////////////////////file upload /////////////////////////////////////////////////////////////
         $scope.showPrivates = function() {
           alert($scope.isPrivate);
@@ -90,43 +199,75 @@ disableMobile: true // Conditionally disabled on mobile devices.
            console.log("same day");
          }//else
        }//compareDates
-        $scope.submit = function(){ //function to call on form submit
-              //TODO: check if from is valid
-              var submitExp = document.getElementById('fileItem').files[0];
-              console.log("in submit! uploading...", submitExp);
-                $scope.upload(submitExp); //call upload function
-              // var s = "g";
-              // console.log("scope's starting date is", $scope.startDate);
-              // console.log("its a ", typeof($scope.startDate));
-              // s.concat($scope.startDate);
-              // console.log("s is ", s);
-              // var x = document.getElementById("start");
-              // console.log("x is", x);
-              //console.log("x value is ", x.value);
-        }
-        $scope.upload = function (file) {
+
+        $scope.upload = function () {
+          var submitPic = document.getElementById('fileItem').files[0];
+          console.log("in submit! uploading...", submitPic);
+          var evt = {
+            title: $scope.eName,
+            publisher: $rootScope.userDetails.username,
+            type: $scope.selectedType,
+            location: {
+                locationMapUrl: $scope.selectedPlace.url,
+                  latlng: {
+                  lat: $scope.selectedLat,
+                  lng: $scope.selectedLng
+                 },
+                locationName: $scope.selectedPlace.formatted_address
+              },
+            image: $scope.imageName,
+            startTime: $scope.startDate.toDateString(),
+            startHr: $scope.startHr,
+            endTime: $scope.endDate.toDateString(),
+            endHr: $scope.endHr,
+            description: $scope.eDesc,
+            numTickets: $scope.totalTickets, //tickets remaining
+            isPrivate: $scope.isPrivate,
+            showRemainingTicks: $scope.showRemain
+          };// event post object
+          evt.tickets = [];
+          for (var i=0;i<$scope.tempTicks.length;i++) {
+            evt.tickets.push($scope.tempTicks[i]);
+          }// for filling ticket array
+          if (submitPic) {
             Upload.upload({
-                url: 'http://localhost:8000/upload', //webAPI exposed to upload the file
-                data:{file:file} //pass file as data, should be user ng-model
+                url: 'http://localhost:8000/events/upload', //webAPI exposed to upload the file
+                data: {
+                  file:submitPic,
+                   event: evt
+                 } //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
+                console.log("controller response is", resp);
                 if(resp.data.error_code === 0){ //validate success
-                  console.log("controller response is", resp);
                   console.log("response file object", resp.config.data.file);
-                    $window.alert('Success'  + resp.config.data.file.name + ' uploaded');
-                    $scope.uploadedImage = resp.config.data.file_name;
+                  console.log("added event successfully!");
+                  $scope.showRedirect = true;
+                  $timeout(function() {
+                    $location.path('/');
+                  }, 2000);
+                    //$window.alert('Success'  + resp.config.data.file.name + ' uploaded');
+                    $scope.imageName = resp.data.file_name;
+                    console.log("image name will be?", $scope.imageName);
+                  //  publishEvent(); // call a function to submit the whole event
                 } else {
-                    $window.alert('an error occured');
+                    $window.alert(resp.data.error_code);
                 }
-            }, function (resp) { //catch error
-                console.log('Error status: ' + resp.status);
-                $window.alert('Error status: ' + resp.status);
-            }, function (evt) {
-                console.log(evt);
-                // var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                // $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
-            });
-        };//file
+            }, function (error) { //catch error
+                console.log('Error status: ' + error);
+                // $window.alert('Error status: ' + resp.status);
+            // }, function (evt) {
+            //     console.log(evt);
+            //     // var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            //     // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            //     // $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
+            // });
+          });
+        } else {
+          createService.postEvent(evt).then(function(resp){
+            console.log("Event added successfully through service!")
+          })
+        }
+        };//scope.upload
 
   //////////////////////file upload /////////////////////////////////////////////////////////////
 
@@ -181,25 +322,12 @@ function fillInAddress() {
   // Get the place details from the autocomplete object.
   $scope.selectedPlace = autocomplete.getPlace();
   console.log('place is', $scope.selectedPlace);
-  console.log('place lat is', $scope.selectedPlace.geometry.location.lat());
-  console.log('place langtitude is', $scope.selectedPlace.geometry.location.lng());
   $scope.selectedLat = $scope.selectedPlace.geometry.location.lat(); // NOTE: setting current lattitude/longitude for distance calculation
   $scope.selectedLng = $scope.selectedPlace.geometry.location.lng();
+  console.log('place lat is', $scope.selectedLat);
+  console.log('place langtitude is', $scope.selectedLng);
 } //fillInAdress
 
-// Bias the autocomplete object to the user's geographical location,
-// as supplied by the browser's 'navigator.geolocation' object.
-// $scope.geolocate = function() {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(function(position) {
-//       var geolocation = {
-//         lat: position.coords.latitude,
-//         lng: position.coords.longitude
-//       }; //geolocation object
-//       console.log("my current location ", geolocation);
-//     }); //navigation callback
-//   }//if
-// } //geoLocate
 $scope.getDistanceFromLatLonInKm = function(lat1, lon1, lat2, lon2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2 - lat1); // deg2rad below
@@ -212,6 +340,7 @@ $scope.getDistanceFromLatLonInKm = function(lat1, lon1, lat2, lon2) {
   var d = R * c; // Distance in km
   return d;
 }
+
 function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
@@ -233,11 +362,9 @@ function addScript( src ) {
 }//addScript
 
   //calling the addScript function
-  var mapSrc = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places";
+  var mapSrc = "https://maps.googleapis.com/maps/api/js?key="+$scope.mapKey+"&libraries=places&language=en";
   addScript(mapSrc);
-
-
-
+  createService.resetTicks();
 /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
 /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
 $scope.preview = function() {
@@ -247,7 +374,7 @@ $scope.preview = function() {
     img.file = prevFile;
     img.height = 250;
     img.width = 250;
-    console.log("img object to be added", img);
+    //console.log("img object to be added", img);
     document.getElementById('preview').removeChild(document.getElementById('preview').firstChild);
     document.getElementById('preview').appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
       //TODO: need to specify preview size
@@ -262,6 +389,7 @@ $scope.preview = function() {
      (img);
     reader.readAsDataURL(prevFile);
 }//handleFiles
+
 function checkNames() {
     var patt = /w+/;
     if (!$scope.eName) {

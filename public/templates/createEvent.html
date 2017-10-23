@@ -5,6 +5,13 @@
         <div class="col-md-6 col-md-offset-3">
           <div class="page-header"><h2>Create Your Event</h2></div>
           <div class="form-group">
+            <label class="control-label" for="source_name"><h3>Organizer: {{userDetails.username}}</h3> </label>
+            <div>
+              <!-- <input id="source_name" class="form-control" name="source_name" ng-model="eDisp" type="text" placeholder="Most awesome events everr" class="form-control input-md"> -->
+              <!-- dropdown of possible organizers -->
+            </div>
+          </div>
+          <div class="form-group">
             <label class="control-label" for="source_name">Title</label>
             <div>
               <input id="source_name" class="form-control input-md" name="source_name" ng-model="eName" type="text" placeholder="Fancy Feast">
@@ -20,28 +27,30 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label" for="source_name">Starts at: </label>
+            <label class="control-label" for="source_name">Starts: </label>
             <div>
-              <input  id="start_date" ng-model="startDate"class="form-control input-md" required>
+              <input  id="start_date" ng-model="startDate" class="col-md-5 input-md" required>
+              <select ng-change="updateEndHr()" ng-model="startHr" class="col-md-5 input-md col-md-offset-2" required>
+                <option ng-repeat="hour in startHrCalender track by $index" value="{{hour}}">{{hour}}</option>
+              </select>
             </div>
           </div>
+          <br/>
           <div class="form-group">
-            <label class="control-label" for="source_name">Ends at:</label>
+            <label class="control-label" for="source_name">Ends:</label>
             <div>
-            <input id="end_date" ng-model="endDate" class="form-control input-md" required>
+            <input id="end_date" ng-model="endDate" class="col-md-5 input-md" required>
+            <select ng-model="endHr" class="col-md-5 input-md col-md-offset-2" required>
+              <option ng-repeat="hour in endHrCalender track by $index" value="{{hour}}">{{hour}}</option>
+            </select>
             </div>
           </div>
-          <button class="btn btn-submit" ng-click="compareDates()">Check dates</button>
+          <br/>
+          <!-- <button class="btn btn-submit" ng-click="compareDates()">Check dates</button> -->
           <div class="form-group">
             <label class="control-label" for="source_name">Description</label>
             <div>
               <textarea id="source_name" class="form-control" name="source_name" ng-model="eDesc" placeholder="Its the coolest show" class="form-control input-md"></textarea>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label" for="source_name">Display name(Temporary name- the organizer name to show up on the ticket)</label>
-            <div>
-              <input id="source_name" class="form-control" name="source_name" ng-model="eDisp" type="text" placeholder="Most awesome events everr" class="form-control input-md">
             </div>
           </div>
            <div class="form-group">
@@ -110,12 +119,18 @@
            </div>
            <div class="form-group">
              <div>
-               <input type="checkbox" name="source_name" value="showRemain"> Publicly show remaining tickets
+               <input type="checkbox" name="source_name" ng-model="showRemain"> Publicly show remaining tickets
              </div>
            </div>
             <br /><!--input -->
                 <Button  class="btn btn-danger" ng-click="reset()">Reset   </Button>
-          <Button class="btn btn-success" ng-click="submit()">Create Event </Button>
+          <Button class="btn btn-success" ng-click="upload()">Create Event </Button>
+          <div class="row show-hide-message" ng-show="showRedirect">
+            <div class="alert alert-success">Event added! redirecting..<span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
+          </div>
+          <!-- <div class="row show-hide-message" ng-show="showFailure">
+            <div class="alert alert-success">{{}}<span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
+          </div> -->
         </div>
       </div>
     </div>
