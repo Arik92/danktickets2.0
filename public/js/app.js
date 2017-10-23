@@ -71,9 +71,6 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/dashboard.html'
     })
 
-    .state('login', {
-      url: '/login',
-      templateUrl: '/templates/login.html'
-    })
+  
 
 });
