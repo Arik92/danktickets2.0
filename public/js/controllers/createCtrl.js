@@ -199,68 +199,62 @@ $scope.updateEndHr = function() {
            console.log("same day");
          }//else
        }//compareDates
-       function publishEvent() {
-         var evt = {
-           title: $scope.eName,
-           publisher: $rootScope.userDetails.username,
-           type: $scope.selectedType,
-           location: {
-               locationMapUrl: $scope.selectedPlace.url,
-                 latlng: {
-                 lat: $scope.selectedLat,
-                 lng: $scope.selectedLng
-                },
-               locationName: $scope.selectedPlace.formatted_address
-             },
-           image: $scope.imageName,
-           startTime: $scope.startDate.toDateString(),
-           startHr: $scope.startHr,
-           endTime: $scope.endDate.toDateString(),
-           endHr: $scope.endHr,
-           description: $scope.eDesc,
-           numTickets: $scope.totalTickets, //tickets remaining
-           isPrivate: $scope.isPrivate,
-           showRemainingTicks: $scope.showRemain
-         };// event post object
-         evt.tickets = [];
-         for (var i=0;i<$scope.tempTicks.length;i++) {
-           evt.tickets.push($scope.tempTicks[i]);
-         }// for filling ticket array
-         createService.postEvent(evt).then(function(res){
-           console.log("added event successfully!");
-           $scope.showRedirect = true;
-           $timeout(function() {
-             $location.path('/');
-           }, 2000);
-         }, function(err){
-           console.log("controller error promise");
-           console.error(err);
-         });
-       }//publishEvent
-        $scope.submit = function(){ //function to call on form submit
-              //TODO: check if from is valid
-              var submitPic = document.getElementById('fileItem').files[0];
-              console.log("in submit! uploading...", submitPic);
-                $scope.upload(submitPic);
-        }
-        $scope.upload = function (file) {
+
+        $scope.upload = function () {
+          var submitPic = document.getElementById('fileItem').files[0];
+          console.log("in submit! uploading...", submitPic);
+          var evt = {
+            title: $scope.eName,
+            publisher: $rootScope.userDetails.username,
+            type: $scope.selectedType,
+            location: {
+                locationMapUrl: $scope.selectedPlace.url,
+                  latlng: {
+                  lat: $scope.selectedLat,
+                  lng: $scope.selectedLng
+                 },
+                locationName: $scope.selectedPlace.formatted_address
+              },
+            image: $scope.imageName,
+            startTime: $scope.startDate.toDateString(),
+            startHr: $scope.startHr,
+            endTime: $scope.endDate.toDateString(),
+            endHr: $scope.endHr,
+            description: $scope.eDesc,
+            numTickets: $scope.totalTickets, //tickets remaining
+            isPrivate: $scope.isPrivate,
+            showRemainingTicks: $scope.showRemain
+          };// event post object
+          evt.tickets = [];
+          for (var i=0;i<$scope.tempTicks.length;i++) {
+            evt.tickets.push($scope.tempTicks[i]);
+          }// for filling ticket array
+          if (submitPic) {
             Upload.upload({
-                url: 'http://localhost:8000/upload', //webAPI exposed to upload the file
-                data:{file:file} //pass file as data, should be user ng-model
+                url: 'http://localhost:8000/events/upload', //webAPI exposed to upload the file
+                data: {
+                  file:submitPic,
+                   event: evt
+                 } //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
                 console.log("controller response is", resp);
                 if(resp.data.error_code === 0){ //validate success
                   console.log("response file object", resp.config.data.file);
+                  console.log("added event successfully!");
+                  $scope.showRedirect = true;
+                  $timeout(function() {
+                    $location.path('/');
+                  }, 2000);
                     //$window.alert('Success'  + resp.config.data.file.name + ' uploaded');
                     $scope.imageName = resp.data.file_name;
                     console.log("image name will be?", $scope.imageName);
-                    publishEvent(); // call a function to submit the whole event
+                  //  publishEvent(); // call a function to submit the whole event
                 } else {
-                    $window.alert('an error occured');
+                    $window.alert(resp.data.error_code);
                 }
             }, function (error) { //catch error
-                console.log('Error status: ' + resp.status);
-                $window.alert('Error status: ' + resp.status);
+                console.log('Error status: ' + error);
+                // $window.alert('Error status: ' + resp.status);
             // }, function (evt) {
             //     console.log(evt);
             //     // var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
@@ -268,6 +262,11 @@ $scope.updateEndHr = function() {
             //     // $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
             // });
           });
+        } else {
+          createService.postEvent(evt).then(function(resp){
+            console.log("Event added successfully through service!")
+          })
+        }
         };//scope.upload
 
   //////////////////////file upload /////////////////////////////////////////////////////////////
@@ -400,5 +399,3 @@ function checkNames() {
     return true;
   }//checkNames
 }]);
-
-///////////////////////////////**********************  SPLIT   **************************/////////////////////////////////////
