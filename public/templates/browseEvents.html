@@ -5,8 +5,54 @@
     <title>Browse events</title>
   </head>
   <body>
-    <div class="container row">
-      <h1 class="col-md-6 col-md-offset-5 page-header">Browse events</h1>
+    <h1 class="col-md-6 col-md-offset-5 page-header">Browse events</h1>
+    <div class="container row" ng-repeat="event in events track by $index">
+      <!-- alexandra's text -->
+      <div class="row">
+  			<div class="[ col-xs-12 col-sm-offset-2 col-sm-8 ]">
+  				<ul class="event-list">
+  					<li>
+  						<time datetime="2014-07-20">
+  							<span class="day">8</span>
+  							<span class="month">Aug</span>
+  							<span class="year">2017</span>
+  							<span class="time">from 8pm to 11pm</span>
+  						</time>
+  						<img alt="Independence Day" ng-src={{event.imgPath}} />
+  						<div class="info">
+  							<h2 class="title">{{event.title}}</h2>
+  							<p class="desc">By: <i class="fa fa-user"></i> {{event.publisher}} <br/>
+                type: {{event.type}} <br/></p>
+  								<ul>
+                    <li style="width:20%;"><a href="#website"><span class="fa fa-globe"></span> Website</a></li>
+  								<li style="width:20%;"><a href={{event.location.locationMapUrl}}><i class="fa fa-map-marker"></i>{{event.location.locationName}}</a></li>
+  								<li style="width:40%;"><span class="fa fa-money"></span> $19.99</li>
+  							</ul>
+  						</div>
+  						<div class="social">
+  							<ul>
+  								<li class="facebook" style="width:33%;"><a href="#facebook"><span class="fa fa-facebook"></span></a></li>
+  								<li class="twitter" style="width:34%;"><a href="#twitter"><span class="fa fa-twitter"></span></a></li>
+  								<li class="google-plus" style="width:33%;"><a href="#google-plus"><span class="fa fa-google-plus"></span></a></li>
+  							</ul>
+  						</div>
+  					</li>
+  </ul>
+  						</div>
+  					</li>
+  				</ul>
+  			</div>
+  <div class="row">
+  					<ul>
+  						<li>
+  							<div class="input-wrap">
+  								<button type="submit" class="hvr-bounce-to-right" id="mybutton" style="max-width: 190px; margin: 10px;">REGISTER</button>
+  								<button type="submit" class="hvr-bounce-to-right" id="mybutton" style="max-width: 320px; margin: 10px; max-height: 57px;"> <i class="fa fa-plus-circle"></i> Add to calendar</button>     							</div>
+  						</li>
+  					</ul>
+  				</div>
+        </div>
+      <!-- my text starts here -->
       <div class="col-md-3" ng-repeat="event in events track by $index">
         Event name: {{event.title}} <br/>
         By: {{event.publisher}} <br/>
