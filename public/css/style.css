@@ -503,7 +503,7 @@ header .mainmenu-container li.dropdown > a .fa {
 #information-bar .container {
   padding: 45px 0;
   background: #fff;
-  margin-top: -250px;
+  margin-top: -80px;
   position: relative;
   z-index: 999;
 }
@@ -2493,17 +2493,17 @@ display: inline-block;
     background-color: rgb(165, 82, 167);
   }
   .event-list > li > time > span {
-    display: none;
+    font-size: 12px;
   }
   .event-list > li > time > .day {
     display: block;
-    font-size: 56pt;
+    font-size: 41pt;
     font-weight: 100;
     line-height: 1;
   }
   .event-list > li time > .month {
     display: block;
-    font-size: 24pt;
+    font-size: 15pt;
     font-weight: 900;
     line-height: 1;
   }
@@ -3070,3 +3070,7 @@ display: inline-block;
     }
 
     100% {
+      -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    }
