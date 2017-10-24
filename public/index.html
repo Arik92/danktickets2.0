@@ -8,7 +8,7 @@
 	<!-- Responsive Meta Tag -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css"/>
-	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 	<!-- main stylesheet -->
 	<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="css/style.css">
@@ -74,7 +74,7 @@
 						<li class="scrollToLink" ng-hide="login.username"><a ui-sref="signin">SIGN IN</a></li>
 						<li class="scrollToLink" ng-hide="login.username"><a ui-sref="signup">SIGN UP</a></li>
 						<li class="scrollToLink" ng-show="login.username"><a ui-sref="create">CREATE EVENT</a></li>
-						<li class="scrollToLink dropdown"><a ui-sref="profile">{{ login.username }}</a>
+						<li class="scrollToLink dropdown"><i class="fa fa-user" style="color:white"></i> <a ui-sref="profile"> {{ login.username }}</a>
 							<ul class="submenu">
 								<li class="scrollToLink"><a ui-sref="manage">MANAGE EVENTS</a></li>
 								<li class="scrollToLink"><a ui-sref="signup">ORGANIZER PROFILE</a></li>
@@ -95,7 +95,7 @@
 	<section id="banner">
 		<div class="banner-container">
 			<div class="banner">
-				<!-- <ul>
+				<ul>
 					<li
 						data-transition="fade"
 						data-slotamount="7"
@@ -159,7 +159,7 @@
 
 						</ul>
 
-					</li> -->
+					</li>
 					<!-- <li
 
 						data-transition="fade"
@@ -277,7 +277,7 @@
 							<li class="scrollToLink"><button type="submit" class="colored hvr-bounce-to-right">Register Now</button></li>
 							<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Watch Video</a></li> -->
 						</ul>
-					</li> -->
+					</li>
 				</ul>
 			</div>
 		</div>
