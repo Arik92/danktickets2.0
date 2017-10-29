@@ -13,10 +13,10 @@
   				<ul class="event-list">
   					<li>
   						<time datetime="2014-07-20">
-  							<span class="day">8</span>
-  							<span class="month">Aug</span>
-  							<span class="year">2017</span>
-  							<span class="time">from 8pm to 11pm</span>
+  							<span class="year">{{event.startTime}}</span>
+  							<span class="year">At {{event.startHr}} until</span>
+  							<span class="year">{{event.endTime}}</span>
+  							<span class="time">At {{event.endHr}}</span>
   						</time>
   						<img alt="Independence Day" ng-src={{event.imgPath}} />
   						<div class="info">
@@ -25,7 +25,7 @@
                 type: {{event.type}} <br/></p>
   								<ul>
                     <li style="width:20%;"><a href="#website"><span class="fa fa-globe"></span> Website</a></li>
-  								<li style="width:20%;"><a href={{event.location.locationMapUrl}}><i class="fa fa-map-marker"></i>{{event.location.locationName}}</a></li>
+  								<li style="width:20%;"><label id="collapseText"><a href={{event.location.locationMapUrl}}><i class="fa fa-map-marker"></i>{{event.location.locationName}}</a></label></li>
   								<li style="width:40%;"><span class="fa fa-money"></span> $19.99</li>
   							</ul>
   						</div>
@@ -52,25 +52,5 @@
   					</ul>
   				</div>
         </div>
-      <!-- my text starts here -->
-      <div class="col-md-3" ng-repeat="event in events track by $index">
-        Event name: {{event.title}} <br/>
-        By: {{event.publisher}} <br/>
-          <img width=200 height=200 ng-src={{event.imgPath}}> <br/>
-          type: {{event.type}} <br/>
-          desctiption: {{event.description}} <br/>
-          location: {{event.location.locationName}} <br/>
-          <!-- At lat: {{event.location.latlng.lat}} and longitude: {{event.location.latlng.lng}} <br/> -->
-          <a href={{event.location.locationMapUrl}}>See it on the map</a> <br/>
-          From {{event.startTime}}, {{event.startHr}} until {{event.endTime}}, {{event.endHr}} <br/>
-          <button class="btn btn-success" >Get ticks</button>
-        <!-- <div class="col-md-4">Event name: {{event.title}}
-        </div>
-        <div class="col-md-4">type: {{event.type}}
-
-        </div>
-        <button class="btn btn-success" >Get ticks</button> -->
-      </div>
-    </div>
   </body>
 </html>
