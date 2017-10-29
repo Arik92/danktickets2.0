@@ -50,7 +50,7 @@ router.get('/searchByActivity/:type', function(req, res, next){
 router.post('/upload', function (req, res1, next) {
   upload(req,res1,function(err){
              if(err){
-                  res.json({error_code:1,err_desc:err});
+                  res1.json({error_code:1,err_desc:err});
                   return;
              }
              console.log("request to work with is", req.body);
