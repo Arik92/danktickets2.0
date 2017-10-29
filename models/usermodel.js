@@ -7,7 +7,8 @@ var UserSchema = new Schema({
   password: { type: String, required: true },
   email:    { type: String, lowercase: true, required: true, unique: true },
   tickets:  { type: Schema.Types.ObjectId, ref:"" },
-  image: String
+  image: String,
+  organizerProfiles: { type: Schema.Types.ObjectId, ref:"" }
 });
 
 //encrypt password mongoose middlware
