@@ -5,10 +5,11 @@ var bcrypt     = require('bcrypt-nodejs');
 var UserSchema = new Schema({
   username: { type: String, lowercase: true, required: true, unique: true },
   password: { type: String, required: true },
-  email:    { type: String, lowercase: true, required: true, unique: true },
-  tickets:  { type: Schema.Types.ObjectId, ref:"" },
+  email:    { type: String, lowercase: true, required: true},
+  //tickets:  { type: Schema.Types.ObjectId, ref:"" },
   image: String,
-  organizerProfiles: { type: Schema.Types.ObjectId, ref:"" }
+  events: [{ type: Schema.Types.ObjectId, ref:"Event" }],
+  organizerProfiles: [{ type: Schema.Types.ObjectId, ref:"Profile" }]
 });
 
 //encrypt password mongoose middlware

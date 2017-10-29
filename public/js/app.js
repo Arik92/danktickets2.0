@@ -39,7 +39,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       }
     })
     .state('createorganizer', {
-      url: '/createorganizer',
+      url: '/create-organizer',
       templateUrl: '/templates/createOrganizer.html',
       controller: 'orCtrl',
       onEnter: function ($location, $stateParams, $anchorScroll, $timeout) {
