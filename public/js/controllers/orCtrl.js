@@ -31,19 +31,7 @@ app.controller('orCtrl',['$scope' ,'$window', 'Upload', function($scope, $window
 
   //////////////////////file upload /////////////////////////////////////////////////////////////
 
-  $scope.add = function(type) {
-    var ticket = {
-      ticketType: type,
-      ticketPrice: 0,
-      ticketName: type+" Ticket",
-      ticketQ: 0,
-      free: isFree
-    }
-    console.log("added ticket is ",ticket);
-    createService.addticket(ticket);
-    $scope.getCurrentTickets();
-  }
-  /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
+    /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
 $scope.preview = function() {
     var prevFile = document.getElementById('fileItem').files[0];
     var img = document.createElement("img");
