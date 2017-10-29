@@ -2696,6 +2696,14 @@ display: inline-block;
     }
 
 
+.eventcolumn {
+
+  width: 45%;
+}
+
+
+
+
    /* dashboard */
 
 
@@ -3083,3 +3091,100 @@ display: inline-block;
     width: 12em;
 }
 
+
+
+
+
+/*event date*/
+
+
+div.calendar {
+  float: left;
+  margin-left: -200px;
+  height:140px;
+  width:130px;
+  
+  background-color:white;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  background-image: -webkit-radial-gradient(center, #eee, #fff);
+  background-image: -moz-radial-gradient(center, #eee, #fff);
+  -webkit-backface-visibility:hidden;
+  margin:50px auto;
+}
+
+div.calendar h1 {
+  margin:0;
+  text-align: center;
+  color:#fff;
+  font-weight: lighter;
+  font-size: 1em;
+  letter-spacing: 1px;
+  padding:10px;
+  border-bottom: 2px solid #1e1e1e;
+  background-color: gray; 
+  background-image: -webkit-gradient(linear,left top, left bottom,color-stop(0.0,#e37f80),color-stop(0.85, #d93e3e));
+  background-image: -moz-gradient(linear,left top, left bottom,color-stop(0.0,#e37f80),color-stop(0.85, #d93e3e));
+  background-image: -ms-gradient(linear,left top, left bottom,color-stop(0.0,#e37f80),color-stop(0.85, #d93e3e));
+  background-image: -o-gradient(linear,left top, left bottom,color-stop(0.0,#e37f80),color-stop(0.85, #d93e3e));
+  background-image: gradient(linear,left top, left bottom,color-stop(0.0,#e37f80),color-stop(0.85, #d93e3e));
+
+  -webkit-border-radius:  5px 5px 0 0;
+  -moz-border-radius:   5px 5px 0 0;
+  -ms-border-radius:    5px 5px 0 0;
+  -o-border-radius:   5px 5px 0 0;
+  border-radius:      5px 5px 0 0;
+}
+
+div.calendar p {
+  font-size: 5em;
+  line-height: 0%;
+  color:black;
+  font-weight: bold;
+  margin-top: 43px;
+}
+
+/*----- Accordion -----*/
+.accordion, .accordion * {
+    -webkit-box-sizing:border-box; 
+    -moz-box-sizing:border-box; 
+    box-sizing:border-box;
+}
+ 
+.accordion {
+    overflow:hidden;
+    box-shadow:0px 1px 3px rgba(0,0,0,0.25);
+    border-radius:3px;
+    background:transparent;
+}
+ 
+/*----- Section Titles -----*/
+.accordion-section-title {
+    width:100%;
+    padding:15px;
+    display: unset;
+    border-bottom:1px solid #1a1a1a;
+    background: transparent;
+    transition:all linear 0.15s;
+    /* Type */
+    font-size:1.200em;
+    text-shadow:0px 1px 0px #1a1a1a;
+    color:black;
+}
+ 
+.accordion-section-title.active, .accordion-section-title:hover {
+    background:#4c4c4c;
+    /* Type */
+    text-decoration:none;
+}
+ 
+.accordion-section:last-child .accordion-section-title {
+    border-bottom:none;
+}
+ 
+/*----- Section Content -----*/
+.accordion-section-content {
+    padding:15px;
+    display:none;
+}
