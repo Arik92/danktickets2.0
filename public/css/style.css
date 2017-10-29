@@ -3074,3 +3074,12 @@ display: inline-block;
         transform: rotate(0deg);
     }
     }
+
+#collapseText {
+  display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 12em;
+}
+

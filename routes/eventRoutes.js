@@ -71,7 +71,7 @@ router.post('/upload', function (req, res1, next) {
      });// path for regular uploads
 
 router.post('/', function (req, res1, next) {
- var e = new Event(req.body.event);
+ var e = new Event(req.body);
  //e.image = req.file.filename; //TODO: save some default image
  e.save(function(error, result){
  if (error) {
