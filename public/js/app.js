@@ -99,9 +99,16 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/editEvent.html',
       controller: 'editCtrl'
     })
-    .state('/facebook/:token', {
-      url:'/facebook/token',
+    .state('facebook/:token', {
+      url:'/facebook/:token',
         // params: {socialParam: null},
-      templateUrl: '/templates/social/social.html'
+      templateUrl: '/templates/social/social.html',
+      controller: 'facebookCtrl'
+    })
+    .state('facebookerror', {
+      url:'/facebookerror',
+        // params: {socialParam: null},
+      templateUrl: '/templates/login.html',
+      controller: 'facebookCtrl'
     })
 });

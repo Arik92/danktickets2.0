@@ -1,41 +1,49 @@
-app.controller('loginCtrl', function(authService, $timeout, $location, $rootScope) {
-  var msg = this;
+app.controller('loginCtrl', function(authService, $timeout, $location, $scope, $window) {
+  var app = this;
 
-  msg.loader = false;
+  app.loader = false;
   //video part 8 35:22 https://www.youtube.com/watch?v=fRPwKuIz8Os&t=1114s
-  $rootScope.$on('$locationChangeStart', function() {
+  $scope.$on('$locationChangeStart', function() {
     if (authService.isLoggedIn()) {
+      app.isLoggedIn = true;
       authService.getUser().then(function(data) {
-        msg.username = data.data.username;
-        msg.email = data.data.email;
-        msg.loader = true;
-        console.log('you are now logged in! msg is ',msg);
-        $rootScope.userDetails = msg;
+        app.username = data.data.username;
+        app.email = data.data.email;
+        app.loader = true;
+        console.log('you are now logged in! msg is ', app);
       });
     } else {
-      msg.username = '';
-      msg.loader = true;
+      app.isLoggedIn = false;
+      app.username = '';
+      app.loader = true;
     }
+    if ($location.hash() == '_=_') $location.hash(null);
   });
 
+  this.facebook = function() {
+    // app.disabled = true;
+    $window.location = $window.location.protocol + '//' + $window.location.host + '/auth/facebook';
+  };
+
   this.doLogin = function (loginData) {
-    msg.loading = true;
-    msg.errorMsg = false;
-    authService.login(msg.loginData).then(function(data) {
+    app.loading = true;
+    app.errorMsg = false;
+
+    authService.login(app.loginData).then(function(data) {
       if (data.data.success) {
-        msg.loading = false;
+        app.loading = false;
         //create success message
         //redirect to home page
-        msg.successMsg = data.data.message + ' ...Redirecting';
+        app.successMsg = data.data.message + ' ...Redirecting';
         $timeout(function() {
           $location.path('/');
-          msg.loginData = '';
-          msg.successMsg = false;
+          app.loginData = '';
+          app.successMsg = false;
         }, 2000);
       }  else {
-        msg.loading = false;
+        app.loading = false;
         //create error message
-        msg.errorMsg = data.data.message;
+        app.errorMsg = data.data.message;
       }
     });
   };
