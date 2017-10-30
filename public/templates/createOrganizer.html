@@ -56,8 +56,11 @@
                <input id="source_name" class="form-control" name="source_name" ng-model="oTwitt" type="text" placeholder="tweet" class="form-control input-md">
              </div>
            </div>
-                <Button  class="btn btn-danger" ng-click="reset()">Reset   </Button>
-          <Button class="btn btn-success" ng-click="submit()">Create Profile </Button>
+                <Button  class="btn btn-danger" ng-click="reset()">Reset </Button>
+          <Button class="btn btn-success" ng-click="upload()">Create Profile </Button>
+          <div class="row show-hide-message" ng-show="showRedirect">
+            <div class="alert alert-success">Created organizer profile! redirecting..<span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
+          </div>
         </div>
       </div>
     </div>

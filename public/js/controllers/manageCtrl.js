@@ -1,4 +1,5 @@
 app.controller('manageCtrl',['createService','$scope','$rootScope', function(createService, $scope, $rootScope){
+  console.log("root scope dits", $rootScope);
   createService.getEventsByPublisher($rootScope.userDetails.username).then(function(result){
     console.log("All events by: ",$rootScope.userDetails.username);
     $scope.events = result;
