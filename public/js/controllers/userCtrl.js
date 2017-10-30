@@ -1,26 +1,39 @@
 app.controller('regCtrl', function(userService, $http, $location, $timeout) {
 
-  var msg = this;
+  var app = this;
 
   this.regUser = function (regData) {
-    msg.loading = true;
-    msg.errorMsg = false;
-    userService.create(msg.regData).then(function(data) {
+    app.loading = true;
+    app.errorMsg = false;
+    
+    userService.create(app.regData).then(function(data) {
       if (data.data.success) {
-        msg.loading = false;
+        app.loading = false;
         //create success message
         //redirect to home page
-        msg.successMsg = data.data.message + ' ...Redirecting';
+        app.successMsg = data.data.message + ' ...Redirecting';
         $timeout(function() {
           $location.path('/');
         }, 2000);     
       }  else {
-        msg.loading = false;
+        app.loading = false;
         //create error message
-        msg.errorMsg = data.data.message;
+        app.errorMsg = data.data.message;
       }
     });
   };
+});
+
+app.controller('facebookCtrl', function($stateParams, authService, $location, $window) {
+  var app = this;
+
+  if ($window.location.pathname == '/facebookerror') {
+      app.errorMsg = 'facebook email not found in database';
+  } else {
+      console.log($stateParams.token)
+      authService.facebook($stateParams.token);
+      $location.path('/');
+  }
 });
 
 
