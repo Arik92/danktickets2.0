@@ -8,7 +8,6 @@ var UserSchema = new Schema({
   email:    { type: String, lowercase: true, required: true},
   //tickets:  { type: Schema.Types.ObjectId, ref:"" },
   image: String,
-  events: [{ type: Schema.Types.ObjectId, ref:"Event" }],
   organizerProfiles: [{ type: Schema.Types.ObjectId, ref:"Profile" }]
 });
 
