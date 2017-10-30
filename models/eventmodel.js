@@ -11,9 +11,10 @@ var ticketSchema = new Schema({
   description: String //NOTE: special notes to guests?
 });
 var eventSchema = new Schema({
+  owner: { type: Schema.Types.ObjectId, ref:"User" },
   title: String,
-  type: String, //NOTE: possible options: show, movie, gallery? for search purposes
-  publisher: String,
+  type: String,
+  Organizer: { type: Schema.Types.ObjectId, ref:"Organizer" },
   location: Object,
   locationMapUrl: String,
   image: String,
@@ -24,7 +25,6 @@ var eventSchema = new Schema({
   description: String,
   tickets: [ticketSchema], //o
   numTickets: Number, //tickets remaining
-  //TODO: image, organizer name,
   isPrivate: Boolean,
   showRemainingTicks: Boolean
 });
