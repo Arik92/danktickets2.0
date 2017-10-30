@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var profileSchema = new Schema({
-  owner: { type: Schema.Types.ObjectId, ref:"User" }
+  owner: { type: Schema.Types.ObjectId, ref:"User" },
   name: {type: String, unique: true},
   image: String,
   about: String,
