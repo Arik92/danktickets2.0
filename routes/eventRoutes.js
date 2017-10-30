@@ -65,7 +65,8 @@ router.post('/upload', function (req, res1, next) {
                   console.log("reached error route");
                   console.log(error);
                 } else {
-                  console.log("reached result route");                  
+                  console.log("reached result route");         
+
                   // res.send(result);
                   res1.send({error_code:0,err_desc:null, file_name: req.file.filename});
                 }//else
