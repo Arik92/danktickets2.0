@@ -1,16 +1,22 @@
-app.controller('loginCtrl', function(authService, $timeout, $location, $scope, $window) {
+app.controller('loginCtrl', function(authService, $timeout, $location, $rootScope, $window) {
   var app = this;
 
   app.loader = false;
   //video part 8 35:22 https://www.youtube.com/watch?v=fRPwKuIz8Os&t=1114s
-  $scope.$on('$locationChangeStart', function() {
+  $rootScope.$on('$locationChangeStart', function() {
     if (authService.isLoggedIn()) {
       app.isLoggedIn = true;
       authService.getUser().then(function(data) {
         app.username = data.data.username;
         app.email = data.data.email;
+        app.id = data.data.id;
         app.loader = true;
         console.log('you are now logged in! msg is ', app);
+        //just to be sure
+        $rootScope.userDetails = {};
+        $rootScope.userDetails.username = data.data.username;
+        $rootScope.userDetails.email = data.data.email;
+        $rootScope.userDetails.id = data.data.id;
       });
     } else {
       app.isLoggedIn = false;
