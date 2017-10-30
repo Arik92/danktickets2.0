@@ -66,11 +66,6 @@ router.post('/upload', function (req, res1, next) {
                   console.log(error);
                 } else {
                   console.log("reached result route");
-                  // User.find({id: req.body.event.owner}, function(err, monRes){
-                  //   monRes.events.push(e._id); NOTE consider findyIdandUpdate() along the lines of
-//                   User.findByIdAndUpdate(req.user._id, {
-//   $push: { friends: friend._id }
-// }, { 'new': true}, cb);
                   })
                   // res.send(result);
                   res1.send({error_code:0,err_desc:null, file_name: req.file.filename});
