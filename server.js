@@ -16,7 +16,7 @@ var app         = express();
 var port        = process.env.PORT || '8000';
 var morgan      = require('morgan');
 var passport    = require('passport');
-var social      = require('./passport/passport')(app, passport);
+// var social      = require('./passport/passport')(app, passport);
 
 
 app.use(function(req, res, next) {
