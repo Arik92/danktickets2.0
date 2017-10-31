@@ -7,7 +7,7 @@
           <div class="form-group">
             <label class="control-label" for="source_name"><h3>Organizer: </h3> </label>
             <div>
-              <select ng-model="selectedOrganizer" class="form-control input-md">
+              <select ng-model="selectedOrganizer" class="form-control input-md" ng-change="selectProf()">
                 <option ng-repeat="organizer in profiles track by $index" value="{{organizer._id}}">{{organizer.name}}</option>
               </select>
             </div>

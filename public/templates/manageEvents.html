@@ -2,7 +2,7 @@
       <h1 class="col-md-6 col-md-offset-5 page-header">Manage your events - select an event to edit it</h1>
       <div class="col-md-3" ng-repeat="event in events track by $index">
         Event name: {{event.title}} <br/>
-        By: {{event.publisher}} <br/>
+        By: {{event.organizer.name}} <br/>
           <img width=200 height=200 ng-src={{event.imgPath}}> <br/>
           type: {{event.type}} <br/>
           desctiption: {{event.description}} <br/>
