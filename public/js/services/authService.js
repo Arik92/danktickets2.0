@@ -17,11 +17,6 @@ app.factory('authService', function($http, authToken){
     }
   };
 
-  //authService.facebook(token);
-  authFactory.facebook = function(token) {
-    authToken.setToken(token);
-  };
-
   //authService.getUser();
   authFactory.getUser = function() {
     if (authToken.getToken) {
@@ -60,7 +55,6 @@ app.factory('authServiceInterceptors', function(authToken) {
   var authServiceInterceptors = {};
   authServiceInterceptors.request = function(config) {
     var token = authToken.getToken();
-    console.log(token);
     if (token) config.headers['x-access-token'] = token;
     return config;
   }

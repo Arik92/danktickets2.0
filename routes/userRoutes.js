@@ -1,3 +1,4 @@
+
 var User   = require('../models/usermodel');
 var jwt    = require('jsonwebtoken');
 var secret = 'urgonnadieclown865626';
@@ -71,3 +72,5 @@ module.exports = function (router) {
 
   return router;
 }
+
+
