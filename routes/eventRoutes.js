@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var Event = require("../models/eventmodel");
-var User = require("../models/usermodel");
-var Organizer = require("../models/profilemodel");
-
 
 /////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
 var multer = require('multer');
@@ -38,7 +35,7 @@ router.get('/:id', function(req, res, next){
       res.send(resultEvents);
     }//else
   })//findCb
-}) // get event by publisher
+}) // get event by publisher/profile
 
 router.get('/searchByActivity/:type', function(req, res, next){
   Event.find({type: req.params.type}, function(err, resultEvents){
@@ -65,7 +62,7 @@ router.post('/upload', function (req, res1, next) {
                   console.log("reached error route");
                   console.log(error);
                 } else {
-                  console.log("reached result route");         
+                  console.log("reached result route");
 
                   // res.send(result);
                   res1.send({error_code:0,err_desc:null, file_name: req.file.filename});
