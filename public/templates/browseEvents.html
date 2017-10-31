@@ -13,7 +13,7 @@
               <img alt="Independence Day" ng-src={{event.imgPath}} />
               <div class="info">
                 <h2 class="title" style="text-align:center">{{event.title}}</h2><!--   <i class="fa fa-clock"></i> --> <!-- from: 00h00 to: 00h00 -->
-                <p class="desc" style="text-align:center; font-size:14px">  By: <i class="fa fa-user"></i>{{event.publisher}}</p>
+                <p class="desc" style="text-align:center; font-size:14px">  By: <i class="fa fa-user"></i>{{event.organizer.name}}</p>
                 <b style="margin-left: 355px">{{event.type}}</b>
                   <ul style="margin-bottom:4px">
                     <li style="width:20%;"><label id="collapseText"><a href={{event.location.locationMapUrl}}><i class="fa fa-map-marker"></i>{{event.location.locationName}}</a></label></li>
@@ -56,7 +56,7 @@
 <div class="bodyevent">
 
 <div class="ticketcontainer">
-  
+
   <div class="card-media">
     <!-- media container -->
     <div class="card-media-object-container">
@@ -100,7 +100,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="card-media">
     <!-- media container -->
     <div class="card-media-object-container">
@@ -140,12 +140,3 @@
 
 </div>
 </div>
-
-
-
-
-
-
-
-
-

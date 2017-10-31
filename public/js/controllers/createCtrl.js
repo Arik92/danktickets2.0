@@ -17,6 +17,9 @@ app.controller('createCtrl',['createService', 'orService','$scope' ,'Upload','$w
     })
   }//initProfs
   initProfs();
+  $scope.selectProf = function(){
+    console.log("selected profile is", $scope.selectedOrganizer);
+  }
   //////////////////////////////////// initializing pickers ////////////////////////////////////////////
   //TODO: when loading an event, set the start/end dates accordingly
   var startDatepicker = datepicker('#start_date', {
@@ -216,8 +219,8 @@ $scope.updateEndHr = function() {
           console.log("in submit! uploading...", submitPic);
           var evt = {
             title: $scope.eName,
-            //owner: $rootScope.userDetails.username._id,
-            publisher: $scope.selectedProfile._id,
+            owner: $rootScope.userDetails.id,
+            organizer: $scope.selectedOrganizer,
             type: $scope.selectedType,
             location: {
                 locationMapUrl: $scope.selectedPlace.url,
