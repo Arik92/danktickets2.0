@@ -1,13 +1,13 @@
 
 var express     = require('express');
 var mongoose    = require('mongoose');
-var eventRoutes = require('./routes/eventRoutes');
 //var expressSession = require('express-session');
 var bodyParser  = require('body-parser');
 //var LocalStrategy = require('passport-local').Strategy;
 var router      = express.Router();
 var userRoutes  = require('./routes/userRoutes')(router);
 var eventRoutes = require('./routes/eventRoutes');
+var organizerRoutes = require('./routes/organizerRoutes');
 
 
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
@@ -30,6 +30,7 @@ app.use(express.static('public'));
 app.use(express.static('node_modules'));
 app.use('/events', eventRoutes);
 app.use('/users', userRoutes);
+app.use('/organizers', organizerRoutes);
 
 app.all('[^.]+', function(req, res) {
   res.sendFile(__dirname + "/public/index.html");

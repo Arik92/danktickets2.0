@@ -1,4 +1,4 @@
-app.controller('createCtrl',['createService','$scope' ,'Upload','$window','$timeout','$rootScope','$location', function(createService, $scope, Upload, $window, $timeout, $rootScope, $location){
+app.controller('createCtrl',['createService', 'orService','$scope' ,'Upload','$window','$timeout','$rootScope','$location', function(createService, orService, $scope, Upload, $window, $timeout, $rootScope, $location){
   $scope.typeOptions = [
     'Concert',
     'Meeting',
@@ -6,6 +6,17 @@ app.controller('createCtrl',['createService','$scope' ,'Upload','$window','$time
     'Party',
     'Other'
   ];
+  function initProfs() {
+    $scope.profiles = [];
+    console.log("initial profs", $rootScope.userDetails);
+    orService.getOrganizersByUser($rootScope.userDetails.id).then(function(data2){
+      console.log("data 2", data2);
+      for (var i=0;i<data2.length;i++) {
+        $scope.profiles[i] = data2[i];
+      }//for
+    })
+  }//initProfs
+  initProfs();
   //////////////////////////////////// initializing pickers ////////////////////////////////////////////
   //TODO: when loading an event, set the start/end dates accordingly
   var startDatepicker = datepicker('#start_date', {
@@ -205,7 +216,8 @@ $scope.updateEndHr = function() {
           console.log("in submit! uploading...", submitPic);
           var evt = {
             title: $scope.eName,
-            publisher: $rootScope.userDetails.username,
+            //owner: $rootScope.userDetails.username._id,
+            publisher: $scope.selectedProfile._id,
             type: $scope.selectedType,
             location: {
                 locationMapUrl: $scope.selectedPlace.url,
@@ -215,7 +227,7 @@ $scope.updateEndHr = function() {
                  },
                 locationName: $scope.selectedPlace.formatted_address
               },
-            image: $scope.imageName,
+            //image: $scope.imageName, 95% sure this is only defined in th routes
             startTime: $scope.startDate.toDateString(),
             startHr: $scope.startHr,
             endTime: $scope.endDate.toDateString(),

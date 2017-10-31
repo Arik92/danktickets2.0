@@ -1,37 +1,55 @@
-app.controller('orCtrl',['$scope' ,'$window', 'Upload', function($scope, $window, Upload){
-        ////////////////////file upload /////////////////////////////////////////////////////////////
-        console.log("entered organizer profileee");
-        $scope.submit = function(){ //function to call on form submit
-              //TODO: check if from is valid
-              var submitExp = document.getElementById('fileItem').files[0];
-              console.log("in submit! uploading...", submitExp);
-                $scope.upload(submitExp); //call upload function
-        }
-        $scope.upload = function (file) {
+app.controller('orCtrl',['orService','$scope' ,'Upload','$window','$timeout','$rootScope','$location', function(orService, $scope, Upload, $window, $timeout, $rootScope, $location){
+        $scope.upload = function () {
+        var submitPic = document.getElementById('fileItem').files[0];
+        console.log("in submit! uploading...", submitPic);
+        var organizer = {
+          name: $scope.oName,
+          owner: $rootScope.userDetails.id,
+          about: $scope.oDesc,
+          website: $scope.oSite,
+        };// event post object
+          if (submitPic) {
             Upload.upload({
-                url: 'http://localhost:8000/upload', //webAPI exposed to upload the file
-                data:{file:file} //pass file as data, should be user ng-model
+                url: 'http://localhost:8000/organizers/upload', //webAPI exposed to upload the file
+                data: {
+                  file:submitPic,
+                   organizer: organizer
+                 } //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
+                console.log("controller response is", resp);
                 if(resp.data.error_code === 0){ //validate success
-                  console.log("controller response is", resp);
-                    $window.alert('Success ');// + resp.config.data.file.name + 'uploaded. Response: ');
+                  console.log("response file object", resp.config.data.file);
+                  console.log("added organizer successfully!");
+                  $scope.showRedirect = true;
+                  $timeout(function() {
+                    $location.path('/');
+                  }, 2000);
+                    //$window.alert('Success'  + resp.config.data.file.name + ' uploaded');
+                    $scope.imageName = resp.data.file_name;
+                    console.log("image name will be?", $scope.imageName);
+                  //  publishEvent(); // call a function to submit the whole event
                 } else {
-                    $window.alert('an error occured');
+                    $window.alert(resp.data.error_code);
                 }
-            }, function (resp) { //catch error
-                console.log('Error status: ' + resp.status);
-                $window.alert('Error status: ' + resp.status);
-            }, function (evt) {
-                console.log(evt);
-                // var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                // $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
-            });
-        };//file
+            }, function (error) { //catch error
+                console.log('Error status: ' + error);
+                // $window.alert('Error status: ' + resp.status);
+            // }, function (evt) {
+            //     console.log(evt);
+            //     // var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            //     // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            //     // $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
+            // });
+          });
+        } else {
+          orService.postOrganizer(organizer).then(function(resp){
+            console.log("Event added successfully through service!")
+          })
+      }//else
+    };//scope.upload
 
   //////////////////////file upload /////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
+/////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
 $scope.preview = function() {
     var prevFile = document.getElementById('fileItem').files[0];
     var img = document.createElement("img");
@@ -39,7 +57,7 @@ $scope.preview = function() {
     img.file = prevFile;
     img.height = 250;
     img.width = 250;
-    console.log("img object to be added", img);
+    //console.log("img object to be added", img);
     document.getElementById('preview').removeChild(document.getElementById('preview').firstChild);
     document.getElementById('preview').appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
       //TODO: need to specify preview size
@@ -54,10 +72,11 @@ $scope.preview = function() {
      (img);
     reader.readAsDataURL(prevFile);
 }//handleFiles
+
 function checkNames() {
     var patt = /w+/;
     if (!$scope.eName) {
-      alert("fill enter an organizer name");
+      alert("fill enter an event name");
       return false;
     }
     return true;
