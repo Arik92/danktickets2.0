@@ -14,7 +14,7 @@ var eventSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref:"User" },
   title: String,
   type: String,
-  Organizer: { type: Schema.Types.ObjectId, ref:"Profile" },
+  organizer: { type: Schema.Types.ObjectId, ref:"Profile" },
   location: Object,
   locationMapUrl: String,
   image: String,
