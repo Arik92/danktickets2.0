@@ -5,7 +5,7 @@ var jwt              = require('jsonwebtoken'); // Import JWT Package
 var secret           = 'urgonnadieclown865626'; // Create custom secret to use with JWT
 
 module.exports = function(app, passport) {
-  
+
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: true, cookie: { secure: false } }));
@@ -68,7 +68,7 @@ module.exports = function(app, passport) {
    });
 
   app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
-  
+
   return passport;
 }
 
@@ -87,7 +87,7 @@ module.exports = function(app, passport) {
 //   app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: true, cookie: { secure: false } }));
 //   // End Passport Configuration Settings
 
-//   // Serialize users once logged in 
+//   // Serialize users once logged in
 //   // place to create token for user
 //   passport.serializeUser(function(user, done) {
 //     console.log(user.email)
@@ -105,7 +105,7 @@ module.exports = function(app, passport) {
 //     done(null, user.id); // Return user object
 //   });
 
-//   // Deserialize Users once logged out 
+//   // Deserialize Users once logged out
 //   passport.deserializeUser(function(id, done) {
 //     User.findById(id, function(err, user) {
 //       done(err, user); // Complete deserializeUser and return done

@@ -1,9 +1,37 @@
-
+var passport = require('../models/passport');
 var User   = require('../models/usermodel');
 var jwt    = require('jsonwebtoken');
 var secret = 'urgonnadieclown865626';
 
 module.exports = function (router) {
+  router.get('/facebook', passport.authenticate('facebook', { scope: 'email' }));
+
+  router.get('/facebook/callback',
+    passport.authenticate('facebook', {session: false, failureRedirect: '/' }),
+    function(req, res) {
+      console.log(req.user);
+      User.findOne({socialId: req.user.id}, function(err, user){
+        if (err) {
+          console.error(err);
+        } if (!user) {
+          user = new User({
+            socialId: req.user.id,
+            email: req.user.emails ? req.user.emails[0].value : "",
+            provider: 'facebook',
+            username: req.user.displayName
+          });
+        }
+        user.save(function(err, newUser) {
+          if (err) {
+            console.error(err);
+          } else {
+            return done(null, newUser);
+          }
+        })//save CB
+      })//findOne CB
+      // Successful authentication, redirect home.
+      res.redirect('/');
+  });
   // http://localhost:8000/users/users
   //user registration route
   router.post('/users', function(req, res){
@@ -80,6 +108,4 @@ module.exports = function (router) {
 
 
   return router;
-}
-
-
+}//module.exports
