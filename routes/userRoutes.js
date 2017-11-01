@@ -11,8 +11,7 @@ module.exports = function (router) {
     user.username = req.body.username;
     user.password = req.body.password;
     user.email = req.body.email;
-    user.tickets = req.body.tickets;
-    user.image = req.body.image;
+    user.image = req.body.image;// this doesnt do anything. needs UPLOAD
     if (req.body.username == null || req.body.username == '' || req.body.password == null || req.body.password == '' || req.body.email == null || req.body.email == '') {
       res.json({ success: false, message: 'Ensure Username, Email and Password were provided' });
     } else {
@@ -28,7 +27,7 @@ module.exports = function (router) {
   //http://localhost:8000/users/authenticate
   //user login route
   router.post('/authenticate', function(req, res) {
-    User.findOne({ username: req.body.username }).select('email username password').exec(function(err, user){
+    User.findOne({ username: req.body.username }).select('email username password _id').exec(function(err, user){
       if (err) throw err;
       if (!user) {
         res.json({ success: false, message: 'could not authenticate user' });
@@ -41,12 +40,12 @@ module.exports = function (router) {
         if (!validPassword) {
           res.json({ success: false, message: 'could not authenticate password' });
         } else {
-          var token = jwt.sign({ username: user.username, email: user.email }, secret, { expiresIn: '72h' } );
+          var token = jwt.sign({ username: user.username, email: user.email, id: user._id }, secret, { expiresIn: '72h' } );
           res.json({ success: true, message: 'User authenticated', token: token });
         }
       }
     });
-  }); 
+  });
 
   router.use(function (req, res, next) {
     var token = req.body.token || req.body.query || req.headers['x-access-token'];

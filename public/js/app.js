@@ -38,7 +38,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
         }, 100)
       }
     })
-    .state('createorganizer', {
+    .state('organizer', {
       url: '/create-organizer',
       templateUrl: '/templates/createOrganizer.html',
       controller: 'orCtrl',

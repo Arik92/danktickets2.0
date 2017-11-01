@@ -27,14 +27,14 @@ app.factory('orService', function($http){
   }) // add promise
   }// post event
   var updateOrganizer = function(organizer) {
-    return $http.put('/events/' + organizer._id, organizer).then(function(result) {
+    return $http.put('/organizers/' + organizer._id, organizer).then(function(result) {
       return result.data;
     }, function(error) {
       throw error;
-    })
-  }
+    })//cb
+  }//update func
   var deleteOrganizer = function(id) {
-    return $http.delete('/events/' + id).then(function(result) {
+    return $http.delete('/organizers/' + id).then(function(result) {
       console.log("organizer profile that was deleted: ", result);
       return result.data; //??
     }, function(error) {
