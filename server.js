@@ -1,36 +1,36 @@
-
 var express     = require('express');
+var app         = express();
+var port        = process.env.PORT || '8000';
+var morgan      = require('morgan');
 var mongoose    = require('mongoose');
-//var expressSession = require('express-session');
 var bodyParser  = require('body-parser');
-//var LocalStrategy = require('passport-local').Strategy;
 var router      = express.Router();
 var userRoutes  = require('./routes/userRoutes')(router);
 var eventRoutes = require('./routes/eventRoutes');
 var organizerRoutes = require('./routes/organizerRoutes');
-
+var path        = require('path');
+var passport    = require('passport');
+var social      = require('./passport/passport')(app, passport);
+//var expressSession = require('express-session');
+//var LocalStrategy = require('passport-local').Strategy;
 
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 
-var app         = express();
-var port        = process.env.PORT || '8000';
-var morgan      = require('morgan');
-var passport    = require('passport');
-var social      = require('./passport/passport')(app, passport);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.use(express.static('node_modules'));
+app.use('/events', eventRoutes);
+app.use('/users', userRoutes);
+app.use('/organizers', organizerRoutes);
 
+mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 
 app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "http://localhost");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         next();
   });
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(express.static('public'));
-app.use(express.static('node_modules'));
-app.use('/events', eventRoutes);
-app.use('/users', userRoutes);
-app.use('/organizers', organizerRoutes);
 
 app.all('[^.]+', function(req, res) {
   res.sendFile(__dirname + "/public/index.html");

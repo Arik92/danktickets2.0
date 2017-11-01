@@ -1,3 +1,4 @@
+
 var User   = require('../models/usermodel');
 var jwt    = require('jsonwebtoken');
 var secret = 'urgonnadieclown865626';
@@ -67,6 +68,18 @@ module.exports = function (router) {
     res.send(req.decoded);
   });
 
+  router.get('/:token', function(req, res, next){
+    User.find({token: req.body.token}, function(err, token){
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(token);
+      }//else
+    })//findCb
+  }) // get event by publisher
+
 
   return router;
 }
+
+
