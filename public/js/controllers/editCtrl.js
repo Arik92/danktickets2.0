@@ -1,4 +1,4 @@
-app.controller('editCtrl',['createService','$scope' ,'Upload','$window','$stateParams','$timeout','$location', function(createService, $scope, Upload, $window, $stateParams, $timeout, $location){
+app.controller('editCtrl',['createService','$scope' ,'Upload','$window','$stateParams','$timeout','$location','$rootScope', function(createService, $scope, Upload, $window, $stateParams, $timeout, $location, $rootScope){
   //$scope.video = $stateParams.videoParam;
   $scope.typeOptions = [
     'Concert',
@@ -7,6 +7,17 @@ app.controller('editCtrl',['createService','$scope' ,'Upload','$window','$stateP
     'Party',
     'Other'
   ];
+  function initProfs() {
+    $scope.profiles = [];
+    console.log("initial profs", $rootScope.userDetails);
+    orService.getOrganizersByUser($rootScope.userDetails.id).then(function(data2){
+      console.log("data 2", data2);
+      for (var i=0;i<data2.length;i++) {
+        $scope.profiles[i] = data2[i];
+      }//for
+    })
+  }//initProfs
+  initProfs();
         ////////////////////file upload /////////////////////////////////////////////////////////////
         $scope.showPrivates = function() {
           alert($scope.isPrivate);

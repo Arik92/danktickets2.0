@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Event = require("../models/eventmodel");
-var User = require("../models/usermodel");
-var Organizer = require("../models/profilemodel");
-
+//var Profile = require("../models/")
 
 /////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
 var multer = require('multer');
@@ -21,24 +19,31 @@ var upload = multer({ storage: storage }).single('file');
 /////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
 
 router.get('/', function (req, res, next) {
-  Event.find(function(error, result){
-    if (error) {
-      console.log(error);
+  Event.find().populate('organizer').exec(function(err, events){
+    if (err) {
+      console.error(err);
     } else {
-      res.send(result);
-    }//else
-  })//find()
-});//get all events that were ever published
+      res.send(events)
+    }
+  })//exec()
+});//get all events that were ever published and populate the publisher field
 
 router.get('/:id', function(req, res, next){
-  Event.find({publisher: req.params.id}, function(err, resultEvents){
+  Event.find().populate('organizer').exec(function(err, events){
     if (err) {
-      console.log(err);
+      console.error(err);
     } else {
-      res.send(resultEvents);
-    }//else
-  })//findCb
-}) // get event by publisher
+      console.log("found events(route)", events);
+      var result = [];
+      for (var i=0;i<events.length;i++) {
+        if (events[i].owner._id==req.params.id) {
+          result.push(events[i]);
+        }
+      }//for
+      res.send(result);
+    }
+  })//exec()
+}) // get event by OWNER id.
 
 router.get('/searchByActivity/:type', function(req, res, next){
   Event.find({type: req.params.type}, function(err, resultEvents){
@@ -65,7 +70,7 @@ router.post('/upload', function (req, res1, next) {
                   console.log("reached error route");
                   console.log(error);
                 } else {
-                  console.log("reached result route");         
+                  console.log("reached result route");
 
                   // res.send(result);
                   res1.send({error_code:0,err_desc:null, file_name: req.file.filename});
