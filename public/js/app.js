@@ -69,7 +69,8 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
           url: '/sign-up',
           templateUrl: '/templates/signup.html',
           controller: 'regCtrl',
-          controllerAs: 'register'
+          controllerAs: 'register',
+          authenticated: false
         })
     .state('signin', {
           url: '/sign-in',
@@ -100,15 +101,18 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       controller: 'editCtrl'
     })
     .state('facebook/:token', {
-      url:'/facebook/:token',
         // params: {socialParam: null},
-      templateUrl: '/templates/social/social.html',
-      controller: 'facebookCtrl'
+      templateUrl: '/templates/social/social.html'
+      // controller: 'facebookCtrl',
+      // controllerAs: 'facebook',
+      // authenticated: false
     })
-    .state('facebookerror', {
-      url:'/facebookerror',
-        // params: {socialParam: null},
-      templateUrl: '/templates/login.html',
-      controller: 'facebookCtrl'
-    })
+    // .state('facebookerror', {
+    //   url:'/facebookerror',
+    //     // params: {socialParam: null},
+    //   templateUrl: '/templates/login.html',
+    //   controller: 'facebookCtrl',
+    //   controllerAs: 'facebook',
+    //   authenticated: false
+    // })
 });
