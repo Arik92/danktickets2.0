@@ -1,11 +1,15 @@
 <section id="createevent" >
   <form enctype="multipart/form-data" name="upload_form">
-    <div class="container">
+    
+          <div class="container" style="max-width:40%">
       <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <div class="page-header"><h2>Create Your Event</h2></div>
+        <div class="col-lg-12">
+          <div class="section-title text-center">
+            <h1 style="margin-top:50px">Create Your Event</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <br> been the industry's standard dummy text ever since the 1500</p>
+     
           <div class="form-group">
-            <label class="control-label" for="source_name"><h3>Organizer: </h3> </label>
+            <label class="control-label" for="source_name"><h2>Organizer: </h2> </label>
             <div>
               <select ng-model="selectedOrganizer" class="form-control input-md" ng-change="selectProf()">
                 <option ng-repeat="organizer in profiles track by $index" value="{{organizer._id}}">{{organizer.name}}</option>
@@ -13,13 +17,15 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label" for="source_name">Title</label>
+            <label class="control-label" for="source_name"><h2>Title</h2</label>
+            <br>
+            <br>
             <div>
               <input id="source_name" class="form-control input-md" name="source_name" ng-model="eName" type="text" placeholder="Fancy Feast">
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label" for="source_name">Event Type</label>
+            <label class="control-label" for="source_name"><h3>Event Type</h3></label>
             <div>
               <p>selected item is : {{selectedType}}</p>
         <select ng-model="selectedType" class="form-control input-md">
@@ -49,13 +55,13 @@
           <br/>
           <!-- <button class="btn btn-submit" ng-click="compareDates()">Check dates</button> -->
           <div class="form-group">
-            <label class="control-label" for="source_name">Description</label>
+            <label class="control-label" for="source_name"><h1>Description</h1></label>
             <div>
               <textarea id="source_name" class="form-control" name="source_name" ng-model="eDesc" placeholder="Its the coolest show" class="form-control input-md"></textarea>
             </div>
           </div>
            <div class="form-group">
-             <label class="control-label" for="source_name">Image</label>
+             <label class="control-label" for="source_name"><h3>Image</h3></label>
              <div>
                <input id="fileItem" type="file" name="eventPic" ng-model="file"
                ngf-pattern="'image/*'"
@@ -64,15 +70,17 @@
              </div>
            </div>
            <div class="form-group">
-             <button class="btn btn-success" ng-click="preview()">preview:</button>
+            
+
+            <button type="submit" ng-click="preview()" class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Preview</button>
              <div id="preview">
              </div>
            </div>
            <br /><!--input -->
            <div class="form-group">
-             <label class="control-label" for="source_name">Event Location: </label>
+             <label class="control-label" for="source_name"><h1>Event Location: </h1></label>
              <div>
-              <h3>Enter any location</h3>
+              <p>Enter any location</p>
                 <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter city">
              </div>
            </div>
@@ -90,9 +98,10 @@
            <div class="form-group">
              <label class="control-label" for="source_name">Choose a ticket type:</label>
              <div>
-               <button class="btn btn-primary" ng-click="add('Free')">Free</button>
-               <button class="btn btn-success" ng-click="add('Paid')">Paid</button>
-               <button class="btn btn-warning" ng-click="add('Donation')">Dontaion</button>
+              <button type="submit" ng-click="add('Free')"class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:19%;background-color:transparent;color:black"> Free</button>
+              <button type="submit" ng-click="add('Paid')" class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:19%;background-color:transparent;color:black"> Paid</button>
+              <button type="submit" ng-click="add('Donation')" class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Donation</button>
+              
                <ul class="list-unstyled list-group" float="left">
                  <li ng-repeat="ticket in tempTicks track by $index" >
                    <br />
@@ -123,15 +132,21 @@
                <input type="checkbox" name="source_name" ng-model="showRemain"> Publicly show remaining tickets
              </div>
            </div>
-            <br /><!--input -->
-                <Button  class="btn btn-danger" ng-click="reset()">Reset   </Button>
-          <Button class="btn btn-success" ng-click="upload()">Create Event </Button>
+            <br /><!--input --> 
+            <button type="submit" ng-click="reset()" class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Reset</button>
+               <button type="submit" ng-click="upload()" class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:33%;background-color:black;color:white"> Create event</button>
+               
           <div class="row show-hide-message" ng-show="showRedirect">
             <div class="alert alert-success">Event added! redirecting..<span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
           </div>
+        </div>
           <!-- <div class="row show-hide-message" ng-show="showFailure">
             <div class="alert alert-success">{{}}<span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
           </div> -->
+              </div>
+        </div>
+      </div>
+          
         </div>
       </div>
     </div>
