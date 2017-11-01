@@ -1,6 +1,8 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var User             = require('../models/usermodel'); // Import User Model
 var session          = require('express-session'); // Import Express Session Package
+var jwt              = require('jsonwebtoken'); // Import JWT Package
+var secret           = 'urgonnadieclown865626'; // Create custom secret to use with JWT
 
 module.exports = function(app, passport) {
   
@@ -9,6 +11,7 @@ module.exports = function(app, passport) {
   app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: true, cookie: { secure: false } }));
 
   passport.serializeUser(function(user, done) {
+    token = jwt.sign({ username: user.username, email: user.email }, secret, { expiresIn: '72h' } );
     done(null, user.id);
   });
 
@@ -25,21 +28,51 @@ module.exports = function(app, passport) {
       profileFields: ['id', 'displayName', 'photos', 'email']
     },
     function(accessToken, refreshToken, profile, done) {
-      console.log(profile._json.email);
-      // User.findOrCreate(..., function(err, user) {
-      //   if (err) { return done(err); }
-      //   done(null, user);
-      // });
-      done(null, profile);
+      console.log(profile._json.email + ' - passport.js ln31');
+      User.findOne({ email: profile._json.email }).select('username password email').exec(function(err, user){
+        if (err) done(err);
+        if(user && user !== null){
+           done(null, user);
+        } else { //else there is user on fb but not in our mongo db.So, create new user
+           var newUser = new User();
+           var uname = profile._json.name.split(" "); //to split FB name and get just first name
+
+           newUser.username = uname[0]; //Fb name's 0th index is first name
+           newUser.password = accessToken;
+           newUser.email = profile._json.email;
+
+           newUser.save(function(err){
+            if(err){
+             //console.log(err);
+             done(err);
+            } else{
+             console.log("saving new user...");
+             done(null, newUser);
+            }
+         });
+}
+      })
+
+      // done(null, profile);
     }
   ));
 
-  app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/signin' }));
+  // app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/signin' }), function(req, res) {
+  //   console.log(token);
+  //   res.redirect('/facebook/' + token);
+  // });
+
+   app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/signin' }), function(req, res) {
+       console.log(token + ' - passport.js ln51');
+       res.redirect('/facebook/' + token); // Redirect user with newly assigned token
+   });
 
   app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
   
   return passport;
 }
+
+
 
 // var FacebookStrategy = require('passport-facebook').Strategy; // Import Passport-Facebook Package
 // var User             = require('../models/usermodel'); // Import User Model
