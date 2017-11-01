@@ -11,13 +11,13 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
         msg.username = data.data.username;
         msg.email = data.data.email;
         msg.loader = true;
-        //msg.id = data.data.id;
+        msg.id = data.data.id;
         //console.log('you are now logged in! msg is ', app);
         //just to be sure
-        //$rootScope.userDetails = {};
-        //$rootScope.userDetails.username = data.data.username;
-        //$rootScope.userDetails.email = data.data.email;
-        //$rootScope.userDetails.id = data.data.id;
+        $rootScope.userDetails = {};
+        $rootScope.userDetails.username = data.data.username;
+        $rootScope.userDetails.email = data.data.email;
+        $rootScope.userDetails.id = data.data.id;
       });
     } else {
       msg.username = '';
@@ -39,7 +39,7 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
           $location.path('/');
           msg.loginData = '';
           msg.successMsg = false;
-        }, 2000);     
+        }, 2000);
       }  else {
         msg.loading = false;
         //create error message
@@ -51,6 +51,4 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
     authService.logout();
     $location.path('/');
   }
-}); 
-
-
+});
