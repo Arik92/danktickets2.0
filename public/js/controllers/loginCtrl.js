@@ -4,7 +4,16 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
 
   msg.loader = false;
   //video part 8 35:22 https://www.youtube.com/watch?v=fRPwKuIz8Os&t=1114s
+  $rootScope.$on('fbLogin', function() {
+    console.log("I have reached fblogin event, and rootscope current fb user is", $rootScope.currentUser);
+    if ($rootScope.currentUser) {
+        msg.username =$rootScope.currentUser;
+      }
+      console.log("login.username", msg.username);
+  });
+
   $rootScope.$on('$locationChangeStart', function() {
+    console.log("I have reached logincrtl, and rootscope current fb user is", $rootScope.currentUser);
     if (authService.isLoggedIn()) {
       authService.getUser().then(function(data) {
 
@@ -19,10 +28,21 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
         $rootScope.userDetails.email = data.data.email;
         $rootScope.userDetails.id = data.data.id;
       });
-    } else {
-      msg.username = '';
-      msg.loader = true;
-    }
+     }
+    //  else  if ($rootScope.currentUser){
+    //   msg.username = $rootScope.currentUser;
+    // }
+     else {
+       if (!$rootScope.currentUser) {
+         console.log("resetting");
+        msg.username = '';
+        msg.loader = true;
+      } else {
+        msg.username =$rootScope.currentUser;
+        msg.loader = true;
+      }
+
+    }  //else
   });
 
 
