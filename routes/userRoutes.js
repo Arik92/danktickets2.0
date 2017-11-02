@@ -10,28 +10,8 @@ module.exports = function (router) {
     passport.authenticate('facebook', {session: false, failureRedirect: '/' }),
     function(req, res) {
       console.log(req.user);
-      User.findOne({socialId: req.user.id}, function(err, user){
-        if (err) {
-          console.error(err);
-        } if (!user) {
-          user = new User({
-            socialId: req.user.id,
-            email: req.user.emails ? req.user.emails[0].value : "",
-            provider: 'facebook',
-            username: req.user.displayName
-          });
-        }
-        user.save(function(err, newUser) {
-          if (err) {
-            console.error(err);
-          } else {
-            return done(null, newUser);
-          }
-        })//save CB
-      })//findOne CB
       // Successful authentication, redirect home.
-      res.redirect('/');
-  });
+      res.redirect('/authorization?token=' + req.user.token + "&name=" + req.user.name);  });
   // http://localhost:8000/users/users
   //user registration route
   router.post('/users', function(req, res){

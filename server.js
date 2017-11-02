@@ -18,10 +18,10 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 app.use(passport.initialize());
 //app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.static('node_modules'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/events', eventRoutes);
 app.use('/users', userRoutes);
 app.use('/organizers', organizerRoutes);
@@ -43,10 +43,10 @@ app.all('[^.]+', function(req, res) {
 // warning - not for use in production code!
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.send({
-    message: err.message,
-    error: err
-  });
+  // res.send({
+  //   message: err.message,
+  //   error: err
+  // });
 });
 
 app.listen(port, function() {
