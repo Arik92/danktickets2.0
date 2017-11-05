@@ -6,5 +6,12 @@ app.factory('userService', function($http){
     return $http.post('/users/users', regData);
   };
 
+  userFactory.getUserByName = function(userName) {
+    return $http.get('/users/searchByName/'+userName).then(function(result){
+      console.log("rssult from the factory is", result);
+      return result.data;
+    });
+  };
+
   return userFactory;
 });

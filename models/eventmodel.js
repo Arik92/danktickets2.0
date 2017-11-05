@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var User = require("./usermodel");
 
 var ticketSchema = new Schema({
   type: String,

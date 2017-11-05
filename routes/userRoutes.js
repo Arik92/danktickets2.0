@@ -4,6 +4,15 @@ var jwt    = require('jsonwebtoken');
 var secret = 'urgonnadieclown865626';
 
 module.exports = function (router) {
+  router.get('/searchByName/:name', function(req, res, next){
+    User.findOne({username: req.params.name}, function(err, user){
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(user);
+      }//else
+    })//findCb
+  }) // get event by token?
   router.get('/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
   router.get('/facebook/callback',
@@ -84,7 +93,7 @@ module.exports = function (router) {
         res.send(token);
       }//else
     })//findCb
-  }) // get event by publisher
+  }) // get event by token?
 
 
   return router;
