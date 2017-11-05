@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Event = require("../models/eventmodel");
+var User = require("../models/usermodel");
 //var Profile = require("../models/")
 
 /////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
@@ -29,14 +30,15 @@ router.get('/', function (req, res, next) {
 });//get all events that were ever published and populate the publisher field
 
 router.get('/:id', function(req, res, next){
-  Event.find().populate('organizer').exec(function(err, events){
+  Event.find().populate('owner organizer').exec(function(err, events){
     if (err) {
       console.error(err);
     } else {
       console.log("found events(route)", events);
       var result = [];
       for (var i=0;i<events.length;i++) {
-        if (events[i].owner._id==req.params.id) {
+        console.log("comparing"+ req.params.userName+" and "+ events[i].owner.username)
+        if (events[i].owner.name==req.params.userName) {
           result.push(events[i]);
         }
       }//for

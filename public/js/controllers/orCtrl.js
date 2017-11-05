@@ -1,10 +1,20 @@
-app.controller('orCtrl',['orService','$scope' ,'Upload','$window','$timeout','$rootScope','$location', function(orService, $scope, Upload, $window, $timeout, $rootScope, $location){
+app.controller('orCtrl',['orService','userService','$scope' ,'Upload','$window','$timeout','$rootScope','$location', function(orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location){
+  userService.getUserByName($rootScope.currentUser).then(function(user){
+    $scope.user = user;
+    console.log("create user is", $scope.user);
+    orService.getOrganizersByUser($scope.user._id).then(function(data2){
+      console.log("data 2", data2);
+      for (var i=0;i<data2.length;i++) {
+        $scope.profiles[i] = data2[i];
+      }//for
+    })//get organizers
+  })//userFactory cb
         $scope.upload = function () {
         var submitPic = document.getElementById('fileItem').files[0];
         console.log("in submit! uploading...", submitPic);
         var organizer = {
           name: $scope.oName,
-          owner: $rootScope.userDetails.id,
+          owner: $scope.user._id,
           about: $scope.oDesc,
           website: $scope.oSite,
         };// event post object
