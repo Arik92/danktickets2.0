@@ -5,7 +5,7 @@ app.controller('regCtrl', function(userService, $http, $location, $timeout) {
   this.regUser = function (regData) {
     app.loading = true;
     app.errorMsg = false;
-    
+
     userService.create(app.regData).then(function(data) {
       if (data.data.success) {
         app.loading = false;
@@ -14,7 +14,7 @@ app.controller('regCtrl', function(userService, $http, $location, $timeout) {
         app.successMsg = data.data.message + ' ...Redirecting';
         $timeout(function() {
           $location.path('/');
-        }, 2000);     
+        }, 2000);
       }  else {
         app.loading = false;
         //create error message
@@ -24,17 +24,11 @@ app.controller('regCtrl', function(userService, $http, $location, $timeout) {
   };
 });
 
-app.controller('facebookCtrl', function($stateParams, authService, $location, $window) {
-  var app = this;
-
-  if ($window.location.pathname == '/facebookerror') {
-      app.errorMsg = 'facebook email not found in database';
-  } else {
-      console.log($stateParams.token)
-      authService.facebook($stateParams.token);
-      $location.path('/');
-  }
-});
-
-
-
+// app.controller('indexCtrl', function($scope, $rootScope, $http) {
+//   $scope.logout = function() {
+//     console.log("logging out...");
+//     localStorage.removeItem("user");
+//     $rootScope.currentUser = null;
+//     delete $http.defaults.headers.common.Authorization;
+//   }
+//})

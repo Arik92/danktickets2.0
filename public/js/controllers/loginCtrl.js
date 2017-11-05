@@ -24,6 +24,7 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
         //console.log('you are now logged in! msg is ', app);
         //just to be sure
         $rootScope.userDetails = {};
+        $rootScope.currentUser = data.data.username; // for fb auth as well
         $rootScope.userDetails.username = data.data.username;
         $rootScope.userDetails.email = data.data.email;
         $rootScope.userDetails.id = data.data.id;
@@ -68,6 +69,9 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
     });
   };
   this.logout = function() {
+    localStorage.removeItem("user");
+    $rootScope.currentUser = null;
+    delete $http.defaults.headers.common.Authorization;
     authService.logout();
     $location.path('/');
   }
