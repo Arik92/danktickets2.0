@@ -68,6 +68,9 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
     });
   };
   this.logout = function() {
+    localStorage.removeItem("user");
+    $rootScope.currentUser = null;
+    delete $http.defaults.headers.common.Authorization;
     authService.logout();
     $location.path('/');
   }

@@ -11,8 +11,13 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
   .state('home', {
       url: '/home',
       templateUrl: '/templates/home.html',
-      controller: function($rootScope, $scope) {
-        console.log("in home state");
+      controller: function($rootScope, $scope, $http) {
+        $scope.logout = function() {
+          console.log("logging out...");
+      localStorage.removeItem("user");
+      $rootScope.currentUser = null;
+      delete $http.defaults.headers.common.Authorization;
+    }
       } //controller
     })
     .state('event', {
@@ -102,7 +107,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     })
     .state('auth', {
       url: '/authorization?token&name',
-      controller: function($stateParams, $state, $rootScope) {
+      controller: function($stateParams, $state, $rootScope, $http) {
         console.log("state params are", $stateParams);
         if ($stateParams.token) {
           var user = {
@@ -112,6 +117,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
           localStorage.setItem("user", JSON.stringify(user));
           $rootScope.currentUser = user.name;
           //$rootScope.$broadcast('fbLogin');
+          $http.defaults.headers.common.Authorization = 'Bearer ' + user.token;
           $state.go('home');
         }
       }//controller
