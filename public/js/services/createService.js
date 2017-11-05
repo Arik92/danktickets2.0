@@ -30,9 +30,9 @@ var getEvents = function() {
 } // get all current events. NOTE: In the future its possible to have event states like voutr. should that be wanted.
 // Do they want to view past events?
 
-var getEventsByOwner = function(id) {
-  console.log("id by service is", id);
-  return $http.get('/events/' +id)
+var getEventsByOwner = function(userName) {
+  console.log("id by service is",userName);
+  return $http.get('/events/' +userName)
     .then(function(response) {
       return response.data;
     }, function(err) {
