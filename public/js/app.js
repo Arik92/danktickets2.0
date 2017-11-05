@@ -100,19 +100,51 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/editEvent.html',
       controller: 'editCtrl'
     })
-    .state('facebook/:token', {
-        // params: {socialParam: null},
-      templateUrl: '/templates/social/social.html'
-      // controller: 'facebookCtrl',
-      // controllerAs: 'facebook',
-      // authenticated: false
+    .state('auth', {
+      url: '/authorization?token&name',
+      controller: function($stateParams, $state, $rootScope) {
+        console.log("state params are", $stateParams);
+        if ($stateParams.token) {
+          var user = {
+            name: $stateParams.name,
+            token: $stateParams.token
+          }
+          localStorage.setItem("user", JSON.stringify(user));
+          $rootScope.currentUser = user.name;
+          //$rootScope.$broadcast('fbLogin');
+          $state.go('home');
+        }
+      }//controller
     })
-    // .state('facebookerror', {
-    //   url:'/facebookerror',
-    //     // params: {socialParam: null},
-    //   templateUrl: '/templates/login.html',
-    //   controller: 'facebookCtrl',
-    //   controllerAs: 'facebook',
-    //   authenticated: false
-    // })
+});
+app.run(function($rootScope, authService) {
+  var user = JSON.parse(localStorage.getItem("user"));
+  if (user) {
+    $rootScope.currentUser = user.name;
+    //$rootScope.$broadcast('fbLogin');
+  }
+  // if (authService.isLoggedIn()) {
+  //   authService.getUser().then(function(data) {
+  //
+  //     $rootScope.username = data.data.username;
+  //     $rootScope.email = data.data.email;
+  //     $rootScope.loader = true;
+  //     $rootScope.id = data.data.id;
+  //     //console.log('you are now logged in! msg is ', app);
+  //     //just to be sure
+  //     $rootScope.userDetails = {};
+  //     $rootScope.userDetails.username = data.data.username;
+  //     $rootScope.userDetails.email = data.data.email;
+  //     $rootScope.userDetails.id = data.data.id;
+  //   });
+  //  }
+  // //  else  if ($rootScope.currentUser){
+  // //   msg.username = $rootScope.currentUser;
+  // // }
+  //  else {
+  //   //  console.log("resetting");
+  //   // $rootScope.username = '';
+  //   // $rootScope.loader = true;
+  //
+  // }
 });
