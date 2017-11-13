@@ -1,8 +1,27 @@
+<div ng-controller="carouselCtrl" style="margin-top: 200px">
+	<slick autoplay="false"
+				 fade="false"
+				 slides-to-show="1"
+				 slides-to-scroll="1"
+				 arrows="true"
+				 prev-arrow=".slick-prev"
+				 next-arrow=".slick-next"
+				 center-mode="false"
+				 dots="true"
+				 style="width: 50%; margin: 0 auto"
+				 >
+		<div ng-repeat="image in images" style="text-align: center">
+			<img data-lazy="{{image}}"
+					 style="margin: 0 auto">
+		</div>
+	</slick>
+</div>
+		
 		<!-- #banner -->
-		<section id="banner">
+		<!-- <section id="banner">
 			<div class="banner-container">
 				<div class="banner">
-					<ul>
+					<ul >
 						<li
 							data-transition="fade"
 							data-slotamount="7"
@@ -67,7 +86,7 @@
 							</ul>
 	
 						</li>
-						<!-- <li
+						<li
 	
 							data-transition="fade"
 							data-slotamount="7"
@@ -182,14 +201,14 @@
 								data-start="2500"
 								data-easing="easeOutBack">
 								<li class="scrollToLink"><button type="submit" class="colored hvr-bounce-to-right">Register Now</button></li>
-								<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Watch Video</a></li> -->
+								<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Watch Video</a></li>
 							</ul>
 						</li>
 					</ul>
 				</div>
 			</div>
 	
-		</section>
+		</section> -->
 		<!-- /#banner -->
 	
 	<section id="information-bar" style="margin-top:200px">
@@ -612,12 +631,12 @@
 				<div class="col-lg-12">
 					<div class="testimonial custom-pager text-center">
 						<ul>
-							<li class="prev"><img src="img/testimonials/arrow-left.png" alt=""></li>
-							<li class="next"><img src="img/testimonials/arrow-right.png" alt=""></li>
+							<li class="prev"><img src="../img/testimonials/arrow-left.png" alt=""></li>
+							<li class="next"><img src="../img/testimonials/arrow-right.png" alt=""></li>
 							<li class="active" data-slide-index="0"><span><img src="img/testimonials/1.png" alt=""></span></li>
-							<li data-slide-index="1"><span><img src="img/testimonials/2.png" alt=""></span></li>
-							<li data-slide-index="2"><span><img src="img/testimonials/3.png" alt=""></span></li>
-							<li data-slide-index="3"><span><img src="img/testimonials/4.png" alt=""></span></li>
+							<li data-slide-index="1"><span><img src="../img/testimonials/2.png" alt=""></span></li>
+							<li data-slide-index="2"><span><img src="../img/testimonials/3.png" alt=""></span></li>
+							<li data-slide-index="3"><span><img src="../img/testimonials/4.png" alt=""></span></li>
 						</ul>
 					</div>
 				</div>

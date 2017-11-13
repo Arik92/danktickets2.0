@@ -7,6 +7,13 @@
 
 	<!-- Responsive Meta Tag -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- owl-carousel styles -->
+	<!-- <link rel="stylesheet" href="../owl.carousel/dist/assets/owl.carousel.min.css" />
+	<link rel="stylesheet" href="../owl.carousel/dist/assets/owl.theme.default.css" /> -->
+	<!-- slick carousel -->
+	<link rel="stylesheet" href="../slick-carousel/slick/slick.css">
+	<link rel="stylesheet" href="../slick-carousel/slick/slick-theme.css">
+	<!-- font-awesome -->
 	<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css"/>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 	<!-- main stylesheet -->
@@ -92,7 +99,7 @@
 	</header>
 	<!-- /#header -->
 
-  <!-- <nav-directive></nav-directive> -->
+  <nav-directive></nav-directive>
 
 	<div ui-view></div>
 
@@ -117,6 +124,7 @@
 	<!-- <script src="js/controllers/editCtrl.js"></script> -->
 	<script src="js/controllers/loginCtrl.js"></script>
 	<script src="js/controllers/manageCtrl.js"></script>
+	<script src="js/controllers/carouselCtrl.js"></script>
 	<!-- JQuery -->
 	<script src="js/jquery.themepunch.tools.min.js"></script>
 	<script src="js/jquery.themepunch.revolution.min.js"></script>
@@ -125,7 +133,9 @@
 	<script src="js/jquery.fancybox.pack.js"></script>
 	<script src="js/jquery.mixitup.min.js"></script>
 	<script src="js/jquery.bxslider.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
+	<!-- it's in node modules, but don't need to list node modules thanks to express -->
+	<script src="../owl.carousel/dist/owl.carousel.min.js"></script>
+	<!-- <script src="js/owl.carousel.min.js"></script> -->
 	<script src="js/jquery.appear.js"></script>
 	<script src="js/jquery.countTo.js"></script>
 	<script src="js/circle-progress.js"></script>
@@ -136,5 +146,8 @@
 	<!-- Directives -->
 	<script src="js/directives/navDirective.js"></script>
 	<script src="js/directives/footerDirective.js"></script>
+	<!-- slick carousel -->
+	<script src="../slick-carousel/slick/slick.js"></script>
+	<script src="../angular-slick/dist/slick.js"></script>
 </body>
 </html>
