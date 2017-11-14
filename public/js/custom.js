@@ -82,6 +82,7 @@
 	   //  	upcomingEventFilterContent.mixItUp();
     // 	};
     // }
+
     // testimonial slider
     function testimonialSlide () {
     	var sliderContainer = $('.testimonial-slide');
@@ -126,6 +127,40 @@
     }
     // sponsor logo carosule
     function sponsorLogo () {
+    	var sponsorLogoContainer = $('.sponsor-logo');
+    	if (sponsorLogoContainer.length) {
+    		sponsorLogoContainer.owlCarousel({
+			    loop: true,
+			    margin: 100,
+			    nav: true,
+			    dots: false,
+			    autoWidth: true,
+	            navText: [
+	                '<i class="fa fa-angle-left"></i>',
+	                '<i class="fa fa-angle-right"></i>'
+	            ],
+	            autoplay:true,
+			    autoplayTimeout:3000,
+			    autoplayHoverPause:true,
+			    responsive: {
+			        0:{
+			            items:1
+			        },
+			        480:{
+			            items:2
+			        },
+			        600:{
+			            items:3
+			        },
+			        1000:{
+			            items:4
+			        }
+			    }
+			});
+    	}
+		}
+		
+    function mainBannerOwlCarousel () {
     	var sponsorLogoContainer = $('.sponsor-logo');
     	if (sponsorLogoContainer.length) {
     		sponsorLogoContainer.owlCarousel({
@@ -252,7 +287,10 @@
 	}
 	// revolution slider
 	function revolutionSliderActiver () {
-		var banner = $('#banner .banner');
+		console.log('rev-slider activated');
+		// var banner = $('#banner .banner');
+		var banner = $('#banner-ul');
+		console.log(banner);
 		if (banner.length) {
 			banner.revolution({
 				delay:5000,
@@ -397,6 +435,9 @@
 
 	// doc ready
 	$(document).on('ready', function () {
+		// mainBannerOwlCarousel();
+		// $('.owl-carousel').owlCarousel();
+		// revolutionSliderActiver();
 		countdownTimer();
 		SmoothMenuScroll();
 		GalleryFancyboxActivator();
@@ -404,13 +445,12 @@
     // checking to see if needed
     // upcomingEventFilter();
 		testimonialSlide();
-		sponsorLogo();
+		// sponsorLogo();
 		// twitterFeedWidget();
 		CounterNumberChanger();
 		expertizeRoundCircle();
 		featureListTab();
 		DeadMenuConfig();
-		revolutionSliderActiver();
 		wowActivator();
 		mobileMenuConfig();
 		contactFormValidation();

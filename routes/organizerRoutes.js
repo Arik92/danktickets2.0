@@ -27,7 +27,7 @@ router.get('/', function (req, res, next) {
   })//find()
 });//get all profiles on the site(gould the functionality be needed)
 
-router.get('/:id', function(req, res, next){
+/*router.get('/:id', function(req, res, next){
   Profile.find({owner: req.params.id}, function(err, resultProfiles){
     if (err) {
       console.log(err);
@@ -35,7 +35,25 @@ router.get('/:id', function(req, res, next){
       res.send(resultProfiles);
     }//else
   })//findCb
-}) // get all of a user's profiles
+}) // get all of a user's profiles*/
+
+router.get('/:name', function(req, res, next){
+  Profile.find().populate('owner').exec(function(err, profiles){
+    if (err) {
+      console.error(err);
+    } else {
+      console.log("found profiles(route)", profiles);
+      var result = [];
+      for (var i=0;i<profiles.length;i++) {
+        console.log("comparing "+ req.params.name+" and "+ profiles[i].owner.username);
+        if (profiles[i].owner.username==req.params.name) {
+          result.push(profiles[i]);
+        }
+      }//for
+      res.send(result);
+    }
+  })//exec()
+}) // get event by OWNER id.
 
 router.post('/upload', function (req, res1, next) {
   upload(req,res1,function(err){
