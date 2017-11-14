@@ -7,20 +7,19 @@ app.controller('createCtrl',['createService', 'orService', 'userService','$scope
     'Other'
   ];
   function initProfs() {
-    $scope.profiles = [];
+	$scope.profiles = [];
     console.log("initial profs", $rootScope.currentUser);
     userService.getUserByName($rootScope.currentUser).then(function(user){
       $scope.user = user;
       console.log("create user is", $scope.user);
-      orService.getOrganizersByUser($scope.user._id).then(function(data2){
+      orService.getOrganizersByUser($rootScope.currentUser).then(function(data2){
         console.log("data 2", data2);
         for (var i=0;i<data2.length;i++) {
           $scope.profiles[i] = data2[i];
         }//for
       })//get organizers
     })//userFactory cb
-
-  }//initProfs
+  }//initProfs //NOTE we need the user fetching here to get that owner id
   initProfs();
   $scope.selectProf = function(){
     console.log("selected profile is", $scope.selectedOrganizer);
