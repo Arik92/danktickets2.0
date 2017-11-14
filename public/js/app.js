@@ -1,4 +1,4 @@
-var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload']);
+var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload', 'slick']);
 
 app.config(function($httpProvider) {
   $httpProvider.interceptors.push('authServiceInterceptors');
@@ -98,6 +98,11 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/manage-events',
       templateUrl: '/templates/manageEvents.html',
       controller: 'manageCtrl'
+    })
+	.state('editprofiles', {
+      url: '/manage-organizers',
+      templateUrl: '/templates/manageProfiles.html',
+      controller: 'manageProfCtrl'
     })
     .state('edit', {
       url: '/edit-event/:id',
