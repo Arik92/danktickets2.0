@@ -37,21 +37,12 @@
         <span class="card-media-body-supporting-bottom-text subtle u-float-right">{{profile.websites}}</span>
       </div>
       <div class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
-        <span class="card-media-body-supporting-bottom-text subtle"><a href={{event.location.locationMapUrl}} target=_blank><i class="fa fa-map-marker"></i>{{event.location.locationName}}</a></span>
-          <a ui-sref="edit({ eventParam: event, id: event._id })" class="card-media-body-supporting-bottom-text card-media-link u-float-right" > <button class="btn btn-success"> Edit this event </button></a>
+        
+          <a ui-sref="edit({ eventParam: event, id: event._id })" class="card-media-body-supporting-bottom-text card-media-link u-float-right" > <button class="btn btn-success"> Edit profile </button></a>
       </div>
     </div>
-  </div>
-      <div class="row">
-            <ul>
-              <li>
-                <div class="input-wrap">
-                  <button type="submit" class="hvr-bounce-to-right" id="mybutton" style="max-width: 190px; margin: 10px; font-size:26px;">REGISTER</button>
-                  <button type="submit" class="hvr-bounce-to-right" id="mybutton" style="max-width: 320px; margin: 10px; max-height: 57px;font-size:24px;"> <i class="fa fa-plus-circle"></i> Add to calendar</button>
-                </div>
-              </li>
-            </ul>
-          </div>        
+  </div>   
+	<br />
 	</div>
 	</div>
 	
