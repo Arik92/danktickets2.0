@@ -99,7 +99,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/manageEvents.html',
       controller: 'manageCtrl'
     })
-	.state('editprofiles', {
+	.state('userprofiles', {
       url: '/manage-organizers',
       templateUrl: '/templates/manageProfiles.html',
       controller: 'manageProfCtrl'
@@ -109,6 +109,12 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
         params: {eventParam: null},
       templateUrl: '/templates/editEvent.html',
       controller: 'editCtrl'
+    })
+	.state('editprofile', {
+      url: '/edit-profile/:id',
+        params: {profileParam: null},
+      templateUrl: '/templates/editProfile.html',
+      controller: 'editProfileCtrl'
     })
     .state('auth', {
       url: '/authorization?token&name',

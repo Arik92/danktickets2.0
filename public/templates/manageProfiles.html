@@ -1,12 +1,10 @@
-<h1 class="col-md-4 col-md-offset-3 ">Manage your organizers </h1>
+<h1 class="col-md-4 col-md-offset-3 ">Manage your organizer profiles </h1>
 <div class="bodyevent">
-    <div class="container " ng-repeat="event in events track by $index">
-        <div class="ticketcontainer">	
-	 <div class="card-media" ng-repeat="event in events track by $index">
+   <div class="ticketcontainer " ng-repeat="profile in profiles track by $index">
+	 <div class="card-media" >
     <!-- media container -->
-    <div class="card-media-object-container">
-      <div class="card-media-object"><img alt="Independence Day" ng-src={{event.imgPath}} /></div>
-      <span class="card-media-object-tag subtle">profile: {{event.organizer.name}}</span>
+    <div class="card-media-object-container" >
+      <img class="card-media-object" alt="Independence Day" ng-src={{profile.imgPath}} />
       <ul class="card-media-object-social-list">
         <li>
           <img src="https://s10.postimg.org/3rjjbzcvd/profile_f.jpg" class="">
@@ -22,7 +20,7 @@
     <!-- body container -->
     <div class="card-media-body">
       <div class="card-media-body-top">
-        <span  class="card-media-body-heading">{{event.title}}</span>
+        <span  class="card-media-body-heading">{{profile.name}}</span>
         <div class="card-media-body-top-icons u-float-right">
           <svg fill="#888888" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 0h24v24H0z" fill="none"/>
@@ -34,19 +32,17 @@
           </svg>
         </div>
       </div>
-      <span class="subtle">More details: {{event.description}}</span>
+      <span class="subtle">More details: {{profile.about}}</span>
       <div class="card-media-body-supporting-bottom">
-        <span class="card-media-body-supporting-bottom-text subtle">{{event.type}}</span>
-        <span class="card-media-body-supporting-bottom-text subtle u-float-right">{{event.startTime}}, {{event.startHr}}</span>
+        <span class="card-media-body-supporting-bottom-text subtle u-float-right">{{profile.websites}}</span>
       </div>
       <div class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
-        <span class="card-media-body-supporting-bottom-text subtle"><a href={{event.location.locationMapUrl}} target=_blank><i class="fa fa-map-marker"></i>{{event.location.locationName}}</a></span>
-          <a ui-sref="edit({ eventParam: event, id: event._id })" class="card-media-body-supporting-bottom-text card-media-link u-float-right" > <button class="btn btn-success"> Edit this event </button></a>
-		
+        
+          <a ui-sref="editprofile({ profileParam: profile, id: profile._id })" class="card-media-body-supporting-bottom-text card-media-link u-float-right" > <button class="btn btn-success"> Edit profile </button></a>
       </div>
     </div>
-  </div>      
-        </div>
+  </div>   
+	<br />
 	</div>
 	</div>
-
+	
