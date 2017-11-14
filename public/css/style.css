@@ -329,6 +329,16 @@ header .mainmenu-container li.dropdown > a .fa {
 
 /** ====== Banner styles ====== **/
 
+.slick-btn {
+  background: tomato;
+}
+
+.slick-btn:hover {
+  background: tomato;
+}
+
+
+
 
 #banner {
   background: url(../img/background/banner-bg.jpg) no-repeat center center fixed;
