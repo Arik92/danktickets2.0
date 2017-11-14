@@ -288,125 +288,20 @@
 							<li class="filter" data-filter=".jun-01"><span>June 01</span></li>
 						</ul>
 					</div>
-					<div class="tab-content-wrap row">
-						<div class="col-lg-3 col-md-4 col-sm-6 mix april-14 april-22 hvr-float-shadow wow fadeIn">
-							<div class="img-holder"><img src="img/upcoming-event/1.jpg" alt=""></div>
+					<div class="tab-content-wrap row" ng-controller="browseCtrl">
+						<div class="col-lg-3 col-md-4 col-sm-6 mix april-14 april-22 hvr-float-shadow wow fadeIn" ng-repeat="event in events track by $index">
+							<div class="img-holder"><img src={{event.imgPath}} alt={{event.title}}></div>
 							<div class="content-wrap">
 								<img src="img/upcoming-event/author.png" alt="" class="author-img">
 								<div class="meta">
 									<ul>
-										<li><span><i class="fa fa-clock-o"></i>22 April, 2015</span></li>
-										<li><span><i class="fa fa-map-marker"></i>California</span></li>
+										<li><span><i class="fa fa-clock-o"></i>{{event.startTime}}, {{event.startHr}}</span></li>
+										<li><span><i class="fa fa-map-marker"></i>{{event.location.locationName}}
 									</ul>
 								</div>
-								<h3>Event Name</h3>
-								<p>Lorem Ipsum is simply dummy text of the printing [...]</p>
-								<a class="read-more" href="#">read more<i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-4 col-sm-6 mix april-28 april-14 hvr-float-shadow wow fadeIn" data-wow-delay=".3s">
-							<div class="img-holder"><img src="img/upcoming-event/2.jpg" alt=""></div>
-							<div class="content-wrap">
-								<img src="img/upcoming-event/author.png" alt="" class="author-img">
-								<div class="meta">
-									<ul>
-										<li><span><i class="fa fa-clock-o"></i>28 April, 2015</span></li>
-										<li><span><i class="fa fa-map-marker"></i>California</span></li>
-									</ul>
-								</div>
-								<h3>Event Name</h3>
-								<p>Lorem Ipsum is simply dummy text of the printing [...]</p>
-								<a class="read-more" href="#">read more<i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-4 col-sm-6 mix may-10 may-22 hvr-float-shadow wow fadeIn" data-wow-delay=".6s">
-							<div class="img-holder"><img src="img/upcoming-event/3.jpg" alt=""></div>
-							<div class="content-wrap">
-								<img src="img/upcoming-event/author.png" alt="" class="author-img">
-								<div class="meta">
-									<ul>
-										<li><span><i class="fa fa-clock-o"></i>10 May, 2015</span></li>
-										<li><span><i class="fa fa-map-marker"></i>California</span></li>
-									</ul>
-								</div>
-								<h3>Event Name</h3>
-								<p>Lorem Ipsum is simply dummy text of the printing [...]</p>
-								<a class="read-more" href="#">read more<i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-4 col-sm-6 mix may-15 may-23 hvr-float-shadow wow fadeIn" data-wow-delay=".9s">
-							<div class="img-holder"><img src="img/upcoming-event/1.jpg" alt=""></div>
-							<div class="content-wrap">
-								<img src="img/upcoming-event/author.png" alt="" class="author-img">
-								<div class="meta">
-									<ul>
-										<li><span><i class="fa fa-clock-o"></i>15 May, 2015</span></li>
-										<li><span><i class="fa fa-map-marker"></i>California</span></li>
-									</ul>
-								</div>
-								<h3>Event Name</h3>
-								<p>Lorem Ipsum is simply dummy text of the printing [...]</p>
-								<a class="read-more" href="#">read more<i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-4 col-sm-6 mix may-22 hvr-float-shadow">
-							<div class="img-holder"><img src="img/upcoming-event/1.jpg" alt=""></div>
-							<div class="content-wrap">
-								<img src="img/upcoming-event/author.png" alt="" class="author-img">
-								<div class="meta">
-									<ul>
-										<li><span><i class="fa fa-clock-o"></i>15 May, 2015</span></li>
-										<li><span><i class="fa fa-map-marker"></i>California</span></li>
-									</ul>
-								</div>
-								<h3>Event Name</h3>
-								<p>Lorem Ipsum is simply dummy text of the printing [...]</p>
-								<a class="read-more" href="#">read more<i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-4 col-sm-6 mix may-23 hvr-float-shadow ">
-							<div class="img-holder"><img src="img/upcoming-event/1.jpg" alt=""></div>
-							<div class="content-wrap">
-								<img src="img/upcoming-event/author.png" alt="" class="author-img">
-								<div class="meta">
-									<ul>
-										<li><span><i class="fa fa-clock-o"></i>15 May, 2015</span></li>
-										<li><span><i class="fa fa-map-marker"></i>California</span></li>
-									</ul>
-								</div>
-								<h3>Event Name</h3>
-								<p>Lorem Ipsum is simply dummy text of the printing [...]</p>
-								<a class="read-more" href="#">read more<i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-4 col-sm-6 mix jun-01 hvr-float-shadow">
-							<div class="img-holder"><img src="img/upcoming-event/1.jpg" alt=""></div>
-							<div class="content-wrap">
-								<img src="img/upcoming-event/author.png" alt="" class="author-img">
-								<div class="meta">
-									<ul>
-										<li><span><i class="fa fa-clock-o"></i>01 June, 2015</span></li>
-										<li><span><i class="fa fa-map-marker"></i>California</span></li>
-									</ul>
-								</div>
-								<h3>Event Name</h3>
-								<p>Lorem Ipsum is simply dummy text of the printing [...]</p>
-								<a class="read-more" href="#">read more<i class="fa fa-angle-right"></i></a>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-4 col-sm-6 mix april-22 hvr-float-shadow ">
-							<div class="img-holder"><img src="img/upcoming-event/1.jpg" alt=""></div>
-							<div class="content-wrap">
-								<img src="img/upcoming-event/author.png" alt="" class="author-img">
-								<div class="meta">
-									<ul>
-										<li><span><i class="fa fa-clock-o"></i>15 June, 2015</span></li>
-										<li><span><i class="fa fa-map-marker"></i>California</span></li>
-									</ul>
-								</div>
-								<h3>Event Name</h3>
-								<p>Lorem Ipsum is simply dummy text of the printing [...]</p>
-								<a class="read-more" href="#">read more<i class="fa fa-angle-right"></i></a>
+								<h3>{{event.title}}</h3>
+								<p>{{event.description}}</p>
+								<a class="read-more" ui-sref="event">read more<i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 					</div>
