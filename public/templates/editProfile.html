@@ -10,16 +10,20 @@
           <div class="form-group">
             <label class="control-label" for="source_name">Organizer Name</label>
             <div>
-              <input id="source_name" class="form-control" name="source_name" ng-model="profile.oName" type="text" placeholder="Organizer name" class="form-control input-md">
+              <input id="source_name" class="form-control" name="source_name" ng-model="profile.name" type="text" placeholder="Organizer name" class="form-control input-md">
             </div>
           </div>
           <div class="form-group">
             <label class="control-label" for="source_name">About You</label>
             <div>
-              <textarea id="source_name" class="form-control" name="source_name" ng-model="profile.oDesc" placeholder="This is who we are. This is what we do" class="form-control input-md"></textarea>
+              <textarea id="source_name" class="form-control" name="source_name" ng-model="profile.description" placeholder="This is who we are. This is what we do" class="form-control input-md"></textarea>
             </div>
           </div>
            <div class="form-group">
+		   <label class="control-label" for="source_name">Current profile image:</label>
+             <div class="">
+               <img width=200 height=200 ng-src={{profile.imgPath}}> <br/>
+             </div>
              <label class="control-label" for="source_name">Image</label>
              <div>
                <input id="fileItem" type="file" name="eventPic" ng-model="file"
@@ -39,7 +43,7 @@
            <div class="form-group">
              <label class="control-label" for="source_name">Website</label>
              <div>
-               <input id="source_name" class="form-control" name="source_name" ng-model="oSite" type="text" placeholder="Danksite.com" class="form-control input-md">
+               <input id="source_name" class="form-control" name="source_name" ng-model="profile.website" type="text" placeholder="Danksite.com" class="form-control input-md">
              </div>
            </div>
            <div class="form-group">
@@ -63,7 +67,7 @@
                <button type="submit" ng-click="reset()" class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Reset</button>
                <button type="submit" ng-click="upload()" class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:33%;background-color:black;color:white"> Save Profile</button>
           <div class="row show-hide-message" ng-show="showRedirect">
-            <div class="alert alert-success">Created organizer profile! redirecting..<span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
+            <div class="alert alert-success">updated organizer profile! redirecting..<span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
           </div>
         </div>
       </div>
