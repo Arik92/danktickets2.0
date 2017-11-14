@@ -443,7 +443,7 @@
 		GalleryFancyboxActivator();
 		// commented out because license required
     // checking to see if needed
-    // upcomingEventFilter();
+    upcomingEventFilter();
 		testimonialSlide();
 		// sponsorLogo();
 		// twitterFeedWidget();
