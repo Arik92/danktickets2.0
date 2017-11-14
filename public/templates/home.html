@@ -1,26 +1,27 @@
-<div ng-controller="carouselCtrl" style="margin-top: 200px">
-	<slick autoplay="true"
-				 fade="true"
-				 slides-to-show="1"
-				 slides-to-scroll="1"
-				 arrows="true"
-				 prev-arrow=".slick-prev-chev"
-				 next-arrow=".slick-next-chev"
-				 center-mode="false"
-				 dots="true"
-				 style="width: 50%; margin: 0 auto"
-				 >
-		<div ng-repeat="image in images" style="text-align: center">
-			<img data-lazy="{{image}}"
-					 style="margin: 0 auto">
-		</div>
-		<a type="button" class="slick-btn slick-prev-chev">
-			<i class="fa fa-chevron-left" aria-hidden="true"></i>			
-		</a>
-		<a type="button" class="slick-btn slick-next-chev">
-			<i class="fa fa-chevron-right" aria-hidden="true"></i>
-		</a>
-	</slick>
+<div ng-controller="carouselCtrl">
+	<div class="carousel-container">
+		<slick autoplay="false"
+					 fade="false"
+					 slides-to-show="1"
+					 slides-to-scroll="1"
+					 arrows="true"
+					 prev-arrow=".slick-prev-chev"
+					 next-arrow=".slick-next-chev"
+					 center-mode="false"
+					 dots="true"
+					 class="slick-container"
+					 >
+			<div ng-repeat="image in images" class="slick-img-container">
+				<img src={{image}} class="slick-img">
+			</div>
+			<a type="button" class="slick-btn slick-prev-chev">
+				<i class="fa fa-chevron-left fa-3x" aria-hidden="true"></i>			
+			</a>
+			<a type="button" class="slick-btn slick-next-chev">
+				<i class="fa fa-chevron-right fa-3x" aria-hidden="true"></i>
+			</a>
+		</slick>
+	</div>
 </div>
 		
 		<!-- #banner -->
