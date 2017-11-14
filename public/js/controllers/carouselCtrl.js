@@ -16,10 +16,9 @@ app.controller('carouselCtrl',['$scope','$window', function( $scope, $window){
     ]; */
 
   $scope.images = [
-    "../../img/banner-carousel/weed.jpeg",
+    "../../img/banner-carousel/medium-weed.jpeg",
     "../../img/banner-carousel/concert1.jpeg",
-    "../../img/banner-carousel/cookout-2.jpeg",
-    
+    "../../img/banner-carousel/cookout-2.jpeg"
     ];
 
 
