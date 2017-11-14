@@ -99,7 +99,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/manageEvents.html',
       controller: 'manageCtrl'
     })
-	.state('editprofiles', {
+	.state('userprofiles', {
       url: '/manage-organizers',
       templateUrl: '/templates/manageProfiles.html',
       controller: 'manageProfCtrl'
