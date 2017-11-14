@@ -76,12 +76,12 @@
     // upcoming event filter
     // commented out because we need a license for it. 
     // Checking to see if we need it
-    function upcomingEventFilter () {
-    	var upcomingEventFilterContent = $('#upcoming-event .tab-content-wrap');
-    	if (upcomingEventFilterContent) {
-	    	upcomingEventFilterContent.mixItUp();
-    	};
-    }
+    // function upcomingEventFilter () {
+    // 	var upcomingEventFilterContent = $('#upcoming-event .tab-content-wrap');
+    // 	if (upcomingEventFilterContent) {
+	   //  	upcomingEventFilterContent.mixItUp();
+    // 	};
+    // }
 
     // testimonial slider
     function testimonialSlide () {
@@ -466,4 +466,3 @@
 	});
 
 })(jQuery);
-
