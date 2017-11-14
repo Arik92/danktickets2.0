@@ -7,6 +7,13 @@
 
 	<!-- Responsive Meta Tag -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- owl-carousel styles -->
+	<!-- <link rel="stylesheet" href="../owl.carousel/dist/assets/owl.carousel.min.css" />
+	<link rel="stylesheet" href="../owl.carousel/dist/assets/owl.theme.default.css" /> -->
+	<!-- slick carousel -->
+	<link rel="stylesheet" href="../slick-carousel/slick/slick.css">
+	<link rel="stylesheet" href="../slick-carousel/slick/slick-theme.css">
+	<!-- font-awesome -->
 	<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css"/>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 	<!-- main stylesheet -->
@@ -78,7 +85,7 @@
 							<ul class="submenu" ng-show="login.username">
 								<li class="scrollToLink"><a ui-sref="manage">MANAGE EVENTS</a></li>
 								<li class="scrollToLink"><a ui-sref="organizer">NEW ORGANIZER</a></li>
-								<li class="scrollToLink"><a ui-sref="signup">ORGANIZER PROFILES</a></li>
+								<li class="scrollToLink"><a ui-sref="editprofiles">ORGANIZER PROFILES</a></li>
 								<li class="scrollToLink"><a ui-sref="profile">PROFILE SETTINGS</a></li>
 								<li class="scrollToLink"><a ui-sref="signup" ng-click="login.logout()">LOG OUT</a></li>
 							</ul>
@@ -92,202 +99,7 @@
 	</header>
 	<!-- /#header -->
 
-	<!-- #banner -->
-	<section id="banner">
-		<div class="banner-container">
-			<div class="banner">
-				<ul>
-					<li
-						data-transition="fade"
-						data-slotamount="7"
-						class="slider-1 text-center gradient-overlay"
-						data-thumb="img/background/banner-bg.jpg"
-						data-title="EXPERTISE YOU CAN TRUST">
-						<img
-							src="img/background/banner-bg.jpg"
-							data-bgposition="center center"
-							data-kenburns="on"
-							data-duration="20000"
-							data-ease="Linear.easeNone"
-							data-bgfit="100"
-							data-bgfitend="130"
-							data-bgpositionend="center center"
-							alt="slider image">
-						<div
-							class="caption sfb tp-resizeme text-center"
-							data-x="0"
-							data-y="220"
-							data-speed="700"
-							data-start="1000"
-							data-easing="easeOutBack">
-
-							<div class="date">
-								December 31, 2015 23:59pm
-							</div>
-						</div>
-
-						<div
-							class="caption sfb tp-resizeme"
-							data-x="0"
-							data-y="290"
-							data-speed="700"
-							data-start="1500"
-							data-easing="easeOutBack">
-
-							<h1>DANK TICKETS CONFERENCE</h1>
-						</div>
-						<div
-							class="caption sfb tp-resizeme input-box"
-							data-x="0"
-							data-y="370"
-							data-speed="700"
-							data-start="2200"
-							data-easing="easeOutBack">
-
-							<ul class="count-down"></ul>
-						</div>
-
-						<ul
-							class="caption sfb tp-resizeme banner-buttons"
-							data-x="0"
-							data-y="530"
-							data-speed="700"
-							data-start="2500"
-							data-easing="easeOutBack">
-
-							<li class="scrollToLink"><a href="#register-now" class="colored hvr-bounce-to-right">Register Now</a></li>
-							<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Get Tickets</a></li>
-
-						</ul>
-
-					</li>
-					<!-- <li
-
-						data-transition="fade"
-						data-slotamount="7"
-						class="slider-2 text-center gradient-overlay"
-						data-thumb="img/background/subscribe-section-bg.jpg"
-						data-title="EXPERTISE YOU CAN TRUST">
-
-						<img
-							src="img/background/subscribe-section-bg.jpg"
-							data-bgposition="center center"
-							data-kenburns="on"
-							data-duration="20000"
-							data-ease="Linear.easeNone"
-							data-bgfit="100"
-							data-bgfitend="130"
-							data-bgpositionend="center center"
-							alt="slider image">
-
-						<div
-							class="caption sfb tp-resizeme text-center"
-							data-x="0"
-							data-y="300"
-							data-speed="700"
-							data-start="1000"
-							data-easing="easeOutBack">
-
-							<h1>DONT MISS THE EVENT</h1>
-						</div>
-
-						<div
-							class="caption sfb tp-resizeme"
-							data-x="0"
-							data-y="370"
-							data-speed="700"
-							data-start="1500"
-							data-easing="easeOutBack">
-
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, neque,  <br> nam? Sed at dolor, perferendis, quaerat, esse dignissimos praesentium unde dolore.</p>
-						</div>
-						<ul
-							class="caption sfb tp-resizeme banner-buttons"
-							data-x="0"
-							data-y="450"
-							data-speed="700"
-							data-start="2500"
-							data-easing="easeOutBack">
-
-							<li class="scrollToLink"><button type="submit" class="colored hvr-bounce-to-right">Register Now</button></li>
-							<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Watch Video</a></li>
-
-						</ul>
-					</li>
-					<li
-						data-transition="fade"
-						data-slotamount="7"
-						class="slider-3 text-center gradient-overlay"
-						data-thumb="img/background/register-bg.jpg"
-						data-title="EXPERTISE YOU CAN TRUST">
-
-						<img
-							src="img/background/register-bg.jpg"
-							data-bgposition="center center"
-							data-kenburns="on"
-							data-duration="20000"
-							data-ease="Linear.easeNone"
-							data-bgfit="100"
-							data-bgfitend="130"
-							data-bgpositionend="center center"
-							alt="slider image">
-
-						<div
-							class="caption sfb tp-resizeme text-center"
-							data-x="0"
-							data-y="220"
-							data-speed="700"
-							data-start="1000"
-							data-easing="easeOutBack">
-
-							<div class="date">
-								December 31, 2015 23:59pm
-							</div>
-						</div>
-
-						<div
-							class="caption sfb tp-resizeme"
-							data-x="0"
-							data-y="290"
-							data-speed="700"
-							data-start="1500"
-							data-easing="easeOutBack">
-
-							<h1>DANK TICKETS EVENT</h1>
-						</div>
-						<div
-							class="caption sfb tp-resizeme input-box"
-							data-x="0"
-							data-y="370"
-							data-speed="700"
-							data-start="2200"
-							data-easing="easeOutBack">
-							<ul>
-								<li><span><input type="text" placeholder="Your Name"></span></li>
-								<li><span><input type="text" placeholder="Your Email"></span></li>
-								<li><span><input type="text" placeholder="Your Phone"></span></li>
-							</ul>
-						</div>
-						<ul
-							class="caption sfb tp-resizeme banner-buttons"
-							data-x="0"
-							data-y="450"
-							data-speed="700"
-							data-start="2500"
-							data-easing="easeOutBack">
-							<li class="scrollToLink"><button type="submit" class="colored hvr-bounce-to-right">Register Now</button></li>
-							<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Watch Video</a></li> -->
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-
-	</section>
-	<!-- /#banner -->
-
-
-  <!-- <nav-directive></nav-directive> -->
+  <nav-directive></nav-directive>
 
 	<div ui-view></div>
 
@@ -312,6 +124,9 @@
 	<!-- <script src="js/controllers/editCtrl.js"></script> -->
 	<script src="js/controllers/loginCtrl.js"></script>
 	<script src="js/controllers/manageCtrl.js"></script>
+	<script src="js/controllers/carouselCtrl.js"></script>
+	<script src="js/controllers/manageProfCtrl.js"></script>
+
 	<!-- JQuery -->
 	<script src="js/jquery.themepunch.tools.min.js"></script>
 	<script src="js/jquery.themepunch.revolution.min.js"></script>
@@ -320,7 +135,6 @@
 	<script src="js/jquery.fancybox.pack.js"></script>
 	<!--<script src="js/jquery.mixitup.min.js"></script>-->
 	<script src="js/jquery.bxslider.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/jquery.appear.js"></script>
 	<script src="js/jquery.countTo.js"></script>
 	<script src="js/circle-progress.js"></script>
@@ -332,5 +146,8 @@
 	<!-- Directives -->
 	<script src="js/directives/navDirective.js"></script>
 	<script src="js/directives/footerDirective.js"></script>
+	<!-- slick carousel -->
+	<script src="../slick-carousel/slick/slick.js"></script>
+	<script src="../angular-slick/dist/slick.js"></script>
 </body>
 </html>
