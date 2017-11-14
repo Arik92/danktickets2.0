@@ -37,7 +37,7 @@ router.get('/', function (req, res, next) {
   })//findCb
 }) // get all of a user's profiles*/
 
-router.get('/:id', function(req, res, next){
+router.get('/:name', function(req, res, next){
   Profile.find().populate('owner').exec(function(err, profiles){
     if (err) {
       console.error(err);
@@ -45,8 +45,8 @@ router.get('/:id', function(req, res, next){
       console.log("found profiles(route)", profiles);
       var result = [];
       for (var i=0;i<profiles.length;i++) {
-        console.log("comparing "+ req.params.id+" and "+ profiles[i].owner.username);
-        if (profiles[i].owner.username==req.params.id) {
+        console.log("comparing "+ req.params.name+" and "+ profiles[i].owner.username);
+        if (profiles[i].owner.username==req.params.name) {
           result.push(profiles[i]);
         }
       }//for
