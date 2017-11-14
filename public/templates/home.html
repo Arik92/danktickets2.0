@@ -1,7 +1,5 @@
 <div ng-controller="carouselCtrl">
 	<div class="carousel-container">
-		<div class="slick-prev-bg slick-bg"></div>
-		<div class="slick-next-bg slick-bg"></div>
 		<slick autoplay="false"
 					 fade="false"
 					 slides-to-show="1"
@@ -14,8 +12,7 @@
 					 class="slick-container"
 					 >
 			<div ng-repeat="image in images" class="slick-img-container">
-				<img src={{image}}
-						 class="slick-img">
+				<img src={{image}} class="slick-img">
 			</div>
 			<a type="button" class="slick-btn slick-prev-chev">
 				<i class="fa fa-chevron-left fa-3x" aria-hidden="true"></i>			
