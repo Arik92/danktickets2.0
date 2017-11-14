@@ -37,7 +37,7 @@ router.get('/:id', function(req, res, next){
       console.log("found events(route)", events);
       var result = [];
       for (var i=0;i<events.length;i++) {
-        console.log("comparing"+ req.params.userName+" and "+ events[i].owner.username)
+        console.log("comparing"+ req.params.id+" and "+ events[i].owner.username)
         if (events[i].owner.name==req.params.userName) {
           result.push(events[i]);
         }
