@@ -22,6 +22,8 @@
 	<!-- responsive stylesheet -->
 	<link rel="stylesheet" href="css/responsive.css">
 	<link rel="stylesheet" href="/js-datepicker/datepicker.css">
+	<!-- Morris stylesheet -->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 	<!-- node modules -->
 </head>
 <body ng-controller="loginCtrl as login" ng-show="login.loader" ng-cloak>
@@ -38,9 +40,13 @@
 					<a ui-sref="home"><img src="img/resources/logo.png" alt="Logo Image" style="max-width: 150PX;padding:5px;margin-top: 10px;margin-right: 90px;"></a>
 				</div>
 				<!-- /.logo -->
-
+				<!-- search bar -->
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 mainmenu-container">
+					<input style="width: 212px;" type="text" placeholder=" Search Event"><button type="submit"><i class="fa fa-search fa-3x"></i></button>
+				</div>
+				<!-- search bar -->
 				<!-- .mainmenu-container -->
-				<nav class="col-lg-9 col-md-9 col-sm-6 col-xs-6 mainmenu-container">
+				<nav class="col-lg-5 col-md-5 col-sm-6 col-xs-6 mainmenu-container">
 					<button class="nav-toggler"> <i class="fa fa-bars"></i></button>
 					<ul class="mainmenu clearfix">
 						<li class="nav-closer"><i class="fa fa-close"></i></li>
@@ -100,14 +106,18 @@
 	<!-- /#header -->
 
   <nav-directive></nav-directive>
-
+  <br><br><br><br><br>
 	<div ui-view></div>
 
 	<footer-directive></footer-directive>
 	<script src="/angular/angular.js"></script>
 	<script src="js/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 	<script src="/@uirouter/angularjs/release/angular-ui-router.js"></script>
 	<script src="ng-file-upload/dist/ng-file-upload.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 	<!-- js folders -->
 	<script src="js-datepicker/datepicker.min.js"></script>
 	<script src="js/app.js"></script>
@@ -133,7 +143,7 @@
 	<script src="js/countdown.min.js"></script>
 	<script src="js/jquery.easing.min.js"></script>
 	<script src="js/jquery.fancybox.pack.js"></script>
-	<!--<script src="js/jquery.mixitup.min.js"></script>-->
+	<script src="js/jquery.mixitup.min.js"></script>
 	<script src="js/jquery.bxslider.min.js"></script>
 	<script src="js/jquery.appear.js"></script>
 	<script src="js/jquery.countTo.js"></script>
@@ -141,7 +151,7 @@
 	<script src="js/wow.js"></script>
 	<script src="js/validate.js"></script>
 	<script src="js/custom.js"></script>
-	
+	<!--<script src="js/dashboard.js"></script>-->
 	<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=59ae72b5c975c80011bcfd3a&product=inline-share-buttons' async='async'></script>
 	<!-- Directives -->
 	<script src="js/directives/navDirective.js"></script>
