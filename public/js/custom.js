@@ -78,7 +78,7 @@
     	var upcomingEventFilterContent = $('#upcoming-event .tab-content-wrap');
     	if (upcomingEventFilterContent) {
 	    	upcomingEventFilterContent.mixItUp();
-    	};
+    	};  
     }
     // testimonial slider
     function testimonialSlide () {
@@ -124,6 +124,40 @@
     }
     // sponsor logo carosule
     function sponsorLogo () {
+    	var sponsorLogoContainer = $('.sponsor-logo');
+    	if (sponsorLogoContainer.length) {
+    		sponsorLogoContainer.owlCarousel({
+			    loop: true,
+			    margin: 100,
+			    nav: true,
+			    dots: false,
+			    autoWidth: true,
+	            navText: [
+	                '<i class="fa fa-angle-left"></i>',
+	                '<i class="fa fa-angle-right"></i>'
+	            ],
+	            autoplay:true,
+			    autoplayTimeout:3000,
+			    autoplayHoverPause:true,
+			    responsive: {
+			        0:{
+			            items:1
+			        },
+			        480:{
+			            items:2
+			        },
+			        600:{
+			            items:3
+			        },
+			        1000:{
+			            items:4
+			        }
+			    }
+			});
+    	}
+		}
+		
+    function mainBannerOwlCarousel () {
     	var sponsorLogoContainer = $('.sponsor-logo');
     	if (sponsorLogoContainer.length) {
     		sponsorLogoContainer.owlCarousel({
@@ -250,7 +284,10 @@
 	}
 	// revolution slider
 	function revolutionSliderActiver () {
-		var banner = $('#banner .banner');
+		console.log('rev-slider activated');
+		// var banner = $('#banner .banner');
+		var banner = $('#banner-ul');
+		console.log(banner);
 		if (banner.length) {
 			banner.revolution({
 				delay:5000,
@@ -395,18 +432,20 @@
 
 	// doc ready
 	$(document).on('ready', function () {
+		// mainBannerOwlCarousel();
+		// $('.owl-carousel').owlCarousel();
+		// revolutionSliderActiver();
 		countdownTimer();
 		SmoothMenuScroll();
 		GalleryFancyboxActivator();
 		upcomingEventFilter();
 		testimonialSlide();
-		sponsorLogo();
+		// sponsorLogo();
 		// twitterFeedWidget();
 		CounterNumberChanger();
 		expertizeRoundCircle();
 		featureListTab();
 		DeadMenuConfig();
-		revolutionSliderActiver();
 		wowActivator();
 		mobileMenuConfig();
 		contactFormValidation();
@@ -450,11 +489,11 @@ $(function() {
     $(this).next(".rad-dropmenu-item").toggleClass("active");
   });
 
-  $(window).resize(function() {
+ /*  $(window).resize(function() {
     $.throttle(250, setTimeout(function() {
       initializeCharts();
     }, 200));
-  });
+  }); */
 
   var colors = [
     '#E94B3B',
@@ -463,7 +502,7 @@ $(function() {
     '#F98E33'
   ];
 
-  var panelList = $('.row');
+ /*  var panelList = $('.row');
 
   panelList.sortable({
     handle: '.row',
@@ -473,9 +512,9 @@ $(function() {
           newIndex = $listItem.index();
       });
     }
-  });
+  }); */
 
-  function initializeCharts() {
+ /*  function initializeCharts() {
 
     $(".rad-chart").empty();
 
@@ -629,7 +668,7 @@ $(function() {
       labels: ['Series ASH', 'Series SS']
     });
 
-  }
+  } */
 
-  initializeCharts();
+  // initializeCharts();
 });
