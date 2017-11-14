@@ -99,6 +99,11 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/manageEvents.html',
       controller: 'manageCtrl'
     })
+	.state('editprofiles', {
+      url: '/manage-organizers',
+      templateUrl: '/templates/manageProfiles.html',
+      controller: 'manageProfCtrl'
+    })
     .state('edit', {
       url: '/edit-event/:id',
         params: {eventParam: null},
