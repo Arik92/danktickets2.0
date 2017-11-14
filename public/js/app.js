@@ -110,6 +110,12 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/editEvent.html',
       controller: 'editCtrl'
     })
+	.state('editprofile', {
+      url: '/edit-profile/:id',
+        params: {profileParam: null},
+      templateUrl: '/templates/editProfile.html',
+      controller: 'editProfileCtrl'
+    })
     .state('auth', {
       url: '/authorization?token&name',
       controller: function($stateParams, $state, $rootScope, $http) {
