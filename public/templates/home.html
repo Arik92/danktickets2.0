@@ -1,11 +1,11 @@
 <div ng-controller="carouselCtrl" style="margin-top: 200px">
-	<slick autoplay="false"
-				 fade="false"
+	<slick autoplay="true"
+				 fade="true"
 				 slides-to-show="1"
 				 slides-to-scroll="1"
 				 arrows="true"
-				 prev-arrow=".slick-prev"
-				 next-arrow=".slick-next"
+				 prev-arrow=".slick-prev-chev"
+				 next-arrow=".slick-next-chev"
 				 center-mode="false"
 				 dots="true"
 				 style="width: 50%; margin: 0 auto"
@@ -14,6 +14,12 @@
 			<img data-lazy="{{image}}"
 					 style="margin: 0 auto">
 		</div>
+		<a type="button" class="slick-btn slick-prev-chev">
+			<i class="fa fa-chevron-left" aria-hidden="true"></i>			
+		</a>
+		<a type="button" class="slick-btn slick-next-chev">
+			<i class="fa fa-chevron-right" aria-hidden="true"></i>
+		</a>
 	</slick>
 </div>
 		

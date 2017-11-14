@@ -433,7 +433,7 @@
 	// doc ready
 	$(document).on('ready', function () {
 		// mainBannerOwlCarousel();
-		$('.owl-carousel').owlCarousel();
+		// $('.owl-carousel').owlCarousel();
 		// revolutionSliderActiver();
 		countdownTimer();
 		SmoothMenuScroll();
