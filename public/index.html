@@ -19,6 +19,7 @@
 	<!-- main stylesheet -->
 	<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/event.css">
 	<!-- responsive stylesheet -->
 	<link rel="stylesheet" href="css/responsive.css">
 	<link rel="stylesheet" href="/js-datepicker/datepicker.css">
@@ -30,7 +31,7 @@
 	<!-- .preloader -->
 	<div class="preloader"></div>
 	<!-- /.preloader -->
-
+	<button class="nav-toggler"> <i class="fa fa-bars"></i></button>
 	<!-- #header -->
 	<header id="header">
 		<div class="container">
@@ -46,8 +47,8 @@
 				</div>
 				<!-- search bar -->
 				<!-- .mainmenu-container -->
-				<nav class="col-lg-5 col-md-5 col-sm-6 col-xs-6 mainmenu-container">
-					<button class="nav-toggler"> <i class="fa fa-bars"></i></button>
+				<nav class="col-lg-5 col-md-5 col-sm-6 col-xs-6 mainmenu-container menu-list">
+					
 					<ul class="mainmenu clearfix">
 						<li class="nav-closer"><i class="fa fa-close"></i></li>
 						<!-- <li class="current scrollToLink dropdown">
@@ -108,7 +109,7 @@
 
 	<nav-directive></nav-directive>
 	
-	<div class="spacer" style="margin-top: 119px"></div>
+	<div id="nav-spacer" style="margin-top: 119px"></div>
 
 
 	<div ui-view></div>
