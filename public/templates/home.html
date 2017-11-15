@@ -11,8 +11,8 @@
 					 dots="true"
 					 class="slick-container"
 					 >
-			<div ng-repeat="image in images" class="slick-img-container">
-				<img src={{image}} class="slick-img">
+			<div ng-repeat="slide in slides" style="background: {{ slide.bgColor }}" class="slick-img-container">
+				<img ng-src="{{ slide.imgURL }}" class="slick-img">
 			</div>
 			<a type="button" class="slick-btn slick-prev-chev">
 				<i class="fa fa-chevron-left fa-3x" aria-hidden="true"></i>			
@@ -246,7 +246,7 @@
 
 						<li>
 							<div class="input-wrap">
-								<button type="submit" class="hvr-bounce-to-right" id="mybutton">SEARCH</button>
+								<button type="submit" class="hvr-bounce-to-right my-btn">SEARCH</button>
 							</div>
 						</li>
 
