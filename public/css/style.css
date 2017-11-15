@@ -149,7 +149,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 5;
   width: 100%;
   background: linear-gradient(to right, #1eb089 0%, #7c49ab 100%, #7db9e8 100%);
 }
@@ -161,7 +161,7 @@ header.header-fixed {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 99999;
+  z-index: 5;
   box-shadow: 0 3px 5px rgba(81, 183, 227, 0.2);
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
@@ -188,8 +188,13 @@ header .container:after {
   bottom: 2px;
   left: 0;
 }
-header .mainmenu-container .nav-toggler {
+ .nav-toggler {
   display: none;
+  position: fixed;
+  background: orange;
+  top: 3%;
+  right: 3%;
+  z-index: 7;
 }
 header .mainmenu-container li.nav-closer {
   display: none;
@@ -244,7 +249,7 @@ header .mainmenu-container > ul > li > ul {
   width: 190px;
   border-top: 2px solid #FF8625;
   background: #fff;
-  z-index: 9999;
+  z-index: 5;
   visibility: hidden;
   opacity: 0;
   box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.1);
@@ -300,7 +305,7 @@ header .mainmenu-container > ul > li > ul > li > ul {
   width: 190px;
   border-top: 2px solid #FF8625;
   background: #fff;
-  z-index: 9999;
+  z-index: 5;
   visibility: hidden;
   opacity: 0;
   box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.1);
@@ -339,6 +344,11 @@ header .mainmenu-container > ul > li > ul.right-align {
 header .mainmenu-container li.dropdown > a .fa {
   display: none;
 
+}
+
+/* used to account for the position fixed navbar */
+#nav-spacer {
+  margin-top: 119px;
 }
 
 /** ====== Banner styles ====== **/
@@ -383,7 +393,7 @@ header .mainmenu-container li.dropdown > a .fa {
 
 .slick-img-container {
   text-align: center;
-  background:linear-gradient(#1eb089 0%, #7c49ab 100%, #7db9e8 100%);
+  /* background:linear-gradient(#1eb089 0%, #7c49ab 100%, #7db9e8 100%); */
   opacity: 0.8;
   /* object-fit: fill; */
   /* height: auto; */
@@ -441,7 +451,7 @@ header .mainmenu-container li.dropdown > a .fa {
 }
 #banner .caption {
   width: 100%;
-  z-index: 9999;
+  z-index: 5;
 }
 #banner .tp-bullets {
   display: none;
@@ -770,7 +780,7 @@ header .mainmenu-container li.dropdown > a .fa {
 #upcoming-event .tab-content-wrap .col-lg-3 .content-wrap .author-img {
   margin-top: -20px;
   position: relative;
-  z-index: 99999;
+  z-index: 5;
   border-radius: 50%;
 }
 #upcoming-event .tab-content-wrap .col-lg-3 .content-wrap .meta {
@@ -2335,10 +2345,9 @@ footer .footer-widget .social-icons a:hover {
 
 /** ====== Single Blog Post styles ====== **/
 
-
 #single-blog-post {
   background: #F6F9F9;
-  padding: 80px 0;
+  padding: 40px 0;
 }
 #single-blog-post .col-lg-12 .content-holder {
   background: #fff;
@@ -2346,14 +2355,17 @@ footer .footer-widget .social-icons a:hover {
 }
 #single-blog-post .col-lg-12 .content-holder .img-holder {
   margin-bottom: 50px;
+  margin-right: 350px;
 }
 #single-blog-post .col-lg-12 .content-holder .img-holder img {
   width: 100%;
+  float: left;
+  max-width: 75%;
 }
 #single-blog-post .col-lg-12 .content-holder .post-title h1 {
   color: #374045;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 2rem;
   line-height: 36px;
   margin-bottom: 20px;
 }
@@ -2534,7 +2546,7 @@ footer .footer-widget .social-icons a:hover {
     top: 0px;
     width: 100%;
     height: 100%;
-    z-index: 999999999;
+    z-index: 559;
     background-color: #ffffff;
     background-position: center center;
     background-repeat: no-repeat;
@@ -2543,7 +2555,7 @@ footer .footer-widget .social-icons a:hover {
 
 
 
-button#mybutton.hvr-bounce-to-right {
+button.my-btn.hvr-bounce-to-right {
     display: inline-block;
     border-radius: 5px;
     font-size: 30px;
@@ -2789,11 +2801,6 @@ button#mybutton.hvr-bounce-to-right {
     }
 
 
-.eventcolumn {
-
-  width: 45%;
-}
-
 .glyphicon.fast-right-spinner {
     -webkit-animation: glyphicon-spin-r 1s infinite linear;
     animation: glyphicon-spin-r 1s infinite linear;
@@ -2843,19 +2850,17 @@ button#mybutton.hvr-bounce-to-right {
     width: 12em;
 }
 
-
-
-
+/* ======== Event Page =========== */
 
 /*event date*/
-
+.post-title {
+  box-shadow: 8px 27px 33px rgba(0,0,0,0.25);
+  max-width: 500px;
+}
 
 div.calendar {
-  float: left;
-  margin-left: -200px;
   height:140px;
   width:130px;
-  
   background-color:white;
   text-align: center;
   border-radius: 5px;
@@ -2863,7 +2868,6 @@ div.calendar {
   background-image: -webkit-radial-gradient(center, #eee, #fff);
   background-image: -moz-radial-gradient(center, #eee, #fff);
   -webkit-backface-visibility:hidden;
-  margin:50px auto;
 }
 
 div.calendar h1 {

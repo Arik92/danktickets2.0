@@ -1,0 +1,117 @@
+.top-event-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.eventcolumn {
+  width: 40%;
+}
+
+.event-img-container {
+  max-width: 40%;
+  height: 100%;
+  align-self: stretch;
+}
+
+.post-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  align-self: stretch;
+  padding: 20px 20px;
+}
+
+.post-title>.calendar {
+  /* font-size: 1rem !important; */
+  margin-right: 10px;
+}
+
+/* button section */
+
+.event-btn {
+  font-size: 26px;
+  padding: 6px 0px;
+}
+
+#event-register-btn {
+  width: 50%;
+  margin-bottom: 2rem;
+}
+
+.bottom-btn-container {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.bottom-btn-container > .my-btn.event-btn {
+  width: 40% !important;
+  font-size: 2rem !important;
+  /* margin: 10px; */
+}
+
+#middle-content {
+  display: flex;
+  padding: 3rem 0;
+}
+
+.side-btn {
+  font-size: 1rem !important;
+  width: 40% !important;
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 992px) {
+
+  .top-event-container {
+    display: block;
+  }
+
+  .top-event-container>.event-img-container {
+    margin: auto;
+  }
+
+  .top-event-container .post-title {
+    margin: auto;
+  }
+}
+
+#event-sponsor, .comment-container {
+  padding: 0 3rem;
+}
+
+@media only screen and (max-width: 766px) {
+  #middle-content {
+    display: block !important;
+  }
+
+  #middle-content .top-btns {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  
+}
+
+@media only screen and (max-width: 600px) {
+  .bottom-btn-container {
+    display: block;
+  }
+
+  #event-register-btn {
+    width: 90%;
+  }
+
+  .bottom-btn-container > .my-btn.event-btn {
+    width: 90% !important;
+    margin: 10px 0;
+  }
+
+
+
+}

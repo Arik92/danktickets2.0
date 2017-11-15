@@ -72,7 +72,7 @@
            <div class="form-group">
             
 
-            <button type="submit" ng-click="preview()" class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Preview</button>
+            <button type="submit" ng-click="preview()" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Preview</button>
              <div id="preview">
              </div>
            </div>
@@ -98,9 +98,9 @@
            <div class="form-group">
              <label class="control-label" for="source_name">Choose a ticket type:</label>
              <div>
-              <button type="submit" ng-click="add('Free')"class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:19%;background-color:transparent;color:black"> Free</button>
-              <button type="submit" ng-click="add('Paid')" class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:19%;background-color:transparent;color:black"> Paid</button>
-              <button type="submit" ng-click="add('Donation')" class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Donation</button>
+              <button type="submit" ng-click="add('Free')"class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:19%;background-color:transparent;color:black"> Free</button>
+              <button type="submit" ng-click="add('Paid')" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:19%;background-color:transparent;color:black"> Paid</button>
+              <button type="submit" ng-click="add('Donation')" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Donation</button>
               
                <ul class="list-unstyled list-group" float="left">
                  <li ng-repeat="ticket in tempTicks track by $index" >
@@ -133,8 +133,8 @@
              </div>
            </div>
             <br /><!--input --> 
-            <button type="submit" ng-click="reset()" class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Reset</button>
-               <button type="submit" ng-click="upload()" class="hvr-bounce-to-right" id="mybutton" style="margin: 10px; font-size:20px;padding: 6px 0px; width:33%;background-color:black;color:white"> Create event</button>
+            <button type="submit" ng-click="reset()" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Reset</button>
+               <button type="submit" ng-click="upload()" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:33%;background-color:black;color:white"> Create event</button>
                
           <div class="row show-hide-message" ng-show="showRedirect">
             <div class="alert alert-success">Event added! redirecting..<span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
