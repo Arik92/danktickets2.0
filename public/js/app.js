@@ -121,7 +121,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 	.state('editprofile', {
       url: '/edit-profile',
         params: {profileParam: null},
-      templateUrl: '/templates/edit-organizers.html',
+      templateUrl: '/templates/edit-organizer.html',
       controller: 'editProfileCtrl'
     })
     .state('auth', {
