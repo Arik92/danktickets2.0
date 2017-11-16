@@ -2578,12 +2578,21 @@ footer .footer-widget .social-icons a:hover {
 }
 
 #tickets-btn {
+  display: inline-block;
+  border-radius: 5px;
   margin: 10px; 
-  font-size:20px;
+  font-size: 14px;
+  font-weight: 800;
   padding: 6px 0px; 
-  width:19%;
+  width: 25%;
   background-color:transparent;
-  color:black;
+  color: black;
+  border: 2px solid black;
+  outline: none;
+  text-transform: uppercase;
+  background: #19CEBC;
+  vertical-align: bottom;
+  transition: all .3s ease;
 }
 
 button.my-btn.hvr-bounce-to-right {
