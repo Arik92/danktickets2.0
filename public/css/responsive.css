@@ -1,7 +1,15 @@
 /* medium size */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
+  nav.mainmenu-container.menu-list {
+    display: none !important;
+  }
+
+  .nav-toggler {
+    display: block;
+  }
+
   header .mainmenu-container > ul > li {
-    padding: 0 13px;
+    padding: 0 1rem;
   }
   .section-title.text-center {
     max-width: 60%;
@@ -83,7 +91,7 @@
   nav.mainmenu-container {
     position: relative;
   }
-  nav.mainmenu-container .nav-toggler {
+  .nav-toggler {
     background: #ff8625 none repeat scroll 0 0;
     border: medium none;
     border-radius: 5px;
@@ -319,7 +327,7 @@
   nav.mainmenu-container {
     position: relative;
   }
-  nav.mainmenu-container .nav-toggler {
+  .nav-toggler {
    /* background: #ff8625 none repeat scroll 0 0;
     border: medium none;
     border-radius: 5px;
@@ -345,7 +353,6 @@
     right: 35px;
     
     text-transform: uppercase;
-    bottom: 45px;
     display: block;
   }
   nav.mainmenu-container ul {
