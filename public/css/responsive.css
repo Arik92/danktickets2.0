@@ -83,7 +83,7 @@
   nav.mainmenu-container {
     position: relative;
   }
-  nav.mainmenu-container .nav-toggler {
+  .nav-toggler {
     background: #ff8625 none repeat scroll 0 0;
     border: medium none;
     border-radius: 5px;
@@ -319,7 +319,7 @@
   nav.mainmenu-container {
     position: relative;
   }
-  nav.mainmenu-container .nav-toggler {
+  .nav-toggler {
    /* background: #ff8625 none repeat scroll 0 0;
     border: medium none;
     border-radius: 5px;
@@ -345,7 +345,6 @@
     right: 35px;
     
     text-transform: uppercase;
-    bottom: 45px;
     display: block;
   }
   nav.mainmenu-container ul {
