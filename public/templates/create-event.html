@@ -97,9 +97,9 @@
            <div class="form-group">
              <label class="control-label" for="source_name">Choose a ticket type:</label>
              <div>
-              <button type="submit" ng-click="add('Free')"class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:19%;background-color:transparent;color:black"> Free</button>
-              <button type="submit" ng-click="add('Paid')" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:19%;background-color:transparent;color:black"> Paid</button>
-              <button type="submit" ng-click="add('Donation')" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Donation</button>
+              <button type="submit" ng-click="add('Free')"class="hvr-bounce-to-right my-btn" id="tickets-btn"> Free</button>
+              <button type="submit" ng-click="add('Paid')" class="hvr-bounce-to-right my-btn" id="tickets-btn"> Paid</button>
+              <button type="submit" ng-click="add('Donation')" class="hvr-bounce-to-right my-btn" id="tickets-btn"> Donation</button>
               
                <ul class="list-unstyled list-group" float="left">
                  <li ng-repeat="ticket in tempTicks track by $index" >
