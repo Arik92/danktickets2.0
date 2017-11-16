@@ -1,11 +1,13 @@
 <section id="editevent" >
   <form enctype="multipart/form-data" name="upload_form">
-    <div class="container">
+    <div class="container" style="width:80%">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
-          <div class="page-header"><h2>Edit event</h2></div>
+          <div class="section-title text-center">
+            <h1 style="margin-top:50px">Edit event</h1>
+          </div>
           <div class="form-group">
-            <label class="control-label" for="source_name" ><h3>Organizer: </h3> </label>
+            <label class="control-label" for="source_name">Organizer:</label>
             <div>
               <select ng-model="selectedName" class="form-control input-md" ng-change="selectProf()">
                 <option ng-repeat="organizer in profiles track by $index" value="{{organizer._id}}">{{organizer.name}}</option>
@@ -71,7 +73,7 @@
              </div>
            </div>
            <div class="form-group">
-             <button class="btn btn-success" ng-click="preview()">preview:</button>
+             <button type="submit" ng-click="preview()" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Preview</button>
              <div id="preview">
              </div>
            </div>
@@ -79,7 +81,6 @@
            <div class="form-group">
              <label class="control-label" for="source_name">Event Location: </label>
              <div>
-              <h3>Enter any location</h3>
                 <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter city" ng-model="event.location.locationName">
              </div>
            </div>
@@ -97,9 +98,9 @@
            <div class="form-group">
              <label class="control-label" for="source_name">Choose a ticket type:</label>
              <div>
-               <button class="btn btn-primary" ng-click="add('Free')">Free</button>
-               <button class="btn btn-success" ng-click="add('Paid')">Paid</button>
-               <button class="btn btn-warning" ng-click="add('Donation')">Dontaion</button>
+               <button type="submit" ng-click="add('Free')"class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:19%;background-color:transparent;color:black"> Free</button>
+               <button type="submit" ng-click="add('Paid')" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:19%;background-color:transparent;color:black"> Paid</button>
+               <button type="submit" ng-click="add('Donation')" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Donation</button>
                <ul class="list-unstyled list-group" float="left">
                  <li ng-repeat="ticket in tempTicks track by $index" >
                    <br />
@@ -132,7 +133,7 @@
            </div>
             <br /><!--input -->
                 <!-- <Button  class="btn btn-danger" ng-click="reset()">Reset   </Button> -->
-          <Button class="btn btn-success" ng-click="submit()" ng-show="!showRedirect">Update Event </Button>
+          <button type="submit" ng-click="submit()" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:33%;background-color:black;color:white" ng-show="!showRedirect">Update Event</button>
           <div class="row show-hide-message" ng-show="showRedirect">
             <div class="alert alert-success">Event updated! redirecting..<span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
           </div>
