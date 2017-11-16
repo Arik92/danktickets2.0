@@ -167,7 +167,7 @@ header.header-fixed {
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
-header.header-fixed .mainmenu-container > ul > li {
+header.header-fixed .main-container > ul > li {
   transition: all 0.3s ease-out;
   line-height: 94px;
 }
@@ -219,7 +219,7 @@ header .mainmenu-container > ul > li {
   float: left;
   position: relative;
   line-height: 119px;
-  padding: 0 20px;
+  padding: 0 15px;
   transition: all 0.3s ease-out;
 }
 
@@ -729,6 +729,7 @@ header .mainmenu-container li.dropdown > a .fa {
   background: #00D8B7;
   color: #fff;
 }
+
 .length-limiter {
   white-space: nowrap;
   width: 100%;

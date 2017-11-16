@@ -34,7 +34,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     })
     .state('create', {
       url: '/create-event',
-      templateUrl: '/templates/createEvent.html',
+      templateUrl: '/templates/create-event.html',
       controller: 'createCtrl',
       onEnter: function ($location, $stateParams, $anchorScroll, $timeout) {
         $timeout(function() {
@@ -45,7 +45,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     })
     .state('organizer', {
       url: '/create-organizer',
-      templateUrl: '/templates/createOrganizer.html',
+      templateUrl: '/templates/create-organizer.html',
       controller: 'orCtrl',
       onEnter: function ($location, $stateParams, $anchorScroll, $timeout) {
         $timeout(function() {
@@ -91,7 +91,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
         })
     .state('browse', {
           url: '/browse-events',
-          templateUrl: '/templates/browseEvents.html',
+          templateUrl: '/templates/browse-events.html',
           controller: 'browseCtrl'
         })
     .state('manage', {
@@ -109,19 +109,19 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     })
 	.state('userprofiles', {
       url: '/manage-organizers',
-      templateUrl: '/templates/manageProfiles.html',
+      templateUrl: '/templates/manage-organizers.html',
       controller: 'manageProfCtrl'
     })
     .state('edit', {
-      url: '/edit-event/:id',
+      url: '/edit-event',
         params: {eventParam: null},
-      templateUrl: '/templates/editEvent.html',
+      templateUrl: '/templates/edit-event.html',
       controller: 'editCtrl'
     })
 	.state('editprofile', {
-      url: '/edit-profile/:id',
+      url: '/edit-profile',
         params: {profileParam: null},
-      templateUrl: '/templates/editProfile.html',
+      templateUrl: '/templates/edit-organizers.html',
       controller: 'editProfileCtrl'
     })
     .state('auth', {
