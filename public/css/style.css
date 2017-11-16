@@ -58,6 +58,7 @@ body {
   font-family: 'Raleway', sans-serif;
   font-size: 14px;
   line-height: 24px;
+  min-height: 100%;
 }
 ul,
 li {
@@ -194,6 +195,18 @@ header .container:after {
   top: 3%;
   right: 3%;
   z-index: 7;
+  background: #ff8625 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 40px;
+  padding: 0 15px;
+  /* position: absolute; */
+  right: 16px;
+  text-transform: uppercase;
+  top: 27px;
 }
 header .mainmenu-container li.nav-closer {
   display: none;
