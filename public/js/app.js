@@ -113,13 +113,13 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       controller: 'manageProfCtrl'
     })
     .state('edit', {
-      url: '/edit-event',
+      url: '/edit-event/:id',
         params: {eventParam: null},
       templateUrl: '/templates/edit-event.html',
       controller: 'editCtrl'
     })
 	.state('editprofile', {
-      url: '/edit-profile',
+      url: '/edit-profile/:id',
         params: {profileParam: null},
       templateUrl: '/templates/edit-organizer.html',
       controller: 'editProfileCtrl'
