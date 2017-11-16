@@ -1,7 +1,15 @@
 /* medium size */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
+  nav.mainmenu-container.menu-list {
+    display: none !important;
+  }
+
+  .nav-toggler {
+    display: block;
+  }
+
   header .mainmenu-container > ul > li {
-    padding: 0 13px;
+    padding: 0 1rem;
   }
   .section-title.text-center {
     max-width: 60%;
