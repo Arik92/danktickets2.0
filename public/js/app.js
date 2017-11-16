@@ -138,6 +138,7 @@ app.run(function($rootScope, authService) {
   var user = JSON.parse(localStorage.getItem("user"));
   if (user) {
     $rootScope.currentUser = user.name;
+    console.log(localStorage);
     //$rootScope.$broadcast('fbLogin');
   }
   // if (authService.isLoggedIn()) {
