@@ -191,7 +191,6 @@ header .container:after {
  .nav-toggler {
   display: none;
   position: fixed;
-  background: orange;
   top: 3%;
   right: 3%;
   z-index: 7;
@@ -612,7 +611,7 @@ header .mainmenu-container li.dropdown > a .fa {
   background: #fff;
   margin-top: -80px;
   position: relative;
-  z-index: 999;
+  z-index: 1;
 }
 #information-bar .col-lg-3 {
   border-right: 2px solid #F2F2F2;
