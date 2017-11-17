@@ -5,7 +5,7 @@
         <div class="col-lg-12">
           <div class="section-title text-center">
             <h1>LOGIN TO YOUR ACCOUNT</h1>
-            <p>Don't have an account yet? <br> <a ui-sref="signup">Sign Up Here</a></p>
+            <p style="color:white;">Don't have an account yet? <br> <a ui-sref="signup" style="color:white;">Sign Up Here</a></p>
           </div>
         </div>
       </div>
@@ -22,14 +22,14 @@
               <li>
                 <div class="input-wrap">
                   <label><img src="img/icons/password.png" alt="">PASSWORD</label>
-                  <input type="text" placeholder="********" ng-model="login.loginData.password">
+                  <input type="password" placeholder="PASSWORD" ng-model="login.loginData.password">
                 </div>
               </li>
               <li>
                 <div class="input-wrap">
-                  <button type="submit" class="hvr-bounce-to-right">LOG IN</button>Or alternatively,
-
-                  <a href="/users/facebook" target="_blank"><button type="button" class="hvr-bounce-to-right">Facebook</button></a>
+                  <button type="submit" class="hvr-bounce-to-right">LOG IN</button>
+                  <p>Or login w/ FB</p>
+                  <a href="/users/facebook" target="_blank"><button type="button" class="btn-facebook">Facebook</button></a>
 
                 </div>
                 <br>
