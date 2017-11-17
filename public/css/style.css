@@ -2595,7 +2595,7 @@ footer .footer-widget .social-icons a:hover {
   transition: all .3s ease;
 }
 
-button.my-btn.hvr-bounce-to-right {
+.my-btn.hvr-bounce-to-right {
     display: inline-block;
     border-radius: 5px;
     font-size: 30px;
@@ -2611,6 +2611,21 @@ button.my-btn.hvr-bounce-to-right {
     transition: all .3s ease;
 }
  
+.my-btn.hvr-bounce-to-right-fb {
+    display: inline-block;
+    border-radius: 5px;
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+    border: 2px solid black;
+    padding: 15px 1px;
+    width: 80%;
+    outline: none;
+    text-transform: uppercase;
+    background: #3B5998;
+    vertical-align: bottom;
+    transition: all .3s ease;
+} 
 
 .event-list {
     list-style: none;
@@ -2810,17 +2825,17 @@ button.my-btn.hvr-bounce-to-right {
     color: #ffffff;
     -webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-    background-color: #2b4b90;
-    *background-color: #133783;
+    background-color: #3B5998;
+    *background-color: #3B5998;
     background-image: -moz-linear-gradient(top, #3b5998, #133783);
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3b5998), to(#133783));
     background-image: -webkit-linear-gradient(top, #3b5998, #133783);
     background-image: -o-linear-gradient(top, #3b5998, #133783);
     background-image: linear-gradient(to bottom, #3b5998, #133783);
     background-repeat: repeat-x;
-    border-color: #133783 #133783 #091b40;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3b5998', endColorstr='#ff133783', GradientType=0);
+    border-color: #3B5998;
+    border-color: #3B5998;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3B5998', endColorstr='#ff133783', GradientType=0);
     filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 
@@ -2831,13 +2846,13 @@ button.my-btn.hvr-bounce-to-right {
     .btn-facebook.disabled,
     .btn-facebook[disabled] {
         color: #ffffff;
-        background-color: #133783 !important;
-        *background-color: #102e6d !important;
+        background-color: #3B5998 !important;
+        *background-color: #3B5998 !important;
     }
 
     .btn-facebook:active,
     .btn-facebook.active {
-        background-color: #0d2456 \9 !important;
+        background-color: #3B5998 \9 !important;
     }
 
 
