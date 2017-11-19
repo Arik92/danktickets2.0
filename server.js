@@ -21,6 +21,7 @@ app.use(passport.initialize());
 app.use(express.static('public'));
 app.use(express.static('node_modules'));
 app.use(express.static('bower_components'));
+app.use(express.static('ui-bootstrap-custom-build'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/events', eventRoutes);
