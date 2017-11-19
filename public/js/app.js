@@ -1,4 +1,4 @@
-var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload', 'slick']);
+var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload', 'slick', 'ui.bootstrap']);
 
 app.config(function($httpProvider) {
   $httpProvider.interceptors.push('authServiceInterceptors');
@@ -99,15 +99,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/manageEvents.html',
       controller: 'manageCtrl'
     })
-    .state('blog', {
-      url: '/blog',
-      templateUrl: '/templates/blog.html'
-    })
-    .state('event2', {
-      url: '/event2',
-      templateUrl: '/templates/event2.html'
-    })
-	.state('userprofiles', {
+	.state('editprofiles', {
       url: '/manage-organizers',
       templateUrl: '/templates/manage-organizers.html',
       controller: 'manageProfCtrl'
@@ -115,14 +107,8 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     .state('edit', {
       url: '/edit-event/:id',
         params: {eventParam: null},
-      templateUrl: '/templates/edit-event.html',
+      templateUrl: '/templates/editEvent.html',
       controller: 'editCtrl'
-    })
-	.state('editprofile', {
-      url: '/edit-profile/:id',
-        params: {profileParam: null},
-      templateUrl: '/templates/edit-organizer.html',
-      controller: 'editProfileCtrl'
     })
     .state('auth', {
       url: '/authorization?token&name',
@@ -146,7 +132,6 @@ app.run(function($rootScope, authService) {
   var user = JSON.parse(localStorage.getItem("user"));
   if (user) {
     $rootScope.currentUser = user.name;
-    console.log(localStorage);
     //$rootScope.$broadcast('fbLogin');
   }
   // if (authService.isLoggedIn()) {

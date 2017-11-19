@@ -2,3 +2,5 @@ node_modules
 public/js/config.js
 public/bundle.js
 public/img/uploads
+bower_components
+ui-bootstrap-custom-build
