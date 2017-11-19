@@ -208,11 +208,6 @@ header .container:after {
   text-transform: uppercase;
   top: 27px;
 }
-
-.nav-toggler.dropdown-menu {
-  left: -200px !important;
-}
-
 header .mainmenu-container li.nav-closer {
   display: none;
 }
