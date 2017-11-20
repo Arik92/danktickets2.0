@@ -1,4 +1,3 @@
-
 app.controller('loginCtrl', function(authService, $timeout, $location, $rootScope) {
   var msg = this;
 
@@ -16,7 +15,6 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
     console.log("I have reached logincrtl, and rootscope current fb user is", $rootScope.currentUser);
     if (authService.isLoggedIn()) {
       authService.getUser().then(function(data) {
-
         msg.username = data.data.username;
         msg.email = data.data.email;
         msg.loader = true;
@@ -48,6 +46,7 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
 
 
   this.doLogin = function (loginData) {
+	  //console.log("login data looks like", loginData);
     msg.loading = true;
     msg.errorMsg = false;
     authService.login(msg.loginData).then(function(data) {
