@@ -122,7 +122,7 @@ $scope.startHrCalender = [
   '03:00 AM',
   '03:30 AM',
   '04:00 AM',
-  '04:30 AM',
+  '04:20 AM',
   '05:00 AM',
   '05:30 AM',
   '06:00 AM',
@@ -146,7 +146,7 @@ $scope.startHrCalender = [
   '03:00 PM',
   '03:30 PM',
   '04:00 PM',
-  '04:30 PM',
+  '04:20 PM',
   '05:00 PM',
   '05:30 PM',
   '06:00 PM',
@@ -174,7 +174,7 @@ $scope.endHrCalender = [
   '03:00 AM',
   '03:30 AM',
   '04:00 AM',
-  '04:30 AM',
+  '04:20 AM',
   '05:00 AM',
   '05:30 AM',
   '06:00 AM',
@@ -198,7 +198,7 @@ $scope.endHrCalender = [
   '03:00 PM',
   '03:30 PM',
   '04:00 PM',
-  '04:30 PM',
+  '04:20 PM',
   '05:00 PM',
   '05:30 PM',
   '06:00 PM',
@@ -285,7 +285,7 @@ $scope.updateEndHr = function() {
                     console.log("image name will be?", $scope.imageName);
                   //  publishEvent(); // call a function to submit the whole event
                 } else {
-                    $window.alert(resp.data.error_code);
+                    $window.alert('error code:', resp.data.error_code);
                 }
             }, function (error) { //catch error
                 console.log('Error status: ' + error);
