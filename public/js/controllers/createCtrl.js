@@ -1,9 +1,9 @@
 app.controller('createCtrl',['createService', 'orService', 'userService','$scope' ,'Upload','$window','$timeout','$rootScope','$location', function(createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location){
  console.log('hello from createCtrl');
  this.$onInit = () => {
+	 initProfs();
    initEndDatePicker();
-  initStartDatePicker();
-  initProfs();
+  initStartDatePicker();  
  }
 
   $scope.typeOptions = [
