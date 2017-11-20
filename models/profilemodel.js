@@ -5,12 +5,11 @@ var profileSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref:"User" },
   name: {type: String, unique: true},
   image: String,
-  about: String,
-  //useAbout: Boolean,
+  about: String,  
   website: String,
-  // facebook: String,
-  // twitter: String,
-  // instagram: String
+   facebook: String,
+   twitter: String,
+   instagram: String
 });
 
 var profile = mongoose.model("Profile", profileSchema);

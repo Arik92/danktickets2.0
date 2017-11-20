@@ -15,7 +15,7 @@
           <div class="form-group">
             <label class="control-label" for="source_name">About You</label>
             <div>
-              <textarea id="source_name" class="form-control" name="source_name" ng-model="profile.description" placeholder="This is who we are. This is what we do" class="form-control input-md"></textarea>
+              <textarea id="source_name" class="form-control" name="source_name" ng-model="profile.about" placeholder="This is who we are. This is what we do" class="form-control input-md"></textarea>
             </div>
           </div>
            <div class="form-group">
@@ -48,19 +48,19 @@
            <div class="form-group">
              <label class="control-label" for="source_name">Facebook:</label>
              <div>
-               <input id="source_name" class="form-control" name="source_name" ng-model="oFace" type="text" placeholder="facebook.com/username" class="form-control input-md">
+               <input id="source_name" class="form-control" name="source_name" ng-model="profile.facebook" type="text" placeholder="facebook.com/username" class="form-control input-md">
              </div>
            </div>
            <div class="form-group">
              <label class="control-label" for="source_name">Instagram:</label>
              <div>
-               <input id="source_name" class="form-control" name="source_name" ng-model="oInst" type="text" placeholder="@gramhandle" class="form-control input-md">
+               <input id="source_name" class="form-control" name="source_name" ng-model="profile.instagram" type="text" placeholder="@gramhandle" class="form-control input-md">
              </div>
            </div>
            <div class="form-group">
              <label class="control-label" for="source_name">Twitter:</label>
              <div>
-               <input id="source_name" class="form-control" name="source_name" ng-model="oTwitt" type="text" placeholder="@twitterhandle" class="form-control input-md">
+               <input id="source_name" class="form-control" name="source_name" ng-model="profile.twitter" type="text" placeholder="@twitterhandle" class="form-control input-md">
              </div>
            </div>
                <button type="submit" ng-click="reset()" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black" g-show="!showRedirect">Reset</button>
