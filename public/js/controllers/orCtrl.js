@@ -17,6 +17,9 @@ app.controller('orCtrl',['orService','userService','$scope' ,'Upload','$window',
           owner: $scope.user._id,
           about: $scope.oDesc,
           website: $scope.oSite,
+		  facebook: $scope.oFace,
+          twitter: $scope.oTwitt,
+          instagram: $scope.oInst
         };// event post object
           if (submitPic) {
             Upload.upload({
