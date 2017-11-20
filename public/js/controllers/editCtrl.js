@@ -240,7 +240,7 @@ function checkNames() {
 
   //////////////////////////////////// initializing pickers ////////////////////////////////////////////
 
-  var startDatepicker = datepicker('#start_date', {
+  var startDatepicker = datepicker('#edit_start_date_picker', {
   position: 'br', // Top right.
   startDate: new Date($scope.event.startTime), // This month.
   dateSelected: new Date($scope.event.startTime), // Today is selected.
@@ -273,7 +273,7 @@ function checkNames() {
   disableMobile: true // Conditionally disabled on mobile devices.
 });
 
-var endDatepicker = datepicker('#end_date', {
+var endDatepicker = datepicker('#edit_end_date_picker', {
 position: 'br', // Top right.
 startDate: new Date(), // This month.
 dateSelected: new Date($scope.event.endTime), // Today is selected.
