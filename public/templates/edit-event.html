@@ -36,7 +36,7 @@
           <div class="form-group">
             <label class="control-label" for="source_name">Starts: </label>
             <div>
-              <input  id="start_date" ng-model="event.startDate" class="col-md-5 input-md" >
+              <input  id="edit_start_date_picker" ng-model="event.startDate" class="col-md-5 input-md" >
               <select ng-change="updateEndHr()" ng-model="event.startHr" class="col-md-5 input-md col-md-offset-2" >
                 <option ng-repeat="hour in startHrCalender track by $index" value="{{hour}}">{{hour}}</option>
               </select>
@@ -46,7 +46,7 @@
           <div class="form-group">
             <label class="control-label" for="source_name">Ends:</label>
             <div>
-            <input id="end_date" ng-model="event.endDate" class="col-md-5 input-md" >
+            <input id="edit_end_date_picker" ng-model="event.endDate" class="col-md-5 input-md" >
             <select ng-model="event.endHr" class="col-md-5 input-md col-md-offset-2" >
               <option ng-repeat="hour in endHrCalender track by $index" value="{{hour}}">{{hour}}</option>
             </select>
