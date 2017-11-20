@@ -21,8 +21,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       } //controller
     })
     .state('event', {
-      url: '/event/:id',
-	  params: {eventParam: null},
+      url: '/event/:id',	  
       templateUrl: '/templates/event.html',
 	  controller: 'eventCtrl'
     })
@@ -98,7 +97,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
         })
     .state('manage', {
       url: '/manage-events',
-      templateUrl: '/templates/manageEvents.html',
+      templateUrl: '/templates/manage-events.html',
       controller: 'manageCtrl'
     })
     .state('blog', {
@@ -115,14 +114,12 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       controller: 'manageProfCtrl'
     })
     .state('edit', {
-      url: '/edit-event/:id',
-        params: {eventParam: null},
+      url: '/edit-event/:id',        
       templateUrl: '/templates/edit-event.html',
       controller: 'editCtrl'
     })
 	.state('editprofile', {
-      url: '/edit-profile/:id',
-      params: {profileParam: null},
+      url: '/edit-profile/:id',      
       templateUrl: '/templates/edit-organizer.html',
       controller: 'editProfileCtrl'
     })

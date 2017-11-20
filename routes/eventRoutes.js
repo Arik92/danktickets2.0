@@ -48,6 +48,17 @@ router.get('/:id', function(req, res, next){
   })//exec()
 }) // get event by OWNER id.
 
+router.get('/findById/:id', function(req, res, next){
+  Event.find({_id: req.params.id}).populate('organizer').exec(function(err,foundEvent){
+    if (err) {
+      console.error(err);
+    } else {
+      console.log("found events(by id)", foundEvent);      
+      res.send(foundEvent);
+    }
+  })//exec()
+}) // get event by OWNER id.
+
 router.get('/searchByActivity/:type', function(req, res, next){
   Event.find({type: req.params.type}, function(err, resultEvents){
     if (err) {
