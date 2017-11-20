@@ -5,6 +5,13 @@ var config = {
 module.exports = config;
 },{}],2:[function(require,module,exports){
 app.controller('createCtrl',['createService', 'orService', 'userService','$scope' ,'Upload','$window','$timeout','$rootScope','$location', function(createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location){
+ console.log('hello from createCtrl');
+ this.$onInit = () => {
+	 initProfs();
+   initEndDatePicker();
+  initStartDatePicker();  
+ }
+
   $scope.typeOptions = [
     'Concert',
     'Meeting',
@@ -12,6 +19,7 @@ app.controller('createCtrl',['createService', 'orService', 'userService','$scope
     'Party',
     'Other'
   ];
+
   function initProfs() {
 	$scope.profiles = [];
     console.log("initial profs", $rootScope.currentUser);
@@ -26,13 +34,52 @@ app.controller('createCtrl',['createService', 'orService', 'userService','$scope
       })//get organizers
     })//userFactory cb
   }//initProfs //NOTE we need the user fetching here to get that owner id
-  initProfs();
+  // initProfs();
   $scope.selectProf = function(){
     console.log("selected profile is", $scope.selectedOrganizer);
   }
   //////////////////////////////////// initializing pickers ////////////////////////////////////////////
   //TODO: when loading an event, set the start/end dates accordingly
-  var startDatepicker = datepicker('#start_date', {
+
+  function initStartDatePicker () {
+    var startDatepicker = datepicker('#create_start_date_picker', {
+    position: 'br', // Top right.
+    startDate: new Date(), // This month.
+    dateSelected: new Date(), // Today is selected.
+    minDate: new Date(), // June 1st, 2016.
+    maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
+    noWeekends: false,
+    formatter: function(el, date) {
+      // This will display the date as `1/1/2017`.
+      el.value = date.toDateString();
+    },
+    onSelect: function(instance) {
+      // Show which date was selected.
+      console.log("start date: ", instance.dateSelected);
+      $scope.startDate = instance.dateSelected;
+      console.log("as string?", $scope.startDate.toDateString());
+    },
+    onShow: function(instance) {
+      console.log('Calendar showing.');
+    },
+    onHide: function(instance) {
+      console.log('Calendar hidden.');
+    },
+    onMonthChange: function(instance) {
+      // Show the month of the selected date.
+      console.log(instance.currentMonthName);
+    },
+    customMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
+    overlayPlaceholder: 'Enter a 4-digit year',
+    overlayButton: 'Go!',
+    disableMobile: false // Conditionally disabled on mobile devices.
+  });
+  } 
+
+function initEndDatePicker() {
+  console.log('initEndfired');
+  var endDatepicker = datepicker('#create_end_date_picker', {
   position: 'br', // Top right.
   startDate: new Date(), // This month.
   dateSelected: new Date(), // Today is selected.
@@ -42,12 +89,14 @@ app.controller('createCtrl',['createService', 'orService', 'userService','$scope
   formatter: function(el, date) {
     // This will display the date as `1/1/2017`.
     el.value = date.toDateString();
+    // $scope.exampleDate = date;
   },
   onSelect: function(instance) {
     // Show which date was selected.
-    console.log("start date: ", instance.dateSelected);
-    $scope.startDate = instance.dateSelected;
-    console.log("as string?", $scope.startDate.toDateString());
+    console.log("End date: ", instance.dateSelected);
+    $scope.endDate = instance.dateSelected;
+    console.log("as object", $scope.endDate);
+    console.log("exp date", $scope.exampleDate);
   },
   onShow: function(instance) {
     console.log('Calendar showing.');
@@ -63,44 +112,10 @@ app.controller('createCtrl',['createService', 'orService', 'userService','$scope
   customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
   overlayPlaceholder: 'Enter a 4-digit year',
   overlayButton: 'Go!',
-  disableMobile: true // Conditionally disabled on mobile devices.
-});
+  disableMobile: false // Conditionally disabled on mobile devices.
+  });
+}
 
-var endDatepicker = datepicker('#end_date', {
-position: 'br', // Top right.
-startDate: new Date(), // This month.
-dateSelected: new Date(), // Today is selected.
-minDate: new Date(), // June 1st, 2016.
-maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
-noWeekends: false,
-formatter: function(el, date) {
-  // This will display the date as `1/1/2017`.
-  el.value = date.toDateString();
-  $scope.exampleDate = date;
-},
-onSelect: function(instance) {
-  // Show which date was selected.
-  console.log("End date: ", instance.dateSelected);
-  $scope.endDate = instance.dateSelected;
-  console.log("as object", $scope.endDate);
-  console.log("exp date", $scope.exampleDate);
-},
-onShow: function(instance) {
-  console.log('Calendar showing.');
-},
-onHide: function(instance) {
-  console.log('Calendar hidden.');
-},
-onMonthChange: function(instance) {
-  // Show the month of the selected date.
-  console.log(instance.currentMonthName);
-},
-customMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
-overlayPlaceholder: 'Enter a 4-digit year',
-overlayButton: 'Go!',
-disableMobile: true // Conditionally disabled on mobile devices.
-});
 $scope.startHrCalender = [
   '',
   '12:00 AM',
@@ -429,21 +444,34 @@ function checkNames() {
 app.controller('editCtrl',['createService','orService', 'userService', '$scope' ,'Upload','$window','$stateParams','$timeout','$location','$rootScope', function(createService, orService, userService, $scope, Upload, $window, $stateParams, $timeout, $location, $rootScope){
   //$scope.video = $stateParams.videoParam;
   console.log("state params", $stateParams);
-  $scope.selectedName = $stateParams.eventParam.organizer.name;
-  console.log("selected name", $scope.selectedName);
-  function initProfs() {
+  //$scope.selectedName = $stateParams.eventParam.organizer.name;
+  //console.log("selected name", $scope.selectedName);
+  function initEventAndProfs() {
+	  createService.getEventById($stateParams.id).then(function(res, err){
+		if (err) {
+			console.log("error fetching specific event by id");
+		} else {
+			console.log("fetched event is", res[0]);
+			$scope.event = res[0];
     $scope.profiles = [];
-    console.log("initial profs for ", $rootScope.currentUser);    
+    console.log("initial profs for ",$rootScope.currentUser);    
       orService.getOrganizersByUser($rootScope.currentUser).then(function(data2){
         console.log("data 2", data2);
         for (var i=0;i<data2.length;i++) {
           $scope.profiles[i] = data2[i];
         }//for
-      })//get organizers
-      
-   
+		initStartDatePicker();
+		initEndDatePicker();
+      })//get organizers  
+		}//else
+	  });//getEventById
   }//initProfs
-  initProfs();
+  
+  this.$onInit = () => {
+			console.log('init fired');
+			initEventAndProfs();			
+			addScript(mapSrc); 
+	}//onInit	  
   $scope.selectProf = function(){
     console.log("selected profile is", $scope.selectedName);
 	$scope.event.organizer = $scope.selectedName;
@@ -653,16 +681,11 @@ function checkNames() {
     }
     return true;
   }//checkNames
-  function init() {
-    addScript(mapSrc);
-    $scope.event = $stateParams.eventParam;
-    console.log("received event obj is ", $stateParams.eventParam);
-  }//init
-  init();
+  
 
   //////////////////////////////////// initializing pickers ////////////////////////////////////////////
-
-  var startDatepicker = datepicker('#start_date', {
+  var initStartDatePicker = function(){
+  var startDatepicker = datepicker('#edit_start_date_picker', {
   position: 'br', // Top right.
   startDate: new Date($scope.event.startTime), // This month.
   dateSelected: new Date($scope.event.startTime), // Today is selected.
@@ -694,8 +717,9 @@ function checkNames() {
   overlayButton: 'Go!',
   disableMobile: true // Conditionally disabled on mobile devices.
 });
-
-var endDatepicker = datepicker('#end_date', {
+  }//init stattDatePicker
+  var initEndDatePicker = function(){
+var endDatepicker = datepicker('#edit_end_date_picker', {
 position: 'br', // Top right.
 startDate: new Date(), // This month.
 dateSelected: new Date($scope.event.endTime), // Today is selected.
@@ -728,6 +752,7 @@ overlayPlaceholder: 'Enter a 4-digit year',
 overlayButton: 'Go!',
 disableMobile: true // Conditionally disabled on mobile devices.
 });
+  }//initEndDatePicker
 $scope.startHrCalender = [
   '',
   '12:00 AM',
