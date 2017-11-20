@@ -1,21 +1,32 @@
 app.controller('editCtrl',['createService','orService', 'userService', '$scope' ,'Upload','$window','$stateParams','$timeout','$location','$rootScope', function(createService, orService, userService, $scope, Upload, $window, $stateParams, $timeout, $location, $rootScope){
   //$scope.video = $stateParams.videoParam;
   console.log("state params", $stateParams);
-  $scope.selectedName = $stateParams.eventParam.organizer.name;
-  console.log("selected name", $scope.selectedName);
-  function initProfs() {
+  //$scope.selectedName = $stateParams.eventParam.organizer.name;
+  //console.log("selected name", $scope.selectedName);
+  function initEventAndProfs() {
+	  createService.getEventById($stateParams.id).then(function(err, res){
+		if (err) {
+			console.log("error fetching specific event by id");
+		} else {
+			console.log("fetched event is", res[0]);
+			$scope.event = res[0];
     $scope.profiles = [];
-    console.log("initial profs for ", $rootScope.currentUser);    
+    console.log("initial profs for ",$rootScope.currentUser);    
       orService.getOrganizersByUser($rootScope.currentUser).then(function(data2){
         console.log("data 2", data2);
         for (var i=0;i<data2.length;i++) {
           $scope.profiles[i] = data2[i];
         }//for
-      })//get organizers
-      
-   
+      })//get organizers  
+		}//else
+	  });//getEventById
   }//initProfs
-  initProfs();
+  
+  this.$onInit = () => {
+			console.log('init fired');
+			initEventAndProfs();
+			 addScript(mapSrc);    
+		}//onInit	  
   $scope.selectProf = function(){
     console.log("selected profile is", $scope.selectedName);
 	$scope.event.organizer = $scope.selectedName;
@@ -225,12 +236,7 @@ function checkNames() {
     }
     return true;
   }//checkNames
-  function init() {
-    addScript(mapSrc);
-    $scope.event = $stateParams.eventParam;
-    console.log("received event obj is ", $stateParams.eventParam);
-  }//init
-  init();
+  
 
   //////////////////////////////////// initializing pickers ////////////////////////////////////////////
 

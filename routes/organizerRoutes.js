@@ -36,7 +36,17 @@ router.get('/', function (req, res, next) {
     }//else
   })//findCb
 }) // get all of a user's profiles*/
-
+router.get('/findById/:id', function(req, res, next){
+	//console.log("id is", req.params.id);
+  Profile.find({_id: req.params.id}).populate('owner').exec(function(err, profile){
+    if (err) {
+      console.error(err);
+    } else {      
+	console.log("found profile", profile);
+      res.send(profile);
+    }
+  })//exec()
+}) // get event by OWNER id.
 router.get('/:name', function(req, res, next){
   Profile.find().populate('owner').exec(function(err, profiles){
     if (err) {
