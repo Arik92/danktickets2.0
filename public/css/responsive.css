@@ -295,7 +295,7 @@
   }
 
   .container {
-    overflow: hidden;
+    /* overflow: hidden; */
   }
   header,
   header.header-fixed {

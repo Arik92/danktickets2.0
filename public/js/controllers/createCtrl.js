@@ -1,4 +1,12 @@
 app.controller('createCtrl',['createService', 'orService', 'userService','$scope' ,'Upload','$window','$timeout','$rootScope','$location', function(createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location){
+ console.log('hello from createCtrl');
+ this.$onInit = () => {
+   initEndDatePicker();
+  initStartDatePicker();
+
+  initProfs();
+ }
+
   $scope.typeOptions = [
     'Concert',
     'Meeting',
@@ -6,6 +14,7 @@ app.controller('createCtrl',['createService', 'orService', 'userService','$scope
     'Party',
     'Other'
   ];
+
   function initProfs() {
 	$scope.profiles = [];
     console.log("initial profs", $rootScope.currentUser);
@@ -20,13 +29,52 @@ app.controller('createCtrl',['createService', 'orService', 'userService','$scope
       })//get organizers
     })//userFactory cb
   }//initProfs //NOTE we need the user fetching here to get that owner id
-  initProfs();
+  // initProfs();
   $scope.selectProf = function(){
     console.log("selected profile is", $scope.selectedOrganizer);
   }
   //////////////////////////////////// initializing pickers ////////////////////////////////////////////
   //TODO: when loading an event, set the start/end dates accordingly
-  var startDatepicker = datepicker('#start_date', {
+
+  function initStartDatePicker () {
+    var startDatepicker = datepicker('#create_start_date_picker', {
+    position: 'br', // Top right.
+    startDate: new Date(), // This month.
+    dateSelected: new Date(), // Today is selected.
+    minDate: new Date(), // June 1st, 2016.
+    maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
+    noWeekends: false,
+    formatter: function(el, date) {
+      // This will display the date as `1/1/2017`.
+      el.value = date.toDateString();
+    },
+    onSelect: function(instance) {
+      // Show which date was selected.
+      console.log("start date: ", instance.dateSelected);
+      $scope.startDate = instance.dateSelected;
+      console.log("as string?", $scope.startDate.toDateString());
+    },
+    onShow: function(instance) {
+      console.log('Calendar showing.');
+    },
+    onHide: function(instance) {
+      console.log('Calendar hidden.');
+    },
+    onMonthChange: function(instance) {
+      // Show the month of the selected date.
+      console.log(instance.currentMonthName);
+    },
+    customMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
+    overlayPlaceholder: 'Enter a 4-digit year',
+    overlayButton: 'Go!',
+    disableMobile: false // Conditionally disabled on mobile devices.
+  });
+  } 
+
+function initEndDatePicker() {
+  console.log('initEndfired');
+  var endDatepicker = datepicker('#create_end_date_picker', {
   position: 'br', // Top right.
   startDate: new Date(), // This month.
   dateSelected: new Date(), // Today is selected.
@@ -36,12 +84,14 @@ app.controller('createCtrl',['createService', 'orService', 'userService','$scope
   formatter: function(el, date) {
     // This will display the date as `1/1/2017`.
     el.value = date.toDateString();
+    // $scope.exampleDate = date;
   },
   onSelect: function(instance) {
     // Show which date was selected.
-    console.log("start date: ", instance.dateSelected);
-    $scope.startDate = instance.dateSelected;
-    console.log("as string?", $scope.startDate.toDateString());
+    console.log("End date: ", instance.dateSelected);
+    $scope.endDate = instance.dateSelected;
+    console.log("as object", $scope.endDate);
+    console.log("exp date", $scope.exampleDate);
   },
   onShow: function(instance) {
     console.log('Calendar showing.');
@@ -57,44 +107,10 @@ app.controller('createCtrl',['createService', 'orService', 'userService','$scope
   customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
   overlayPlaceholder: 'Enter a 4-digit year',
   overlayButton: 'Go!',
-  disableMobile: true // Conditionally disabled on mobile devices.
-});
+  disableMobile: false // Conditionally disabled on mobile devices.
+  });
+}
 
-var endDatepicker = datepicker('#end_date', {
-position: 'br', // Top right.
-startDate: new Date(), // This month.
-dateSelected: new Date(), // Today is selected.
-minDate: new Date(), // June 1st, 2016.
-maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
-noWeekends: false,
-formatter: function(el, date) {
-  // This will display the date as `1/1/2017`.
-  el.value = date.toDateString();
-  $scope.exampleDate = date;
-},
-onSelect: function(instance) {
-  // Show which date was selected.
-  console.log("End date: ", instance.dateSelected);
-  $scope.endDate = instance.dateSelected;
-  console.log("as object", $scope.endDate);
-  console.log("exp date", $scope.exampleDate);
-},
-onShow: function(instance) {
-  console.log('Calendar showing.');
-},
-onHide: function(instance) {
-  console.log('Calendar hidden.');
-},
-onMonthChange: function(instance) {
-  // Show the month of the selected date.
-  console.log(instance.currentMonthName);
-},
-customMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-customDays: ['S', 'M', 'T', 'W', 'Th', 'F', 'S'],
-overlayPlaceholder: 'Enter a 4-digit year',
-overlayButton: 'Go!',
-disableMobile: true // Conditionally disabled on mobile devices.
-});
 $scope.startHrCalender = [
   '',
   '12:00 AM',
