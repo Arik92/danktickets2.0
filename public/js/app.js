@@ -21,8 +21,10 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       } //controller
     })
     .state('event', {
-      url: '/event',
+      url: '/event/:id',
+	  params: {eventParam: null},
       templateUrl: '/templates/event.html',
+	  controller: 'eventCtrl'
     })
     .state('profile', {
       url: '/profile',
@@ -120,7 +122,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     })
 	.state('editprofile', {
       url: '/edit-profile/:id',
-        params: {profileParam: null},
+      params: {profileParam: null},
       templateUrl: '/templates/edit-organizer.html',
       controller: 'editProfileCtrl'
     })
