@@ -18,7 +18,7 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
           $scope.profiles[i] = data2[i];
         }//for
 		initStartDatePicker();
-			initEndDatePicker();
+		initEndDatePicker();
       })//get organizers  
 		}//else
 	  });//getEventById
