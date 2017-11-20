@@ -7,9 +7,9 @@ var profileSchema = new Schema({
   image: String,
   about: String,  
   website: String,
-   facebook: String,
-   twitter: String,
-   instagram: String
+  facebook: String,
+  twitter: String,
+  instagram: String
 });
 
 var profile = mongoose.model("Profile", profileSchema);

@@ -1,7 +1,20 @@
 app.controller('editProfileCtrl',['orService','userService','$scope' ,'Upload','$window','$timeout','$rootScope','$location','$stateParams', function(orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location, $stateParams){
 		console.log("edit profile state params",$stateParams);
-		$scope.profile = $stateParams.profileParam;
-		console.log("received profile is", $scope.profile);
+		function profileServiceinit() {
+		orService.getOrganizerById($stateParams.id).then(function(result, err){
+			if (err) {
+				console.log("an error fetching profile with id occured");
+			} else {
+				console.log("result is", result);
+			$scope.profile = result[0];
+			console.log("received profile is", $scope.profile);
+			}//else
+		});
+		};
+		this.$onInit = () => {
+			console.log('init fired');
+			profileServiceinit();
+		}//onInit		
         $scope.upload = function () {
         var submitPic = document.getElementById('fileItem').files[0];
         console.log("in submit! uploading...", submitPic);        

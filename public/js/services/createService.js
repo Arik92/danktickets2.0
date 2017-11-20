@@ -17,6 +17,16 @@ app.factory('createService', function($http){
   var resetTicks = function() {
     currentsTicks = [];
   }
+  var getEventById = function(id) {
+	 return $http.get('/events/findById/'+id).then(function(result) {
+    console.log("result from create service: ");
+    console.log(result.data);
+    return result.data;
+  }, function(error) {
+    console.error(error);
+    // throw (error);
+  }) // add promise
+  };
 
 var getEvents = function() {
   return $http.get('/events').then(function(result) {
@@ -101,6 +111,7 @@ var deleteEvent = function(oId) {
     getEventsByOwner: getEventsByOwner,
     updateEvent: updateEvent,
     deleteEvent: deleteEvent,
-    resetTicks: resetTicks
+    resetTicks: resetTicks,
+	getEventById: getEventById
   };
 });

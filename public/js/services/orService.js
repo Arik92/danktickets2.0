@@ -9,6 +9,15 @@ app.factory('orService', function($http){
       // throw (error);
     }) // add promise
   } // get all organizer profiles for a given user id
+  var getOrganizerById = function(id) {
+	  console.log("servicce id is", id);
+	return $http.get('/organizers/findById/'+id)
+      .then(function(response) {
+        return response.data;
+      }, function(err) {
+        console.error(err);
+      });
+  }//getting organizer by specific id
   var getAllOrganizers = function() {
     return $http.get('/organizers')
       .then(function(response) {
@@ -46,6 +55,7 @@ app.factory('orService', function($http){
         getOrganizersByUser: getOrganizersByUser,
         postOrganizer: postOrganizer,
         updateOrganizer: updateOrganizer,
-        deleteOrganizer: deleteOrganizer
+        deleteOrganizer: deleteOrganizer,
+		getOrganizerById: getOrganizerById
     };
 });
