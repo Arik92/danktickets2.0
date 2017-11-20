@@ -226,7 +226,7 @@ header .mainmenu-container > ul > li {
 header .mainmenu-container input{
   float: left;
   position: relative;
-  line-height: 43px;
+  line-height: 42px;
   margin-top: 32px;
   transition: all 0.3s ease-out;
 }
