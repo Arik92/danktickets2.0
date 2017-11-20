@@ -33,7 +33,26 @@
 	<!-- /.preloader -->
 	<!-- #header -->
 	<header id="header">
-	<button class="nav-toggler"> <i class="fa fa-bars"></i></button>
+	<!-- <button class="nav-toggler" > <i class="fa fa-bars"></i></button> -->
+	<button ng-controller="navToggleCtrl"
+					class="nav-toggler"
+					uib-dropdown
+					on-toggle="toggled(open)"
+					uib-dropdown-toggle
+					>
+		<i class="fa fa-bars"></i>
+			<ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown"
+					style="left: -150px">
+					<li role="menuitem"><a ng-click="goToState('event')">Browse events</a></li>
+					<li role="menuitem"><a ng-click="goToState('create')">Create Event</a></li>
+					<li class="divider"></li>
+					<li role="menuitem"><a ng-click="goToState('profile')">My Profile</a></li>
+					<li role="menuitem"><a ng-click="goToState('manage')">Manage Events</a></li>
+					<li role="menuitem"><a ng-click="goToState('editProfiles')">New Organizer</a></li>
+					<li role="menuitem"><a ng-click="goToState('organizer')">Organizer Profile</a></li>
+					<li role="menuitem"><a ng-click="goToState('signin')">Log Out</a></li>
+			</ul>
+	</button>
 		<div class="container">
 			<div class="row">
 				<!-- .logo -->
