@@ -291,12 +291,12 @@
 					</div>
 					<div class="tab-content-wrap row" ng-controller="browseCtrl">
             <div class="col-lg-3 col-md-4 col-sm-6 mix april-14 april-22 hvr-float-shadow wow fadeIn" ng-repeat="event in events track by $index">
-              <a ui-sref="event">
+             
               <div class="img-holder" id="card-img-holder" style="background-image: url({{event.imgPath}});"><img src="../img/upcoming-event/1.jpg" alt={{event.title}}></div>
               <div class="content-wrap">
                 
                 <img src="img/upcoming-event/author.png" alt="" class="author-img">
-                </a>
+                
                 <div class="meta">
                   <ul>
                     <li><span><i class="fa fa-clock-o"></i>{{event.startTime}}, {{event.startHr}}-{{event.startTime}}, {{event.startHr}}</span>
@@ -318,7 +318,7 @@
                   <ul>
                     <li>
                       <div class="input-wrap">
-                        <button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; height: 5%; font-size:18px;">REGISTER</button>
+					  <a ui-sref="event({id: event['_id']})"><button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; height: 5%; font-size:18px;">Expand</button></a>
                         <button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; max-height: 5%;font-size:18px;"> <i class="fa fa-plus-circle"></i> Save</button>
                       </div>
                     </li>
