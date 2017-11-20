@@ -4,7 +4,7 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
   //$scope.selectedName = $stateParams.eventParam.organizer.name;
   //console.log("selected name", $scope.selectedName);
   function initEventAndProfs() {
-	  createService.getEventById($stateParams.id).then(function(err, res){
+	  createService.getEventById($stateParams.id).then(function(res, err){
 		if (err) {
 			console.log("error fetching specific event by id");
 		} else {
@@ -17,6 +17,8 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
         for (var i=0;i<data2.length;i++) {
           $scope.profiles[i] = data2[i];
         }//for
+		initStartDatePicker();
+			initEndDatePicker();
       })//get organizers  
 		}//else
 	  });//getEventById
@@ -24,9 +26,9 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
   
   this.$onInit = () => {
 			console.log('init fired');
-			initEventAndProfs();
-			 addScript(mapSrc);    
-		}//onInit	  
+			initEventAndProfs();			
+			addScript(mapSrc); 
+	}//onInit	  
   $scope.selectProf = function(){
     console.log("selected profile is", $scope.selectedName);
 	$scope.event.organizer = $scope.selectedName;
@@ -239,7 +241,7 @@ function checkNames() {
   
 
   //////////////////////////////////// initializing pickers ////////////////////////////////////////////
-
+  var initStartDatePicker = function(){
   var startDatepicker = datepicker('#edit_start_date_picker', {
   position: 'br', // Top right.
   startDate: new Date($scope.event.startTime), // This month.
@@ -272,7 +274,8 @@ function checkNames() {
   overlayButton: 'Go!',
   disableMobile: true // Conditionally disabled on mobile devices.
 });
-
+  }//init stattDatePicker
+  var initEndDatePicker = function(){
 var endDatepicker = datepicker('#edit_end_date_picker', {
 position: 'br', // Top right.
 startDate: new Date(), // This month.
@@ -306,6 +309,7 @@ overlayPlaceholder: 'Enter a 4-digit year',
 overlayButton: 'Go!',
 disableMobile: true // Conditionally disabled on mobile devices.
 });
+  }//initEndDatePicker
 $scope.startHrCalender = [
   '',
   '12:00 AM',

@@ -3,7 +3,6 @@ app.controller('createCtrl',['createService', 'orService', 'userService','$scope
  this.$onInit = () => {
    initEndDatePicker();
   initStartDatePicker();
-
   initProfs();
  }
 

@@ -1,4 +1,4 @@
-app.controller('regCtrl', function(userService, $http, $location, $timeout) {
+app.controller('regCtrl', function(userService, authService, $http, $location, $timeout) {
 
   var app = this;
 
@@ -7,15 +7,22 @@ app.controller('regCtrl', function(userService, $http, $location, $timeout) {
     app.errorMsg = false;
 
     userService.create(app.regData).then(function(data) {
+		console.log("data for signup", data.config.data.username);
+		var loginObj = {
+			"username": data.config.data.username,
+			"password": data.config.data.password
+		};
       if (data.data.success) {
         app.loading = false;
         //create success message
         //redirect to home page
         app.successMsg = data.data.message + ' ...Redirecting';
-        $timeout(function() {
+		authService.login(loginObj).then(function(result){
+			$timeout(function() {			
           $location.path('/');
         }, 2000);
-      }  else {
+		});        
+      } else {
         app.loading = false;
         //create error message
         app.errorMsg = data.data.message;
