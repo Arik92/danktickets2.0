@@ -2,6 +2,7 @@ app.factory('authService', function($http, authToken){
   var authFactory = {};
 
   authFactory.login = function(loginData) {
+	  console.log("login data service is", loginData);
     return $http.post('/users/authenticate', loginData).then(function(data){
       authToken.setToken(data.data.token);
       return data;
