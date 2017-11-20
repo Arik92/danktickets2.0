@@ -29,27 +29,26 @@
             </ul>
           </div> -->
           <div class="tab-content-wrap row" ng-controller="browseCtrl">
-            <div class="col-lg-3 col-md-4 col-sm-6 mix april-14 april-22 hvr-float-shadow wow fadeIn" ng-repeat="event in events track by $index">
-              <a ui-sref="event">
-              <div class="img-holder" id="card-img-holder" style="background-image: url({{event.imgPath}});"><img src="../img/banner-carousel/weed.jpeg" alt={{event.title}}></div>
-              <div class="content-wrap">
-                
-                <img src="img/upcoming-event/author.png" alt="" class="author-img">
-                </a>
+            <div class="col-lg-3 col-md-4 col-sm-6 mix april-14 april-22 hvr-float-shadow wow fadeIn" ng-repeat="evt in events track by $index">
+				<div class="img-holder" id="card-img-holder" style="background-image: url({{evt.imgPath}});"><img src="../img/banner-carousel/weed.jpeg" alt={{evt.title}}></div>
+				<div class="content-wrap">                
+				<img src="img/upcoming-event/author.png" alt="" class="author-img">
+				</div>
+             
                 <div class="meta">
                   <ul>
-                    <li><span><i class="fa fa-clock-o"></i>{{event.startTime}}, {{event.startHr}}-{{event.startTime}}, {{event.startHr}}</span>
+                    <li><span><i class="fa fa-clock-o"></i>{{evt.startTime}}, {{evt.startHr}}-{{evt.startTime}}, {{evt.startHr}}</span>
 
                     </li>
-                    <li><a href={{event.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i class="fa fa-map-marker"></i>{{event.location.locationName}}</span></a>
+                    <li><a href={{evt.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i class="fa fa-map-marker"></i>{{evt.location.locationName}}</span></a>
                     </li>
                   </ul>
                 </div>
-                <h4 ng-show="event.organizer.name">{{event.organizer.name}} Presents:</h4>
-                <h3 class="length-limiter">{{event.title}}</h3>
-                <p class="length-limiter">{{event.description}}</p>
+                <h4 ng-show="event.organizer.name">{{evt.organizer.name}} Presents:</h4>
+                <h3 class="length-limiter">{{evt.title}}</h3>
+                <p class="length-limiter">{{evt.description}}</p>
                 <div >
-                <p style="background-color: grey;width:50%;color:white;text-align:center;">{{event.type}}</p>
+                <p style="background-color: grey;width:50%;color:white;text-align:center;">{{evt.type}}</p>
                 <p>Ticket Prices</p>
                 </div>
                 <a class="read-more" ui-sref="event">read more<i class="fa fa-angle-right"></i></a>
@@ -57,7 +56,7 @@
                   <ul>
                     <li>
                       <div class="input-wrap">
-                        <button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; height: 5%; font-size:18px;">REGISTER</button>
+                        <a ui-sref="event({id: evt['_id']})"><button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; height: 5%; font-size:18px;">Expand</button></a>
                         <button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; max-height: 5%;font-size:18px;"> <i class="fa fa-plus-circle"></i> Save</button>
                       </div>
                     </li>
