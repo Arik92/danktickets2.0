@@ -71,7 +71,7 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
               console.log("in submit! uploading...", submitPic);
               if (submitPic) {
                 Upload.upload({
-                    url: 'http://danktickets.herokuapp.com/events/deleteAndUpload', //webAPI exposed to upload the file
+                    url: 'https://danktickets.herokuapp.com/events/deleteAndUpload', //webAPI exposed to upload the file
                     data: {
                      file: submitPic,
                      event: $scope.event
