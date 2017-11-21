@@ -82,7 +82,7 @@ router.post('/upload', function (req, res1, next) {
               e.save(function(error, result){
                 if (error) {
                   console.log("reached error route");
-                  console.log(error);
+                  res1.send(error);
                 } else {
                   console.log("reached result route");
 
