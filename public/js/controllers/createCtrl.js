@@ -265,7 +265,7 @@ $scope.updateEndHr = function() {
           }// for filling ticket array
           if (submitPic) {
             Upload.upload({
-                url: 'http://danktickets.herokuapp.com/events/upload', //webAPI exposed to upload the file
+                url: 'https://danktickets.herokuapp.com/events/upload', //webAPI exposed to upload the file
                 data: {
                   file:submitPic,
                    event: evt
