@@ -256,7 +256,7 @@ $scope.updateEndHr = function() {
           }// for filling ticket array
           if (submitPic) {
             Upload.upload({
-                url: 'http://localhost:8000/events/upload', //webAPI exposed to upload the file
+                url: 'http://danktickets.herokuapp.com/events/upload', //webAPI exposed to upload the file
                 data: {
                   file:submitPic,
                    event: evt
@@ -486,7 +486,7 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
               console.log("in submit! uploading...", submitPic);
               if (submitPic) {
                 Upload.upload({
-                    url: 'http://localhost:8000/events/deleteAndUpload', //webAPI exposed to upload the file
+                    url: 'http://danktickets.herokuapp.com/events/deleteAndUpload', //webAPI exposed to upload the file
                     data: {
                      file: submitPic,
                      event: $scope.event
