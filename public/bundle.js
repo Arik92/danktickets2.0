@@ -290,7 +290,8 @@ $scope.updateEndHr = function() {
                     console.log("image name will be?", $scope.imageName);
                   //  publishEvent(); // call a function to submit the whole event
                 } else {
-                    $window.alert(resp.data.error_code);
+					console.log(resp.data);
+                    $window.alert("response is", resp.data);
                 }
             }, function (error) { //catch error
                 console.log('Error status: ' + error);
