@@ -5,6 +5,10 @@
         <div class="col-lg-7 col-md-7 col-sm-7">
           <div class="section-title">
             <h1>Manage Your Events</h1>
+            <div ng-if="!events.length" style="text-align: center">
+              <h3>You have no events yet, add some!</h3>
+              <a ui-sref="create" style="display: block; cursor: pointer; font-size: 2em">create event</a>
+            </div>
           </div>
         </div>
       </div>

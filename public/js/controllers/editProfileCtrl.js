@@ -20,7 +20,7 @@ app.controller('editProfileCtrl',['orService','userService','$scope' ,'Upload','
         console.log("in submit! uploading...", submitPic);        
           if (submitPic) {
             Upload.upload({
-                url: 'http://localhost:8000/organizers/deleteAndUpload', //webAPI exposed to upload the file
+                url: 'https://danktickets.herokuapp.com/organizers/deleteAndUpload', //webAPI exposed to upload the file
                 data: {
                   file:submitPic,
                    organizer: $scope.profile

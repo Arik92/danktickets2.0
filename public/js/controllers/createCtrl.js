@@ -1,10 +1,9 @@
 app.controller('createCtrl',['createService', 'orService', 'userService','$scope' ,'Upload','$window','$timeout','$rootScope','$location', function(createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location){
  console.log('hello from createCtrl');
  this.$onInit = () => {
+	 initProfs();
    initEndDatePicker();
-  initStartDatePicker();
-
-  initProfs();
+  initStartDatePicker();  
  }
 
   $scope.typeOptions = [
@@ -266,7 +265,7 @@ $scope.updateEndHr = function() {
           }// for filling ticket array
           if (submitPic) {
             Upload.upload({
-                url: 'http://localhost:8000/events/upload', //webAPI exposed to upload the file
+                url: 'https://danktickets.herokuapp.com/events/upload', //webAPI exposed to upload the file
                 data: {
                   file:submitPic,
                    event: evt
@@ -285,7 +284,8 @@ $scope.updateEndHr = function() {
                     console.log("image name will be?", $scope.imageName);
                   //  publishEvent(); // call a function to submit the whole event
                 } else {
-                    $window.alert('error code:', resp.data.error_code);
+					console.log(resp.data);
+                    $window.alert("response is", resp.data);
                 }
             }, function (error) { //catch error
                 console.log('Error status: ' + error);
