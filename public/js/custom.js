@@ -12,19 +12,19 @@
 		var countDownContainer = $('.count-down');
 		if (countDownContainer.length) {
 			countDownContainer.countdown({
-				date: "December 31, 2015 23:59:59"
+				date: "August 23, 2017 23:59:59"
 			});
 		};
 	}
 	// sticky header
 	function stickyHeader () {
-		// var headerScrollPos = $('header').next().offset().top;
-		// if($(window).scrollTop() > headerScrollPos) {
-		// 	$('header').addClass('header-fixed gradient-overlay');
-		// }
-		// else if($(this).scrollTop() <= headerScrollPos) {
-		// 	$('header').removeClass('header-fixed gradient-overlay');
-		// }
+		var headerScrollPos = $('header').next().offset().top;
+		if($(window).scrollTop() > headerScrollPos) {
+			$('header').addClass('header-fixed gradient-overlay');
+		}
+		else if($(this).scrollTop() <= headerScrollPos) {
+			$('header').removeClass('header-fixed gradient-overlay');
+		}
 	}
 	function SmoothMenuScroll () {
 		var anchor = $('.scrollToLink');
