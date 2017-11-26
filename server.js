@@ -1,61 +1,56 @@
-var express = require('express');
-var app = express();
+var express     = require('express');
+var app         = express();
+var port        = process.env.PORT || '8000';
+var morgan      = require('morgan');
+var mongoose    = require('mongoose');
+var bodyParser  = require('body-parser');
+var router      = express.Router();
+var userRoutes  = require('./routes/userRoutes')(router);
+var eventRoutes = require('./routes/eventRoutes');
+var organizerRoutes = require('./routes/organizerRoutes');
+var passport    = require('./models/passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
+//var path        = require('path');
+//var social      = require('./passport/passport')(app, passport);
 //var expressSession = require('express-session');
-var bodyParser = require('body-parser');
-var multer  = require('multer');
+//var LocalStrategy = require('passport-local').Strategy;
+
+mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
+app.use(passport.initialize());
+//app.use(morgan('dev'));
+app.use(express.static('public'));
+app.use(express.static('node_modules'));
+app.use(express.static('bower_components'));
+app.use(express.static('ui-bootstrap-custom-build'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/events', eventRoutes);
+app.use('/users', userRoutes);
+app.use('/organizers', organizerRoutes);
+
+//mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
+
 app.use(function(req, res, next) {
-        res.header("Access-Control-Allow-Origin", "http://localhost");
+        res.header("Access-Control-Allow-Origin", "https://danktickets.herokuapp");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         next();
-    });
-    app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(bodyParser.json());
-    app.use(express.static('public'));
-    app.use(express.static('node_modules'));
+  });
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads/')
-    },
-    filename: function (req, file, cb) {
-            var datetimestamp = Date.now();
-            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
-        }
-});
-var upload = multer({ storage: storage }).single('file');
-//var passport = require('passport');
-// var localStrategy = require('passport-local').strategy;
-// var mongoose = require('mongoose');
-// var beerRoutes = require('./routes/beerRoutes');
-// var userRoutes = require('./routes/userRoutes');
-// var User = require('./models/userModel');
-/////////////////////////////////   multer
-app.post('/addevent', function(req, res) {
-        upload(req,res,function(err){
-            if(err){
-                 res.json({error_code:1,err_desc:err});
-                 return;
-            }
-             res.json({error_code:0,err_desc:null});
-        })
-    });
-/////////////////////////////////   multer
-
-app.all('*', function(req, res) {
+app.all('[^.]+', function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
+  // res.send("GOD DAMN!!!!!!!!!!!!!");
 });
 
 //main error handler
 // warning - not for use in production code!
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.send({
-    message: err.message,
-    error: err
-  });
+  // res.send({
+  //   message: err.message,
+  //   error: err
+  // });
 });
 
-
-app.listen(8000, function() {
-  console.log("Dank tickets, tick-it-up! Listening on 8000.");
+app.listen(port, function() {
+  console.log("Dank tickets, tick-it-up! Listening on " + port);
 });

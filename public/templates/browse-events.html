@@ -1,0 +1,185 @@
+<!-- #upcoming-event -->
+  <section id="upcoming-event">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 col-md-7 col-sm-7">
+          <div class="section-title">
+            <h1>Upcoming Events</h1>
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5">
+          <form action="#" class="pull-right">
+            <input type="text" placeholder="Search Event"> <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- <div class="tab-title-wrap">
+            <ul class="clearfix">
+              <li class="filter active" data-filter="all"><span>All Events</span></li>
+              <li class="filter" data-filter=".april-14"><span>April 14</span></li>
+              <li class="filter" data-filter=".april-22"><span>April 22</span></li>
+              <li class="filter" data-filter=".april-28"><span>April 28</span></li>
+              <li class="filter" data-filter=".may-10"><span>May 10</span></li>
+              <li class="filter" data-filter=".may-15"><span>May 15</span></li>
+              <li class="filter" data-filter=".may-22"><span>May 22</span></li>
+              <li class="filter" data-filter=".may-23"><span>May 23</span></li>
+              <li class="filter" data-filter=".jun-01"><span>June 01</span></li>
+            </ul>
+          </div> -->
+          <div class="tab-content-wrap row" ng-controller="browseCtrl">
+            <div class="col-lg-3 col-md-4 col-sm-6 mix april-14 april-22 hvr-float-shadow wow fadeIn" ng-repeat="evt in events track by $index">
+				<div class="img-holder" id="card-img-holder" style="background-image: url({{evt.imgPath}});"><img src="../img/banner-carousel/weed.jpeg" alt={{evt.title}}></div>
+				<div class="content-wrap">                
+				<img src="img/upcoming-event/author.png" alt="" class="author-img">
+				</div>
+             
+                <div class="meta">
+                  <ul>
+                    <li><span><i class="fa fa-clock-o"></i>{{evt.startTime}}, {{evt.startHr}}-{{evt.startTime}}, {{evt.startHr}}</span>
+
+                    </li>
+                    <li><a href={{evt.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i class="fa fa-map-marker"></i>{{evt.location.locationName}}</span></a>
+                    </li>
+                  </ul>
+                </div>
+                <h4 ng-show="event.organizer.name">{{evt.organizer.name}} Presents:</h4>
+                <h3 class="length-limiter">{{evt.title}}</h3>
+                <p class="length-limiter">{{evt.description}}</p>
+                <div >
+                <p style="background-color: grey;width:50%;color:white;text-align:center;">{{evt.type}}</p>
+                <p>Ticket Prices</p>
+                </div>
+                <a class="read-more" ui-sref="event">read more<i class="fa fa-angle-right"></i></a>
+                <div class="row">
+                  <ul>
+                    <li>
+                      <div class="input-wrap">
+                        <a ui-sref="event({id: evt['_id']})"><button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; height: 5%; font-size:18px;">Expand</button></a>
+                        <button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; max-height: 5%;font-size:18px;"> <i class="fa fa-plus-circle"></i> Save</button>
+                      </div>
+                    </li>
+                  </ul>
+                </div>            
+              </div>
+            </div>
+          </div> <!-- tab-content-wrap -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /#upcoming-event -->
+<!--   <div class="col-md-4 col-md-offset-3">
+    <div class="section-title">
+      <h1>Browse all events</h1>
+    </div>
+  </div>
+	<div class="bodyevent">
+    <div class="ticketcontainer " ng-repeat="event in events track by $index">
+  	  <div class="card-media" > -->
+        <!-- media container -->
+<!--         <div class="card-media-object-container" >
+          <div class="card-media-object" style="background-image: url({{event.imgPath}});"></div>
+          <span class="card-media-object-tag subtle">{{event.organizer.name}}</span>
+          <ul class="card-media-object-social-list">
+            <li>
+              <img src="https://s10.postimg.org/3rjjbzcvd/profile_f.jpg" class="">
+            </li>
+            <li>
+              <img src="https://s16.postimg.org/b0j0djh79/profile_0_f.jpg" class="">
+            </li>
+            <li class="card-media-object-social-list-item-additional">
+              <span>+2</span>
+            </li>
+          </ul>
+        </div> -->
+        <!-- body container -->
+<!--         <div class="card-media-body">
+          <div class="card-media-body-top">
+            <span class="subtle">{{event.startTime}}, {{event.startHr}}</span>
+            <div class="card-media-body-top-icons u-float-right">
+              <svg fill="#888888" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+              </svg>
+              <svg fill="#888888" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+                <path d="M0 0h24v24H0z" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <span  class="card-media-body-heading">{{event.title}}</span>
+          <span class="subtle">More details: {{event.description}}</span>
+          <div class="card-media-body-supporting-bottom">
+            <span class="card-media-body-supporting-bottom-text subtle">{{event.type}}</span>
+            <span class="card-media-body-supporting-bottom-text subtle u-float-right">Prices Go Here</span>
+          </div>
+          <div class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
+            <span class="card-media-body-supporting-bottom-text subtle"><a href={{event.location.locationMapUrl}} target=_blank><i class="fa fa-map-marker"></i>{{event.location.locationName}}</a></span>
+            <a href="#/" class="card-media-body-supporting-bottom-text card-media-link u-float-right">VIEW TICKETS</a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <ul>
+          <li>
+            <div class="input-wrap">
+              <button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 190px; margin: 10px; font-size:26px;">REGISTER</button>
+              <button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 320px; margin: 10px; max-height: 57px;font-size:24px;"> <i class="fa fa-plus-circle"></i> Add to calendar</button>
+            </div>
+          </li>
+        </ul>
+      </div>        
+  	</div>
+	</div>  --><!-- END of angular code -->
+		
+<!-- <div class="bodyevent">
+<div class="ticketcontainer">	
+	 
+  <div class="card-media"> -->
+    <!-- media container -->
+    <!-- <div class="card-media-object-container">
+      <div class="card-media-object" style="background-image: url(https://s9.postimg.org/y0sfm95gv/prince_f.jpg);"></div>
+      <span class="card-media-object-tag subtle">Selling Fast</span>
+      <ul class="card-media-object-social-list">
+        <li>
+          <img src="https://s10.postimg.org/3rjjbzcvd/profile_f.jpg" class="">
+        </li>
+        <li>
+          <img src="https://s16.postimg.org/b0j0djh79/profile_0_f.jpg" class="">
+        </li>
+        <li class="card-media-object-social-list-item-additional">
+          <span>+2</span>
+        </li>
+      </ul>
+    </div> -->
+    <!-- body container -->
+    <!-- <div class="card-media-body">
+      <div class="card-media-body-top">
+        <span class="subtle">Mon, APR 09, 7:00 PM</span>
+        <div class="card-media-body-top-icons u-float-right">
+          <svg fill="#888888" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+          </svg>
+          <svg fill="#888888" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+          </svg>
+        </div>
+      </div>
+      <span class="card-media-body-heading">This Thing Called Life: A Celebration of Prince and His Legacy at MEZZANINE SF</span>
+      <div class="card-media-body-supporting-bottom">
+        <span class="card-media-body-supporting-bottom-text subtle">Mezzanine, San Francisco, CA</span>
+        <span class="card-media-body-supporting-bottom-text subtle u-float-right">Free &ndash; $30</span>
+      </div>
+      <div class="card-media-body-supporting-bottom card-media-body-supporting-bottom-reveal">
+        <span class="card-media-body-supporting-bottom-text subtle">#Music #Party</span>
+        <a href="#/" class="card-media-body-supporting-bottom-text card-media-link u-float-right">VIEW TICKETS</a>
+      </div>
+    </div>
+  </div> -->
+
+</div>
+</div>

@@ -1,6 +1,15 @@
+/* medium size */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
+  nav.mainmenu-container.menu-list {
+    display: none !important;
+  }
+
+  .nav-toggler {
+    display: block;
+  }
+
   header .mainmenu-container > ul > li {
-    padding: 0 13px;
+    padding: 0 1rem;
   }
   .section-title.text-center {
     max-width: 60%;
@@ -76,11 +85,13 @@
     width: 80%;
   }
 }
+
+/* smallish medium */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   nav.mainmenu-container {
     position: relative;
   }
-  nav.mainmenu-container .nav-toggler {
+  .nav-toggler {
     background: #ff8625 none repeat scroll 0 0;
     border: medium none;
     border-radius: 5px;
@@ -272,9 +283,19 @@
     width: 100%;
   }
 }
+
+/* small */
 @media only screen and (max-width: 767px) {
+  #nav-spacer {
+    display: none;
+  }
+
+  .nav-toggler {
+    position: absolute;
+  }
+
   .container {
-    overflow: hidden;
+    /* overflow: hidden; */
   }
   header,
   header.header-fixed {
@@ -306,7 +327,7 @@
   nav.mainmenu-container {
     position: relative;
   }
-  nav.mainmenu-container .nav-toggler {
+  .nav-toggler {
    /* background: #ff8625 none repeat scroll 0 0;
     border: medium none;
     border-radius: 5px;
@@ -332,7 +353,6 @@
     right: 35px;
     
     text-transform: uppercase;
-    bottom: 45px;
     display: block;
   }
   nav.mainmenu-container ul {
@@ -627,8 +647,19 @@
   #single-blog-post .col-lg-12.comment-form-section .comment-form {
     padding: 0;
   }
+
+  /* events page */
+  .eventcolumn {
+    float: none;
+  }
+
+  .calendar {
+    float: none;
+  }
 }
+
 @media only screen and (min-width: 480px) and (max-width: 767px) {
+
   #banner ul.count-down li span i {
     width: 30px;
     height: 40px;
@@ -644,8 +675,18 @@
     margin-bottom: 20px;
   }
 }
+
 @media only screen and (min-width: 640px) and (max-width: 767px) {
   #bottom-bar {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .menu-list {
+    display: none;
+  }
+  .nav-toggler {
+    display: block;
   }
 }
