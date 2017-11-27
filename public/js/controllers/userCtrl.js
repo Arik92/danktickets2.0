@@ -2,7 +2,7 @@ app.controller('regCtrl', function(userService, authService, $http, $location, $
 
   var app = this;
 
-  this.regUser = function (regData) {
+  this.regUser = function () {
     app.loading = true;
     app.errorMsg = false;
 
