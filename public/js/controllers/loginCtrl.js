@@ -1,7 +1,7 @@
 app.controller('loginCtrl', function(authService, $timeout, $location, $rootScope) {
   var msg = this;
 	this.$onInit = () => {
-	 $scope.loginData = {};
+	 msg.loginData = {};
  }
 
   msg.loader = false;
