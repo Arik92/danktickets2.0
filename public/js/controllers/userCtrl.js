@@ -7,10 +7,11 @@ app.controller('regCtrl', function(userService, authService, $http, $location, $
     app.errorMsg = false;
 
     userService.create(app.regData).then(function(data) {
-		console.log("data for signup", data.config.data.username);
+		console.log("data for signup", data.config.data);
 		var loginObj = {
-			"username": data.config.data.username,
-			"password": data.config.data.password
+			//"username": data.config.data.username,
+			"password": data.config.data.password,
+			"email": data.config.data.email
 		};
       if (data.data.success) {
         app.loading = false;
