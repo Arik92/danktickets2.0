@@ -44,7 +44,7 @@ module.exports = function (router) {
   //http://localhost:8000/users/authenticate
   //user login route
   router.post('/authenticate', function(req, res) {
-    User.findOne({ username: req.body.username }).select('email username password _id').exec(function(err, user){
+    User.findOne({ email: req.body.email }).select('email username password _id').exec(function(err, user){
       if (err) throw err;
       if (!user) {
         res.json({ success: false, message: 'could not authenticate user' });
@@ -95,6 +95,16 @@ module.exports = function (router) {
     })//findCb
   }) // get event by token?
 
+router.post('/login', passport.authenticate('local'), function(req, res) {
+  // If this function gets called, authentication was successful.
+  // `req.user` contains the authenticated user.
+  res.send(req.user);
+});
+
+router.get('/logout', function(req, res) {
+  req.logout();
+  res.send('Logged Out');
+});
 
   return router;
 }//module.exports
