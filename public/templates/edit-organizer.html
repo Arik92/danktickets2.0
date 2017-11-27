@@ -20,9 +20,9 @@
           </div>
            <div class="form-group">
 		   <label class="control-label" for="source_name">Current profile image:</label>
-             <div class="">
-               <img width=200 height=200 ng-src={{profile.imgPath}}> <br/>
-             </div>
+             <div class="img-holder pull-left" id="card-img-holder" style="background-image: url({{profile.imgPath}});height:auto;">
+                <img src="img/blog/1.jpg" style="opacity:0;" alt="">
+              </div>
              <label class="control-label" for="source_name">Image</label>
              <div>
                <input id="fileItem" type="file" name="eventPic" ng-model="file"
