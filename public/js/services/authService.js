@@ -11,6 +11,7 @@ app.factory('authService', function($http, authToken){
 
   //authService.isLoggedIn()
   authFactory.isLoggedIn = function() {
+    console.log('hello from isLoggedIn authFactory');
     if (authToken.getToken()) {
       return true;
     } else {
@@ -20,7 +21,7 @@ app.factory('authService', function($http, authToken){
 
   //authService.getUser();
   authFactory.getUser = function() {
-    if (authToken.getToken) {
+    if (authToken.getToken()) {
       return $http.post('/users/currentUser');
     } else {
       $q.reject({ message: 'User has no token' });

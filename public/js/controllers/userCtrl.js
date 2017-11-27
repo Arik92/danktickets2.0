@@ -17,6 +17,9 @@ app.controller('regCtrl', function(userService, authService, $http, $location, $
         app.loading = false;
         //create success message
         //redirect to home page
+
+        // strike here for mailer
+
         app.successMsg = data.data.message + ' ...Redirecting';
 		authService.login(loginObj).then(function(result){
 			$timeout(function() {			
@@ -40,3 +43,7 @@ app.controller('regCtrl', function(userService, authService, $http, $location, $
 //     delete $http.defaults.headers.common.Authorization;
 //   }
 //})
+
+//// ===================== nodeMailer stuff ===========================
+
+
