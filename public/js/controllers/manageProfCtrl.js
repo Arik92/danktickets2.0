@@ -5,7 +5,7 @@ app.controller('manageProfCtrl',['orService','$scope','$rootScope', function(orS
     $scope.profiles = result;
     for (var i=0;i<$scope.profiles.length;i++) {
       console.log($scope.profiles[i]);
-      $scope.profiles[i].imgPath ='/img/uploads/' + $scope.profiles[i].image;
+      $scope.profiles[i].imgPath ='public/img/uploads/' + $scope.profiles[i].image;
       //console.log("location "+i+" :", $scope.profiles[i].location);
     }//for
   }, function(err){
