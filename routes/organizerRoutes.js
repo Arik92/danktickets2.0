@@ -126,7 +126,7 @@ router.post('/deleteAndUpload', function(req, res1, next) {
            console.log("request to work with is", req.body);
            if (req.body.organizer.imgPath!="/img/uploads/undefined") {
            var fs = require('fs');
-           var addressToDelete = 'public/img/uploads/'+req.body.organizer.image
+           var addressToDelete = 'public/'+req.body.organizer.image;
          }//if there's no image, there is nothing to delete. TODO: change to default picture
            console.log("file name:", req.file.filename);
            req.body.organizer.image = e.image = '/img/uploads/'+req.file.filename;
