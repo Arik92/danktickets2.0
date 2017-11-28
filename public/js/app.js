@@ -1,29 +1,29 @@
 var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload', 'slick', 'ui.bootstrap']);
 
-app.config(function($httpProvider) {
+app.config(function ($httpProvider) {
   $httpProvider.interceptors.push('authServiceInterceptors');
 })
 
-app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
+app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
-   $urlRouterProvider.otherwise('/home');
+  $urlRouterProvider.otherwise('/home');
   $stateProvider
-  .state('home', {
+    .state('home', {
       url: '/home',
       templateUrl: '/templates/home.html',
-      controller: function($rootScope, $scope, $http) {
-        $scope.logout = function() {
+      controller: function ($rootScope, $scope, $http) {
+        $scope.logout = function () {
           console.log("logging out...");
-      localStorage.removeItem("user");
-      $rootScope.currentUser = null;
-      delete $http.defaults.headers.common.Authorization;
-    }
+          localStorage.removeItem("user");
+          $rootScope.currentUser = null;
+          delete $http.defaults.headers.common.Authorization;
+        }
       } //controller
     })
     .state('event', {
-      url: '/event/:id',	  
+      url: '/event/:id',
       templateUrl: '/templates/event.html',
-	  controller: 'eventCtrl'
+      controller: 'eventCtrl'
     })
     .state('profile', {
       url: '/profile',
@@ -38,7 +38,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/create-event.html',
       controller: 'createCtrl',
       onEnter: function ($location, $stateParams, $anchorScroll, $timeout) {
-        $timeout(function() {
+        $timeout(function () {
           $location.hash($stateParams.scrollTo);
           $anchorScroll()
         }, 100)
@@ -49,7 +49,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/create-organizer.html',
       controller: 'orCtrl',
       onEnter: function ($location, $stateParams, $anchorScroll, $timeout) {
-        $timeout(function() {
+        $timeout(function () {
           $location.hash($stateParams.scrollTo);
           $anchorScroll()
         }, 100)
@@ -64,37 +64,43 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/page-contact.html'
     })
     .state('terms', {
-          url: '/terms-of-service',
-          templateUrl: '/templates/terms.html'
-        })
+      url: '/terms-of-service',
+      templateUrl: '/templates/terms.html'
+    })
     .state('privacypolicy', {
-          url: '/privacy-policy',
-          templateUrl: '/templates/privacypolicy.html'
-        })
+      url: '/privacy-policy',
+      templateUrl: '/templates/privacypolicy.html'
+    })
     .state('signup', {
-          url: '/sign-up',
-          templateUrl: '/templates/signup.html',
-          controller: 'regCtrl',
-          controllerAs: 'register',
-          authenticated: false
-        })
+      url: '/sign-up',
+      templateUrl: '/templates/signup.html',
+      controller: 'regCtrl',
+      controllerAs: 'register',
+      authenticated: false
+    })
+    .state('validate', {
+      url: '/validate/:userId',
+      templateUrl: '/templates/validated-landing.html',
+      controller: 'validateCtrl'
+      // ,controllerAs: 'val'
+    })
     .state('signin', {
-          url: '/sign-in',
-          templateUrl: '/templates/login.html'
-        })
+      url: '/sign-in',
+      templateUrl: '/templates/login.html'
+    })
     .state('dashboard', {
-          url: '/dashboard',
-          templateUrl: '/templates/dashboard.html'
-        })
+      url: '/dashboard',
+      templateUrl: '/templates/dashboard.html'
+    })
     .state('contact', {
-          url: '/contact',
-          templateUrl: '/templates/contact.html'
-        })
+      url: '/contact',
+      templateUrl: '/templates/contact.html'
+    })
     .state('browse', {
-          url: '/browse-events',
-          templateUrl: '/templates/browse-events.html',
-          controller: 'browseCtrl'
-        })
+      url: '/browse-events',
+      templateUrl: '/templates/browse-events.html',
+      controller: 'browseCtrl'
+    })
     .state('manage', {
       url: '/manage-events',
       templateUrl: '/templates/manage-events.html',
@@ -108,24 +114,24 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       url: '/event2',
       templateUrl: '/templates/event2.html'
     })
-	.state('userprofiles', {
+    .state('userprofiles', {
       url: '/manage-organizers',
       templateUrl: '/templates/manage-organizers.html',
       controller: 'manageProfCtrl'
     })
     .state('edit', {
-      url: '/edit-event/:id',        
+      url: '/edit-event/:id',
       templateUrl: '/templates/edit-event.html',
       controller: 'editCtrl'
     })
-	.state('editprofile', {
-      url: '/edit-profile/:id',      
+    .state('editprofile', {
+      url: '/edit-profile/:id',
       templateUrl: '/templates/edit-organizer.html',
       controller: 'editProfileCtrl'
     })
     .state('auth', {
       url: '/authorization?token&name',
-      controller: function($stateParams, $state, $rootScope, $http) {
+      controller: function ($stateParams, $state, $rootScope, $http) {
         console.log("state params are", $stateParams);
         if ($stateParams.token) {
           var user = {
@@ -141,7 +147,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
       }//controller
     })
 });
-app.run(function($rootScope, authService) {
+app.run(function ($rootScope, authService) {
   var user = JSON.parse(localStorage.getItem("user"));
   if (user) {
     $rootScope.currentUser = user.name;
