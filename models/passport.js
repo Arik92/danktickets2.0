@@ -21,7 +21,8 @@ passport.use(new FacebookStrategy({
             socialId: profile.id,
             email: profile.emails ? profile.emails[0].value : "",
             provider: 'facebook',
-            username: profile.displayName
+            username: profile.displayName,
+            isEmailValidated: true
           });
         } else {
           console.log("this user already exists in mongo!");

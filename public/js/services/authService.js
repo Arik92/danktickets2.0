@@ -5,8 +5,17 @@ app.factory('authService', function($http, authToken){
 	  console.log("login data service is", loginData);
     return $http.post('/users/authenticate', loginData).then(function(data){
       authToken.setToken(data.data.token);
+      console.log('authServiceCB');
       return data;
-    })
+    }, errorCallBack)
+  }
+
+  authFactory.validateEmail = function(params) {
+    return $http.post('/users/emailValidate', params).then(function(res){
+      authToken.setToken(res.data.token);
+      console.log('validateCB');
+      return res;
+    }, errorCallBack)
   }
 
   //authService.isLoggedIn()
@@ -62,3 +71,7 @@ app.factory('authServiceInterceptors', function(authToken) {
   }
   return authServiceInterceptors;
 })
+
+function errorCallBack(err) {
+  console.log(err);
+}
