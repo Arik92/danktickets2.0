@@ -18,7 +18,7 @@ app.controller('validateCtrl', ['authService', '$scope', '$window', '$stateParam
             console.log("result", result);
             $timeout(() => {
               $location.path('/')
-            }, 5000);
+            }, 3000);
           })
         }
       })
