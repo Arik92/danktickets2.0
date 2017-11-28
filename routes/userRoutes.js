@@ -108,16 +108,14 @@ module.exports = function (router) {
   //http://localhost:8000/users/validate/:userId
   // validate new user from nodemailer link
   router.post('/emailValidate', function (req, res) {
-    // var id = new mongoose.Types.ObjectId(req.body.userId);
-    // console.log(typeof(id));
-    console.log('req.body', req.body);
+    // this is a mongodb find
     User.find( (err, users) => {
       if (err) throw err;
 
+      // this is a native javascript find
       const matchingUser = users.find((user) => {
         return user._id.valueOf().toString() === req.body.userId;
       })
-
 
       if (!matchingUser) {
         console.log('no userr');
@@ -129,10 +127,9 @@ module.exports = function (router) {
       matchingUser.isEmailValidated = true;
       console.log('matchingUser', matchingUser);
 
-      User.findByIdAndUpdate(matchingUser._id, matchingUser, { new: true }, (error, user) => {
+      User.findByIdAndUpdate(matchingUser._id, matchingUser, { new: true }, (error, newUser) => {
         if (err) throw err;
-        const token = jwt.sign({ username: user.username, email: user.email, id: user._id, isEmailValidated: user.isEmailValidated }, secret, { expiresIn: '72h' });
-        res.json({ success: true, message: 'User validated, saved and token created', token: token, user: user });
+        res.json({ success: true, message: 'User validated and saved to db', user: newUser });
       })
     });
   });
@@ -140,19 +137,19 @@ module.exports = function (router) {
   //http://localhost:8000/users/authenticate
   //user login route
   router.post('/authenticate', function (req, res) {
+    console.log('authenticate req.body', req.body);
     User.findOne( { $or: [{ email: req.body.email }, { _id: req.body.userId }] }).select('email username password _id isEmailValidated').exec(function (err, user) {
       if (err) throw err;
 
+      console.log('authenticated user', user);
       let validPassword;
       if (!user) {
         res.json({ success: false, message: 'could not authenticate user' });
         return;
       }
       if (user && req.body.password) {
-        validPassword = user.comparePassword(req.body.password);
-        console.log('user', user);
-        console.log('req.body', req.body);
-        console.log(validPassword);
+        validPassword = user.comparePassword(req.body.password) || (user.password.localeCompare(req.body.password) === 0);
+        console.log('validPassword', validPassword);
       }
       if (!validPassword) {
         res.json({ success: false, message: 'could not authenticate password' });
@@ -160,8 +157,8 @@ module.exports = function (router) {
       }
 
       // this is the key!!!
-      if (!user.isEmailValidated) {
-        const token = jwt.sign({ username: user.username, email: user.email, id: user._id, isEmailValidated: user.isEmailValidated }, secret, { expiresIn: '72h' });
+      if (user.isEmailValidated) {
+        const token = jwt.sign({ username: user.username, email: user.email, id: user._id }, secret, { expiresIn: '72h' });
         res.json({ success: true, message: 'User authenticated', token: token });
       } else {
         res.json({ success: false, message: 'email is not validated!!!' });
