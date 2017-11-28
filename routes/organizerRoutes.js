@@ -74,7 +74,7 @@ router.post('/upload', function (req, res1, next) {
              console.log("request to work with is", req.body);
              console.log("file name:", req.file.filename);
               var p = new Profile(req.body.organizer);
-			  e.image = '/img/uploads/'+req.file.filename;              
+			  e.image = 'public/img/uploads/'+req.file.filename;              
               p.save(function(error, result){
                 if (error) {
                   console.log("reached error route");
