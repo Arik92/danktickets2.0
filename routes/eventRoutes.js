@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
   })//exec()
 });//get all events that were ever published and populate the publisher field
 
-router.get('/:id', function(req, res, next){
+router.get('/:name', function(req, res, next){
   Event.find().populate('owner organizer').exec(function(err, events){
     if (err) {
       console.error(err);
@@ -37,8 +37,8 @@ router.get('/:id', function(req, res, next){
       console.log("found events(route)", events);
       var result = [];
       for (var i=0;i<events.length;i++) {
-        console.log("comparing *"+ req.params.id+"* and *"+ events[i].owner.username+"*");
-        if (req.params.id.localeCompare(events[i].owner.username)===0) {
+        console.log("comparing *"+ req.params.name+"* and *"+ events[i].owner.username+"*");
+        if (req.params.name.localeCompare(events[i].owner.username)===0) {
 			console.log("got in");
           result.push(events[i]);
         }
@@ -46,7 +46,7 @@ router.get('/:id', function(req, res, next){
       res.send(result);
     }
   })//exec()
-}) // get event by OWNER id.
+}) // get event by OWNER name.
 
 router.get('/findById/:id', function(req, res, next){
   Event.find({_id: req.params.id}).populate('organizer').exec(function(err,foundEvent){
