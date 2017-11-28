@@ -1,4 +1,4 @@
-app.controller('regCtrl', function(userService, authService, $http, $location, $timeout) {
+app.controller('regCtrl', function (userService, authService, $http, $location, $timeout) {
 
   var app = this;
 
@@ -6,23 +6,32 @@ app.controller('regCtrl', function(userService, authService, $http, $location, $
     app.loading = true;
     app.errorMsg = false;
 
-    userService.create(app.regData).then(function(data) {
-		console.log("data for signup", data.config.data);
-		var loginObj = {
-			//"username": data.config.data.username,
-			"password": data.config.data.password,
-			"email": data.config.data.email
-		};
+    userService.create(app.regData).then(function (data) {
+      console.log(data);
+      console.log("data for signup", data.config.data);
+      var loginObj = {
+        //"username": data.config.data.username,
+        "password": data.config.data.password,
+        "email": data.config.data.email
+        // ,"isEmailValidated": data.config.data.isEmailValidated
+      };
       if (data.data.success) {
         app.loading = false;
         //create success message
         //redirect to home page
-        app.successMsg = data.data.message + ' ...Redirecting';
-		authService.login(loginObj).then(function(result){
-			$timeout(function() {			
-          $location.path('/');
-        }, 2000);
-		});        
+
+        // strike here for mailer
+
+        // app.successMsg = data.data.message + ' ...Redirecting';
+        app.successMsg = data.data.message + ' , Please check your email to finish registration process';
+
+
+        /* authService.login(loginObj).then(function (result) {
+          $timeout(function () {
+            $location.path('/');
+          }, 2000);
+        }); */
+
       } else {
         app.loading = false;
         //create error message
@@ -40,3 +49,7 @@ app.controller('regCtrl', function(userService, authService, $http, $location, $
 //     delete $http.defaults.headers.common.Authorization;
 //   }
 //})
+
+//// ===================== nodeMailer stuff ===========================
+
+

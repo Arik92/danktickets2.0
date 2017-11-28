@@ -1,13 +1,9 @@
 app.controller('navToggleCtrl',['$scope','$log', '$state', function( $scope, $log, $state){
   
   this.$onInit = () => {
-    console.log('yooo man from navToggle');
-    this.dropdown();
+    
   }
 
-  this.dropdown = () => {
-    console.log('yo man we about to dropdown');
-  }
 
   $scope.items = [
     'The first choice!',
