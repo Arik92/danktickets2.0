@@ -89,11 +89,12 @@ module.exports = function (router) {
     };
 
     // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(mailOptions, (err, info) => {
       console.log('sendMail triggered')
-      if (error) {
-        console.log(error);
-      }
+      if (err) {
+        console.log('Error occurred. ' + err.message);
+        return process.exit(1);
+    }
       console.log('Message sent: %s', info.messageId);
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
