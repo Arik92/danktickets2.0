@@ -46,7 +46,7 @@ module.exports = function (router) {
         } else {
           res.json({ success: true, message: 'User created!' });
           // send email via nodeEmailer for verification
-          sendNodeMailer(newUser);
+          sendNodeMailer(newUser, 'register');
         }
       });
     }
@@ -54,16 +54,33 @@ module.exports = function (router) {
 
   //// ===================== nodeMailer code ===========================
 
-  function sendNodeMailer(newUser) {
-    console.log('nodeMailer triggered', newUser);
-    const output = `
-    <h2>Thank you for registering ${newUser.username} </h2>
-    <p>Please click the following link to complete the registration process</p>
-    <br>
-    <a href="http://localhost:8000/validate/${newUser._id.toString()}" target="_blank">
-      CLICK ME!
-    </a>
-  `;
+  function sendNodeMailer(user, msgType) {
+    console.log('nodeMailer triggered', user);
+    let output;
+
+    switch (msgType) {
+      case 'register':
+        output = `
+        <h2>Thank you for registering ${user.username} </h2>
+        <p>Please click the following link to complete the registration process</p>
+        <br>
+        <a href="http://localhost:8000/validate/${user._id.toString()}" target="_blank">
+          CLICK ME!
+        </a>
+      `;
+      break;
+      case 'pw-reset':
+        output = `
+        <h2>Hello ${user.username} </h2>
+        <p>Please click the following link to reset your password</p>
+        <br>
+        <a href="http://localhost:8000/password-reset/${user._id.toString()}" target="_blank">
+          CLICK ME!
+        </a>
+      `;
+      break;
+
+    }
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
@@ -105,7 +122,29 @@ module.exports = function (router) {
 
   //// ===================== resume with routes code ===========================
 
-  //http://localhost:8000/users/validate/:userId
+  //http://localhost:8000/users/forgotPassword
+  // validate new user from nodemailer link
+  router.post('/forgotPassword', function (req, res) {
+    // this is a mongodb find
+    User.find( (err, users) => {
+      if (err) throw err;
+
+      // this is a native javascript find
+      const matchingUser = users.find((user) => {
+        return user.email === req.body.email;
+      })
+
+      if (!matchingUser) {
+        console.log('no userr');
+        res.json({ success: false, message: 'no userrr' });
+        return;
+      };
+
+      sendNodeMailer(matchingUser, 'pw-reset');
+    });
+  });
+
+  //http://localhost:8000/users/emailValidate
   // validate new user from nodemailer link
   router.post('/emailValidate', function (req, res) {
     // this is a mongodb find

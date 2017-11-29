@@ -28,8 +28,18 @@
               <li>
                 <div class="input-wrap">
                   <button type="submit" class="hvr-bounce-to-right">LOG IN</button>
-                  <p>Or login w/ FB</p>
+                  <p>Forgot password? Click 
+                    <span>
+                      <a href="#" 
+                         style="text-decoration: underline; font-style: bold"
+                         data-toggle="modal" 
+                         data-target="#forgot-pw-modal">
+                        Here
+                      </a>
+                    </span>
+                  </p>
                   <a href="/users/facebook" target="_self"><button type="button" class="btn-facebook">Facebook</button></a>
+                  <p>Or login w/ FB</p>
 
                 </div>
                 <br>
@@ -48,12 +58,49 @@
             <div class="row show-hide-message" ng-show="facebook.errorMsg">
               <div class="alert alert-danger">{{ facebook.errorMsg }}</div>
             </div>
+            <div class="row show-hide-message" ng-if="login.forgotPW">
+              <div class="alert alert-success">Check your email with instructions to reset password</div>
+            </div>
           </form>
         </div>
       </div>
     </div>
   </section>
 <!-- /#register-now -->
+
+<!-- Modal -->
+<div class="modal fade" id="forgot-pw-modal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Please Enter Your Email to Reset Password</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="pw-reset-input">Email:</label>
+                <input type="text" class="form-control" id="pw-reset-input" placeholder="Enter Email"
+                       ng-model="login.resetInfo.email">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal"
+                  ng-init="login.forgotPW = false" 
+                  ng-click="login.sendEmail(); login.forgotPW = true">
+                  Send Retrieval Email
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"
+                  >
+                  Cancel
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
 
 
 <!--
