@@ -6,6 +6,7 @@ var UserSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: String,
   email:   String,
+  isEmailValidated: Boolean,
   provider: String,
   socialId: String,
   //tickets:  { type: Schema.Types.ObjectId, ref:"" },
@@ -25,6 +26,7 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.methods.comparePassword = function(password) {
+  console.log('pw', password, 'this.pw', this.password);
   return bcrypt.compareSync(password, this.password);
 };
 

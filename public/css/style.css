@@ -922,7 +922,7 @@ header .mainmenu-container li.dropdown > a .fa {
   vertical-align: bottom;
   transition: all .3s ease;
 }
-#register-now ul li .input-wrap button:hover {
+#register-now ul li .input-wrap button:hover, #register-now ul li .input-wrap button:focus {
   border-color: #FF8625;
   color: #FF8625;
 }
