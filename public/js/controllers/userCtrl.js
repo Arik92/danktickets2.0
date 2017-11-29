@@ -1,6 +1,13 @@
 app.controller('regCtrl', function (userService, authService, $http, $location, $timeout) {
-
+	this.$onInit = () => {
+	 app.is18 = false; 
+ }
+	
   var app = this;
+  this.pressed18 = function(){
+	  console.log("clickedd 18");
+		app.is18 = true;
+	}//pressed18
 
   this.regUser = function () {
     app.loading = true;
