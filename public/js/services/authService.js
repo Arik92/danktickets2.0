@@ -18,6 +18,13 @@ app.factory('authService', function($http, authToken){
     }, errorCallBack)
   }
 
+  authFactory.forgotPassword = function(userData) {
+    return $http.post('/users/forgotPassword', userData).then(function(res){
+      console.log('forgot password res', res);
+      return res;
+    }, errorCallBack)
+  }
+
   //authService.isLoggedIn()
   authFactory.isLoggedIn = function() {
     console.log('hello from isLoggedIn authFactory');
