@@ -5,6 +5,7 @@ var secret = 'urgonnadieclown865626';
 
 const nodemailer = require('nodemailer');
 var mongoose = require('mongoose');
+const bcrypt = require('bcrypt-nodejs');
 
 
 module.exports = function (router) {
@@ -68,17 +69,17 @@ module.exports = function (router) {
           CLICK ME!
         </a>
       `;
-      break;
+        break;
       case 'pw-reset':
         output = `
         <h2>Hello ${user.username} </h2>
         <p>Please click the following link to reset your password</p>
         <br>
-        <a href="http://localhost:8000/password-reset/${user._id.toString()}" target="_blank">
+        <a href="http://localhost:8000/forgot-password/${user._id.toString()}" target="_blank">
           CLICK ME!
         </a>
       `;
-      break;
+        break;
 
     }
 
@@ -111,7 +112,7 @@ module.exports = function (router) {
       if (err) {
         console.log('Error occurred. ' + err.message);
         return process.exit(1);
-    }
+      }
       console.log('Message sent: %s', info.messageId);
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
@@ -126,7 +127,7 @@ module.exports = function (router) {
   // validate new user from nodemailer link
   router.post('/forgotPassword', function (req, res) {
     // this is a mongodb find
-    User.find( (err, users) => {
+    User.find((err, users) => {
       if (err) throw err;
 
       // this is a native javascript find
@@ -144,11 +145,41 @@ module.exports = function (router) {
     });
   });
 
+  //http://localhost:8000/users/forgotPassword
+  router.post('/updatePassword', function (req, res) {
+    // this is a mongodb find
+    User.find((err, users) => {
+      if (err) throw err;
+
+      // this is a native javascript find
+      const matchingUser = users.find((user) => {
+        return user._id.valueOf().toString() === req.body.userId;
+      })
+
+      if (!matchingUser) {
+        console.log('no userr');
+        res.json({ success: false, message: 'no userrr' });
+        return;
+      };
+
+      // update password
+      const hashedNewPassword = bcrypt.hashSync(req.body.password);
+
+      matchingUser.password = hashedNewPassword;
+
+      User.findByIdAndUpdate(matchingUser._id, matchingUser, { new: true }, (error, updatedUser) => {
+        if (err) throw err;
+        res.json({ success: true, message: 'User password updated and saved to db', user: updatedUser });
+      })
+
+    });
+  });
+
   //http://localhost:8000/users/emailValidate
   // validate new user from nodemailer link
   router.post('/emailValidate', function (req, res) {
     // this is a mongodb find
-    User.find( (err, users) => {
+    User.find((err, users) => {
       if (err) throw err;
 
       // this is a native javascript find
@@ -177,7 +208,12 @@ module.exports = function (router) {
   //user login route
   router.post('/authenticate', function (req, res) {
     console.log('authenticate req.body', req.body);
-    User.findOne( { $or: [{ email: req.body.email }, { _id: req.body.userId }] }).select('email username password _id isEmailValidated').exec(function (err, user) {
+
+    // if resetting password, will look for the password
+    const hashedNewPassword = bcrypt.hashSync(req.body.password);
+    console.log(req.body.password);
+    console.log('hashednewpw', hashedNewPassword);
+    User.findOne({ $or: [{ email: req.body.email }, { password: hashedNewPassword }] }).select('email username password _id isEmailValidated').exec(function (err, user) {
       if (err) throw err;
 
       console.log('authenticated user', user);
@@ -187,7 +223,8 @@ module.exports = function (router) {
         return;
       }
       if (user && req.body.password) {
-        validPassword = user.comparePassword(req.body.password) || (user.password.localeCompare(req.body.password) === 0);
+        validPassword = user.comparePassword(req.body.password) ||
+          (user.password.localeCompare(req.body.password) === 0);
         console.log('validPassword', validPassword);
       }
       if (!validPassword) {
