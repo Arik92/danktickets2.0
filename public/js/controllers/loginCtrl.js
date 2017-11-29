@@ -1,7 +1,10 @@
-app.controller('loginCtrl', function(authService, $timeout, $location, $rootScope) {
+app.controller('loginCtrl', function(authService, $timeout, $location, $rootScope, $scope) {
   var msg = this;
+  this.resetInfo = {};
+  this.resetInfo.email = '';
+
 	this.$onInit = () => {
-	 msg.loginData = {};
+   msg.loginData = {};
  }
 
   msg.loader = false;
@@ -47,7 +50,16 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
     }  //else
   });
 
+  //// ===================== forgot password stuff ===========================
+  
+  this.sendEmail = () => {
+    authService.forgotPassword(this.resetInfo).then((res) => {
+      console.log('authservice res', res);
+    })
+  }
 
+  //// ===================== normal login ===========================
+  
   this.doLogin = function (loginData) {
 	  //console.log("login data looks like", loginData);
     msg.loading = true;
