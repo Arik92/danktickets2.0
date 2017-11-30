@@ -31,8 +31,8 @@ app.use('/organizers', organizerRoutes);
 //mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 
 app.use(function(req, res, next) {
-        res.header("Access-Control-Allow-Origin", "https://danktickets.herokuapp");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.header("Access-Control-Allow-Origin", "localhost, https://localhost:8000, https://danktickets.herokuapp.com");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         next();
   });
 
