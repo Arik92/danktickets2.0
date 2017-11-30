@@ -25,7 +25,7 @@ app.use(express.static('bower_components'));
 app.use(express.static('ui-bootstrap-custom-build'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+//app.use(cors());
 app.options('*', cors());
 app.use('/events', eventRoutes);
 app.use('/users', userRoutes);
