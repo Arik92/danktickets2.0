@@ -25,6 +25,20 @@ UserSchema.pre('save', function(next) {
   });
 });
 
+// 'save' hook is not triggered on password update
+/* UserSchema.pre('update', function(next) {
+  this.update({},{ $set: { updatedAt: new Date() } });
+
+  var user = this;
+  //bcrypt encrypts password
+  bcrypt.hash(user.password, null, null, function(err, hash) {
+    if (err) return next(err);
+    // Store hash in your password DB.
+    user.password = hash;
+    next();
+  });
+}); */
+
 UserSchema.methods.comparePassword = function(password) {
   console.log('pw', password, 'this.pw', this.password);
   return bcrypt.compareSync(password, this.password);

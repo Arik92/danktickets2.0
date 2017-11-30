@@ -84,6 +84,12 @@ app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
       controller: 'validateCtrl'
       // ,controllerAs: 'val'
     })
+    .state('forgotPassword', {
+      url: '/forgot-password/:userId',
+      templateUrl: '/templates/forgot-password.html',
+      controller: 'resetCtrl',
+      controllerAs: 'resetCtrl'
+    })
     .state('signin', {
       url: '/sign-in',
       templateUrl: '/templates/login.html'
