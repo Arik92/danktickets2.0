@@ -1,7 +1,7 @@
 var express     = require('express');
+var cors = require('cors');
 var app         = express();
 var port        = process.env.PORT || '8000';
-var cors = require('cors');
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
 var bodyParser  = require('body-parser');
@@ -25,11 +25,12 @@ app.use(express.static('bower_components'));
 app.use(express.static('ui-bootstrap-custom-build'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.options('*', cors());
 app.use('/events', eventRoutes);
 app.use('/users', userRoutes);
 app.use('/organizers', organizerRoutes);
-app.use(cors());
-app.options('*', cors());
+
 
 //mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 
