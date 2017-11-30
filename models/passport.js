@@ -3,11 +3,11 @@ var passport = require('passport');
 var User   = require('./usermodel');
 var jwt    = require('jsonwebtoken');
 //localhost:8000/users/facebook/callback
-// http://danktickets.herokuapp.com/users/facebook/callback
+// https://danktickets.herokuapp.com/users/facebook/callback
 passport.use(new FacebookStrategy({
       clientID: '793514707495227',
       clientSecret: '12d8dcfc4b9a3c728c0b38795a0b500b',
-      callbackURL: "http://danktickets.herokuapp.com/users/facebook/callback",
+      callbackURL: "https://danktickets.herokuapp.com/users/facebook/callback",
       profileFields: ['id', 'displayName', 'photos', 'email']
     },
     function(accessToken, refreshToken, profile, done) {

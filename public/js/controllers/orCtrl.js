@@ -48,7 +48,8 @@ app.controller('orCtrl', ['orService', 'userService', '$scope', 'Upload', '$wind
           $window.alert(resp.data.error_code);
         }
       }, function (error) { //catch error
-        console.log('Error status: ' + error);
+        console.log('Error status: ' ,error);
+		console.log('heroku error ', +error.desc+"code: "+error.code);//heroku
         // $window.alert('Error status: ' + resp.status);
         // }, function (evt) {
         //     console.log(evt);

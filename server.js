@@ -35,22 +35,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(cors());
 //app.options('*', cors());
 
-
-
-//mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
-
-
 app.use('/events', eventRoutes);
 app.use('/users', userRoutes);
 app.use('/organizers', organizerRoutes);
 
+//mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
+
 app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Origin", "https://danktickets.herokuapp.com");
 		//res.header("Access-Control-Allow-Credentials", "true");
-		//res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT"); 
+		res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT"); 
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         next();
   });
+
+
+
 
 app.all('[^.]+', function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
