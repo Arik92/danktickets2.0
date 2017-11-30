@@ -1,3 +1,8 @@
+// to hide env variables
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load();
+}
+
 var express     = require('express');
 //var cors = require('cors');
 var app         = express();
@@ -15,6 +20,8 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 //var social      = require('./passport/passport')(app, passport);
 //var expressSession = require('express-session');
 //var LocalStrategy = require('passport-local').Strategy;
+
+
 
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 app.use(passport.initialize());
