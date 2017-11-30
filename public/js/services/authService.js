@@ -5,12 +5,36 @@ app.factory('authService', function($http, authToken){
 	  console.log("login data service is", loginData);
     return $http.post('/users/authenticate', loginData).then(function(data){
       authToken.setToken(data.data.token);
+      console.log('authServiceCB');
       return data;
-    })
+    }, errorCallBack)
+  }
+
+  authFactory.validateEmail = function(params) {
+    return $http.post('/users/emailValidate', params).then(function(res){
+      authToken.setToken(res.data.token);
+      console.log('validateCB');
+      return res;
+    }, errorCallBack)
+  }
+
+  authFactory.forgotPassword = function(userData) {
+    return $http.post('/users/forgotPassword', userData).then(function(res){
+      console.log('forgot password res', res);
+      return res;
+    }, errorCallBack)
+  }
+
+  authFactory.updatePassword = function(userData) {
+    return $http.post('/users/updatePassword', userData).then(function(res){
+      console.log('forgot password res', res);
+      return res;
+    }, errorCallBack)
   }
 
   //authService.isLoggedIn()
   authFactory.isLoggedIn = function() {
+    console.log('hello from isLoggedIn authFactory');
     if (authToken.getToken()) {
       return true;
     } else {
@@ -20,7 +44,7 @@ app.factory('authService', function($http, authToken){
 
   //authService.getUser();
   authFactory.getUser = function() {
-    if (authToken.getToken) {
+    if (authToken.getToken()) {
       return $http.post('/users/currentUser');
     } else {
       $q.reject({ message: 'User has no token' });
@@ -61,3 +85,7 @@ app.factory('authServiceInterceptors', function(authToken) {
   }
   return authServiceInterceptors;
 })
+
+function errorCallBack(err) {
+  console.log(err);
+}

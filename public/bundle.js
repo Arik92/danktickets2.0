@@ -127,7 +127,7 @@ $scope.startHrCalender = [
   '03:00 AM',
   '03:30 AM',
   '04:00 AM',
-  '04:30 AM',
+  '04:20 AM',
   '05:00 AM',
   '05:30 AM',
   '06:00 AM',
@@ -151,7 +151,7 @@ $scope.startHrCalender = [
   '03:00 PM',
   '03:30 PM',
   '04:00 PM',
-  '04:30 PM',
+  '04:20 PM',
   '05:00 PM',
   '05:30 PM',
   '06:00 PM',
@@ -179,7 +179,7 @@ $scope.endHrCalender = [
   '03:00 AM',
   '03:30 AM',
   '04:00 AM',
-  '04:30 AM',
+  '04:20 AM',
   '05:00 AM',
   '05:30 AM',
   '06:00 AM',
@@ -203,7 +203,7 @@ $scope.endHrCalender = [
   '03:00 PM',
   '03:30 PM',
   '04:00 PM',
-  '04:30 PM',
+  '04:20 PM',
   '05:00 PM',
   '05:30 PM',
   '06:00 PM',
@@ -221,7 +221,7 @@ $scope.endHrCalender = [
 ];
 $scope.endHr = $scope.endHrCalender[0];
 $scope.updateEndHr = function() {
-  console.log("start hour is", $scope.startHr);
+  //console.log("start hour is", $scope.startHr);
   $scope.endHr = $scope.startHr;
 };
         ////////////////////file upload /////////////////////////////////////////////////////////////
@@ -230,15 +230,21 @@ $scope.updateEndHr = function() {
         }
        $scope.compareDates = function() {
          var diff = $scope.endDate.getTime()- $scope.startDate.getTime();
-         if (diff>0) {
-           console.log("end date is bigger than start")
-         } else if (diff<0) {
-           console.log("invalid date!!!");
-         } else {
-           console.log("same day");
-         }//else
+         if (diff>0) {           
+		   return true;
+         } else {           
+		   return false;
+		 }        //else
        }//compareDates
-
+	   
+	   function validator() {
+		   var validatorError = "ok";
+		   if ($scope.compareDates()===false) {
+			   validatorError = "Invaid Event dates! Make sure the event dates are valid";
+		   }
+		   return validatorError;
+	   }//validator
+	   
         $scope.upload = function () {
           var submitPic = document.getElementById('fileItem').files[0];
           console.log("in submit! uploading...", submitPic);
@@ -269,6 +275,9 @@ $scope.updateEndHr = function() {
           for (var i=0;i<$scope.tempTicks.length;i++) {
             evt.tickets.push($scope.tempTicks[i]);
           }// for filling ticket array
+		  var isLegit = validator();
+		  if (isLegit.localeCompare("ok")===0) { 
+		  console.log("compared "+isLegit+" and ok. and the result is"+isLegit.localeCompare("ok"));
           if (submitPic) {
             Upload.upload({
                 url: 'https://danktickets.herokuapp.com/events/upload', //webAPI exposed to upload the file
@@ -307,7 +316,11 @@ $scope.updateEndHr = function() {
           createService.postEvent(evt).then(function(resp){
             console.log("Event added successfully through service!")
           })
-        }
+        } 
+		}
+		else {
+			alert(isLegit); 
+		}
         };//scope.upload
 
   //////////////////////file upload /////////////////////////////////////////////////////////////

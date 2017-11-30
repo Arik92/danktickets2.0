@@ -11,7 +11,15 @@
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <form ng-submit="register.regUser(regData);">
+		<ul class="clearfix" ng-hide="register.is18">
+              <li>
+                <div class="input-wrap">
+                  <label><img src="img/icons/name.png" alt="">I am at least 18 years of age</label>
+                  <input type="checkbox" ng-click="register.pressed18()">
+                </div>
+              </li>
+			  </ul>
+          <form ng-submit="register.regUser();" ng-show="register.is18">
             <ul class="clearfix">
               <li>
                 <div class="input-wrap">
@@ -46,7 +54,9 @@
             </ul>
             <br>
             <div class="row show-hide-message" ng-show="register.successMsg">
-              <div class="alert alert-success">{{ register.successMsg }} <span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
+              <div class="alert alert-success">{{ register.successMsg }} 
+                <!-- <span class="glyphicon glyphicon-repeat fast-right-spinner"></span> -->
+              </div>
             </div>
             <div class="row show-hide-message" ng-show="register.errorMsg">
               <div class="alert alert-danger">{{ register.errorMsg }}</div>

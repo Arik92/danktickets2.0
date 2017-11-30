@@ -5,6 +5,10 @@
         <div class="col-lg-7 col-md-7 col-sm-7">
           <div class="section-title">
             <h1>Manage Your Events</h1>
+            <div ng-if="!events.length" style="text-align: center">
+              <h3>You have no events yet, add some!</h3>
+              <a ui-sref="create" style="display: block; cursor: pointer; font-size: 2em">create event</a>
+            </div>
           </div>
         </div>
       </div>
@@ -26,7 +30,7 @@
           <div class="tab-content-wrap row">
             <div class="col-lg-3 col-md-4 col-sm-6 mix april-14 april-22 hvr-float-shadow wow fadeIn" ng-repeat="event in events track by $index">
               <a ui-sref="event">
-              <div class="img-holder" id="card-img-holder" style="background-image: url({{event.imgPath}});"><img src="../img/banner-carousel/weed.jpeg" alt={{event.title}}></div>
+              <div class="img-holder" id="card-img-holder" style="background-image: url({{event.image}});"><img src="../img/banner-carousel/weed.jpeg" alt={{event.title}}></div>
               <div class="content-wrap">
                 <img src="img/upcoming-event/author.png" alt="" class="author-img">
                 </a>

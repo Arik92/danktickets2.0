@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
   })//exec()
 });//get all events that were ever published and populate the publisher field
 
-router.get('/:id', function(req, res, next){
+router.get('/:name', function(req, res, next){
   Event.find().populate('owner organizer').exec(function(err, events){
     if (err) {
       console.error(err);
@@ -37,8 +37,8 @@ router.get('/:id', function(req, res, next){
       console.log("found events(route)", events);
       var result = [];
       for (var i=0;i<events.length;i++) {
-        console.log("comparing *"+ req.params.id+"* and *"+ events[i].owner.username+"*");
-        if (req.params.id.localeCompare(events[i].owner.username)===0) {
+        console.log("comparing *"+ req.params.name+"* and *"+ events[i].owner.username+"*");
+        if (req.params.name.localeCompare(events[i].owner.username)===0) {
 			console.log("got in");
           result.push(events[i]);
         }
@@ -46,7 +46,7 @@ router.get('/:id', function(req, res, next){
       res.send(result);
     }
   })//exec()
-}) // get event by OWNER id.
+}) // get event by OWNER name.
 
 router.get('/findById/:id', function(req, res, next){
   Event.find({_id: req.params.id}).populate('organizer').exec(function(err,foundEvent){
@@ -77,8 +77,8 @@ router.post('/upload', function (req, res1, next) {
              }
              console.log("request to work with is", req.body);
              console.log("file name:", req.file.filename);
-              var e = new Event(req.body.event);
-              e.image = req.file.filename;
+              var e = new Event(req.body.event);			  
+              e.image = '/img/uploads/'+req.file.filename;
               e.save(function(error, result){
                 if (error) {
                   console.log("reached error route");
@@ -130,10 +130,10 @@ router.post('/deleteAndUpload', function(req, res1, next) {
            console.log("request to work with is", req.body);
            if (req.body.event.imgPath!="/img/uploads/undefined") {
            var fs = require('fs');
-           var addressToDelete = 'public/img/uploads/'+req.body.event.image
+           var addressToDelete = req.body.event.image;
          }//if there's no image, there is nothing to delete. TODO: change to default picture
            console.log("file name:", req.file.filename);
-           req.body.event.image = req.file.filename;
+           req.body.event.image = '/img/uploads/'+req.file.filename;
            Event.findByIdAndUpdate(req.body.event._id, req.body.event, { new: true }, function(error, event) {
              if (error) {
                console.error(error)
