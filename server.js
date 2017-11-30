@@ -32,6 +32,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 
+
+app.use('/events', eventRoutes);
+app.use('/users', userRoutes);
+app.use('/organizers', organizerRoutes);
+
 app.use(function(req, res, next) {
         //res.header("Access-Control-Allow-Origin", "http://danktickets.herokuapp.com");
 		res.header("Access-Control-Allow-Credentials", "true");
@@ -39,9 +44,6 @@ app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         next();
   });
-  app.use('/events', eventRoutes);
-app.use('/users', userRoutes);
-app.use('/organizers', organizerRoutes);
 
 app.all('[^.]+', function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
