@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 
 app.use(function(req, res, next) {
-        res.header("Access-Control-Allow-Origin", "localhost, https://localhost:8000, https://danktickets.herokuapp.com, http://danktickets.herokuapp.com");
+        res.header("Access-Control-Allow-Origin", "danktickets.herokuapp.com");
 		res.header("Access-Control-Allow-Credentials", "true");
 		res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT"); 
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
