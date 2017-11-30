@@ -28,7 +28,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(cors());
 //app.options('*', cors());
 
-
+app.use('/events', eventRoutes);
+app.use('/users', userRoutes);
+app.use('/organizers', organizerRoutes);
 
 //mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 
@@ -39,9 +41,7 @@ app.use(function(req, res, next) {
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
         next();
   });
-app.use('/events', eventRoutes);
-app.use('/users', userRoutes);
-app.use('/organizers', organizerRoutes);
+
 
 
 
