@@ -1,5 +1,5 @@
 var express     = require('express');
-var cors = require('cors');
+//var cors = require('cors');
 var app         = express();
 var port        = process.env.PORT || '8000';
 var morgan      = require('morgan');
@@ -26,7 +26,7 @@ app.use(express.static('ui-bootstrap-custom-build'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(cors());
-app.options('*', cors());
+//app.options('*', cors());
 app.use('/events', eventRoutes);
 app.use('/users', userRoutes);
 app.use('/organizers', organizerRoutes);
