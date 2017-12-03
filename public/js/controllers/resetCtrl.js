@@ -9,7 +9,7 @@ function (authService, $scope, $window, $stateParams, $state, $timeout, $locatio
     pwConfirm: ''
   }
 
-  this.mismatchedPasswords = false;
+  this.doPasswordsMatch = true;
   this.passwordUpdated = false;
   this.updateFailed = false;
 
@@ -20,15 +20,12 @@ function (authService, $scope, $window, $stateParams, $state, $timeout, $locatio
   }
 
   this.resetPassword = () => {
-    console.log('resetting password');
 
-    // confirm that password input matches
-    if (this.resetInfo.password !== this.resetInfo.pwConfirm) {
-      this.mismatchedPasswords = true;
-      return;
-    } else {
-      this.mismatchedPasswords = false;
-    }
+    // check that password confirmation matches
+    // this.doPasswordsMatch = this.comparePasswords(this.resetInfo.password, this.resetInfo.pwConfirm);
+    this.doPasswordsMatch = this.comparePasswords(this.resetInfo.password, this.resetInfo.pwConfirm);
+
+    if (!this.doPasswordsMatch) return;
 
     authService.updatePassword(this.resetInfo).then((res) => {
       console.log("res after update", res);
@@ -47,9 +44,10 @@ function (authService, $scope, $window, $stateParams, $state, $timeout, $locatio
         this.updateFailed = true;
       }
     })
-
   } 
 
-
+this.comparePasswords = (pw1, pw2) => {
+  return pw1 === pw2 ? true : false;
+}
 
 }]);
