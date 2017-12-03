@@ -1,6 +1,5 @@
 node_modules
 bower_components
 .vscode
-
 .env
 config.js
