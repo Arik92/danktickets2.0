@@ -6,8 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "build": "browserify ./public/js/controllers/createCtrl.js ./public/js/controllers/editCtrl.js -o ./public/bundle.js",
-    "buildStart": "npm run build && node server.js",
-    "install": "bower install && npm install"
+    "buildStart": "npm run build && node server.js"
   },
   "repository": {
     "type": "git",
