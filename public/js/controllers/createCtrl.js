@@ -36,6 +36,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
   //TODO: when loading an event, set the start/end dates accordingly
 
   function initStartDatePicker() {
+	  $scope.startDate = new Date().getTime();
     var startDatepicker = datepicker('#create_start_date_picker', {
       position: 'br', // Top right.
       startDate: new Date(), // This month.
@@ -50,8 +51,13 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       onSelect: function (instance) {
         // Show which date was selected.
         console.log("start date: ", instance.dateSelected);
-        $scope.startDate = instance.dateSelected;
-        console.log("as string?", $scope.startDate.toDateString());
+        $scope.startDate = instance.dateSelected.getTime();
+        console.log("as string?", $scope.startDate);
+		/*var num = instance.dateSelected.getTime();
+		console.log("as number: "+num+"and it is a"+typeof(num));
+		var date2 = new Date(num);
+		console.log("date 2", date2);
+		console.log(date2+" re converted "+ date2.toDateString()+"and as time"+date2.getTime());*/
       },
       onShow: function (instance) {
         console.log('Calendar showing.');
@@ -88,9 +94,9 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       onSelect: function (instance) {
         // Show which date was selected.
         console.log("End date: ", instance.dateSelected);
-        $scope.endDate = instance.dateSelected;
-        console.log("as object", $scope.endDate);
-        console.log("exp date", $scope.exampleDate);
+        $scope.endDate = instance.dateSelected.getTime();
+        console.log("as number", $scope.endDate);
+        //console.log("exp date", $scope.exampleDate);
       },
       onShow: function (instance) {
         console.log('Calendar showing.');

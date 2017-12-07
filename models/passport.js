@@ -7,7 +7,7 @@ var jwt    = require('jsonwebtoken');
 passport.use(new FacebookStrategy({
       clientID: '793514707495227',
       clientSecret: '12d8dcfc4b9a3c728c0b38795a0b500b',
-      callbackURL: "https://danktickets.herokuapp.com/users/facebook/callback",
+      callbackURL: "http://localhost:8000/users/facebook/callback",
       profileFields: ['id', 'displayName', 'photos', 'email']
     },
     function(accessToken, refreshToken, profile, done) {
