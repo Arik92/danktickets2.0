@@ -1,0 +1,20 @@
+{
+  "name": "danktickets",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Natti Katz <katzy687@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/mbreslow56/danktickets2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-slick": "^0.2.1"
+  }
+}

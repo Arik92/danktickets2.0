@@ -1,0 +1,147 @@
+<section id="editevent" >
+  <form enctype="multipart/form-data" name="upload_form">
+    <div class="container" style="width:80%">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="section-title text-center">
+            <h1 style="margin-top:50px">Edit event</h1>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="source_name">Organizer:</label>
+            <div>
+              <select ng-model="selectedName" class="form-control input-md" ng-change="selectProf()">
+                <option ng-repeat="organizer in profiles track by $index" value="{{organizer._id}}">{{organizer.name}}</option>
+              </select>
+            </div>
+            <div>
+              <!-- <input id="source_name" class="form-control" name="source_name" ng-model="eDisp" type="text" placeholder="Most awesome events everr" class="form-control input-md"> -->
+              <!-- dropdown of possible organizers -->
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="source_name">Title</label>
+            <div>
+              <input id="source_name" class="form-control input-md" name="source_name" ng-model="event.title" type="text" placeholder="Fancy Feast">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="source_name">Event Type</label>
+            <div>
+              <p>Event type: {{event.type}}</p>
+        <select ng-model="event.type" class="form-control input-md">
+          <option ng-repeat="type in typeOptions" value="{{type}}">{{type}}</option>
+        </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="source_name">Starts: </label>
+            <div>
+              <input  id="edit_start_date_picker" ng-model="event.startDate" class="col-md-5 input-md" >
+              <select ng-change="updateEndHr()" ng-model="event.startHr" class="col-md-5 input-md col-md-offset-2" >
+                <option ng-repeat="hour in startHrCalender track by $index" value="{{hour}}">{{hour}}</option>
+              </select>
+            </div>
+          </div>
+          <br/>
+          <div class="form-group">
+            <label class="control-label" for="source_name">Ends:</label>
+            <div>
+            <input id="edit_end_date_picker" ng-model="event.endDate" class="col-md-5 input-md" >
+            <select ng-model="event.endHr" class="col-md-5 input-md col-md-offset-2" >
+              <option ng-repeat="hour in endHrCalender track by $index" value="{{hour}}">{{hour}}</option>
+            </select>
+            </div>
+          </div>
+          <br/>
+          <!-- <button class="btn btn-submit" ng-click="compareDates()">Check dates</button> -->
+          <div class="form-group">
+            <label class="control-label" for="source_name">Description</label>
+            <div>
+              <textarea id="source_name" class="form-control" name="source_name" ng-model="event.description" placeholder="Its the coolest show" class="form-control input-md"></textarea>
+            </div>
+          </div>
+           <div class="form-group">
+             <label class="control-label" for="source_name">Event image:</label>
+             <div class="">
+               <img width=200 height=200 ng-src={{event.image}}> <br/>
+             </div>
+             <div>
+               <input id="fileItem" type="file" name="eventPic" ng-model="file"
+               ngf-pattern="'image/*'"
+               accept="image/*"
+               ngf-max-size="20MB" >
+             </div>
+           </div>
+           <div class="form-group">
+             <button type="submit" ng-click="preview()" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Preview</button>
+             <div id="preview">
+             </div>
+           </div>
+           <br /><!--input -->
+           <div class="form-group">
+             <label class="control-label" for="source_name">Event Location: </label>
+             <div>
+                <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter city" ng-model="event.location.locationName">
+             </div>
+           </div>
+           <br /><!--input -->
+           <div class="form-group">
+             <label class="control-label" for="source_name">Is this a public event?</label>
+             <div>
+               <input type="radio" ng-model="event.isPrivate" value="false" ng-value="false"> Public
+               <input type="radio" ng-model="event.isPrivate" value="true" ng-value="true"> Private(invite only)
+             </div>
+             <!-- <button class="btn" ng-click="showPrivates()">show privates</button> -->
+           </div>
+           <br /><!--input -->
+           <div class="page-header"><h2>Event Tickets</h2></div>
+           <div class="form-group">
+             <label class="control-label" for="source_name">Choose a ticket type:</label>
+             <div>
+               <button type="submit" ng-click="add('Free')"class="hvr-bounce-to-right my-btn" id="tickets-btn"> Free</button>
+               <button type="submit" ng-click="add('Paid')" class="hvr-bounce-to-right my-btn" id="tickets-btn"> Paid</button>
+               <button type="submit" ng-click="add('Donation')" class="hvr-bounce-to-right my-btn" id="tickets-btn"> Donation</button>
+               <ul class="list-unstyled list-group" float="left">
+                 <li ng-repeat="ticket in tempTicks track by $index" >
+                   <br />
+                   <div class="row">
+                   <div class="col-md-3">Ticket name: </div>
+                   <div class="col-md-3">Price:
+                   </div>
+                   <div class="col-md-3">Quantity:</div>
+                   <div class="col-md-3"></div>
+                   </div>
+                    <div class="row">
+                    <div class="col-md-3"><input ng-model="ticket.ticketName" type="text" placeHolder="Ticket name" class="form-control input-md"></div>
+                    <div class="col-md-3"><input  ng-hide="ticket.free" ng-model="ticket.ticketPrice" type="number"  min="0" placeHolder="Price" class="form-control input-md">
+                    <input  ng-show="ticket.free" type="text" placeHolder="free" class="form-control input-md" disabled></div>
+                    <div class="col-md-3"><input ng-model="ticket.ticketQ" type="number" placeHolder="How many?" min="0" class="form-control input-md" ng-change="updateQ()"></div>
+                    <div class="col-md-3"><button class="btn btn-danger" ng-click="delete($index)"><i class="fa fa-trash-o " aria-hidden="true"></i></button></div>
+                    </div>
+                   <br />
+                 </li>
+                 <div class="row">
+                 <div class="col-md-12">Total Ticket amount: {{totalTickets}}</div>
+               </div>
+               </ul>
+             </div>
+           </div>
+           <div class="form-group">
+             <div>
+               <input type="checkbox" name="source_name" ng-model="event.showRemainingTicks" ng-init="event.showRemainingTicks"> Publicly show remaining tickets
+             </div>
+           </div>
+            <br /><!--input -->
+                <!-- <Button  class="btn btn-danger" ng-click="reset()">Reset   </Button> -->
+          <button type="submit" ng-click="submit()" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:33%;background-color:black;color:white" ng-show="!showRedirect">Update Event</button>
+          <div class="row show-hide-message" ng-show="showRedirect">
+            <div class="alert alert-success">Event updated! redirecting..<span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
+          </div>
+          <!-- <div class="row show-hide-message" ng-show="showFailure">
+            <div class="alert alert-success">{{}}<span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

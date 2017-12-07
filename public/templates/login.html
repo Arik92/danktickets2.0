@@ -1,0 +1,195 @@
+  <!-- #register-now -->
+  <section id="register-now" class="gradient-overlay">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-title text-center">
+            <h1>LOGIN TO YOUR ACCOUNT</h1>
+            <p style="color:white;">Don't have an account yet? <br> <a ui-sref="signup" style="color:white;">Sign Up Here</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <form ng-submit="login.doLogin(loginData);">
+            <ul class="clearfix">
+              <li>
+                <div class="input-wrap">
+                  <label><img src="img/icons/name.png" alt="">EMAIL</label>
+                  <input type="text" placeholder="EMAIL" ng-model="login.loginData.email">
+                </div>
+              </li>
+              <li>
+                <div class="input-wrap">
+                  <label><img src="img/icons/password.png" alt="">PASSWORD</label>
+                  <input type="password" placeholder="PASSWORD" ng-model="login.loginData.password">
+                </div>
+              </li>
+              <li>
+                <div class="input-wrap">
+                  <button type="submit" class="hvr-bounce-to-right">LOG IN</button>
+                  <p>Forgot password? Click 
+                    <span>
+                      <a href="#" 
+                         style="text-decoration: underline; font-style: bold"
+                         data-toggle="modal" 
+                         data-target="#forgot-pw-modal">
+                        Here
+                      </a>
+                    </span>
+                  </p>
+                  <a href="/users/facebook" target="_self"><button type="button" class="btn-facebook">Facebook</button></a>
+                  <p>Or login w/ FB</p>
+
+                </div>
+                <br>
+                <button type="button" class="btn btn-default" ng-show="app.loading">
+                  <span class="glyphicon glyphicon-repeat fast-right-spinner"> Loading...</span>
+                </button>
+              </li>
+            </ul>
+            <br>
+            <div class="row show-hide-message" ng-show="login.successMsg">
+              <div class="alert alert-success">{{ login.successMsg }} <span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
+            </div>
+            <div class="row show-hide-message" ng-show="login.errorMsg">
+              <div class="alert alert-danger">{{ login.errorMsg }}</div>
+            </div>
+            <div class="row show-hide-message" ng-show="facebook.errorMsg">
+              <div class="alert alert-danger">{{ facebook.errorMsg }}</div>
+            </div>
+            <div class="row show-hide-message" ng-if="login.forgotPW">
+              <div class="alert alert-success">Check your email with instructions to reset password</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- /#register-now -->
+
+<!-- Modal -->
+<div class="modal fade" id="forgot-pw-modal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Please Enter Your Email to Reset Password</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="pw-reset-input">Email:</label>
+                <input type="text" class="form-control" id="pw-reset-input" placeholder="Enter Email"
+                       ng-model="login.resetInfo.email">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal"
+                  ng-init="login.forgotPW = false" 
+                  ng-click="login.sendEmail(); login.forgotPW = true">
+                  Send Retrieval Email
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"
+                  >
+                  Cancel
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+<!--
+<section id="event-speakers">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-title text-center" style="max-width: 67%; align-items: center; padding-left: 400px;">
+            <div class="panel-heading">
+              <h1>Welcome Back to DankTickets</h1>
+            </div> -->
+        <!--
+        <div class="col-lg-12 form-section" style="
+    max-width: 67%;
+    align-items: center;
+    padding-left: 400px;
+"> -->
+        <!--  <div class="row">
+        <div class="col-lg-12"> -->
+<!--            <ul class="clearfix">
+            <form accept-charset="UTF-8" role="form" class="ng-pristine ng-valid">
+              <fieldset>
+                <div class="form-group">
+                  <input class="form-control" placeholder="E-mail" name="email" type="text">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input name="remember" type="checkbox" value="Remember Me"> Remember Me</input>
+                  </label>
+                </div> -->
+
+              <!-- <input class="btn btn-lg btn-success btn-block" type="submit" value="Login"> -->
+
+<!--                <div class="row text-center">
+                  <a href="#" class="show-more hvr-bounce-to-right" style="width: 230px; font-size: 23px;">Login</a>
+                </div>
+              </div> -->
+
+            <!-- <li>
+              <div class="input-wrap">
+                <button type="submit" class="hvr-bounce-to-right">LOG IN</button>
+              </div>
+            </li> -->
+
+
+<!--                       <hr>
+                    <center><h4>OR</h4></center>
+                    <input class="btn btn-lg btn-facebook btn-block" type="submit" value="Login via facebook" style="
+    max-width: 20%;
+    margin-left: 474px;
+">
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div></section>
+ -->
+
+
+
+<!--  #contact
+  <section id="contact" class="gradient-overlay">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-title text-center">
+            <h1>Sign Up</h1>
+            <p>Already have an account? Sign In here. <br> </p>
+          </div>
+        </div>
+      </div>
+      <div class="row align-self-center">
+        <div class="col-lg-12 form-section">
+          <form class="contact-form" action="include/sendemail.php">
+            <ul class="clearfix">
+              <li class="half"><input type="text" name="firstname" placeholder="First Name"></li>
+              <li class="half"><input type="text" name="lastname" placeholder="Last Name"></li>
+              <li class="full"><input type="text" name="email" placeholder="Your Email"></li>
+              <li class="full"><input type="text" name="password" placeholder="Password"></li>
+              <li class="full"><button type="submit" class="hvr-bounce-to-right">Submit</button></li>
+            </ul>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section> -->

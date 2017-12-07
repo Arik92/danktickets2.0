@@ -1,0 +1,509 @@
+<div ng-controller="carouselCtrl">
+	<div class="carousel-container">
+		<slick autoplay="false"
+					 fade="false"
+					 slides-to-show="1"
+					 slides-to-scroll="1"
+					 arrows="true"
+					 prev-arrow=".slick-prev-chev"
+					 next-arrow=".slick-next-chev"
+					 center-mode="false"
+					 dots="true"
+					 class="slick-container"
+					 >
+			<div ng-repeat="slide in slides" style="background: {{ slide.bgColor }}" class="slick-img-container">
+				<img ng-src="{{ slide.imgURL }}" class="slick-img">
+			</div>
+			<a type="button" class="slick-btn slick-prev-chev">
+				<i class="fa fa-chevron-left fa-3x" aria-hidden="true"></i>			
+			</a>
+			<a type="button" class="slick-btn slick-next-chev">
+				<i class="fa fa-chevron-right fa-3x" aria-hidden="true"></i>
+			</a>
+		</slick>
+	</div>
+</div>
+		
+		<!-- #banner -->
+		<!-- <section id="banner">
+			<div class="banner-container">
+				<div class="banner">
+					<ul >
+						<li
+							data-transition="fade"
+							data-slotamount="7"
+							class="slider-1 text-center gradient-overlay"
+							data-thumb="img/background/banner-bg.jpg"
+							data-title="EXPERTISE YOU CAN TRUST">
+							<img
+								src="../img/background/banner-bg.jpg"
+								data-bgposition="center center"
+								data-kenburns="on"
+								data-duration="20000"
+								data-ease="Linear.easeNone"
+								data-bgfit="100"
+								data-bgfitend="130"
+								data-bgpositionend="center center"
+								alt="slider image">
+							<div
+								class="caption sfb tp-resizeme text-center"
+								data-x="0"
+								data-y="220"
+								data-speed="700"
+								data-start="1000"
+								data-easing="easeOutBack">
+	
+								<div class="date">
+									December 31, 2015 23:59pm
+								</div>
+							</div>
+	
+							<div
+								class="caption sfb tp-resizeme"
+								data-x="0"
+								data-y="290"
+								data-speed="700"
+								data-start="1500"
+								data-easing="easeOutBack">
+	
+								<h1>DANK TICKETS CONFERENCE</h1>
+							</div>
+							<div
+								class="caption sfb tp-resizeme input-box"
+								data-x="0"
+								data-y="370"
+								data-speed="700"
+								data-start="2200"
+								data-easing="easeOutBack">
+	
+								<ul class="count-down"></ul>
+							</div>
+	
+							<ul
+								class="caption sfb tp-resizeme banner-buttons"
+								data-x="0"
+								data-y="530"
+								data-speed="700"
+								data-start="2500"
+								data-easing="easeOutBack">
+	
+								<li class="scrollToLink"><a href="#register-now" class="colored hvr-bounce-to-right">Register Now</a></li>
+								<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Get Tickets</a></li>
+	
+							</ul>
+	
+						</li>
+						<li
+	
+							data-transition="fade"
+							data-slotamount="7"
+							class="slider-2 text-center gradient-overlay"
+							data-thumb="img/background/subscribe-section-bg.jpg"
+							data-title="EXPERTISE YOU CAN TRUST">
+	
+							<img
+								src="img/background/subscribe-section-bg.jpg"
+								data-bgposition="center center"
+								data-kenburns="on"
+								data-duration="20000"
+								data-ease="Linear.easeNone"
+								data-bgfit="100"
+								data-bgfitend="130"
+								data-bgpositionend="center center"
+								alt="slider image">
+	
+							<div
+								class="caption sfb tp-resizeme text-center"
+								data-x="0"
+								data-y="300"
+								data-speed="700"
+								data-start="1000"
+								data-easing="easeOutBack">
+	
+								<h1>DONT MISS THE EVENT</h1>
+							</div>
+	
+							<div
+								class="caption sfb tp-resizeme"
+								data-x="0"
+								data-y="370"
+								data-speed="700"
+								data-start="1500"
+								data-easing="easeOutBack">
+	
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, neque,  <br> nam? Sed at dolor, perferendis, quaerat, esse dignissimos praesentium unde dolore.</p>
+							</div>
+							<ul
+								class="caption sfb tp-resizeme banner-buttons"
+								data-x="0"
+								data-y="450"
+								data-speed="700"
+								data-start="2500"
+								data-easing="easeOutBack">
+	
+								<li class="scrollToLink"><button type="submit" class="colored hvr-bounce-to-right">Register Now</button></li>
+								<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Watch Video</a></li>
+	
+							</ul>
+						</li>
+						<li
+							data-transition="fade"
+							data-slotamount="7"
+							class="slider-3 text-center gradient-overlay"
+							data-thumb="img/background/register-bg.jpg"
+							data-title="EXPERTISE YOU CAN TRUST">
+	
+							<img
+								src="img/background/register-bg.jpg"
+								data-bgposition="center center"
+								data-kenburns="on"
+								data-duration="20000"
+								data-ease="Linear.easeNone"
+								data-bgfit="100"
+								data-bgfitend="130"
+								data-bgpositionend="center center"
+								alt="slider image">
+	
+							<div
+								class="caption sfb tp-resizeme text-center"
+								data-x="0"
+								data-y="220"
+								data-speed="700"
+								data-start="1000"
+								data-easing="easeOutBack">
+	
+								<div class="date">
+									December 31, 2015 23:59pm
+								</div>
+							</div>
+	
+							<div
+								class="caption sfb tp-resizeme"
+								data-x="0"
+								data-y="290"
+								data-speed="700"
+								data-start="1500"
+								data-easing="easeOutBack">
+	
+								<h1>DANK TICKETS EVENT</h1>
+							</div>
+							<div
+								class="caption sfb tp-resizeme input-box"
+								data-x="0"
+								data-y="370"
+								data-speed="700"
+								data-start="2200"
+								data-easing="easeOutBack">
+								<ul>
+									<li><span><input type="text" placeholder="Your Name"></span></li>
+									<li><span><input type="text" placeholder="Your Email"></span></li>
+									<li><span><input type="text" placeholder="Your Phone"></span></li>
+								</ul>
+							</div>
+							<ul
+								class="caption sfb tp-resizeme banner-buttons"
+								data-x="0"
+								data-y="450"
+								data-speed="700"
+								data-start="2500"
+								data-easing="easeOutBack">
+								<li class="scrollToLink"><button type="submit" class="colored hvr-bounce-to-right">Register Now</button></li>
+								<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Watch Video</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+	
+		</section> -->
+		<!-- /#banner -->
+	
+	<section id="information-bar" style="margin-top:200px">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+					<ul>
+						<li><span class="img-holder"><i class="glyphicon glyphicon-map-marker fa-3x" style="color:#60E7D2;"></i></span></li>
+						<li><span><b>Browse Location</b> <input></input> </span></li>
+					</ul>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+					<ul>
+						<li><span class="img-holder"><!-- <img src="img/icons/2.png" alt=""> --><i class="glyphicon glyphicon-search fa-3x" style="color:#60E7D2;"></i></span></li>
+						<li><span><b>Browse Event</b> <input></input> </span></li>
+					</ul>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+					<ul>
+						<li><span class="img-holder"><i class="fa fa-calendar fa-3x" style="color:#60E7D2;"></i></span></li>
+						<li><span><b>All dates</b> <input></input></span></li>
+					</ul>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+					<ul>
+						<!-- <li><span class="img-holder"><img src="img/icons/4.png" alt=""></span></li> -->
+						<!-- <li><span><b>Some Coffe</b> Some Lorem Ipsum Text</span></li> -->
+
+						<li>
+							<div class="input-wrap">
+								<button type="submit" class="hvr-bounce-to-right my-btn">SEARCH</button>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /#information-bar -->
+
+	
+	<!-- #upcoming-event -->
+	<section id="upcoming-event">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-7 col-md-7 col-sm-7">
+					<div class="section-title">
+						<h1>Upcoming Events</h1>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <br> been the industry's standard dummy text ever since the 1500</p>
+					</div>
+				</div>
+				<div class="col-lg-5 col-md-5 col-sm-5">
+					<form action="#" class="pull-right">
+						<input type="text" placeholder="Search Event"> <button type="submit"><i class="fa fa-search"></i></button>
+					</form>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="tab-title-wrap">
+						<ul class="clearfix">
+							<li class="filter active" data-filter="all"><span>All Events</span></li>
+							<li class="filter" data-filter=".april-14"><span>April 14</span></li>
+							<li class="filter" data-filter=".april-22"><span>April 22</span></li>
+							<li class="filter" data-filter=".april-28"><span>April 28</span></li>
+							<li class="filter" data-filter=".may-10"><span>May 10</span></li>
+							<li class="filter" data-filter=".may-15"><span>May 15</span></li>
+							<li class="filter" data-filter=".may-22"><span>May 22</span></li>
+							<li class="filter" data-filter=".may-23"><span>May 23</span></li>
+							<li class="filter" data-filter=".jun-01"><span>June 01</span></li>
+						</ul>
+					</div>
+					<div class="tab-content-wrap row" ng-controller="browseCtrl">
+            <div class="col-lg-3 col-md-4 col-sm-6 mix april-14 april-22 hvr-float-shadow wow fadeIn" ng-repeat="event in events track by $index">
+             
+              <div class="img-holder" id="card-img-holder" style="background-image: url({{event.image}});"><img src="../img/upcoming-event/1.jpg" alt={{event.title}}></div>
+              <div class="content-wrap">
+                
+                <img src="img/upcoming-event/author.png" alt="" class="author-img">
+                
+                <div class="meta">
+                  <ul>
+                    <li><span><i class="fa fa-clock-o"></i>{{event.startTime}}, {{event.startHr}}-{{event.startTime}}, {{event.startHr}}</span>
+
+                    </li>
+                    <li><a href={{event.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i class="fa fa-map-marker"></i>{{event.location.locationName}}</span></a>
+                    </li>
+                  </ul>
+                </div>
+                <h4 ng-show="event.organizer.name">{{event.organizer.name}} Presents:</h4>
+                <h3 class="length-limiter">{{event.title}}</h3>
+                <p class="length-limiter">{{event.description}}</p>
+                <div >
+                <p style="background-color: grey;width:50%;color:white;text-align:center;">{{event.type}}</p>
+                <p>Ticket Prices</p>
+                </div>
+                <a class="read-more" ui-sref="event">read more<i class="fa fa-angle-right"></i></a>
+                <div class="row">
+                  <ul>
+                    <li>
+                      <div class="input-wrap">
+					  <a ui-sref="event({id: event['_id']})"><button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; height: 5%; font-size:18px;">Expand</button></a>
+                        <button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; max-height: 5%;font-size:18px;"> <i class="fa fa-plus-circle"></i> Save</button>
+                      </div>
+                    </li>
+                  </ul>
+                </div>            
+              </div>
+            </div>
+          </div> <!-- tab-content-wrap -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /#upcoming-event -->
+
+
+
+
+	<!-- #app-section -->
+<!-- 	<section id="app-section" class="gradient-overlay">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-5 col-md-5 col-sm-5">
+					<div class="app-box wow slideInLeft" style="background-image: url(img/app-section/app-main.png), url(img/app-section/app-bg.png);"></div>
+				</div>
+				<div class="col-lg-7 col-md-7 col-sm-7">
+					<div class="section-title">
+						<h1>We  have Mobile App for you!! Download it <br>now and stay with us</h1>
+					</div>
+
+					<ul>
+						<li class="clearfix">
+							<i class="fa fa-file-text-o"></i> <span><b>User Friendly</b> :  The standard chunk of Lorem Ipsum used since the 1500s is <br>reproduced below for those interested</span>
+						</li>
+						<li class="clearfix">
+							<i class="fa fa-file-text-o"></i> <span><b>User Friendly</b> :  The standard chunk of Lorem Ipsum used since the 1500s is <br>reproduced below for those interested</span>
+						</li>
+						<li class="clearfix">
+							<i class="fa fa-file-text-o"></i> <span><b>User Friendly</b> :  The standard chunk of Lorem Ipsum used since the 1500s is <br>reproduced below for those interested</span>
+						</li>
+					</ul>
+
+					<a href="#" class="dwnld-now hvr-bounce-to-right">DOWNLOAD NOW</a>
+
+				</div>
+			</div>
+		</div>
+	</section> -->
+	<!-- /#app-section -->
+
+	<!-- #pricing-table -->
+	<!-- <section id="pricing-table">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title text-center">
+						<h1>PRICING TABLE</h1>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <br> been the industry's standard dummy text ever since the 1500</p>
+					</div>
+				</div>
+			</div>
+			<div class="row price-table-row">
+				<div class="col-lg-3 col-md-4 col-sm-6 wow zoomIn">
+					<! .single-price-box -->
+					<!-- <div class="single-price-box">
+						<div class="title">
+							<span>free</span>
+						</div>
+						<div class="content">
+							<span class="time">1-months</span>
+							<span class="price"><span class="currency">$</span>0</span>
+							<a href="#" class="sign-up hvr-bounce-to-right">sign up</a>
+						</div>
+					</div> -->
+					<!-- /.single-price-box -->
+				<!-- </div>
+				<div class="col-lg-3 col-md-4 col-sm-6 wow zoomIn" data-wow-delay=".5s"> -->
+					<!-- .single-price-box -->
+					<!-- <div class="single-price-box">
+						<div class="title">
+							<span>basic</span>
+						</div>
+						<div class="content">
+							<span class="time">6-months</span>
+							<span class="price"><span class="currency">$</span>16</span>
+							<a href="#" class="sign-up hvr-bounce-to-right">sign up</a>
+						</div>
+					</div> -->
+					<!-- /.single-price-box -->
+				<!-- </div>
+				<div class="col-lg-3 col-md-4 col-sm-6 wow zoomIn" data-wow-delay="1s"> -->
+					<!-- .single-price-box -->
+					<!-- <div class="single-price-box">
+						<div class="title">
+							<span>STANDARD</span>
+						</div>
+						<div class="content">
+							<span class="time">8-months</span>
+							<span class="price"><span class="currency">$</span>39</span>
+							<a href="#" class="sign-up hvr-bounce-to-right">sign up</a>
+						</div>
+						<div class="bagage">
+							best
+						</div>
+					</div> -->
+					<!-- /.single-price-box -->
+				<!-- </div>
+				<div class="col-lg-3 col-md-4 col-sm-6 col-lg-offset-0 col-md-offset-4 wow zoomIn" data-wow-delay="1.5s"> -->
+					<!-- .single-price-box -->
+					<!-- <div class="single-price-box">
+						<div class="title">
+							<span>business</span>
+						</div>
+						<div class="content">
+							<span class="time">12-months</span>
+							<span class="price"><span class="currency">$</span>65</span>
+							<a href="#" class="sign-up hvr-bounce-to-right">sign up</a>
+						</div>
+					</div> -->
+					<!-- /.single-price-box -->
+				<!-- </div>
+			</div>
+		</div>
+	</section> -->
+	<!-- /#pricing-table -->
+
+
+
+	<!-- #blog -->
+	<section id="blog">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title text-center">
+						<h1>LATEST NEWS</h1>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <br> been the industry's standard dummy text ever since the 1500</p>
+					</div>
+				</div>
+			</div>
+			<div class="row blog-post-container">
+				<div class="col-lg-8 col-md-8 col-sm-12">
+					<div class="row">
+						<div class="single-post thumbnail col-lg-12 col-md-12 col-sm-12 wow fadeIn">
+							<div class="img-holder pull-left">
+								<img src="img/blog/1.jpg" alt="">
+							</div>
+							<div class="content pull-left">
+								<h3>Post with Image Here</h3>
+								<p class="meta"><a href="#">Maynard Breslow</a> on 24  Feb, 2014</p>
+								<p>Lorem Ipsum is simply dummy text of the <br> printing and typesetting industry.</p>
+								<a href="#" class="read-more hvr-bounce-to-right">read more</a>
+							</div>
+						</div>
+						<div class="single-post col-lg-6 col-md-6 col-sm-6 wow fadeIn" data-wow-delay=".3s">
+							<div class="content">
+								<h3>Text Post Only Here</h3>
+								<p class="meta"><a href="#">Maynard Breslow</a> on 24  Feb, 2014</p>
+								<p>Lorem Ipsum is simply dummy text of the <br> printing and typesetting industry.</p>
+								<a href="#" class="read-more hvr-bounce-to-right">read more</a>
+							</div>
+						</div>
+						<div class="single-post col-lg-6 col-md-6 col-sm-6 link-post  wow fadeIn" data-wow-delay=".3s">
+							<div class="link-holder text-center">
+								<i class="fa fa-link"></i>
+								<p>http://www.facebook.com</p>
+							</div>
+							<div class="content ">
+								<a href="#" class="read-more hvr-bounce-to-right">read more</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-lg-push-0 col-md-push-0 col-sm-push-3">
+					<div class="single-post wow fadeIn">
+						<div class="img-holder">
+							<img src="img/blog/2.jpg" alt="">
+						</div>
+						<div class="content">
+							<h3>Post with Image Here</h3>
+							<p class="meta"><a href="#">Maynard Breslow</a> on 24  Feb, 2014</p>
+							<p>Lorem Ipsum is simply dummy text of the <br> printing and typesetting industry.</p>
+							<a href="#" class="read-more hvr-bounce-to-right">read more</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /#blog -->
