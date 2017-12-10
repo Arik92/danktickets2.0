@@ -150,9 +150,9 @@ a:focus {
 /** ====== Header styles ====== **/
 
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
+  /* position: fixed; */
+  /* top: 0; */
+  /* left: 0; */
   z-index: 5;
   width: 100%;
   background: linear-gradient(to right, #1eb089 0%, #7c49ab 100%, #7db9e8 100%);
@@ -166,7 +166,7 @@ header.header-fixed {
   top: 0;
   width: 100%;
   z-index: 5;
-  box-shadow: 0 3px 5px rgba(81, 183, 227, 0.2);
+  box-shadow: 0 3px 5px rgba(98, 201, 245, 0.2);
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }

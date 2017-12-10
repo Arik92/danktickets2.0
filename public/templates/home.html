@@ -1,10 +1,10 @@
-	<ul class="mobile-top-panel">
+	<ul class="mobile-home-panel top-panel">
 		<li>Featured</li>
 		<li>Local</li>
 		<li>Upcoming</li>
 		<li>Favorites</li>
 	</ul>
-	
+
 	<div ng-controller="carouselCtrl" class="carousel-container">
 			<a type="button" class="slick-btn slick-prev-chev">
 					<i class="fa fa-chevron-left fa-3x" aria-hidden="true"></i>			
@@ -23,12 +23,27 @@
 					 dots="true"
 					 class="slick-container"
 					 >
-			<div ng-repeat="slide in slides" style="background: {{ slide.bgColor }}" class="slick-img-container">
+			<div ng-repeat="slide in slides" 
+					 style="background: {{ slide.bgColor }}" 
+					 class="slick-item-container">
 				<img ng-src="{{ slide.imgURL }}" class="slick-img">
+				<div class="info">
+					<div class="left">
+						<div class="date">{{ slide.date }}</div>
+						<div class="name">{{ slide.name }}</div>
+					</div>
+					<div class="right">{{ slide.location }}</div>
+				</div>
 			</div>
 			
 		</slick>
 	</div>
+
+	<ul class="mobile-home-panel bottom-panel">
+		<li>Home</li>
+		<li>Tickets</li>
+		<li>More</li>
+	</ul>
 	
 	<section id="information-bar" style="margin-top:200px">
 		<div class="container">
@@ -144,119 +159,6 @@
 		</div>
 	</section>
 	<!-- /#upcoming-event -->
-
-
-
-
-	<!-- #app-section -->
-<!-- 	<section id="app-section" class="gradient-overlay">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-5 col-md-5 col-sm-5">
-					<div class="app-box wow slideInLeft" style="background-image: url(img/app-section/app-main.png), url(img/app-section/app-bg.png);"></div>
-				</div>
-				<div class="col-lg-7 col-md-7 col-sm-7">
-					<div class="section-title">
-						<h1>We  have Mobile App for you!! Download it <br>now and stay with us</h1>
-					</div>
-
-					<ul>
-						<li class="clearfix">
-							<i class="fa fa-file-text-o"></i> <span><b>User Friendly</b> :  The standard chunk of Lorem Ipsum used since the 1500s is <br>reproduced below for those interested</span>
-						</li>
-						<li class="clearfix">
-							<i class="fa fa-file-text-o"></i> <span><b>User Friendly</b> :  The standard chunk of Lorem Ipsum used since the 1500s is <br>reproduced below for those interested</span>
-						</li>
-						<li class="clearfix">
-							<i class="fa fa-file-text-o"></i> <span><b>User Friendly</b> :  The standard chunk of Lorem Ipsum used since the 1500s is <br>reproduced below for those interested</span>
-						</li>
-					</ul>
-
-					<a href="#" class="dwnld-now hvr-bounce-to-right">DOWNLOAD NOW</a>
-
-				</div>
-			</div>
-		</div>
-	</section> -->
-	<!-- /#app-section -->
-
-	<!-- #pricing-table -->
-	<!-- <section id="pricing-table">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title text-center">
-						<h1>PRICING TABLE</h1>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <br> been the industry's standard dummy text ever since the 1500</p>
-					</div>
-				</div>
-			</div>
-			<div class="row price-table-row">
-				<div class="col-lg-3 col-md-4 col-sm-6 wow zoomIn">
-					<! .single-price-box -->
-					<!-- <div class="single-price-box">
-						<div class="title">
-							<span>free</span>
-						</div>
-						<div class="content">
-							<span class="time">1-months</span>
-							<span class="price"><span class="currency">$</span>0</span>
-							<a href="#" class="sign-up hvr-bounce-to-right">sign up</a>
-						</div>
-					</div> -->
-					<!-- /.single-price-box -->
-				<!-- </div>
-				<div class="col-lg-3 col-md-4 col-sm-6 wow zoomIn" data-wow-delay=".5s"> -->
-					<!-- .single-price-box -->
-					<!-- <div class="single-price-box">
-						<div class="title">
-							<span>basic</span>
-						</div>
-						<div class="content">
-							<span class="time">6-months</span>
-							<span class="price"><span class="currency">$</span>16</span>
-							<a href="#" class="sign-up hvr-bounce-to-right">sign up</a>
-						</div>
-					</div> -->
-					<!-- /.single-price-box -->
-				<!-- </div>
-				<div class="col-lg-3 col-md-4 col-sm-6 wow zoomIn" data-wow-delay="1s"> -->
-					<!-- .single-price-box -->
-					<!-- <div class="single-price-box">
-						<div class="title">
-							<span>STANDARD</span>
-						</div>
-						<div class="content">
-							<span class="time">8-months</span>
-							<span class="price"><span class="currency">$</span>39</span>
-							<a href="#" class="sign-up hvr-bounce-to-right">sign up</a>
-						</div>
-						<div class="bagage">
-							best
-						</div>
-					</div> -->
-					<!-- /.single-price-box -->
-				<!-- </div>
-				<div class="col-lg-3 col-md-4 col-sm-6 col-lg-offset-0 col-md-offset-4 wow zoomIn" data-wow-delay="1.5s"> -->
-					<!-- .single-price-box -->
-					<!-- <div class="single-price-box">
-						<div class="title">
-							<span>business</span>
-						</div>
-						<div class="content">
-							<span class="time">12-months</span>
-							<span class="price"><span class="currency">$</span>65</span>
-							<a href="#" class="sign-up hvr-bounce-to-right">sign up</a>
-						</div>
-					</div> -->
-					<!-- /.single-price-box -->
-				<!-- </div>
-			</div>
-		</div>
-	</section> -->
-	<!-- /#pricing-table -->
-
-
 
 	<!-- #blog -->
 	<section id="blog">
