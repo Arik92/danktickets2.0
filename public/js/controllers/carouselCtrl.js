@@ -20,9 +20,9 @@ app.controller('carouselCtrl',['$scope','$window', function( $scope, $window){
       location: 'Santa Cruz, CA'
     },
     {
-      imgURL: "../../img/banner-carousel/taco-sesh.jpg",
+      imgURL: "../../img/banner-carousel/meet-art-sesh.jpg",
       bgColor: 'linear-gradient(red 0%, #7c49ab 100%, #7db9e8 100%)',
-      name: 'Taco Sesh Munchie Time',
+      name: 'Meet Art Sesh',
       date: 'Friday, January 26, 7:00 PM',
       location: 'Long Beach, CA'
     },
