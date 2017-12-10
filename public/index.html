@@ -22,6 +22,7 @@
 	<link rel="stylesheet" href="css/event.css">
 	<!-- responsive stylesheet -->
 	<link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="css/home.css">
 	<link rel="stylesheet" href="/js-datepicker/datepicker.css">
 	<!-- Morris stylesheet -->
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
@@ -29,84 +30,30 @@
 	<link rel="stylesheet" href="ui-bootstrap-custom-2.5.0-csp.css">
 </head>
 <body ng-controller="loginCtrl as login" ng-show="login.loader" ng-cloak>
-	<!-- .preloader -->
 	<div class="preloader"></div>
-	<!-- /.preloader -->
-	<!-- #header -->
 	<header id="header">
-	<!-- <button class="nav-toggler" > <i class="fa fa-bars"></i></button> -->
-	<button ng-controller="navToggleCtrl"
-					class="nav-toggler"
-					uib-dropdown
-					on-toggle="toggled(open)"
-					uib-dropdown-toggle
-					>
-		<i class="fa fa-bars"></i>
-			<ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown"
-					style="left: -150px">
-					<li role="menuitem"><a ng-click="goToState('browse')">Browse events</a></li>
-					<li role="menuitem" ng-show="login.username"><a ng-click="goToState('create')">Create Event</a></li>
-					<li class="divider"></li>
-					<li role="menuitem" ng-show="login.username"><a ng-click="goToState('profile')">My Profile</a></li>
-					<li role="menuitem" ng-show="login.username"><a ng-click="goToState('manage')">Manage Events</a></li>
-					<li role="menuitem" ng-show="login.username"><a ng-click="goToState('organizer')">New Organizer</a></li>
-					<li role="menuitem" ng-show="login.username"><a ng-click="goToState('userprofiles')">Organizer Profiles</a></li>
-					<li class="divider" ng-show="login.username"></li>
-					<li role="menuitem" ng-show="login.username"><a ng-click="login.logout()">Log Out</a></li>
-					<li role="menuitem" ng-hide="login.username"><a ng-click="goToState('signin')">SIGN IN</a></li>
-					<li role="menuitem" ng-hide="login.username"><a ng-click="goToState('signup')">SIGN UP</a></li>
-			</ul>
-	</button>
+		<hamburger-directive></hamburger-directive>
 		<div class="container">
 			<div class="row">
 				<!-- .logo -->
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 logo">
-					<a ui-sref="home"><img src="img/resources/logo.png" alt="Logo Image" style="max-width: 150PX;padding:5px;margin-top: 10px;margin-right: 90px;"></a>
+				<div class="left-container col col-md-6">
+					<div class=" logo">
+						<a ui-sref="home"><img src="img/resources/logo.png" alt="Logo Image"></a>
+					</div>
+					<form class="navbar-form" role="search">
+							<div class="input-group add-on">
+								<input class="form-control" placeholder="Search Events" name="srch-term" id="srch-term" type="text">
+								<div class="input-group-btn">
+									<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+								</div>
+							</div>
+					</form>
 				</div>
-				<!-- /.logo -->
-				<!-- search bar -->
-				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 mainmenu-container">
-					<input style="width: 212px;" type="text" placeholder=" Search Event"><button type="submit"><i class="fa fa-search fa-3x"></i></button>
-				</div>
-				<!-- search bar -->
 				<!-- .mainmenu-container -->
-				<nav class="col-lg-5 col-md-5 col-sm-6 col-xs-6 mainmenu-container menu-list">				
+				<nav class="col-md-6 mainmenu-container menu-list">				
 					<ul class="mainmenu clearfix">
 						<li class="nav-closer"><i class="fa fa-close"></i></li>
-						<!-- <li class="current scrollToLink dropdown">
-							<a href="#banner">HOME</a>
-							<ul class="submenu">
-								<li class="deadlink dropdown">
-									<a href="#">HOME Variations</a>
-									<ul class="submenu">
-										<li><a href="index.html">HOME V1</a></li>
-										<li><a href="index-v2.html">HOME V2</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li> -->
-						<!-- <li class="deadlink">
-							<a href="#">DankTickets</a>
-							<ul class="submenu">
-								<li><a href="#">About Us</a></li>
-								<li class="dropdown">
-									<a href="services.html">Services</a>
-									<ul class="submenu">
-										<li class="deadlink"><a href="#">Third Level Menu</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li> -->
 						<li class="scrollToLink"><a ui-sref="browse">BROWSE EVENTS</a></li>
-						<!-- <li class="scrollToLink"><a href=".home#gallery">GALLERY</a></li> -->
-						<!-- <li class="scrollToLink dropdown">
-							<a href="#blog">BLOG</a>
-							<ul class="submenu">
-								<li><a href="blog.html">Blog Archive</a></li>
-								<li><a href="blog-single.html">Blog Single</a></li>
-							</ul>
-						</li> -->
-						<!-- <li class="scrollToLink"><a ui-sref="contact">CONTACT</a></li> -->
 						<li class="scrollToLink" ng-hide="login.username"><a ui-sref="signin">SIGN IN</a></li>
 						<li class="scrollToLink" ng-hide="login.username"><a ui-sref="signup">SIGN UP</a></li>
 						<li class="scrollToLink" ng-show="login.username"><a ui-sref="create">CREATE EVENT</a></li>
@@ -119,7 +66,6 @@
 								<li class="scrollToLink"><a ui-sref="signup" ng-click="login.logout()">LOG OUT</a></li>
 							</ul>
 						</li>
-						<!-- <li class="scrollToLink"><a href="#event-sponsor">SPONSOR</a></li> -->
 					</ul>
 				</nav>
 				<!-- /.mainmenu-container -->
@@ -129,14 +75,16 @@
 	<!-- /#header -->
 
 
-	<nav-directive></nav-directive>
+	<!-- <nav-directive></nav-directive> -->
 	
-	<div id="nav-spacer" style="margin-top: 94px"></div>
+	<div id="nav-spacer" style="margin-top: 118px"></div>
 
 
 	<div ui-view></div>
 
 	<footer-directive></footer-directive>
+
+	<!-- Scripts -->
 	<script src="/angular/angular.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -188,6 +136,7 @@
 	<!-- Directives -->
 	<script src="js/directives/navDirective.js"></script>
 	<script src="js/directives/footerDirective.js"></script>
+	<script src="js/directives/hamburgerDirective.js"></script>
 	<!-- slick carousel -->
 	<script src="../slick-carousel/slick/slick.js"></script>
 	<script src="../angular-slick/dist/slick.js"></script>

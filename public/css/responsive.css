@@ -1,12 +1,12 @@
 /* medium size */
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 992px) {
   nav.mainmenu-container.menu-list {
-    display: none !important;
+    display: block;
   }
 
   .nav-toggler {
-    display: block;
-  }
+    display: none;
+  } 
 
   header .mainmenu-container > ul > li {
     padding: 0 1rem;
@@ -328,19 +328,6 @@
     position: relative;
   }
   .nav-toggler {
-   /* background: #ff8625 none repeat scroll 0 0;
-    border: medium none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 40px;
-    padding: 0 15px;
-    position: absolute;
-    right: 16px;
-    text-transform: uppercase;
-    top: 27px;
-    display: block;*/
     background: #60E7D2 none repeat scroll 0 0;
     border: medium none;
     border-radius: 5px;
@@ -433,17 +420,14 @@
     display: block;
   }
   header .logo {
-    padding-top: 20px;
     transition: all 0.3s ease-out 0s;
-    padding-bottom: 20px;
-    /*width: 100%;*/
   }
   header .mainmenu-container {
     width: 100%;
   }
   header .container {
     /*height: 175px;*/
-    text-align: center;
+    /* text-align: center; */
   }
   #banner .input-box ul li span input {
     width: 100px;

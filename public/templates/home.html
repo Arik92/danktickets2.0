@@ -1,5 +1,17 @@
-<div ng-controller="carouselCtrl">
-	<div class="carousel-container">
+	<ul class="mobile-top-panel">
+		<li>Featured</li>
+		<li>Local</li>
+		<li>Upcoming</li>
+		<li>Favorites</li>
+	</ul>
+	
+	<div ng-controller="carouselCtrl" class="carousel-container">
+			<a type="button" class="slick-btn slick-prev-chev">
+					<i class="fa fa-chevron-left fa-3x" aria-hidden="true"></i>			
+				</a>
+				<a type="button" class="slick-btn slick-next-chev">
+					<i class="fa fa-chevron-right fa-3x" aria-hidden="true"></i>
+				</a>
 		<slick autoplay="false"
 					 fade="false"
 					 slides-to-show="1"
@@ -14,209 +26,9 @@
 			<div ng-repeat="slide in slides" style="background: {{ slide.bgColor }}" class="slick-img-container">
 				<img ng-src="{{ slide.imgURL }}" class="slick-img">
 			</div>
-			<a type="button" class="slick-btn slick-prev-chev">
-				<i class="fa fa-chevron-left fa-3x" aria-hidden="true"></i>			
-			</a>
-			<a type="button" class="slick-btn slick-next-chev">
-				<i class="fa fa-chevron-right fa-3x" aria-hidden="true"></i>
-			</a>
+			
 		</slick>
 	</div>
-</div>
-		
-		<!-- #banner -->
-		<!-- <section id="banner">
-			<div class="banner-container">
-				<div class="banner">
-					<ul >
-						<li
-							data-transition="fade"
-							data-slotamount="7"
-							class="slider-1 text-center gradient-overlay"
-							data-thumb="img/background/banner-bg.jpg"
-							data-title="EXPERTISE YOU CAN TRUST">
-							<img
-								src="../img/background/banner-bg.jpg"
-								data-bgposition="center center"
-								data-kenburns="on"
-								data-duration="20000"
-								data-ease="Linear.easeNone"
-								data-bgfit="100"
-								data-bgfitend="130"
-								data-bgpositionend="center center"
-								alt="slider image">
-							<div
-								class="caption sfb tp-resizeme text-center"
-								data-x="0"
-								data-y="220"
-								data-speed="700"
-								data-start="1000"
-								data-easing="easeOutBack">
-	
-								<div class="date">
-									December 31, 2015 23:59pm
-								</div>
-							</div>
-	
-							<div
-								class="caption sfb tp-resizeme"
-								data-x="0"
-								data-y="290"
-								data-speed="700"
-								data-start="1500"
-								data-easing="easeOutBack">
-	
-								<h1>DANK TICKETS CONFERENCE</h1>
-							</div>
-							<div
-								class="caption sfb tp-resizeme input-box"
-								data-x="0"
-								data-y="370"
-								data-speed="700"
-								data-start="2200"
-								data-easing="easeOutBack">
-	
-								<ul class="count-down"></ul>
-							</div>
-	
-							<ul
-								class="caption sfb tp-resizeme banner-buttons"
-								data-x="0"
-								data-y="530"
-								data-speed="700"
-								data-start="2500"
-								data-easing="easeOutBack">
-	
-								<li class="scrollToLink"><a href="#register-now" class="colored hvr-bounce-to-right">Register Now</a></li>
-								<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Get Tickets</a></li>
-	
-							</ul>
-	
-						</li>
-						<li
-	
-							data-transition="fade"
-							data-slotamount="7"
-							class="slider-2 text-center gradient-overlay"
-							data-thumb="img/background/subscribe-section-bg.jpg"
-							data-title="EXPERTISE YOU CAN TRUST">
-	
-							<img
-								src="img/background/subscribe-section-bg.jpg"
-								data-bgposition="center center"
-								data-kenburns="on"
-								data-duration="20000"
-								data-ease="Linear.easeNone"
-								data-bgfit="100"
-								data-bgfitend="130"
-								data-bgpositionend="center center"
-								alt="slider image">
-	
-							<div
-								class="caption sfb tp-resizeme text-center"
-								data-x="0"
-								data-y="300"
-								data-speed="700"
-								data-start="1000"
-								data-easing="easeOutBack">
-	
-								<h1>DONT MISS THE EVENT</h1>
-							</div>
-	
-							<div
-								class="caption sfb tp-resizeme"
-								data-x="0"
-								data-y="370"
-								data-speed="700"
-								data-start="1500"
-								data-easing="easeOutBack">
-	
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, neque,  <br> nam? Sed at dolor, perferendis, quaerat, esse dignissimos praesentium unde dolore.</p>
-							</div>
-							<ul
-								class="caption sfb tp-resizeme banner-buttons"
-								data-x="0"
-								data-y="450"
-								data-speed="700"
-								data-start="2500"
-								data-easing="easeOutBack">
-	
-								<li class="scrollToLink"><button type="submit" class="colored hvr-bounce-to-right">Register Now</button></li>
-								<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Watch Video</a></li>
-	
-							</ul>
-						</li>
-						<li
-							data-transition="fade"
-							data-slotamount="7"
-							class="slider-3 text-center gradient-overlay"
-							data-thumb="img/background/register-bg.jpg"
-							data-title="EXPERTISE YOU CAN TRUST">
-	
-							<img
-								src="img/background/register-bg.jpg"
-								data-bgposition="center center"
-								data-kenburns="on"
-								data-duration="20000"
-								data-ease="Linear.easeNone"
-								data-bgfit="100"
-								data-bgfitend="130"
-								data-bgpositionend="center center"
-								alt="slider image">
-	
-							<div
-								class="caption sfb tp-resizeme text-center"
-								data-x="0"
-								data-y="220"
-								data-speed="700"
-								data-start="1000"
-								data-easing="easeOutBack">
-	
-								<div class="date">
-									December 31, 2015 23:59pm
-								</div>
-							</div>
-	
-							<div
-								class="caption sfb tp-resizeme"
-								data-x="0"
-								data-y="290"
-								data-speed="700"
-								data-start="1500"
-								data-easing="easeOutBack">
-	
-								<h1>DANK TICKETS EVENT</h1>
-							</div>
-							<div
-								class="caption sfb tp-resizeme input-box"
-								data-x="0"
-								data-y="370"
-								data-speed="700"
-								data-start="2200"
-								data-easing="easeOutBack">
-								<ul>
-									<li><span><input type="text" placeholder="Your Name"></span></li>
-									<li><span><input type="text" placeholder="Your Email"></span></li>
-									<li><span><input type="text" placeholder="Your Phone"></span></li>
-								</ul>
-							</div>
-							<ul
-								class="caption sfb tp-resizeme banner-buttons"
-								data-x="0"
-								data-y="450"
-								data-speed="700"
-								data-start="2500"
-								data-easing="easeOutBack">
-								<li class="scrollToLink"><button type="submit" class="colored hvr-bounce-to-right">Register Now</button></li>
-								<li class="scrollToLink"><a href="#upcoming-event" class="bordered hvr-bounce-to-right">Watch Video</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-	
-		</section> -->
-		<!-- /#banner -->
 	
 	<section id="information-bar" style="margin-top:200px">
 		<div class="container">
