@@ -7,11 +7,46 @@ module.exports = config;
 app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location) {
   console.log('hello from createCtrl');
   this.$onInit = () => {
+	$scope.currentTickets = [];
     initProfs();
     initEndDatePicker();
     initStartDatePicker();
-  }
+  }  
+////////////////////////////////////////////////ticket interface//////////////////////////////////////  
 
+  $scope.deleteTempTick = function(index) {
+    $scope.currentTickets.splice(index, 1);
+	$scope.updateQ();
+  }
+  
+  $scope.resetTickets = function() {
+    $scope.currentsTickets = [];
+  }
+  $scope.add = function (type) {
+    var isFree = false;
+    if (type === 'Free') {
+      isFree = true;
+    }
+    var ticket = {
+      ticketType: type,
+      ticketPrice: 0,
+      ticketName: type + " Ticket",
+      ticketQ: 0,
+      free: isFree
+    }
+    console.log("added ticket is ", ticket);
+    $scope.currentTickets.push(ticket);
+	$scope.updateQ();
+    
+  }
+  
+  $scope.updateQ = function () {
+    $scope.totalTickets = 0;
+    for (var i = 0; i < $scope.currentTickets.length; i++) {
+      $scope.totalTickets += $scope.currentTickets[i].ticketQ;
+    }//for
+  }//updateQ
+  
   $scope.typeOptions = [
     'Concert',
     'Meeting',
@@ -287,8 +322,8 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       showRemainingTicks: $scope.showRemain
     };// event post object
     evt.tickets = [];
-    for (var i = 0; i < $scope.tempTicks.length; i++) {
-      evt.tickets.push($scope.tempTicks[i]);
+    for (var i = 0; i < $scope.currentTickets.length; i++) {
+      evt.tickets.push($scope.currentTickets[i]);
     }// for filling ticket array
     var isLegit = validator();
     if (isLegit.localeCompare("ok") === 0) {
@@ -342,37 +377,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
 
   var config = require('../config.js');
   $scope.mapKey = config.MAPS_API_KEY;
-  //console.log("key is: ", $scope.mapKey);
-  $scope.add = function (type) {
-    var isFree = false;
-    if (type === 'Free') {
-      isFree = true;
-    }
-    var ticket = {
-      ticketType: type,
-      ticketPrice: 0,
-      ticketName: type + " Ticket",
-      ticketQ: 0,
-      free: isFree
-    }
-    console.log("added ticket is ", ticket);
-    createService.addticket(ticket);
-    $scope.getCurrentTickets();
-  }
-  $scope.getCurrentTickets = function () {
-    $scope.tempTicks = createService.getTempTicks();
-    $scope.updateQ();
-  }
-  $scope.updateQ = function () {
-    $scope.totalTickets = 0;
-    for (var i = 0; i < $scope.tempTicks.length; i++) {
-      $scope.totalTickets += $scope.tempTicks[i].ticketQ;
-    }//for
-  }//updateQ
-  $scope.delete = function (index) {
-    createService.deleteTempTick(index);
-    $scope.getCurrentTickets();
-  }
+  //console.log("key is: ", $scope.mapKey);  
   /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
   var placeSearch, autocomplete;
   function initAutocomplete() {
@@ -433,7 +438,6 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
   //calling the addScript function
   var mapSrc = "https://maps.googleapis.com/maps/api/js?key=" + $scope.mapKey + "&libraries=places&language=en";
   addScript(mapSrc);
-  createService.resetTicks();
   /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
   /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
   $scope.preview = function () {
@@ -482,6 +486,10 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 		} else {
 			console.log("fetched event is", res[0]);
 			$scope.event = res[0];
+			$scope.currentTickets = [];
+			for (var i=0;i<$scope.event.tickets.length;i++) {
+			$scope.currentTickets.push($scope.event.tickets[i]);
+			}
     $scope.profiles = [];
     console.log("initial profs for ",$rootScope.currentUser);    
       orService.getOrganizersByUser($rootScope.currentUser).then(function(data2){
@@ -499,8 +507,42 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
   this.$onInit = () => {
 			console.log('init fired');
 			initEventAndProfs();			
-			addScript(mapSrc); 
+			addScript(mapSrc); 		
 	}//onInit	  
+	
+	$scope.deleteTempTick = function(index) {
+    $scope.currentTickets.splice(index, 1);
+	$scope.updateQ();
+  }
+  
+  $scope.resetTickets = function() {
+    $scope.currentsTickets = [];
+  }
+  $scope.add = function (type) {
+    var isFree = false;
+    if (type === 'Free') {
+      isFree = true;
+    }
+    var ticket = {
+      ticketType: type,
+      ticketPrice: 0,
+      ticketName: type + " Ticket",
+      ticketQ: 0,
+      free: isFree
+    }
+    console.log("added ticket is ", ticket);
+    $scope.currentTickets.push(ticket);
+	$scope.updateQ();
+    
+  }
+  
+  $scope.updateQ = function () {
+    $scope.totalTickets = 0;
+    for (var i = 0; i < $scope.currentTickets.length; i++) {
+      $scope.totalTickets += $scope.currentTickets[i].ticketQ;
+    }//for
+  }//updateQ
+  
   $scope.selectProf = function(){
     console.log("selected profile is", $scope.selectedName);
 	$scope.event.organizer = $scope.selectedName;
@@ -585,37 +627,7 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 
   var config = require('../config.js');
   $scope.mapKey = config.MAPS_API_KEY;
-  //console.log("key is: ", $scope.mapKey);
-  $scope.add = function(type) {
-    var isFree = false;
-    if (type==='Free') {
-      isFree = true;
-    }
-    var ticket = {
-      ticketType: type,
-      ticketPrice: 0,
-      ticketName: type+" Ticket",
-      ticketQ: 0,
-      free: isFree
-    }
-    console.log("added ticket is ",ticket);
-    createService.addticket(ticket);
-    $scope.getCurrentTickets();
-  }
-  $scope.getCurrentTickets = function() {
-    $scope.tempTicks = createService.getTempTicks();
-    $scope.updateQ();
-  }
-  $scope.updateQ = function() {
-    $scope.totalTickets = 0;
-    for (var i=0;i<$scope.tempTicks.length;i++) {
-      $scope.totalTickets+=$scope.tempTicks[i].ticketQ;
-    }//for
-  }//updateQ
-  $scope.delete = function(index) {
-    createService.deleteTempTick(index);
-    $scope.getCurrentTickets();
-  }
+  //console.log("key is: ", $scope.mapKey);  
   /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
   var placeSearch, autocomplete;
 function initAutocomplete(){
