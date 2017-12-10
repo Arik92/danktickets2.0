@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var User = require("./usermodel");
 
-var ticketSchema = new Schema({
+ /*var ticketSchema = new Schema({
   type: String,
   price: Number,
   name: String,
@@ -11,6 +11,7 @@ var ticketSchema = new Schema({
   //id or serial number. aside from mongoID
   description: String //NOTE: special notes to guests?
 });
+var ticket = mongoose.model("Ticket", ticketSchema); */
 var eventSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref:"User" },
   title: String,
@@ -26,7 +27,15 @@ var eventSchema = new Schema({
   endDateDisplay: String,
   endHr: String,
   description: String,
-  tickets: [ticketSchema], //o
+  tickets: [
+	  {
+		 ticketType: String,
+		 ticketprice: Number,
+		 ticketName: String,
+		 ticketQ: Number,
+		 isFree: Boolean		 
+	  }	  
+  ], //o
   numTickets: Number, //tickets remaining
   isPrivate: Boolean,
   showRemainingTicks: Boolean
