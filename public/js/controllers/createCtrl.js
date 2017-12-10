@@ -51,6 +51,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       onSelect: function (instance) {
         // Show which date was selected.
         console.log("start date: ", instance.dateSelected);
+
         $scope.startDate = instance.dateSelected.getTime();
         console.log("as string?", $scope.startDate);
 		/*var num = instance.dateSelected.getTime();

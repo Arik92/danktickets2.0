@@ -256,6 +256,7 @@ function checkNames() {
   onSelect: function(instance) {
     // Show which date was selected.
     $scope.event.startDate = instance.dateSelected.getTime();
+    //$scope.event.startDate = instance.dateSelected.toDateString();
     console.log("NEW start date is ", $scope.event.startDate);
   },
   onShow: function(instance) {

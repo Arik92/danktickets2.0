@@ -57,6 +57,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       onSelect: function (instance) {
         // Show which date was selected.
         console.log("start date: ", instance.dateSelected);
+
         $scope.startDate = instance.dateSelected.getTime();
         console.log("as string?", $scope.startDate);
 		/*var num = instance.dateSelected.getTime();
@@ -719,6 +720,7 @@ function checkNames() {
   onSelect: function(instance) {
     // Show which date was selected.
     $scope.event.startDate = instance.dateSelected.getTime();
+    //$scope.event.startDate = instance.dateSelected.toDateString();
     console.log("NEW start date is ", $scope.event.startDate);
   },
   onShow: function(instance) {
