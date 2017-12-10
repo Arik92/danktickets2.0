@@ -1,4 +1,5 @@
 app.controller('browseCtrl',['createService','$scope','$window', function(createService, $scope, $window){
+	 function eventPrep() {
   createService.getEvents().then(function(result){
     console.log("All events: ",result);
     $scope.events = result;
@@ -12,4 +13,8 @@ app.controller('browseCtrl',['createService','$scope','$window', function(create
   }, function(err){
     throw (err)
   })//GET request route
+	 }
+  this.$onInit = () => {
+   eventPrep(); 
+  }
 }]);

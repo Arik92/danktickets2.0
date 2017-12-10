@@ -36,7 +36,9 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
   //TODO: when loading an event, set the start/end dates accordingly
 
   function initStartDatePicker() {
-	  $scope.startDate = new Date().getTime();
+	  var initialStart = new Date();
+	  $scope.startDate = initialStart.getTime();
+	  $scope.startDateDisplay = initialStart.toDateString();
     var startDatepicker = datepicker('#create_start_date_picker', {
       position: 'br', // Top right.
       startDate: new Date(), // This month.
@@ -51,9 +53,9 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       onSelect: function (instance) {
         // Show which date was selected.
         console.log("start date: ", instance.dateSelected);
-
         $scope.startDate = instance.dateSelected.getTime();
-        console.log("as string?", $scope.startDate);
+		$scope.startDateDisplay = instance.dateSelected.toDateString();
+        //console.log("as string?", $scope.startDate);
 		/*var num = instance.dateSelected.getTime();
 		console.log("as number: "+num+"and it is a"+typeof(num));
 		var date2 = new Date(num);
@@ -79,6 +81,9 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
   }
 
   function initEndDatePicker() {
+	  var initialEnd = new Date();
+	  $scope.endDate = initialEnd.getTime();
+	  $scope.endtDateDisplay = initialEnd.toDateString();
     console.log('initEndfired');
     var endDatepicker = datepicker('#create_end_date_picker', {
       position: 'br', // Top right.
@@ -96,6 +101,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
         // Show which date was selected.
         console.log("End date: ", instance.dateSelected);
         $scope.endDate = instance.dateSelected.getTime();
+	    $scope.endDateDisplay = instance.dateSelected.toDateString();
         console.log("as number", $scope.endDate);
         //console.log("exp date", $scope.exampleDate);
       },
@@ -230,7 +236,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
     alert($scope.isPrivate);
   }
   $scope.compareDates = function () {
-    var diff = $scope.endDate.getTime() - $scope.startDate.getTime();
+    var diff = $scope.endDate - $scope.startDate;
     if (diff > 0) {
       return true;
     } else {
@@ -263,9 +269,11 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
         locationName: $scope.selectedPlace.formatted_address
       },
       //image: $scope.imageName, 95% sure this is only defined in th routes
-      startTime: $scope.startDate.toDateString(),
+      startTime: $scope.startDate,
+	  startDateDisplay: $scope.startDateDisplay,
       startHr: $scope.startHr,
-      endTime: $scope.endDate.toDateString(),
+      endTime: $scope.endDate,
+	  endDateDisplay: $scope.endDateDisplay,
       endHr: $scope.endHr,
       description: $scope.eDesc,
       numTickets: $scope.totalTickets, //tickets remaining
@@ -278,10 +286,10 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
     }// for filling ticket array
     var isLegit = validator();
     if (isLegit.localeCompare("ok") === 0) {
-      console.log("compared " + isLegit + " and ok. and the result is" + isLegit.localeCompare("ok"));
+      //console.log("compared " + isLegit + " and ok. and the result is" + isLegit.localeCompare("ok"));
       if (submitPic) {
-        Upload.upload({
-          url: 'https://danktickets.herokuapp.com/events/upload', //webAPI exposed to upload the file
+        Upload.upload({ //'https://danktickets.herokuapp.com/events/upload'
+          url: 'http://localhost:8000/events/upload',//webAPI exposed to upload the file
           data: {
             file: submitPic,
             event: evt

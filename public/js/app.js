@@ -11,14 +11,7 @@ app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
     .state('home', {
       url: '/home',
       templateUrl: '/templates/home.html',
-      controller: function ($rootScope, $scope, $http) {
-        $scope.logout = function () {
-          console.log("logging out...");
-          localStorage.removeItem("user");
-          $rootScope.currentUser = null;
-          delete $http.defaults.headers.common.Authorization;
-        }
-      } //controller
+      controller: 'homeCtrl'
     })
     .state('event', {
       url: '/event/:id',
