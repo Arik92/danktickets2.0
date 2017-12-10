@@ -245,7 +245,7 @@ function checkNames() {
   var startDatepicker = datepicker('#edit_start_date_picker', {
   position: 'br', // Top right.
   startDate: new Date($scope.event.startTime), // This month.
-  dateSelected: new Date($scope.event.startTime), // Today is selected.
+  dateSelected: new Date($scope.event.startTime.toDateString()), // Today is selected.
   minDate: new Date($scope.event.startTime), // June 1st, 2016.
   maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
   noWeekends: false,
@@ -255,7 +255,8 @@ function checkNames() {
   },
   onSelect: function(instance) {
     // Show which date was selected.
-    $scope.event.startDate = instance.dateSelected.toDateString();
+    $scope.event.startDate = instance.dateSelected.getTime();
+    //$scope.event.startDate = instance.dateSelected.toDateString();
     console.log("NEW start date is ", $scope.event.startDate);
   },
   onShow: function(instance) {
@@ -279,7 +280,7 @@ function checkNames() {
 var endDatepicker = datepicker('#edit_end_date_picker', {
 position: 'br', // Top right.
 startDate: new Date(), // This month.
-dateSelected: new Date($scope.event.endTime), // Today is selected.
+dateSelected: new Date(event.endTime.toDateString()), // Today is selected.
 minDate: new Date($scope.event.endTime), // June 1st, 2016.
 maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
 noWeekends: false,
@@ -290,7 +291,7 @@ formatter: function(el, date) {
 onSelect: function(instance) {
   // Show which date was selected.
   console.log("End date: ", instance.dateSelected);
-  $scope.event.endDate = instance.dateSelected.toDateString();
+  $scope.event.endDate = instance.dateSelected.getTime();
   console.log("NEW end date is ", $scope.event.endDate);
 },
 onShow: function(instance) {
