@@ -1,7 +1,8 @@
 app.controller('manageCtrl',['createService','$scope','$rootScope', function(createService, $scope, $rootScope){
   console.log("root scope usr", $rootScope.currentUser);
   createService.getEventsByOwner($rootScope.currentUser).then(function(result){
-    console.log("All events by ",$rootScope.currentUser+":"+result);
+    console.log("All events by "+$rootScope.currentUser);
+	console.log(result);
     $scope.events = result;
     /*for (var i=0;i<$scope.events.length;i++) {
       console.log($scope.events[i]);

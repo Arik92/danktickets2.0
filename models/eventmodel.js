@@ -19,9 +19,11 @@ var eventSchema = new Schema({
   location: Object,
   locationMapUrl: String,
   image: String,
-  startTime: String,
+  startTime: Number,
+  startDateDisplay: String,
   startHr: String,
-  endTime: String,
+  endTime: Number,
+  endDateDisplay: String,
   endHr: String,
   description: String,
   tickets: [ticketSchema], //o
