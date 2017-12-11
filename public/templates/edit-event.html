@@ -102,7 +102,7 @@
                <button type="submit" ng-click="add('Paid')" class="hvr-bounce-to-right my-btn" id="tickets-btn"> Paid</button>
                <button type="submit" ng-click="add('Donation')" class="hvr-bounce-to-right my-btn" id="tickets-btn"> Donation</button>
                <ul class="list-unstyled list-group" float="left">
-                 <li ng-repeat="ticket in currentTickets track by $index" >
+                 <li ng-repeat="ticket in event.eventTickets track by $index" >
                    <br />
                    <div class="row">
                    <div class="col-md-3">Ticket name: </div>
@@ -112,15 +112,15 @@
                    </div>
                     <div class="row">
                     <div class="col-md-3"><input ng-model="ticket.ticketName" type="text" placeHolder="Ticket name" class="form-control input-md"></div>
-                    <div class="col-md-3"><input  ng-hide="ticket.free" ng-model="ticket.ticketPrice" type="number"  min="0" placeHolder="Price" class="form-control input-md">
-                    <input  ng-show="ticket.free" type="text" placeHolder="free" class="form-control input-md" disabled></div>
+                    <div class="col-md-3"><input  ng-hide="ticket.isFree" ng-model="ticket.ticketPrice" type="number"  min="0" placeHolder="Price" class="form-control input-md">
+                    <input  ng-show="ticket.isFree" type="text" placeHolder="free" class="form-control input-md" disabled></div>
                     <div class="col-md-3"><input ng-model="ticket.ticketQ" type="number" placeHolder="How many?" min="0" class="form-control input-md" ng-change="updateQ()"></div>
-                    <div class="col-md-3"><button class="btn btn-danger" ng-click="delete($index)"><i class="fa fa-trash-o " aria-hidden="true"></i></button></div>
+                    <div class="col-md-3"><button class="btn btn-danger" ng-click="deleteTempTick($index)"><i class="fa fa-trash-o " aria-hidden="true"></i></button></div>
                     </div>
                    <br />
                  </li>
                  <div class="row">
-                 <div class="col-md-12">Total Ticket amount: {{totalTickets}}</div>
+                 <div class="col-md-12">Total Ticket amount: {{event.numTickets}}</div>
                </div>
                </ul>
              </div>

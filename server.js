@@ -2,10 +2,11 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
 }
-
 var express     = require('express');
 //var cors = require('cors');
 var app         = express();
+var server      = require('http').createServer(app);
+var io          = require('socket.io')(server);
 var port        = process.env.PORT || '8000';
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
@@ -57,6 +58,16 @@ app.all('[^.]+', function(req, res) {
   // res.send("GOD DAMN!!!!!!!!!!!!!");
 });
 
+io.on('connection', function(socket) { // I am going to receive an array of tickets that are being bought.
+	// there would be a validation function on the CLIENT to make sure the purchase is currently possible
+	// TODO: take tickets from event
+	console.log('socketedD');
+	// on disconnet: set them back
+	socket.once('disconnect', function() {
+      console.log('Got disconnect!');     
+   });
+	// on complete: 
+	});
 //main error handler
 // warning - not for use in production code!
 app.use(function(err, req, res, next) {
@@ -67,6 +78,6 @@ app.use(function(err, req, res, next) {
   // });
 });
 
-app.listen(port, function() {
+server.listen(port, function() {
   console.log("Dank tickets, tick-it-up! Listening on " + port);
 });

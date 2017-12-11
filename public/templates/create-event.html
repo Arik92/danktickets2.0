@@ -118,7 +118,7 @@
                     <div class="col-md-3"><input  ng-hide="ticket.free" ng-model="ticket.ticketPrice" type="number"  min="0" placeHolder="Price" class="form-control input-md">
                     <input  ng-show="ticket.free" type="text" placeHolder="free" class="form-control input-md" disabled></div>
                     <div class="col-md-3"><input ng-model="ticket.ticketQ" type="number" placeHolder="How many?" min="0" class="form-control input-md" ng-change="updateQ()"></div>
-                    <div class="col-md-3"><button class="btn btn-danger" ng-click="delete($index)"><i class="fa fa-trash-o " aria-hidden="true"></i></button></div>
+                    <div class="col-md-3"><button class="btn btn-danger" ng-click="deleteTempTick($index)"><i class="fa fa-trash-o " aria-hidden="true"></i></button></div>
                     </div>
                    <br />
                  </li>

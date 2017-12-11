@@ -321,9 +321,9 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       isPrivate: $scope.isPrivate,
       showRemainingTicks: $scope.showRemain
     };// event post object
-    evt.tickets = [];
+    evt.eventTickets = [];
     for (var i = 0; i < $scope.currentTickets.length; i++) {
-      evt.tickets.push($scope.currentTickets[i]);
+      evt.eventTickets.push($scope.currentTickets[i]);
     }// for filling ticket array
     var isLegit = validator();
     if (isLegit.localeCompare("ok") === 0) {
@@ -485,11 +485,7 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 			console.log("error fetching specific event by id");
 		} else {
 			console.log("fetched event is", res[0]);
-			$scope.event = res[0];
-			$scope.currentTickets = [];
-			for (var i=0;i<$scope.event.tickets.length;i++) {
-			$scope.currentTickets.push($scope.event.tickets[i]);
-			}
+			$scope.event = res[0];			
     $scope.profiles = [];
     console.log("initial profs for ",$rootScope.currentUser);    
       orService.getOrganizersByUser($rootScope.currentUser).then(function(data2){
@@ -511,12 +507,12 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 	}//onInit	  
 	
 	$scope.deleteTempTick = function(index) {
-    $scope.currentTickets.splice(index, 1);
-	$scope.updateQ();
+    $scope.event.eventTickets.splice(index, 1);
+	$scope.updateQ();// $scope.event.numTickets - 
   }
   
   $scope.resetTickets = function() {
-    $scope.currentsTickets = [];
+    $scope.event.eventTickets = [];
   }
   $scope.add = function (type) {
     var isFree = false;
@@ -528,18 +524,18 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
       ticketPrice: 0,
       ticketName: type + " Ticket",
       ticketQ: 0,
-      free: isFree
+      isFree: isFree
     }
     console.log("added ticket is ", ticket);
-    $scope.currentTickets.push(ticket);
+    $scope.event.eventTickets.push(ticket);
 	$scope.updateQ();
     
   }
   
   $scope.updateQ = function () {
-    $scope.totalTickets = 0;
-    for (var i = 0; i < $scope.currentTickets.length; i++) {
-      $scope.totalTickets += $scope.currentTickets[i].ticketQ;
+    $scope.event.numTickets = 0;
+    for (var i = 0; i < $scope.event.eventTickets.length; i++) {
+      $scope.event.numTickets += $scope.event.eventTickets[i].ticketQ;
     }//for
   }//updateQ
   
