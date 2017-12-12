@@ -115,6 +115,11 @@ footer-directive, #information-bar, #upcoming-event, #blog {
   padding: 0.5em
 }
 
+.activeTab {
+  background: purple;
+  color: white;
+}
+
 /* animation */
 
 /* ngIf animation */

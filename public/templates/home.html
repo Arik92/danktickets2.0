@@ -1,9 +1,9 @@
 	<div id="mobile-home-container" ng-init="showSlider=true">
 		<ul class="mobile-home-panel top-panel">
-			<li ui-sref="home" ng-click="showSlider=true">Featured</li>
-			<li ui-sref="home.local" ng-click="showSlider=false">Local</li>
-			<li ui-sref="home.upcoming" ng-click="showSlider=false">Upcoming</li>
-			<li ui-sref="home.favorites" ng-click="showSlider=false">Favorites</li>
+			<li ui-sref="home" ng-click="showSlider=true" ng-class="{activeTab: isActive('/home')}">Featured</li>
+			<li ui-sref="home.local" ng-click="showSlider=false" ng-class="{activeTab: isActive('/home/local')}">Local</li>
+			<li ui-sref="home.upcoming" ng-click="showSlider=false" ng-class="{activeTab: isActive('/home/upcoming')}">Upcoming</li>
+			<li ui-sref="home.favorites" ng-click="showSlider=false" ng-class="{activeTab: isActive('/home/favorites')}">Favorites</li>
 		</ul>
 	
 		<div ng-controller="carouselCtrl" 
