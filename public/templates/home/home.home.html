@@ -1,0 +1,24 @@
+<div ng-controller="carouselCtrl" class="carousel-container">
+  <a type="button" class="slick-btn slick-prev-chev">
+    <i class="fa fa-chevron-left fa-3x" aria-hidden="true"></i>
+  </a>
+  <a type="button" class="slick-btn slick-next-chev">
+    <i class="fa fa-chevron-right fa-3x" aria-hidden="true"></i>
+  </a>
+  <slick autoplay="false" fade="false" 
+        slides-to-show="1" slides-to-scroll="1" 
+        arrows="true" prev-arrow=".slick-prev-chev"
+        next-arrow=".slick-next-chev" center-mode="false" dots="true" class="slick-container">
+    <div ng-repeat="slide in slides" style="background: {{ slide.bgColor }}" class="slick-item-container">
+      <img ng-src="{{ slide.imgURL }}" class="slick-img">
+      <div class="info">
+        <div class="left">
+          <div class="date">{{ slide.date }}</div>
+          <div class="name">{{ slide.name }}</div>
+        </div>
+        <div class="right">{{ slide.location }}</div>
+      </div>
+    </div>
+
+  </slick>
+</div>

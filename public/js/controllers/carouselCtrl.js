@@ -6,9 +6,9 @@ app.controller('carouselCtrl',['$scope','$window', function( $scope, $window){
 
   $scope.slides = [
     {
-      imgURL: "../../img/banner-carousel/trapped-in-la.jpg",
+      imgURL: "../../img/banner-carousel/taco-sesh-square.jpg",
       bgColor: 'linear-gradient(#1eb089 0%, #7c49ab 100%, #7db9e8 100%)',
-      name: 'Trapped In LA',
+      name: 'Taco Seshhh',
       date: 'Friday, January 26, 7:00 PM',
       location: 'Sherman Oaks, CA'
     },

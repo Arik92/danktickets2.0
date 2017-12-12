@@ -1,3 +1,12 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  margin-bottom: 2em;
+}
+
 
 #header form {
   margin: 0;
@@ -84,6 +93,27 @@
   width: 33.333%;
 }
 
+footer-directive, #information-bar, #upcoming-event, #blog {
+  display: none;
+}
+
+#mobile-home-container {
+  position: relative;
+}
+
+.mobile-home-panel.bottom-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: var(--gradient-theme);
+  color: white;
+}
+
+.mobile-home-panel.bottom-panel .fa {
+  padding: 0.5em
+}
 
 
 @media only screen and (min-width: 768px) {
