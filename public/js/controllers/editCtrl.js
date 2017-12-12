@@ -10,6 +10,10 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 		} else {
 			console.log("fetched event is", res[0]);
 			$scope.event = res[0];
+			$scope.currentTickets = [];
+			for (var i=0;i<$scope.event.tickets.length;i++) {
+			$scope.currentTickets.push($scope.event.tickets[i]);
+			}
     $scope.profiles = [];
     console.log("initial profs for ",$rootScope.currentUser);    
       orService.getOrganizersByUser($rootScope.currentUser).then(function(data2){
@@ -27,8 +31,42 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
   this.$onInit = () => {
 			console.log('init fired');
 			initEventAndProfs();			
-			addScript(mapSrc); 
+			addScript(mapSrc); 		
 	}//onInit	  
+	
+	$scope.deleteTempTick = function(index) {
+    $scope.currentTickets.splice(index, 1);
+	$scope.updateQ();
+  }
+  
+  $scope.resetTickets = function() {
+    $scope.currentsTickets = [];
+  }
+  $scope.add = function (type) {
+    var isFree = false;
+    if (type === 'Free') {
+      isFree = true;
+    }
+    var ticket = {
+      ticketType: type,
+      ticketPrice: 0,
+      ticketName: type + " Ticket",
+      ticketQ: 0,
+      free: isFree
+    }
+    console.log("added ticket is ", ticket);
+    $scope.currentTickets.push(ticket);
+	$scope.updateQ();
+    
+  }
+  
+  $scope.updateQ = function () {
+    $scope.totalTickets = 0;
+    for (var i = 0; i < $scope.currentTickets.length; i++) {
+      $scope.totalTickets += $scope.currentTickets[i].ticketQ;
+    }//for
+  }//updateQ
+  
   $scope.selectProf = function(){
     console.log("selected profile is", $scope.selectedName);
 	$scope.event.organizer = $scope.selectedName;
@@ -70,8 +108,8 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
               var submitPic = document.getElementById('fileItem').files[0];
               console.log("in submit! uploading...", submitPic);
               if (submitPic) {
-                Upload.upload({
-                    url: 'https://danktickets.herokuapp.com/events/deleteAndUpload', //webAPI exposed to upload the file
+                Upload.upload({ //'https://danktickets.herokuapp.com/events/deleteAndUpload'
+                    url: 'http://localhost:8000/events/deleteAndUpload', //exposed to upload the file
                     data: {
                      file: submitPic,
                      event: $scope.event
@@ -113,37 +151,7 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 
   var config = require('../config.js');
   $scope.mapKey = config.MAPS_API_KEY;
-  //console.log("key is: ", $scope.mapKey);
-  $scope.add = function(type) {
-    var isFree = false;
-    if (type==='Free') {
-      isFree = true;
-    }
-    var ticket = {
-      ticketType: type,
-      ticketPrice: 0,
-      ticketName: type+" Ticket",
-      ticketQ: 0,
-      free: isFree
-    }
-    console.log("added ticket is ",ticket);
-    createService.addticket(ticket);
-    $scope.getCurrentTickets();
-  }
-  $scope.getCurrentTickets = function() {
-    $scope.tempTicks = createService.getTempTicks();
-    $scope.updateQ();
-  }
-  $scope.updateQ = function() {
-    $scope.totalTickets = 0;
-    for (var i=0;i<$scope.tempTicks.length;i++) {
-      $scope.totalTickets+=$scope.tempTicks[i].ticketQ;
-    }//for
-  }//updateQ
-  $scope.delete = function(index) {
-    createService.deleteTempTick(index);
-    $scope.getCurrentTickets();
-  }
+  //console.log("key is: ", $scope.mapKey);  
   /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
   var placeSearch, autocomplete;
 function initAutocomplete(){
@@ -245,7 +253,7 @@ function checkNames() {
   var startDatepicker = datepicker('#edit_start_date_picker', {
   position: 'br', // Top right.
   startDate: new Date($scope.event.startTime), // This month.
-  dateSelected: new Date($scope.event.startTime.toDateString()), // Today is selected.
+  dateSelected: new Date($scope.event.startTime), // Today is selected.
   minDate: new Date($scope.event.startTime), // June 1st, 2016.
   maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
   noWeekends: false,
@@ -256,6 +264,7 @@ function checkNames() {
   onSelect: function(instance) {
     // Show which date was selected.
     $scope.event.startDate = instance.dateSelected.getTime();
+	$scope.event.startDateDisplay = instance.dateSelected.toDateString();
     //$scope.event.startDate = instance.dateSelected.toDateString();
     console.log("NEW start date is ", $scope.event.startDate);
   },
@@ -280,7 +289,7 @@ function checkNames() {
 var endDatepicker = datepicker('#edit_end_date_picker', {
 position: 'br', // Top right.
 startDate: new Date(), // This month.
-dateSelected: new Date(event.endTime.toDateString()), // Today is selected.
+dateSelected: new Date($scope.event.endTime), // Today is selected.
 minDate: new Date($scope.event.endTime), // June 1st, 2016.
 maxDate: new Date(2099, 0, 1), // Jan 1st, 2099. //TODO: expand this dynamicly? maybe
 noWeekends: false,
@@ -292,7 +301,8 @@ onSelect: function(instance) {
   // Show which date was selected.
   console.log("End date: ", instance.dateSelected);
   $scope.event.endDate = instance.dateSelected.getTime();
-  console.log("NEW end date is ", $scope.event.endDate);
+  $scope.event.endDateDisplay = instance.dateSelected.toDateString();
+  console.log("NEW end date is "+ $scope.event.endDate+" displayed:"+$scope.event.endDateDisplay);
 },
 onShow: function(instance) {
   console.log('Calendar showing.');

@@ -107,8 +107,8 @@
 							<li class="filter" data-filter=".jun-01"><span>June 01</span></li>
 						</ul>
 					</div>
-					<div class="tab-content-wrap row" ng-controller="browseCtrl">
-            <div class="col-lg-3 col-md-4 col-sm-6 mix april-14 april-22 hvr-float-shadow wow fadeIn" ng-repeat="event in events track by $index">
+					<div class="tab-content-wrap row" ng-controller="homeCtrl">
+            <div class="col-lg-3 col-md-4 col-sm-6 mix april-14 april-22 hvr-float-shadow wow fadeIn" ng-repeat="event in events | orderBy: 'startTime'|limitTo: 20">
              
               <div class="img-holder" id="card-img-holder" style="background-image: url({{event.image}});"><img src="../img/upcoming-event/1.jpg" alt={{event.title}}></div>
               <div class="content-wrap">
@@ -117,7 +117,7 @@
                 
                 <div class="meta">
                   <ul>
-                    <li><span><i class="fa fa-clock-o"></i>{{event.startTime}}, {{event.startHr}}-{{event.startTime}}, {{event.startHr}}</span>
+                    <li><span><i class="fa fa-clock-o"></i>{{event.startDateDisplay}} at {{event.startHr}} - {{event.endDateDisplay}} at {{event.endHr}}</span>
 
                     </li>
                     <li><a href={{event.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i class="fa fa-map-marker"></i>{{event.location.locationName}}</span></a>

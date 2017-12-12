@@ -34,12 +34,12 @@ router.get('/:name', function(req, res, next){
     if (err) {
       console.error(err);
     } else {
-      console.log("found events(route)", events);
+      //console.log("found events(route)", events);
       var result = [];
       for (var i=0;i<events.length;i++) {
-        console.log("comparing *"+ req.params.name+"* and *"+ events[i].owner.username+"*");
+        //console.log("comparing *"+ req.params.name+"* and *"+ events[i].owner.username+"*");
         if (req.params.name.localeCompare(events[i].owner.username)===0) {
-			console.log("got in");
+			//console.log("got in");
           result.push(events[i]);
         }
       }//for	 
@@ -49,7 +49,7 @@ router.get('/:name', function(req, res, next){
 }) // get event by OWNER name.
 
 router.get('/findById/:id', function(req, res, next){
-  Event.find({_id: req.params.id}).populate('organizer').exec(function(err,foundEvent){
+  Event.find({_id: req.params.id}).populate('organizer tickets').exec(function(err,foundEvent){
     if (err) {
       console.error(err);
     } else {
@@ -75,9 +75,10 @@ router.post('/upload', function (req, res1, next) {
                   res1.json({error_code:1,err_desc:err});
                   return;
              }
-             console.log("request to work with is", req.body);
+             //console.log("request to work with is", req.body);
              console.log("file name:", req.file.filename);
-              var e = new Event(req.body.event);			  
+              var e = new Event(req.body.event);		
+             console.log("e is", e);			  
               e.image = '/img/uploads/'+req.file.filename;
               e.save(function(error, result){
                 if (error) {

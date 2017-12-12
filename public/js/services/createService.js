@@ -1,22 +1,5 @@
 app.factory('createService', function($http){
 
-  var currentTickets = [];
-
-  var getTempTicks = function() {
-    return currentTickets;
-  }//returnTemp
-
-  var addticket = function(ticket) {
-    currentTickets.push(ticket);
-  }//addTicket
-
-  var deleteTempTick = function(index) {
-    currentTickets.splice(index, 1);
-  }
-
-  var resetTicks = function() {
-    currentsTicks = [];
-  }
   var getEventById = function(id) {
 	 return $http.get('/events/findById/'+id).then(function(result) {
     console.log("result from create service: ");
@@ -102,16 +85,12 @@ var deleteEvent = function(oId) {
 //   })
 // }
 
-    return {
-    getTempTicks: getTempTicks,
-    addticket: addticket,
-    deleteTempTick: deleteTempTick,
+    return {    
     postEvent: postEvent,
     getEvents: getEvents,
     getEventsByOwner: getEventsByOwner,
     updateEvent: updateEvent,
-    deleteEvent: deleteEvent,
-    resetTicks: resetTicks,
+    deleteEvent: deleteEvent,    
 	getEventById: getEventById
   };
 });
