@@ -1,5 +1,5 @@
 app.controller('manageCtrl',['createService','$scope','$rootScope', function(createService, $scope, $rootScope){
-	var socket = io();
+	
 
     /*socket.on('connect', function () { 
 
