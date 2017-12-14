@@ -27,7 +27,7 @@ var eventSchema = new Schema({
   endDateDisplay: String,
   endHr: String,
   description: String,
-  tickets: [
+  eventTickets: [
 	  {
 		 ticketType: String,
 		 ticketprice: Number,

@@ -315,9 +315,9 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       isPrivate: $scope.isPrivate,
       showRemainingTicks: $scope.showRemain
     };// event post object
-    evt.tickets = [];
+    evt.eventTickets = [];
     for (var i = 0; i < $scope.currentTickets.length; i++) {
-      evt.tickets.push($scope.currentTickets[i]);
+      evt.eventTickets.push($scope.currentTickets[i]);
     }// for filling ticket array
     var isLegit = validator();
     if (isLegit.localeCompare("ok") === 0) {
