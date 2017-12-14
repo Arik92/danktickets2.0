@@ -1,4 +1,19 @@
 app.controller('manageCtrl',['createService','$scope','$rootScope', function(createService, $scope, $rootScope){
+	
+
+    /*socket.on('connect', function () { 
+
+        person_name = prompt("Welcome. Please enter your name");
+
+        socket.emit('NewPlayer', person_name);
+
+        socket.on('disconnected', function() {
+
+            socket.emit('DelPlayer', person_name);
+
+        });
+
+    });*/
   console.log("root scope usr", $rootScope.currentUser);
   createService.getEventsByOwner($rootScope.currentUser).then(function(result){
     console.log("All events by "+$rootScope.currentUser);

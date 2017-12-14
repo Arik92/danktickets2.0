@@ -1,8 +1,9 @@
 var ticketSchema = new Schema({
+  event: { type: Schema.Types.ObjectId, ref:"Event" },  
   type: String,
   price: Number,
   name: String,
-  //isFree: Boolean
+  isFree: Boolean
   //seat?
   //id or serial number. aside from mongoID
   description: String //NOTE: special notes to guests?
