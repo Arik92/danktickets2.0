@@ -1,9 +1,17 @@
-app.controller('homeCtrl', ['createService', '$rootScope', '$scope', '$http', '$window', '$location', function (createService, $rootScope, $scope, $http, $window, $location) {
+app.controller('homeCtrl', ['createService', 'dankAdService', '$rootScope', '$scope', '$http', '$window', '$location', function (createService, dankAdService, $rootScope, $scope, $http, $window, $location) {
 
   this.$onInit = () => {
-    homeEventsPrep();
     console.log("hello from hoe ctrl");
+    homeEventsPrep();
     $scope.dummyEvents = getDummyEvents();
+    $scope.dummyAds = dankAdService.dummyAds;
+    console.log($scope.dummyAds);
+    $scope.featuredDummyEvent =  {
+      imgURL: "../../img/wide-posters/cannabis-cup.png",
+      name: 'Cannabis Cup',
+      date: 'Friday, January 26, 7:00 PM',
+      location: 'Sherman Oaks, CA'
+    }
     console.log($scope.events);
 	$scope.upcomingFlag = true;
 	$scope.localFlag = false;	

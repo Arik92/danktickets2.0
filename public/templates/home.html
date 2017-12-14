@@ -66,8 +66,30 @@
 	</aside>	
 	
 	<main class="main-content">
-		<div class="central-ad-banner">Promtions, Give Aways, Ads, etc.</div>
-		<div class="main-event">main event here</div>
+		<slick class="slick-ad-banner"
+					autoplay="true" 
+					fade="true" 
+					slides-to-show="1" 
+					slides-to-scroll="1" 
+					arrows="false" 
+					center-mode="false" 
+					dots="false"
+		>
+			<div class="ad-container" ng-repeat="ad in dummyAds">
+				<img ng-src="{{ ad.imgURL }}" alt="{{ ad.name }}">
+			</div>
+		</slick>
+
+		<div class="main-event">
+				<img ng-src="{{ featuredDummyEvent.imgURL }}" class="feature-event-img">
+				<div class="info">
+					<div class="left">
+						<div class="date">{{ featuredDummyEvent.date }}</div>
+						<div class="name">{{ featuredDummyEvent.name }}</div>
+					</div>
+					<div class="right">{{ featuredDummyEvent.location }}</div>
+			</div>
+		</div>
 	</main>
 
 	<section class="other-events"> Other events here </section>

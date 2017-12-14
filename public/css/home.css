@@ -193,13 +193,19 @@ footer-directive {
   }
 
   #desktop-grid-container {
+    /* --my-row-height: 25vh; */
+  }
+
+  #desktop-grid-container {
     /* padding: 1em; */
+    --my-row-height: 30vh;
+    --ad-banner-height: 15vh;
     max-width: 1600px;
     margin: auto;
     display: grid;
     grid-gap: 0.5em;
     grid-template-columns: 1.5fr 3fr 1.5fr;
-    grid-template-rows: repeat(4, 25vh);
+    grid-template-rows: repeat(4, var(--my-row-height));
     grid-template-areas: 
       "aside-events main-content main-content"
       "aside-events main-content main-content"
@@ -232,7 +238,7 @@ footer-directive {
 
   .side-events-list li {
     /* text-align: center; */
-    background: #36454f;
+    background: var(--charcoal);
     color: white;
     border: solid black 2px;
     font-size: 1.1em;
@@ -244,6 +250,59 @@ footer-directive {
   main.main-content {
     grid-area: main-content;
     background: steelblue;
+  }
+
+  .slick-ad-banner {
+    margin: 0;
+  }
+
+  .slick-ad-banner .ad-container {
+    /* text-align: center; */
+    /* padding: 1em; */
+    border: solid black 1px;
+    background: #3F51B5;
+    color: white;
+    height: var(--ad-banner-height);
+    /* width: 50vw; */
+    margin: 0 1em;
+  }
+
+  .ad-container > img {
+    height: 100%;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  #desktop-grid-container .feature-event-img {
+    width: auto;
+    display: block;
+    height: calc(var(--my-row-height) * 2 - (var(--ad-banner-height) + 10vh) );
+    margin: 0 auto;
+  }
+
+  .main-event {
+    /* border: solid 1px black; */
+    background: darkcyan;
+    margin: 1em;
+  }
+
+  .main-event .info {
+    display: flex;
+    justify-content: space-between;
+    background: var(--charcoal);
+    padding: 1em;
+    color: white;
+    font-size: 1.3em;
+    line-height: 1.2em;
+    font-family: "Palatino Linotype";
+  }
+
+  .main-event .left {
+    padding-left: 3em;
+  }
+
+  .main-event .right {
+    padding-right: 3em;
   }
 
   

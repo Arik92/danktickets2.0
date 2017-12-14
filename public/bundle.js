@@ -2,7 +2,7 @@
 var config = {
   MAPS_API_KEY: 'AIzaSyBlqLa-v1ZicvzAhvzPyX4p0mbXIzYjGEk'
 };
-module.exports = config;
+module.exports = config; 
 },{}],2:[function(require,module,exports){
 app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location) {
   console.log('hello from createCtrl');

@@ -91,6 +91,6 @@ var deleteEvent = function(oId) {
     getEventsByOwner: getEventsByOwner,
     updateEvent: updateEvent,
     deleteEvent: deleteEvent,    
-	getEventById: getEventById
+	  getEventById: getEventById
   };
 });
