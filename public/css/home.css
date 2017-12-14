@@ -246,6 +246,9 @@ footer-directive, #information-bar, #upcoming-event, #blog {
     background: steelblue;
   }
 
+  
+  /* other events */
+
   section.other-events {
     grid-area: other-events;
     background: lightgreen;
