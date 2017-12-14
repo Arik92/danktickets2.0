@@ -30,7 +30,7 @@ var eventSchema = new Schema({
   eventTickets: [
 	  {
 		 ticketType: String,
-		 ticketprice: Number,
+		 ticketPrice: Number,
 		 ticketName: String,
 		 ticketQ: Number,
 		 isFree: Boolean		 

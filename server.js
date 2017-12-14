@@ -61,6 +61,7 @@ app.all('[^.]+', function(req, res) {
 io.on('connection', function(socket) { // I am going to receive an array of tickets that are being bought.
 	// there would be a validation function on the CLIENT to make sure the purchase is currently possible
 	// TODO: take tickets from event
+	// possibility : from 10 mins from connect they have the option of buying the itckts - otherwise disconnect them // change the tickets back
 	console.log('socketedD');
 	// on disconnet: set them back
 	socket.once('disconnect', function() {
