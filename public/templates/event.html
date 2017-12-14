@@ -68,7 +68,7 @@
 					<div id="middle-content">
 						<!-- .content -->
 						<div class="content">
-
+						
 							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
 								dummy text ever since the
 								<br>1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived
@@ -82,7 +82,26 @@
 							</p>
 
 							<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will
-								give you a complete account</p>
+								give you a complete account</p> 
+							<p> 
+							<div class="container">
+							<h1>available tickets: </h1> 
+								<ul ng-repeat="ticket in event.eventTickets track by $index">
+									<li>{{ticket.ticketName}} - {{ticket.ticketQ}} tickets left at {{ticket.ticketPrice}}$ each </li>									
+									<input type=""placeHolder="how many?" ng-model></input><button class="btn btn-success" ng-click="addToCart(ticket, 1)">Add To Cart</button>
+								</ul>
+							</div>
+							<div class="container">
+							<h1>Your shopping cart: </h1> 							
+								<ul ng-repeat="ticket in ticketCart track by $index">
+									<li>{{ticket.quantity}} X {{ticket.ticketName}} </li>
+									<li>{{ticket.ticket.ticketPrice*ticket.quantity}}</li>
+									<i class="fa fa-trash-o" aria-hidden="true" ng-click="removeFromCart($index)"></i>
+								</ul>
+								Total: {{ticketSum}}
+							</div>
+								
+							</p>
 
 
 
