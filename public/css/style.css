@@ -39,6 +39,7 @@
 /* variables */
 :root {
   --gradient-theme:linear-gradient(to right, #1eb089 0%, #7c49ab 100%, #7db9e8 100%);
+  --charcoal: #36454f;
 }
 
 /** ====== Imported styles ====== **/
