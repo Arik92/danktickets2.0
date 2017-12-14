@@ -36,7 +36,10 @@
 *********************************************
 ********* End of Table of content ***********
 *********************************************/
-
+/* variables */
+:root {
+  --gradient-theme:linear-gradient(to right, #1eb089 0%, #7c49ab 100%, #7db9e8 100%);
+}
 
 /** ====== Imported styles ====== **/
 
@@ -52,7 +55,11 @@
 @import url('settings.css');
 
 /** ====== Global styles ====== **/
-
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
 body {
   font-family: 'Raleway', sans-serif;
   font-size: 14px;
@@ -84,6 +91,7 @@ a:active,
 a:focus {
   text-decoration: none;
   outline: none;
+  color: white;
 }
 .container {
   padding: 0 5px;
@@ -146,9 +154,9 @@ a:focus {
 /** ====== Header styles ====== **/
 
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
+  /* position: fixed; */
+  /* top: 0; */
+  /* left: 0; */
   z-index: 5;
   width: 100%;
   background: linear-gradient(to right, #1eb089 0%, #7c49ab 100%, #7db9e8 100%);
@@ -158,11 +166,11 @@ header .logo {
   transition: all 0.3s ease-out;
 }
 header.header-fixed {
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   width: 100%;
   z-index: 5;
-  box-shadow: 0 3px 5px rgba(81, 183, 227, 0.2);
+  box-shadow: 0 3px 5px rgba(98, 201, 245, 0.2);
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
@@ -363,90 +371,6 @@ header .mainmenu-container li.dropdown > a .fa {
 }
 
 /** ====== Banner styles ====== **/
-
-/* Natti Slick Carousel */
-.carousel-container {
-  position: relative;
-  /* width: auto; */
-  /* height: auto; */
-}
-
-.slick-container {
-  /* width: 70vw; */
-  /* height: 50vw; */
-  margin: 0 auto;
-  z-index: 3;
-}
-
-.slick-bg {
-  opacity: 0.2;
-  position: absolute;
-  background: #1eb089;
-  width: 40vw;
-  height: 40vw;
-}
-
-.slick-prev-bg {
-  background: url("/img/banner-carousel/cookout-1.jpeg") no-repeat;
-}
-
-.slick-center-bg {
-  width: 18vw;
-  left: 50%;
-  transform: translateX(-50%);
-  background: url("/img/banner-carousel/farming1.jpeg") no-repeat;
-}
-
-.slick-next-bg {
-  right: 0;
-  background: url("/img/banner-carousel/concert2.jpeg") no-repeat;
-}
-
-.slick-img-container {
-  text-align: center;
-  /* background:linear-gradient(#1eb089 0%, #7c49ab 100%, #7db9e8 100%); */
-  opacity: 0.8;
-  /* object-fit: fill; */
-  /* height: auto; */
-  /* width: 100%; */
-}
-
-.slick-img {
-  margin: 0 auto;
-  /* object-fit: fill; */
-  height: auto;
-  width: 60%;
- 
-}
-
-.slick-btn {
-  cursor: pointer;
-  position: absolute;
-  /* background: tomato; */
-}
-
-.slick-prev-chev {
-  top: 50%;
-  left: 10%;
-}
-
-.slick-dots {
-  bottom: -50px;
-}
-
-.slick-next-chev {
-  top: 50%;
-  right: 10%;
-}
-
-.slick-btn:hover {
-  /* background: tomato; */
-}
-
-
-
-
-
 #banner {
   background: url(../img/background/banner-bg.jpg) no-repeat center center fixed;
   background-size: cover;
@@ -1771,121 +1695,6 @@ header .mainmenu-container li.dropdown > a .fa {
   border: none;
   line-height: 49px;
   transition: all .3s ease;
-
-}
-
-/** ====== Footer styles ====== **/
-
-
-footer {
-  background: #29363E;
-  padding: 100px 0 85px;
-}
-footer .footer-widget h3 {
-  font-size: 18px;
-  font-weight: 800;
-  color: #fff;
-  text-transform: uppercase;
-  margin: 0;
-  margin-bottom: 30px;
-}
-footer .footer-widget p {
-  color: #A4B0B6;
-  font-weight: 500;
-}
-footer .footer-widget a {
-  color: #A4B0B6;
-  font-weight: 600;
-  transition: all .3s ease;
-}
-footer .footer-widget a:hover {
-  color: #FF8625;
-}
-footer .footer-widget .bx-wrapper .bx-viewport {
-  background: none;
-  border: none;
-  left: 0;
-  box-shadow: none;
-}
-footer .footer-widget .photo-gallery {
-  margin-left: -1.5px;
-  margin-right: -1.5px;
-}
-footer .footer-widget .photo-gallery li {
-  float: left;
-  width: 75px;
-  margin: 1.5px 1.5px;
-}
-footer .footer-widget .photo-gallery li img {
-  opacity: 1;
-  transition: all .3s ease;
-}
-footer .footer-widget .photo-gallery li img:hover {
-  opacity: .55;
-}
-footer .footer-widget.twitter-feed a {
-  color: #F2F2F2;
-  font-size: 13px;
-  font-weight: 500;
-  transition: all .3s ease;
-}
-footer .footer-widget.twitter-feed a:hover {
-  color: #FF8625;
-}
-footer .footer-widget.twitter-feed .themex_twt_date {
-  color: #576673;
-  font-weight: normal;
-  font-size: 14px;
-}
-footer .footer-widget.menu-widget ul li {
-  margin-bottom: 10px;
-}
-footer .footer-widget.menu-widget ul li a i {
-  color: #fff;
-  margin-right: 10px;
-}
-footer .footer-widget.about-widget img {
-  margin-bottom: 40px;
-}
-footer .footer-widget .social-icons {
-  margin-top: 30px;
-}
-footer .footer-widget .social-icons a {
-  color: #fff;
-  width: 35px;
-  height: 35px;
-  line-height: 35px;
-  text-align: center;
-  display: inline-block;
-  background: url(../img/resources/social-icon-bg.png) center center no-repeat;
-  margin-right: 5px;
-  transition: all .3s ease;
-}
-footer .footer-widget .social-icons a:hover {
-  color: #FF8625;
-  transform: rotate(360deg);
-
-}
-
-/** ====== Bottom Bar styles ====== **/
-
-
-#bottom-bar {
-  background: #273138;
-  color: #4C5357;
-  text-transform: uppercase;
-  font-weight: normal;
-  padding: 20px 0px;
-}
-#bottom-bar p {
-  margin-bottom: 0;
-}
-#bottom-bar p a {
-  color: #fff;
-  transition: all .3s ease;
-}
-#bottom-bar p a:hover {
-  color: #FF8625;
 
 }
 

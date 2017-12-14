@@ -1,6 +1,11 @@
 const nodemailer = require('nodemailer');
 module.exports = sendNodeMail;
 
+// dummy data for testing purposes
+// const user = { email: 'test@test.com', username: 'testuser', _id: 123, };
+// require('dotenv').load();
+// sendNodeMail(user, 'register');
+
 function sendNodeMail(user, msgType) {
   console.log('nodeMailer triggered');
 
@@ -8,8 +13,6 @@ function sendNodeMail(user, msgType) {
   const url = setUrl();
   const output = setEmailOutput(user, msgType, url);
   const mailConfig = setMailConfig();
-
-  let transporter = nodemailer.createTransport(mailConfig);
 
   // setup email data with unicode symbols
   let mailOptions = {
@@ -20,8 +23,11 @@ function sendNodeMail(user, msgType) {
     html: output // html body
   };
 
+  let transporter = nodemailer.createTransport(mailConfig);
+
   // send mail with defined transport object
   transporter.sendMail(mailOptions, (err, info) => {
+    console.log('sendMail triggered');
     if (err) {
       console.log('Error occurred. ' + err.message);
       return process.exit(1);

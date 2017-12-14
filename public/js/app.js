@@ -1,4 +1,4 @@
-var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload', 'slick', 'ui.bootstrap']);
+var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload', 'slick', 'ui.bootstrap', 'ngAnimate']);
 
 app.config(function ($httpProvider) {
   $httpProvider.interceptors.push('authServiceInterceptors');
@@ -11,6 +11,29 @@ app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
     .state('home', {
       url: '/home',
       templateUrl: '/templates/home.html',
+      controller: 'homeCtrl'
+    })
+    .state('home.local', {
+      url: "/local",
+      template: "<h1>Hellooo from Local</h1>",
+      controller: 'homeCtrl'
+    })
+    .state('home.upcoming', {
+      url: "/upcoming",
+      template: "<h1>Hellooo from Upcoming</h1>",
+      controller: 'homeCtrl'
+    })
+    .state('home.favorites', {
+      url: "/favorites",
+      template: "<h1>Hellooo from Favorites</h1>",
+      controller: function($scope) {
+        console.log('hello from the partial');
+        $scope.items = ["A", "List", "Of", "Items"];
+      }
+    })
+    .state('home.home', {
+      url: "/list",
+      template: "<h1>yoooo we backkk</yo>",
       controller: 'homeCtrl'
     })
     .state('event', {
