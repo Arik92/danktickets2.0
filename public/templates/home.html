@@ -5,210 +5,52 @@
 			<li ui-sref="home.upcoming" ng-click="showSlider=false" ng-class="{activeTab: isActive('/home/upcoming')}">Upcoming</li>
 			<li ui-sref="home.favorites" ng-click="showSlider=false" ng-class="{activeTab: isActive('/home/favorites')}">Favorites</li>
 		</ul>
-	
-		<div ng-controller="carouselCtrl" 
-				 ng-if="showSlider"
-				 class="carousel-container">
-			<a type="button" class="slick-btn slick-prev-chev">
-				<i class="fa fa-chevron-left fa-3x" aria-hidden="true"></i>
-			</a>
-			<a type="button" class="slick-btn slick-next-chev">
-				<i class="fa fa-chevron-right fa-3x" aria-hidden="true"></i>
-			</a>
-			<slick autoplay="false" fade="false" 
-						slides-to-show="1" slides-to-scroll="1" 
-						arrows="true" prev-arrow=".slick-prev-chev"
-						next-arrow=".slick-next-chev" center-mode="false" dots="true" class="slick-container">
-				<div ng-repeat="slide in slides" style="background: {{ slide.bgColor }}" class="slick-item-container">
-					<img ng-src="{{ slide.imgURL }}" class="slick-img">
-					<div class="info">
-						<div class="left">
-							<div class="date">{{ slide.date }}</div>
-							<div class="name">{{ slide.name }}</div>
-						</div>
-						<div class="right">{{ slide.location }}</div>
-					</div>
-				</div>
-			</slick>
-		</div>
+		
+		<slider-directive></slider-directive>
 
+		<!-- nested mobile home views -->
 		<div ui-view></div>
 
 	</div>
 	
-	<section id="information-bar" style="margin-top:200px">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-					<ul>
-						<li><span class="img-holder"><i class="glyphicon glyphicon-map-marker fa-3x" style="color:#60E7D2;"></i></span></li>
-						<li><span><b>Browse Location</b> <input></input> </span></li>
-					</ul>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-					<ul>
-						<li><span class="img-holder"><!-- <img src="img/icons/2.png" alt=""> --><i class="glyphicon glyphicon-search fa-3x" style="color:#60E7D2;"></i></span></li>
-						<li><span><b>Browse Event</b> <input></input> </span></li>
-					</ul>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-					<ul>
-						<li><span class="img-holder"><i class="fa fa-calendar fa-3x" style="color:#60E7D2;"></i></span></li>
-						<li><span><b>All dates</b> <input></input></span></li>
-					</ul>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-					<ul>
-						<!-- <li><span class="img-holder"><img src="img/icons/4.png" alt=""></span></li> -->
-						<!-- <li><span><b>Some Coffe</b> Some Lorem Ipsum Text</span></li> -->
+<!-- Desktop -->
 
-						<li>
-							<div class="input-wrap">
-								<button type="submit" class="hvr-bounce-to-right my-btn">SEARCH</button>
-							</div>
-						</li>
-
-					</ul>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- /#information-bar -->
-
+<div id="desktop-grid-container">
 	
-	<!-- #upcoming-event -->
-	<section id="upcoming-event">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-7 col-md-7 col-sm-7">
-					<div class="section-title">
-						<h1>Upcoming Events</h1>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <br> been the industry's standard dummy text ever since the 1500</p>
-					</div>
-				</div>
-				<div class="col-lg-5 col-md-5 col-sm-5">
-					<form action="#" class="pull-right">
-						<input type="text" placeholder="Search Event"> <button type="submit"><i class="fa fa-search"></i></button>
-					</form>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="tab-title-wrap">
-						<ul class="clearfix">
-							<li class="filter active" data-filter="all"><span>All Events</span></li>
-							<li class="filter" data-filter=".april-14"><span>April 14</span></li>
-							<li class="filter" data-filter=".april-22"><span>April 22</span></li>
-							<li class="filter" data-filter=".april-28"><span>April 28</span></li>
-							<li class="filter" data-filter=".may-10"><span>May 10</span></li>
-							<li class="filter" data-filter=".may-15"><span>May 15</span></li>
-							<li class="filter" data-filter=".may-22"><span>May 22</span></li>
-							<li class="filter" data-filter=".may-23"><span>May 23</span></li>
-							<li class="filter" data-filter=".jun-01"><span>June 01</span></li>
-						</ul>
-					</div>
-					<div class="tab-content-wrap row" ng-controller="homeCtrl">
-            <div class="col-lg-3 col-md-4 col-sm-6 mix april-14 april-22 hvr-float-shadow wow fadeIn" ng-repeat="event in events | orderBy: 'startTime'|limitTo: 20">
-             
-              <div class="img-holder" id="card-img-holder" style="background-image: url({{event.image}});"><img src="../img/upcoming-event/1.jpg" alt={{event.title}}></div>
-              <div class="content-wrap">
-                
-                <img src="img/upcoming-event/author.png" alt="" class="author-img">
-                
-                <div class="meta">
-                  <ul>
-                    <li><span><i class="fa fa-clock-o"></i>{{event.startDateDisplay}} at {{event.startHr}} - {{event.endDateDisplay}} at {{event.endHr}}</span>
-
-                    </li>
-                    <li><a href={{event.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i class="fa fa-map-marker"></i>{{event.location.locationName}}</span></a>
-                    </li>
-                  </ul>
-                </div>
-                <h4 ng-show="event.organizer.name">{{event.organizer.name}} Presents:</h4>
-                <h3 class="length-limiter">{{event.title}}</h3>
-                <p class="length-limiter">{{event.description}}</p>
-                <div >
-                <p style="background-color: grey;width:50%;color:white;text-align:center;">{{event.type}}</p>
-                <p>Ticket Prices</p>
-                </div>
-                <a class="read-more" ui-sref="event">read more<i class="fa fa-angle-right"></i></a>
-                <div class="row">
-                  <ul>
-                    <li>
-                      <div class="input-wrap">
-					  <a ui-sref="event({id: event['_id']})"><button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; height: 5%; font-size:18px;">Expand</button></a>
-                        <button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; max-height: 5%;font-size:18px;"> <i class="fa fa-plus-circle"></i> Save</button>
-                      </div>
-                    </li>
-                  </ul>
-                </div>            
-              </div>
-            </div>
-          </div> <!-- tab-content-wrap -->
-				</div>
-			</div>
+	<aside class="aside-events">
+		<div class="filter-btn-container">
+			<div class="local-btn">Local</div>
+			<div class="upcoming-btn">Upcoming</div>
 		</div>
-	</section>
-	<!-- /#upcoming-event -->
 
-	<!-- #blog -->
-	<section id="blog">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title text-center">
-						<h1>LATEST NEWS</h1>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <br> been the industry's standard dummy text ever since the 1500</p>
-					</div>
-				</div>
-			</div>
-			<div class="row blog-post-container">
-				<div class="col-lg-8 col-md-8 col-sm-12">
-					<div class="row">
-						<div class="single-post thumbnail col-lg-12 col-md-12 col-sm-12 wow fadeIn">
-							<div class="img-holder pull-left">
-								<img src="img/blog/1.jpg" alt="">
-							</div>
-							<div class="content pull-left">
-								<h3>Post with Image Here</h3>
-								<p class="meta"><a href="#">Maynard Breslow</a> on 24  Feb, 2014</p>
-								<p>Lorem Ipsum is simply dummy text of the <br> printing and typesetting industry.</p>
-								<a href="#" class="read-more hvr-bounce-to-right">read more</a>
-							</div>
-						</div>
-						<div class="single-post col-lg-6 col-md-6 col-sm-6 wow fadeIn" data-wow-delay=".3s">
-							<div class="content">
-								<h3>Text Post Only Here</h3>
-								<p class="meta"><a href="#">Maynard Breslow</a> on 24  Feb, 2014</p>
-								<p>Lorem Ipsum is simply dummy text of the <br> printing and typesetting industry.</p>
-								<a href="#" class="read-more hvr-bounce-to-right">read more</a>
-							</div>
-						</div>
-						<div class="single-post col-lg-6 col-md-6 col-sm-6 link-post  wow fadeIn" data-wow-delay=".3s">
-							<div class="link-holder text-center">
-								<i class="fa fa-link"></i>
-								<p>http://www.facebook.com</p>
-							</div>
-							<div class="content ">
-								<a href="#" class="read-more hvr-bounce-to-right">read more</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-6 col-lg-push-0 col-md-push-0 col-sm-push-3">
-					<div class="single-post wow fadeIn">
-						<div class="img-holder">
-							<img src="img/blog/2.jpg" alt="">
-						</div>
-						<div class="content">
-							<h3>Post with Image Here</h3>
-							<p class="meta"><a href="#">Maynard Breslow</a> on 24  Feb, 2014</p>
-							<p>Lorem Ipsum is simply dummy text of the <br> printing and typesetting industry.</p>
-							<a href="#" class="read-more hvr-bounce-to-right">read more</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- /#blog -->
+		<ul class="side-events-list">
+			<li ng-repeat="event in dummyEvents">
+				<a href="">
+					<p>
+						<span>
+							<i style="color: lightcoral" class="fa fa-calendar-o"></i>
+							{{ event.date }} - {{ event.name }}
+						</span>
+					</p>
+					<p>
+						<span>
+							<i style="color: lightgreen" class="fa fa-map-marker"></i>
+							{{ event.location }}
+						</span>
+					</p>
+				</a>
+			</li>
+		</ul>
+	</aside>	
+	
+	<main class="main-content">
+		<div class="main-ads">Promtions, Give Aways, Ads, etc.</div>
+		<div class="main-event">main event here</div>
+	</main>
+
+	<section class="other-events"> Other events here </section>
+
+	<aside class="side-content">blogs and links</aside>
+
+</div>
+

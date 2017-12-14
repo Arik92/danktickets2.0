@@ -7,6 +7,9 @@ body {
   margin-bottom: 2em;
 }
 
+#desktop-grid-container {
+  display: none;
+}
 
 #header form {
   margin: 0;
@@ -160,6 +163,15 @@ footer-directive, #information-bar, #upcoming-event, #blog {
 }
 
 @media only screen and (min-width: 992px) {
+  body {
+    margin-bottom: 0;
+  }
+
+  #header form.navbar-form {
+    margin-right: -4em;
+    margin-left: 4em;
+  }
+
   #header .left-container {
     height: 118.8px;
   }
@@ -168,8 +180,6 @@ footer-directive, #information-bar, #upcoming-event, #blog {
     width: 100%;
   }
 
-  #header .row {
-  }
   #header form {
     width: 100%;
   }
@@ -177,6 +187,127 @@ footer-directive, #information-bar, #upcoming-event, #blog {
   .slick-btn:hover .fa {
     color: purple;
   }
+
+  #mobile-home-container, .mobile-home-panel.bottom-panel {
+    display: none;
+  }
+
+  #desktop-grid-container {
+    /* padding: 1em; */
+    max-width: 1600px;
+    margin: auto;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: 1.5fr repeat(3, 1fr) 1.5fr;
+    grid-template-rows: repeat(4, 25vh);
+    grid-template-areas: 
+    "aside-events main-content main-content main-content main-content"
+    "aside-events main-content main-content main-content main-content"
+    "aside-events other-events other-events other-events side-content"
+    "aside-events other-events other-events other-events side-content"
+  }
+
+  /* side events */
+
+  aside.aside-events {
+    grid-area: aside-events;
+    background: purple;
+    overflow: scroll;
+    /* position: fixed; */
+  }
+
+  .filter-btn-container>div {
+    font-size: 1.5em;
+    box-sizing: border-box;
+    width: 50%;
+    border: solid black 2px;
+    text-align: center;
+    cursor: pointer;
+    background: white;
+    color: black;
+  }
+
+  .side-events-list {
+  }
+
+  .side-events-list li {
+    /* text-align: center; */
+    background: #36454f;
+    color: white;
+    border: solid black 2px;
+    font-size: 1.1em;
+    padding: 1em;
+  }
+
+  /* main area */
+
+  main.main-content {
+    grid-area: main-content;
+    background: steelblue;
+  }
+
+  section.other-events {
+    grid-area: other-events;
+    background: lightgreen;
+  }
+
+  aside.side-content {
+    grid-area: side-content;
+    background: pink;
+  }
+
+  aside.aside-events .filter-btn-container {
+    display: flex;
+  }
+
+  
+
+  
+
+
+  /* footer stuff */
+  footer-directive {
+    display: block;
+  }
+
+  footer {
+    background: #29363E;
+    padding: 3em;
+  }
+
+  footer a {
+    color: white;
+    cursor: pointer;
+  }
+
+  #footer-logo {
+    display: block;
+    width: 10em;
+    margin: auto;
+  }
+
+  .footer-links, .social-links {
+    display: flex;
+    justify-content: center;
+    color: white;
+  }
+
+  .footer-links li, .social-links li {
+    padding: 1em;
+  }
+
+  .social-links li {
+    font-size: 2em;
+  }
+
+  .footer-links li {
+    font-size: 1.3em;
+  }
+
+  .copyright {
+    text-align: center;
+  }
+
 }
 
 

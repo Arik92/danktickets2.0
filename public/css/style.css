@@ -91,6 +91,7 @@ a:active,
 a:focus {
   text-decoration: none;
   outline: none;
+  color: white;
 }
 .container {
   padding: 0 5px;
@@ -165,7 +166,7 @@ header .logo {
   transition: all 0.3s ease-out;
 }
 header.header-fixed {
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   width: 100%;
   z-index: 5;
@@ -1694,121 +1695,6 @@ header .mainmenu-container li.dropdown > a .fa {
   border: none;
   line-height: 49px;
   transition: all .3s ease;
-
-}
-
-/** ====== Footer styles ====== **/
-
-
-footer {
-  background: #29363E;
-  padding: 100px 0 85px;
-}
-footer .footer-widget h3 {
-  font-size: 18px;
-  font-weight: 800;
-  color: #fff;
-  text-transform: uppercase;
-  margin: 0;
-  margin-bottom: 30px;
-}
-footer .footer-widget p {
-  color: #A4B0B6;
-  font-weight: 500;
-}
-footer .footer-widget a {
-  color: #A4B0B6;
-  font-weight: 600;
-  transition: all .3s ease;
-}
-footer .footer-widget a:hover {
-  color: #FF8625;
-}
-footer .footer-widget .bx-wrapper .bx-viewport {
-  background: none;
-  border: none;
-  left: 0;
-  box-shadow: none;
-}
-footer .footer-widget .photo-gallery {
-  margin-left: -1.5px;
-  margin-right: -1.5px;
-}
-footer .footer-widget .photo-gallery li {
-  float: left;
-  width: 75px;
-  margin: 1.5px 1.5px;
-}
-footer .footer-widget .photo-gallery li img {
-  opacity: 1;
-  transition: all .3s ease;
-}
-footer .footer-widget .photo-gallery li img:hover {
-  opacity: .55;
-}
-footer .footer-widget.twitter-feed a {
-  color: #F2F2F2;
-  font-size: 13px;
-  font-weight: 500;
-  transition: all .3s ease;
-}
-footer .footer-widget.twitter-feed a:hover {
-  color: #FF8625;
-}
-footer .footer-widget.twitter-feed .themex_twt_date {
-  color: #576673;
-  font-weight: normal;
-  font-size: 14px;
-}
-footer .footer-widget.menu-widget ul li {
-  margin-bottom: 10px;
-}
-footer .footer-widget.menu-widget ul li a i {
-  color: #fff;
-  margin-right: 10px;
-}
-footer .footer-widget.about-widget img {
-  margin-bottom: 40px;
-}
-footer .footer-widget .social-icons {
-  margin-top: 30px;
-}
-footer .footer-widget .social-icons a {
-  color: #fff;
-  width: 35px;
-  height: 35px;
-  line-height: 35px;
-  text-align: center;
-  display: inline-block;
-  background: url(../img/resources/social-icon-bg.png) center center no-repeat;
-  margin-right: 5px;
-  transition: all .3s ease;
-}
-footer .footer-widget .social-icons a:hover {
-  color: #FF8625;
-  transform: rotate(360deg);
-
-}
-
-/** ====== Bottom Bar styles ====== **/
-
-
-#bottom-bar {
-  background: #273138;
-  color: #4C5357;
-  text-transform: uppercase;
-  font-weight: normal;
-  padding: 20px 0px;
-}
-#bottom-bar p {
-  margin-bottom: 0;
-}
-#bottom-bar p a {
-  color: #fff;
-  transition: all .3s ease;
-}
-#bottom-bar p a:hover {
-  color: #FF8625;
 
 }
 
