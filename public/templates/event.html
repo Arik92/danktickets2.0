@@ -88,17 +88,18 @@
 							<h1>available tickets: </h1> 
 								<ul ng-repeat="ticket in event.eventTickets track by $index">
 									<li>{{ticket.ticketName}} - {{ticket.ticketQ}} tickets left at {{ticket.ticketPrice}}$ each </li>									
-									<input type=""placeHolder="how many?" ng-model></input><button class="btn btn-success" ng-click="addToCart(ticket, 1)">Add To Cart</button>
+									<input placeHolder="how many?" ng-model="ticketsToAdd"></input><button class="btn btn-success" ng-click="addToCart(ticket, ticketsToAdd)">Add To Cart</button>
 								</ul>
 							</div>
 							<div class="container">
 							<h1>Your shopping cart: </h1> 							
-								<ul ng-repeat="ticket in ticketCart track by $index">
-									<li>{{ticket.quantity}} X {{ticket.ticketName}} </li>
-									<li>{{ticket.ticket.ticketPrice*ticket.quantity}}</li>
-									<i class="fa fa-trash-o" aria-hidden="true" ng-click="removeFromCart($index)"></i>
+								<ul ng-repeat="obj in ticketCart track by $index">
+								<li><i class="fa fa-plus btn" aria-hidden="true" ng-click="cartPlus($index)"></i><i class="fa fa-minus btn" aria-hidden="true" ng-click="cartMinus($index)"></i>
+								{{obj.quantity}} X {{obj.ticket.ticketName}} <i class="fa fa-trash-o btn btn-danger" aria-hidden="true" ng-click="removeFromCart($index)"></i></li>
+									<li>{{obj.ticket.ticketPrice*obj.quantity}}</li>									
 								</ul>
-								Total: {{ticketSum}}
+								<div ng-show="ticketCart[0].ticket"><button class="btn btn-primary" ng-click="checkout()">Checkout</button></li>
+								Total: {{ticketSum}} </div>
 							</div>
 								
 							</p>

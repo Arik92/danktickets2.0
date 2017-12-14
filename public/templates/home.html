@@ -19,23 +19,45 @@
 	
 	<aside class="aside-events">
 		<div class="filter-btn-container">
-			<div class="local-btn">Local</div>
-			<div class="upcoming-btn">Upcoming</div>
+			<div class="upcoming-btn" ng-click="goUpcoming()">Upcoming</div>
+			<div class="local-btn" ng-click="goLocal()">Local</div>			
 		</div>
-
 		<ul class="side-events-list">
-			<li ng-repeat="event in dummyEvents">
+			<li  ng-show="upcomingFlag" ng-repeat="event in events |orderBy: 'startTime' |limitTo: 20">
 				<a href="">
 					<p>
 						<span>
-							<i style="color: lightcoral" class="fa fa-calendar-o"></i>
-							{{ event.date }} - {{ event.name }}
+							<a ui-sref="event({id: event['_id']})">
+								<i style="color: lightcoral" class="fa fa-calendar-o"></i>
+								{{ event.startDateDisplay }} - {{ event.title | uppercase}}
+							</a>
 						</span>
 					</p>
 					<p>
+						<span>							
+							<a href={{event.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i style="color: lightgreen" class="fa fa-map-marker"></i>{{event.location.locationName}}</span></a>							
+						</span>
+					</p>
+				</a>
+			</li>
+			<li  ng-show="localFlag"  ng-repeat="event in events |orderBy: 'distance' |limitTo: 20">
+				<a href="">
+					<p>
 						<span>
-							<i style="color: lightgreen" class="fa fa-map-marker"></i>
-							{{ event.location }}
+							<a ui-sref="event({id: event['_id']})">
+								<i style="color: lightcoral" class="fa fa-calendar-o"></i>
+								{{ event.startDateDisplay }} - {{ event.title | uppercase}}
+							</a>
+						</span>
+					</p>
+					<p>
+						<span>							
+							<a href={{event.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i style="color: lightgreen" class="fa fa-map-marker"></i>{{event.location.locationName}}</span></a>							
+						</span>
+					</p>
+					<p>
+						<span> 
+						{{event.distance}} miles away
 						</span>
 					</p>
 				</a>
