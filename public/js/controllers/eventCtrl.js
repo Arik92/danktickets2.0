@@ -30,10 +30,26 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		  alert("cannot add that many tickets!");
 	  }//else 
   }//addToCart  - cart is for the user to mess with and make his order. this doest buy or reserve them yet!
+  $scope.cartPlus = function(index) {
+	  $scope.ticketCart[index].quantity++;
+  if ($scope.ticketCart[index].quantity<=$scope.ticketCart[index].ticket.ticketQ) {
+	  $scope.updateSum();
+	} else {
+		$scope.ticketCart[index].quantity--;
+	}//else 
+  }//cartplus
+   $scope.cartMinus = function(index) {
+	  $scope.ticketCart[index].quantity--;
+	  if ($scope.ticketCart[index].quantity===0) {
+		  $scope.removeFromCart(index);
+	  } else {
+	  	  $scope.updateSum();
+	  }//else
+  }//cartMinus
 	$scope.updateSum = function() {
 		$scope.ticketSum = 0;
 		for (var i=0;i<$scope.ticketCart.length;i++) {
-			$scope.ticketSum+= $scope.ticketCart[i].ticketPrice*$scope.ticketCart[i].ticketQ;
+			$scope.ticketSum+= $scope.ticketCart[i].ticket.ticketPrice*$scope.ticketCart[i].quantity;
 		}//for 
 	} //update sum to update any changes made to ticket quantities
 	$scope.removeFromCart = function(index) {
@@ -41,7 +57,8 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	 $scope.ticketCart.splice(index, 1);
 	 $scope.updateSum();
 	}//rrmove from cart
-  $scope.buyTickets = function(numTickets) {
+  $scope.checkout = function() {
+	  console.log("final checkout",$scope.ticketCart);
 	//TODO: check that the event has said number of tickets available. if it does, connect to socket and reserve tickets
 	// have a request to update the db about and reserve said tickets 
 	//

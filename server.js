@@ -63,6 +63,7 @@ io.on('connection', function(socket) { // I am going to receive an array of tick
 	// TODO: take tickets from event
 	// possibility : from 10 mins from connect they have the option of buying the itckts - otherwise disconnect them // change the tickets back
 	console.log('socketedD');
+	setTimeout(function(){ alert("your order has expired. please repeat the process"); }, 600000);
 	// on disconnet: set them back
 	socket.once('disconnect', function() {
       console.log('Got disconnect!');     

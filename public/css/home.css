@@ -96,7 +96,7 @@ body {
   width: 33.333%;
 }
 
-footer-directive, #information-bar, #upcoming-event, #blog {
+footer-directive {
   display: none;
 }
 
