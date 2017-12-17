@@ -1,10 +1,12 @@
-app.controller('homeCtrl', ['createService', 'dankAdService', '$rootScope', '$scope', '$http', '$window', '$location', function (createService, dankAdService, $rootScope, $scope, $http, $window, $location) {
+app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$rootScope', '$scope', '$http', '$window', '$location', function (createService, dankAdService, linkService, $rootScope, $scope, $http, $window, $location) {
 
   this.$onInit = () => {
     console.log("hello from hoe ctrl");
     homeEventsPrep();
+    $scope.socialLinks = linkService.socialLinks;
     $scope.dummyEvents = getDummyEvents();
     $scope.dummyAds = dankAdService.dummyAds;
+    $scope.dummyBlogs = getDummyBlogs();
     console.log($scope.dummyAds);
     $scope.featuredDummyEvent =  {
       imgURL: "../../img/wide-posters/cannabis-cup.png",
@@ -88,12 +90,25 @@ $scope.getDistanceFromLatLonInMiles = function(lat1, lon1, lat2, lon2) {
     let events = [];
     for (i=0; i<15; i++) {
       events.push({
-        name: 'dummy event',
+        name: 'Dank Event!!',
         date: '4/20/2018',
-        location: 'Calabasas, NM'
+        location: 'Calabasas, NM',
+        imgURL: "../../img/banner-carousel/Chalice.jpg"
       })
     }
     return events;
+  }
+
+  function getDummyBlogs() {
+    let blogs = [];
+    for (i=0; i<4; i++) {
+      blogs.push({
+        name: 'Grow Weed For Free!',
+        date: '2/22/2018',
+        imgURL: "../../img/banner-carousel/farming1.jpeg"
+      })
+    }
+    return blogs;
   }
 
 }]);
