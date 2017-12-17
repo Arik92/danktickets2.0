@@ -114,10 +114,25 @@
 				</div>
 				<div class="info">
 					<div class="left">
-						<div class="date">{{ event.date }}</div>
+						<div class="date">
+								<a ui-sref="">
+									<span>
+										<i style="color: lightcoral" class="fa fa-calendar-o"></i>
+										{{ event.date }}
+									</span>
+								</a>
+						</div>
+						<div class="date">{{ event.startTime }}</div>
 						<div class="name">{{ event.name }}</div>
 					</div>
-					<div class="right">{{ event.location }}</div>
+					<div class="right">
+						<a ui-sref="">
+								<span>
+									<i style="color: lightgreen" class="fa fa-map-marker"></i>
+									{{ event.location }}
+								</span>
+						</a>
+					</div>
 			</div>
 			</li>
 		</ul>

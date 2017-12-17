@@ -317,7 +317,7 @@ footer-directive {
   }
 
   .other-events>.event-grid-container .name {
-    font-size: 1.1em;
+    /* font-size: 1.1em; */
   } 
 
   .event-poster .left {
@@ -334,6 +334,15 @@ footer-directive {
   section.other-events {
     grid-area: other-events;
     background: var(--card-background-color);
+  }
+
+  .other-events .info {
+    line-height: 2em;
+    font-size: 1.1em;
+  }
+
+  .other-events .name {
+    font-size: 1.3em;
   }
 
   
@@ -354,7 +363,7 @@ footer-directive {
   }
   
   .event-grid-container>.event-poster {
-    background: purple;
+    background: var(--charcoal);
   }
   
   .other-events .left {
@@ -391,9 +400,27 @@ footer-directive {
 
   .socialLink-grid-container li {
     text-align: center;
-    font-size: 3em;
-    padding: 0.5em;
+    font-size: 2.5em;
     color: black;
+    transition: background-color 0.5s;
+  }
+
+  .socialLink-grid-container i.fa {
+    padding: 0 !important;
+  }
+
+  .socialLink-grid-container li:hover {
+    background-color: white;
+  }
+
+  .socialLink-grid-container li:hover i.fa {
+    color: purple;
+  }
+
+  .socialLink-grid-container a {
+    display: block;
+    padding: 0.5em;
+    
   }
 
   .socialLink-grid-container i {
@@ -459,12 +486,22 @@ footer-directive {
     color: white;
   }
 
-  .footer-links li, .social-links li {
+  .footer-links li {
     padding: 1em;
   }
 
   .social-links li {
     font-size: 2em;
+    transition: background-color 0.5s;
+  }
+
+  .social-links li:hover {
+    background-color: white;
+  }
+
+  .social-links a {
+    display: block;
+    padding: 1em;
   }
 
   .footer-links li {

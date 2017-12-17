@@ -4,7 +4,7 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
     console.log("hello from hoe ctrl");
     homeEventsPrep();
     $scope.socialLinks = linkService.socialLinks;
-    $scope.dummyEvents = getDummyEvents();
+    $scope.dummyEvents = createService.dummyEvents;
     $scope.dummyAds = dankAdService.dummyAds;
     $scope.dummyBlogs = getDummyBlogs();
     console.log($scope.dummyAds);
