@@ -200,12 +200,13 @@ footer-directive {
     /* padding: 1em; */
     --my-row-height: 30vh;
     --ad-banner-height: 15vh;
+    --card-background-color: #e7deed;
     max-width: 1600px;
     margin: auto;
     display: grid;
     grid-gap: 0.5em;
-    grid-template-columns: 1.5fr 3fr 1.5fr;
-    grid-template-rows: repeat(4, var(--my-row-height));
+    grid-template-columns: 1.5fr 3fr 1.2fr;
+    grid-template-rows: repeat(4, minmax(var(--my-row-height), auto));
     grid-template-areas: 
       "aside-events main-content main-content"
       "aside-events main-content main-content"
@@ -213,11 +214,19 @@ footer-directive {
       "aside-events other-events side-content"
   }
 
+  #desktop-grid-container i {
+    padding-right: 0.5em;
+  }
+
+  #desktop-grid-container a {
+    color: white;
+  }
+
   /* side events */
 
   aside.aside-events {
     grid-area: aside-events;
-    background: purple;
+    background: #4A148C;
     overflow: scroll;
     /* position: fixed; */
   }
@@ -244,6 +253,12 @@ footer-directive {
     font-size: 1.1em;
     padding: 1em;
   }
+
+  .side-events-list a {
+    color: white;
+  }
+
+ 
 
   /* main area */
 
@@ -282,26 +297,34 @@ footer-directive {
 
   .main-event {
     /* border: solid 1px black; */
-    background: darkcyan;
+    background: black;
     margin: 1em;
   }
 
-  .main-event .info {
+  .event-poster .info {
     display: flex;
     justify-content: space-between;
     background: var(--charcoal);
     padding: 1em;
     color: white;
     font-size: 1.3em;
-    line-height: 1.2em;
+    line-height: 1.5em;
     font-family: "Palatino Linotype";
   }
 
-  .main-event .left {
+  .event-poster .name {
+    font-size: 1.3em;
+  }
+
+  .other-events>.event-grid-container .name {
+    /* font-size: 1.1em; */
+  } 
+
+  .event-poster .left {
     padding-left: 3em;
   }
 
-  .main-event .right {
+  .event-poster .right {
     padding-right: 3em;
   }
 
@@ -310,21 +333,130 @@ footer-directive {
 
   section.other-events {
     grid-area: other-events;
-    background: lightgreen;
+    background: var(--card-background-color);
   }
 
-  aside.side-content {
-    grid-area: side-content;
-    background: pink;
+  .other-events .info {
+    line-height: 2em;
+    font-size: 1.1em;
   }
 
+  .other-events .name {
+    font-size: 1.3em;
+  }
+
+  
   aside.aside-events .filter-btn-container {
     display: flex;
   }
 
-  
+  .event-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 2em;
+    margin: 2em;
+  }
 
+  .event-grid-container .img-container {
+    background: lightseagreen;
+  }
   
+  .event-grid-container>.event-poster {
+    background: var(--charcoal);
+  }
+  
+  .other-events .left {
+    padding-left: 0.5em;
+  }
+  
+  .other-events .right {
+    padding-right: 0.5em;
+  }
+  
+  /* side blogs and social media */
+    aside.side-content {
+      grid-area: side-content;
+      /* background: #e7deed; */
+    }
+
+  .side-content .social-container {
+    background: lightseagreen;
+  }
+
+  .social-container h4 {
+    text-align: center;
+    padding-top: 1em;
+    margin: 0;
+    color: white;
+  }
+
+  .socialLink-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 1em 4em;
+  }
+
+  .socialLink-grid-container li {
+    text-align: center;
+    font-size: 2.5em;
+    color: black;
+    transition: background-color 0.5s;
+  }
+
+  .socialLink-grid-container i.fa {
+    padding: 0 !important;
+  }
+
+  .socialLink-grid-container li:hover {
+    background-color: white;
+  }
+
+  .socialLink-grid-container li:hover i.fa {
+    color: purple;
+  }
+
+  .socialLink-grid-container a {
+    display: block;
+    padding: 0.5em;
+    
+  }
+
+  .socialLink-grid-container i {
+    color: black;
+  }
+
+  .blogs-container {
+    font-family: "Palatino Linotype";
+    text-align: center;
+    padding: 1em;
+    background: var(--card-background-color);
+    margin-top: 1em;
+  }
+  
+  .blogs-container li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    background: var(--charcoal);
+    color: white;
+  }
+
+  .blogs-container .blog-img-container {
+    width: 70%;
+    padding: 0.3em;
+    background: lightseagreen;
+    align-self: center;
+  }
+
+  .see-all-blogs {
+    font-size: 1.2em;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 
 
   /* footer stuff */
@@ -354,12 +486,22 @@ footer-directive {
     color: white;
   }
 
-  .footer-links li, .social-links li {
+  .footer-links li {
     padding: 1em;
   }
 
   .social-links li {
     font-size: 2em;
+    transition: background-color 0.5s;
+  }
+
+  .social-links li:hover {
+    background-color: white;
+  }
+
+  .social-links a {
+    display: block;
+    padding: 1em;
   }
 
   .footer-links li {

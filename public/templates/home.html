@@ -80,21 +80,99 @@
 			</div>
 		</slick>
 
-		<div class="main-event">
+		<div class="main-event event-poster">
 				<img ng-src="{{ featuredDummyEvent.imgURL }}" class="feature-event-img">
 				<div class="info">
 					<div class="left">
-						<div class="date">{{ featuredDummyEvent.date }}</div>
+						<div class="date">
+							<a ui-sref="">
+								<span>
+									<i style="color: lightcoral" class="fa fa-calendar-o"></i>
+									{{ featuredDummyEvent.date }}
+								</span>
+							</a>
+						</div>
 						<div class="name">{{ featuredDummyEvent.name }}</div>
 					</div>
-					<div class="right">{{ featuredDummyEvent.location }}</div>
+					<div class="right">
+							<a ui-sref="">
+								<span>
+									<i style="color: lightgreen" class="fa fa-map-marker"></i>
+									{{ featuredDummyEvent.location }}
+								</span>
+							</a>
+					</div>
 			</div>
 		</div>
 	</main>
 
-	<section class="other-events"> Other events here </section>
+	<section class="other-events">
+		<ul class="event-grid-container">
+			<li ng-repeat="event in dummyEvents | limitTo: 4" class="event-poster">
+				<div class="img-container">
+					<img ng-src="{{ event.imgURL }}" class="feature-event-img">
+				</div>
+				<div class="info">
+					<div class="left">
+						<div class="date">
+								<a ui-sref="">
+									<span>
+										<i style="color: lightcoral" class="fa fa-calendar-o"></i>
+										{{ event.date }}
+									</span>
+								</a>
+						</div>
+						<div class="date">{{ event.startTime }}</div>
+						<div class="name">{{ event.name }}</div>
+					</div>
+					<div class="right">
+						<a ui-sref="">
+								<span>
+									<i style="color: lightgreen" class="fa fa-map-marker"></i>
+									{{ event.location }}
+								</span>
+						</a>
+					</div>
+			</div>
+			</li>
+		</ul>
+	</section>
 
-	<aside class="side-content">blogs and links</aside>
+	<aside class="side-content">
+
+		<div class="social-container">
+			<h4>Connect with us!</h4>
+			<ul class="socialLink-grid-container">
+				<li ng-repeat="socialLink in socialLinks">
+					<a href="{{ socialLink.url }}">
+						<i class="{{ socialLink.faClass }}"></i>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+
+		<div class="blogs-container">
+			<h4>Check out our recent blogs</h3>
+			<ul>
+				<li ng-repeat="blog in dummyBlogs">
+					<div class="blog-info-container">
+						<p>{{ blog.name }}</p>
+						<p>{{ blog.date }}</p>
+					</div>
+					<div class="blog-img-container">
+						<img ng-src="{{ blog.imgURL }}" alt="">
+					</div>
+				</li>
+			</ul>
+			<div class="see-all-blogs">
+				<a style="color: blue" 
+					 ui-sref="">
+					Check out the rest of the blogs
+				</a>
+			</div>
+		</div>
+	</aside>
 
 </div>
 

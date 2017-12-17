@@ -92,7 +92,7 @@ a:active,
 a:focus {
   text-decoration: none;
   outline: none;
-  color: white;
+  /* color: white; */
 }
 .container {
   padding: 0 5px;
