@@ -19,11 +19,22 @@
 	
 	<aside class="aside-events">
 		<div class="filter-btn-container">
-			<div class="upcoming-btn" ng-click="goUpcoming()">Upcoming</div>
-			<div class="local-btn" ng-click="goLocal()">Local</div>			
+			<div class="upcoming-btn" 
+					 ng-click="goUpcoming()"
+					 ng-class="upcomingFlag ? 'filter-btn-active' : '' "
+			>
+					 Upcoming
+			</div>
+			<div class="local-btn" 
+					 ng-click="goLocal()"
+					 ng-class="localFlag ? 'filter-btn-active' : '' "
+			>
+				Local
+			</div>			
 		</div>
 		<ul class="side-events-list">
-			<li  ng-show="upcomingFlag" ng-repeat="event in events |orderBy: 'startTime' |limitTo: 20">
+			<li	ng-show="upcomingFlag" 
+					ng-repeat="event in events |orderBy: 'startTime' |limitTo: 20">
 				<a href="">
 					<p>
 						<span>
@@ -40,7 +51,9 @@
 					</p>
 				</a>
 			</li>
-			<li  ng-show="localFlag"  ng-repeat="event in events |orderBy: 'distance' |limitTo: 20">
+			<li class="local-events"
+					ng-show="localFlag"  
+					ng-repeat="event in events |orderBy: 'distance' |limitTo: 20">
 				<a href="">
 					<p>
 						<span>
