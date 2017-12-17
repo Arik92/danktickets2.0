@@ -242,7 +242,18 @@ footer-directive {
     color: black;
   }
 
-  .side-events-list {
+  .filter-btn-active {
+    background: purple !important;
+    color: white !important;
+  }
+
+  .side-events-list li {
+    transition: all linear 0.3s;
+  }
+
+  .side-events-list li.ng-hide {
+    opacity: 0;
+    transform: rotateX(180deg);
   }
 
   .side-events-list li {
