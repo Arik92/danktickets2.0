@@ -1,117 +1,63 @@
-.top-event-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+#event-page-container p,h3,h4,h5 {
+  margin: 0;
+  padding: 0;
+}
+
+
+.event-poster-head {
   width: 100%;
-  margin-bottom: 40px;
 }
 
-.eventcolumn {
-  width: 40%;
+.ticket-bar {
+  text-align: center;
+  background: #A5D6A7;
+  border: solid 2px black;
+  font-size: 1.3em;
+  font-weight: bold;
+  padding: 0.5em 0;
+  line-height: 1.5em;
 }
 
-.event-img-container {
-  max-width: 40%;
-  height: 100%;
-  align-self: stretch;
+.ticket-bar p {
+  margin: 0;
 }
 
-.post-title {
+
+
+.event-info-bar {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-around;
-  align-self: stretch;
-  padding: 20px 20px;
+  padding: 1em 1em 1em 3em;
+  font-size: 1.3em;
+  border: solid 1px black;
 }
 
-.post-title>.calendar {
-  /* font-size: 1rem !important; */
-  margin-right: 10px;
+.event-info-bar .event-name {
+  font-size: 1.5em;
 }
 
-/* button section */
-
-.event-btn {
-  font-size: 26px;
-  padding: 6px 0px;
-}
-
-#event-register-btn {
-  width: 50%;
-  margin-bottom: 2rem;
-}
-
-.bottom-btn-container {
-  width: 50%;
-  margin: 0 auto;
+.event-info-icons {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
-.bottom-btn-container > .my-btn.event-btn {
-  width: 40% !important;
-  font-size: 2rem !important;
-  /* margin: 10px; */
+.event-info-icons a {
+  display: block;
+  padding: 0.5em;
 }
 
-#middle-content {
-  display: flex;
-  padding: 3rem 0;
+section.description {
+  white-space: pre-wrap;
 }
 
-.side-btn {
-  font-size: 1rem !important;
-  width: 40% !important;
-}
 
-/* MEDIA QUERIES */
 
-@media only screen and (max-width: 992px) {
 
-  .top-event-container {
-    display: block;
-  }
-
-  .top-event-container>.event-img-container {
-    margin: auto;
-  }
-
-  .top-event-container .post-title {
-    margin: auto;
-  }
-}
-
-#event-sponsor, .comment-container {
-  padding: 0 3rem;
-}
-
-@media only screen and (max-width: 766px) {
-  #middle-content {
-    display: block !important;
-  }
-
-  #middle-content .top-btns {
-    display: flex;
-    justify-content: space-around;
-  }
-
+@media screen and (min-width: 768px) {
   
 }
 
-@media only screen and (max-width: 600px) {
-  .bottom-btn-container {
-    display: block;
-  }
-
-  #event-register-btn {
-    width: 90%;
-  }
-
-  .bottom-btn-container > .my-btn.event-btn {
-    width: 90% !important;
-    margin: 10px 0;
-  }
-
-
+@media screen and (min-width: 992px) {
 
 }

@@ -1,523 +1,104 @@
-<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=59ae72b5c975c80011bcfd3a&product=inline-share-buttons'
- async='async'></script>
-<!-- /#header -->
+<div id="event-page-container">
+	<div class="event-poster-head">
+		<img src="../img/wide-posters/Secret Sesh.png" alt="">
+	</div>
 
+	<div class="ticket-bar">
+		<p>Tickets</p>
+		<p>$20 - $20,000</p>
+	</div>
 
-<!-- #page-title -->
-<!-- <section id="page-title" class="gradient-overlay">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					
-				</div>
-			</div>
-		</div>
-	</section> -->
-<!-- /#page-title -->
-
-
-<!-- #single-blog-post -->
-<section id="single-blog-post">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<!-- .content-holder -->
-				<div class="content-holder">
-
-					<div class="top-event-container">
-						<div class="event-img-container">
-							<img src="img/marijuana.jpg">
-						</div>
-
-						<!-- .post-title -->
-						<div class="post-title">
-							<div class="calendar">
-								<h1 class="month">OCTOBER</h1>
-								<p class="day">29</p>
-							</div>
-							<div class="info">
-								<h1>
-									The Event of The Year
-								</h1>
-
-								<h3>
-									by
-									<b style="color:red">Organizer</b>
-								</h3>
-								<h3>
-									<i class="fa fa-money"></i>
-									FREE
-								</h3>
-							</div>
-						</div>
-					</div>
-
-					<div class="event-btn-container">
-						<div class="register-container">
-							<button id="event-register-btn" type="submit" class="hvr-bounce-to-right my-btn event-btn">Register</button>
-						</div>
-
-						<div class="bottom-btn-container">
-							<button type="submit" class="hvr-bounce-to-right my-btn event-btn">
-								<i class="fa fa-share-alt-square "></i> SHARE</button>
-							<button type="submit" class="hvr-bounce-to-right my-btn event-btn">
-								<i class="fa fa-plus-square"></i> ADD EVENT</button>
-						</div>
-					</div>
-
-					<div id="middle-content">
-						<!-- .content -->
-						<div class="content">
-						
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-								dummy text ever since the
-								<br>1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived
-								not only five centuries, but also
-								<br>the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
-								of Letraset</p>
-
-							<p>
-								<b>“Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
-									<br>literature from 45 BC, making itover 2000 years old. Richard McClintock”</b>
-							</p>
-
-							<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will
-								give you a complete account</p> 
-							<p> 
-							<div class="container">
-							<h1>available tickets: </h1> 
-								<ul ng-repeat="ticket in event.eventTickets track by $index">
-									<li>{{ticket.ticketName}} - {{ticket.ticketQ}} tickets left at {{ticket.ticketPrice}}$ each </li>									
-									<input placeHolder="how many?" ng-model="ticketsToAdd"></input><button class="btn btn-success" ng-click="addToCart(ticket, ticketsToAdd)">Add To Cart</button>
-								</ul>
-							</div>
-							<div class="container">
-							<h1>Your shopping cart: </h1> 							
-								<ul ng-repeat="obj in ticketCart track by $index">
-								<li><i class="fa fa-plus btn" aria-hidden="true" ng-click="cartPlus($index)"></i><i class="fa fa-minus btn" aria-hidden="true" ng-click="cartMinus($index)"></i>
-								{{obj.quantity}} X {{obj.ticket.ticketName}} <i class="fa fa-trash-o btn btn-danger" aria-hidden="true" ng-click="removeFromCart($index)"></i></li>
-									<li>{{obj.ticket.ticketPrice*obj.quantity}}</li>									
-								</ul>
-								<div ng-show="ticketCart[0].ticket"><button class="btn btn-primary" ng-click="checkout()">Checkout</button></li>
-								Total: {{ticketSum}} </div>
-							</div>
-								
-							</p>
-
-
-
-						</div>
-						<!-- /.content -->
-
-						<!-- side-bar-shit -->
-						<div class="side-bar-shit">
-
-							<div class="top-btns">
-								<div id="date-btn">
-									<H3 style="margin-top:30px">
-										<u>DATE AND TIME</u>
-									</H3>
-									<p>Tue, November 7, 2017
-										<br> 2:00 PM – 3:30 PM IST
-										<Br>
-									</p>
-									<button type="submit" class="hvr-bounce-to-right my-btn side-btn" style="margin: 10px; font-size:24px;padding: 6px 0px; width:32%;background-color:transparent;color:black">
-										<i class="fa fa-plus-square"></i> Add to calendar</button>
-								</div>
-	
-								<div class="location-btn">
-									<H3 style="margin-top:20px">
-										<u>LOCATION</u>
-									</H3>
-									<p>Ulpan Neve Tsedek
-										<Br> 7 Lilienblum Street
-										<br> Tel Aviv-Yafo, Tel Aviv District
-									</p>
-									<button type="submit" class="hvr-bounce-to-right my-btn side-btn" style="margin: 10px; font-size:24px;padding: 6px 0px; width:32%;background-color:transparent;color:black">
-										<i class="fa fa-map-marker"></i> View Map</button>
-								</div>
-							</div>
-							<H3 style="margin-top:20px">FRIENDS ATTENDING</H3>
-							<a href="#" title="Facebook" class="btn btn-facebook btn-lg"><i class="fa fa-facebook fa-fw"></i> Connect with Facebook</a>
-						</div>
-
-					</div> <!-- flex-container-end -->
-
-					<div class="tags">
-						<h4 style="margin-top:30px">TAGS</h4>
-						<a href="http://www.jquery2dotnet.com/search/label/css">Business</a>
-						<a href="http://www.jquery2dotnet.com/search/label/Javascript">Meeting</a>
-						<a href="http://www.jquery2dotnet.com/search/label/jquery">Concert</a>
-						<a href="http://www.jquery2dotnet.com/search/label/jquery">Nightlife</a>
-						<a href="http://www.jquery2dotnet.com/search/label/jquery">Sport</a>
-					</div>
-					<br>
-					<br>
-					<H3 style="margin-top:25px">SHARE WITH YOUR FRIENDS</H3>
-					<div class="sharethis-inline-share-buttons"></div>
-
-
-					<!-- /.content-holder -->
-					<div id="map"></div>
-					<script>
-						function initMap() {
-							var uluru = { lat: -25.363, lng: 131.044 };
-							var map = new google.maps.Map(document.getElementById('map'), {
-								zoom: 4,
-								center: uluru
-							});
-							var marker = new google.maps.Marker({
-								position: uluru,
-								map: map
-							});
-						}
-					</script>
-					<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR9ihwGh3phyj4LBWR6x4UtsqqgK9Je9k&callback=initMap">
-					</script>
-				</div>
-			</div>
-
-			<div class="comment-container">
-				<div class="row">
-					<!-- .comment-section -->
-					<div class="col-lg-12 comment-section">
-						<div class="comment-title text-center">
-							<h1>3 Comments Posted</h1>
-						</div>
-						<div class="comment-holder">
-							<!-- .single-comment -->
-							<div class="single-comment clearfix wow slideInLeft">
-								<div class="img-holder pull-left">
-									<img src="img/testimonials/1.png" alt="">
-								</div>
-								<div class="comment-content pull-left">
-									<h3>Lorem Ipsum</h3>
-									<span class="time">24 minutes ago at 11:48pm</span>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-										dummy text ever</p>
-									<a class="reply-button hvr-bounce-to-right" href="#">Reply</a>
-								</div>
-							</div>
-							<!-- /.single-comment -->
-	
-							<!-- .single-comment -->
-							<div class="single-comment clearfix wow slideInLeft" data-wow-delay=".3s">
-								<div class="img-holder pull-left">
-									<img src="img/testimonials/2.png" alt="">
-								</div>
-								<div class="comment-content pull-left">
-									<h3>Lorem Ipsum</h3>
-									<span class="time">24 minutes ago at 11:48pm</span>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-										dummy text ever</p>
-									<a class="reply-button hvr-bounce-to-right" href="#">Reply</a>
-								</div>
-							</div>
-							<!-- /.single-comment -->
-	
-							<!-- .single-comment -->
-							<div class="single-comment clearfix wow slideInLeft" data-wow-delay=".6s">
-								<div class="img-holder pull-left">
-									<img src="img/testimonials/3.png" alt="">
-								</div>
-								<div class="comment-content pull-left">
-									<h3>Lorem Ipsum</h3>
-									<span class="time">24 minutes ago at 11:48pm</span>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-										dummy text ever</p>
-									<a class="reply-button hvr-bounce-to-right" href="#">Reply</a>
-								</div>
-							</div>
-							<!-- /.single-comment -->
-	
-							<!-- .single-comment -->
-							<div class="single-comment clearfix wow slideInLeft" data-wow-delay=".0s">
-								<div class="img-holder pull-left">
-									<img src="img/testimonials/4.png" alt="">
-								</div>
-								<div class="comment-content pull-left">
-									<h3>Lorem ipsum</h3>
-									<span class="time">24 minutes ago at 11:48pm</span>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-										dummy text ever</p>
-									<a class="reply-button hvr-bounce-to-right" href="#">Reply</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="comment-container">
-				<div class="row">
-					<div class="col-lg-12 comment-form-section">
-						<div class="form-title text-center">
-							<h1>Leave a comment to this post</h1>
-						</div>
-						<div class="comment-form">
-							<ul class="clearfix">
-								<li class="half">
-									<input type="text" placeholder="Your Name">
-								</li>
-								<li class="half">
-									<input type="text" placeholder="Your Email">
-								</li>
-								<li class="full">
-									<input type="text" placeholder="Your Subject">
-								</li>
-								<li class="full">
-									<textarea placeholder="Your Comments here"></textarea>
-								</li>
-								<li class="full">
-									<button type="submit" class="hvr-bounce-to-right">Post Comment</button>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-</section>
-<!-- /#single-blog-post -->
-	<!-- #testimonials -->
-	<section id="testimonials" class="gradient-overlay">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title text-center">
-						<h1>Testimonials</h1>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="testimonial custom-pager text-center">
-						<ul>
-							<li class="prev"><img src="../img/testimonials/arrow-left.png" alt=""></li>
-							<li class="next"><img src="../img/testimonials/arrow-right.png" alt=""></li>
-							<li class="active" data-slide-index="0"><span><img src="img/testimonials/1.png" alt=""></span></li>
-							<li data-slide-index="1"><span><img src="../img/testimonials/2.png" alt=""></span></li>
-							<li data-slide-index="2"><span><img src="../img/testimonials/3.png" alt=""></span></li>
-							<li data-slide-index="3"><span><img src="../img/testimonials/4.png" alt=""></span></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<ul class="testimonial-slide">
-						<li class="slide">
-							<h3>John Doe</h3>
-							<span>Speaker, EventTime CO.</span>
-
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been <br> the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of <br> type and scrambled it to make a type specimen book</p>
-
-						</li>
-						<li class="slide">
-							<h3>John Doe</h3>
-							<span>Speaker, EventTime CO.</span>
-
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been <br> the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of <br> type and scrambled it to make a type specimen book</p>
-
-						</li>
-						<li class="slide">
-							<h3>John Doe</h3>
-							<span>Speaker, EventTime CO.</span>
-
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been <br> the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of <br> type and scrambled it to make a type specimen book</p>
-
-						</li>
-						<li class="slide">
-							<h3>John Doe</h3>
-							<span>CEO, EventTime CO.</span>
-
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been <br> the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of <br> type and scrambled it to make a type specimen book</p>
-
-						</li>
-					</ul>
-				</div>
-			</div>
-
-		</div>
-	</section>
-	<!-- /#testimonials -->
-		<!-- #event-speakers -->
-	<section id="event-speakers">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title text-center">
-						<h1>EVENT SPEAKERS</h1>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <br> been the industry's standard dummy text ever since the 1500</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-6 col-md-8 col-sm-8 col-lg-offset-0 col-md-offset-1 col-sm-offset-1">
-					<!-- .single-speakers -->
-					<div class="single-speakers row">
-						<div class="info text-right col-lg-6 col-md-7 col-sm-7">
-							<h3>John Doe</h3>
-							<span class="position">Speaker</span>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-							<ul class="social">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-							</ul>
-						</div>
-						<div class="img-holder text-center col-lg-6 col-md-5 col-sm-5">
-							<div class="img-container"><img src="img/speakers/1.png" alt=""></div>
-						</div>
-					</div>
-					<!-- /.single-speakers -->
-
-					<!-- .single-speakers -->
-					<div class="single-speakers row">
-						<div class="info text-right col-lg-6 col-md-7 col-sm-7">
-							<h3>John Doe</h3>
-							<span class="position">Speaker</span>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-							<ul class="social">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-							</ul>
-						</div>
-						<div class="img-holder text-center col-lg-6 col-md-5 col-sm-5">
-							<div class="img-container"><img src="img/speakers/2.png" alt=""></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-8 col-sm-10 col-lg-offset-0 col-md-offset-1 col-sm-offset-1">
-					<!-- .single-speakers -->
-					<div class="single-speakers row">
-						<div class="img-holder text-center col-lg-6 col-md-5 col-sm-5">
-							<div class="img-container" data-wow-delay=".6s"><img src="img/speakers/3.png" alt=""></div>
-						</div>
-						<div class="info text-left col-lg-6 col-md-7 col-sm-7">
-							<h3>John Doe</h3>
-							<span class="position">Speaker</span>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-							<ul class="social">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<!-- /.single-speakers -->
-
-					<!-- .single-speakers -->
-					<div class="single-speakers row">
-						<div class="img-holder text-center col-lg-6 col-md-5 col-sm-5">
-							<div class="img-container"><img src="img/speakers/4.png" alt=""></div>
-						</div>
-						<div class="info text-left col-lg-6 col-md-7 col-sm-7">
-							<h3>John Doe</h3>
-							<span class="position">Speaker</span>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-							<ul class="social">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<!-- /.single-speakers -->
-				</div>
-			</div>
-			<div class="row text-center">
-				<a href="#" class="show-more hvr-bounce-to-right">SEE MORE</a>
-			</div>
-		</div>
-	</section>
-	<!-- /#event-speakers -->
-
-	<!-- #gallery -->
-	<section id="gallery">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title text-center">
-						<h1>Our Gallery</h1>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has <br> been the industry's standard dummy text ever since the 1500</p>
-					</div>
-				</div>
-			</div>
-			<div class="row gallery-image">
-				<a class="fancybox" href="img/gallery/1.png"><div class="col-lg-3 col-md-4 col-sm-6">
-					<img src="img/gallery/1.png" alt="">
-				</div></a>
-				<a class="fancybox" href="img/gallery/2.png"><div class="col-lg-3 col-md-4 col-sm-6">
-					<img src="img/gallery/2.png" alt="">
-				</div></a>
-				<a class="fancybox" href="img/gallery/3.png"><div class="col-lg-3 col-md-4 col-sm-6">
-					<img src="img/gallery/3.png" alt="">
-				</div></a>
-				<a class="fancybox" href="img/gallery/4.png"><div class="col-lg-3 col-md-4 col-sm-6">
-					<img src="img/gallery/4.png" alt="">
-				</div></a>
-				<a class="fancybox" href="img/gallery/5.png"><div class="col-lg-3 col-md-4 col-sm-6">
-					<img src="img/gallery/5.png" alt="">
-				</div></a>
-				<a class="fancybox" href="img/gallery/6.png"><div class="col-lg-3 col-md-4 col-sm-6">
-					<img src="img/gallery/6.png" alt="">
-				</div></a>
-				<a class="fancybox" href="img/gallery/7.png"><div class="col-lg-3 col-md-4 col-sm-6">
-					<img src="img/gallery/7.png" alt="">
-				</div></a>
-				<a class="fancybox" href="img/gallery/8.png"><div class="col-lg-3 col-md-4 col-sm-6">
-					<img src="img/gallery/8.png" alt="">
-				</div></a>
-			</div>
-		</div>
-	</section>
-	<!-- /#gallery -->
-
-<!-- #event-sponsor -->
-<section id="event-sponsor">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="section-title">
-					<h1>EVENT SPONSOR</h1>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-						<br> has been the industry's standard dummy text ever since the 1500</p>
-				</div>
-			</div>
-		</div>
-		<div class="row sponsor-logo-row">
-			<div class="col-lg-12">
-				<ul class="sponsor-logo">
-					<li>
-						<div class="item">
-							<img src="img/sponsor-logo/1.png" alt="">
-						</div>
-					</li>
-					<li>
-						<div class="item">
-							<img src="img/sponsor-logo/2.png" alt="">
-						</div>
-					</li>
-					<li>
-						<div class="item">
-							<img src="img/sponsor-logo/3.png" alt="">
-						</div>
-					</li>
-					<li>
-						<div class="item">
-							<img src="img/sponsor-logo/4.png" alt="">
-						</div>
-					</li>
-				</ul>
-			</div>
+	<div class="event-info-bar">
+		<div class="event-name">805 Oiler Festival</div>
+		<div class="event-info-icons">
+			<a href="">
+				<i class="fa fa-chevron-down" aria-hidden="true"></i>
+			</a>
+			<a href="">
+				<i class="fa fa-bookmark" aria-hidden="true"></i>
+			</a>
 		</div>
 	</div>
-</section>
+
+	<section class="event-info">
+		<div class="date-and-time">
+			<div class="date">Fri, Jan 26, 2018</div>
+			<div class="time">7:00PM - 12:00AM</div>
+		</div>
+
+		<div class="location">
+			<div class="address">4857 Fulton Ave</div>
+			<div class="city">Sherman Oaks, CA</div>
+		</div>
+
+		<div>Refund Policy</div>
+		<div>No Refunds</div>
+	</section>
+
+	<section class="description">
+		Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+		
+		Sequi cupiditate hic dicta consequuntur recusandae, fuga ipsam ut temporibus. 
+		
+		Nisi ducimus quasi rerum magni dolorum a, tempora unde animi, quod dolor cumque ullam temporibus. 
+		
+		Itaque cumque dolore amet sit nihil, culpa laudantium ea, consectetur nulla sint commodi doloremque enim modi possimus!
+	</section>
+
+	<section class="organizer-info"></section>
+
+	<div class="social-links"></div>	
+
+	<section class="sponsor"></section>
+
+	<section class="event-map"></section>
+
+
+</div>
+
+
+
+
+<!-- arik's shopping cart -->
+<!-- <div class="container">
+		<h1>available tickets: </h1>
+		<ul ng-repeat="ticket in event.eventTickets track by $index">
+			<li>{{ticket.ticketName}} - {{ticket.ticketQ}} tickets left at {{ticket.ticketPrice}}$ each </li>
+			<input placeHolder="how many?" ng-model="ticketsToAdd"></input>
+			<button class="btn btn-success" ng-click="addToCart(ticket, ticketsToAdd)">Add To Cart</button>
+		</ul>
+	</div>
+	<div class="container">
+		<h1>Your shopping cart: </h1>
+		<ul ng-repeat="obj in ticketCart track by $index">
+			<li>
+				<i class="fa fa-plus btn" aria-hidden="true" ng-click="cartPlus($index)"></i>
+				<i class="fa fa-minus btn" aria-hidden="true" ng-click="cartMinus($index)"></i>
+				{{obj.quantity}} X {{obj.ticket.ticketName}}
+				<i class="fa fa-trash-o btn btn-danger" aria-hidden="true" ng-click="removeFromCart($index)"></i>
+			</li>
+			<li>{{obj.ticket.ticketPrice*obj.quantity}}</li>
+		</ul>
+		<div ng-show="ticketCart[0].ticket">
+			<button class="btn btn-primary" ng-click="checkout()">Checkout</button>
+			</li>
+			Total: {{ticketSum}}
+		</div>
+	</div> -->
+
+	<!-- <div id="map"></div>
+	<script>
+		function initMap() {
+			var uluru = { lat: -25.363, lng: 131.044 };
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 4,
+				center: uluru
+			});
+			var marker = new google.maps.Marker({
+				position: uluru,
+				map: map
+			});
+		}
+	</script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR9ihwGh3phyj4LBWR6x4UtsqqgK9Je9k&callback=initMap">
+	</script> -->
