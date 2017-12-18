@@ -425,4 +425,12 @@ $scope.updateEndHr = function() {
   console.log("start hour is", $scope.startHr);
 };
   //init calenders and hour pickers
+  $scope.deleteEvent = function() {
+	  createService.deleteEvent($scope.event._id).then(function(result){
+		  console.log("delete result is", result);
+		  $timeout(function() {
+                    $location.path('/');
+                  }, 2000);
+	  })
+  }
 }]);

@@ -109,17 +109,25 @@ router.post('/', function (req, res1, next) {
   });
 })//regular uploads(no pic provided)
 
-router.delete("/:id",function(req,res){
-  //TODO: delete associated image
+router.delete('/:id',function(req,res){
+  //TODO: delete associated image. make sure the image address is passed
   Event.findOneAndRemove({ _id: req.params.id }, function(err, event) {
     if (err) {
       console.log(err);
       res.send(err);
-    }  else {
-      console.log(event);
+	 }  else {
+     	  //delete associated image 	   
+	   var fs = require('fs');	   
+	   console.log(event.image);
+       var addressToDelete = 'public'+event.image;
+	   fs.unlink(addressToDelete,function(response){
+		   console.log("deleted event ", response);
+        //res.send({error_code:0,err_desc:null});
+        }); //TODO: need the path for the file
+	   
       res.send(event);
-    }
-});
+		}
+	});
 });
 router.post('/deleteAndUpload', function(req, res1, next) {
   //TODO: check if the image has changed. if it did, delete and replace it with the new one

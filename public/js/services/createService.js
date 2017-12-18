@@ -50,14 +50,14 @@ var updateEvent = function(event) {
     throw error;
   })
 }
-var deleteEvent = function(oId) {
-  return $http.delete('/events/' + oId).then(function(result) {
-    console.log("ongoing battle that was deleted: ", result);
+var deleteEvent = function(id) {	
+  return $http.delete('/events/' + id).then(function(result) {
+    console.log("event that was deleted: ", result);
     return result.data; //??
   }, function(error) {
     throw (error);
   }) //promise callbacks
-} // delete a battle
+} // delete an event
 
 
 // var vote = function(battle, userId) {
