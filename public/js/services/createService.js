@@ -118,7 +118,7 @@ var deleteEvent = function(id) {
       date: 'Sun, April 01',
       startTime: '7:00 PM',
       location: 'Oakland, CA'
-    }
+    } 
   ];
 
   return {

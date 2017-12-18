@@ -9,7 +9,7 @@
 	</div>
 
 	<div class="event-info-bar">
-		<div class="event-name">805 Oiler Festival</div>
+		<div class="event-name">{{event.title}}</div>
 		<div class="event-info-icons">
 			<a href="">
 				<i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -24,14 +24,15 @@
 		<div class="date-location-container">
 			<div class="date-and-time">
 				<h6>Date / Time</h6>
-				<p class="date">Fri, Jan 26, 2018</p>
-				<p class="time">7:00PM - 12:00AM</p>
+				<p class="date">Starts: {{event.startDateDisplay}}</p>
+				<p class="time">{{event.startHr}}</p>
+				<p class="date">Ends: {{event.endDateDisplay}}</p>
+				<p class="time">{{event.endHr}}</p>
 			</div>
 	
 			<div class="location">
-				<h6>Location</h6>
-				<p class="address">4857 Fulton Ave</p>
-				<p class="city">Sherman Oaks, CA</p>
+				<h6>Location</h6>				
+				<p class="city">{{event.location.locationName}}</p>
 			</div>
 		</div>
 
@@ -43,15 +44,15 @@
 	<section class="description">
 		<h6>Event Description</h6>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, delectus numquam asperiores earum sapiente deserunt!
+			{{event.description}}
 		</p>
 	</section>
 
 	<section class="organizer-info">
-		<div class="organizer-name">Organizer: Secret Sesh</div>
-		<div class="organizer-contact"><a href="">Contact Organizer</a></div>
+		<div class="organizer-name">Organizer: {{event.organizer.name}}</div>
+		<div class="organizer-contact"><a href="">Contact Organizer {{event.organizer.about}}</a></div>
 		<div class="organizer-profile"><a href="">Organizer Profile</a></div>
-		<div class="organizer-url"><a href="">www.secretsesh.com</a></div>
+		<div class="organizer-url"><a href="">{{event.organizer.website}}</a></div>
 	</section>
 
 	<ul class="organizer-social-links">
@@ -70,15 +71,16 @@
 	</section>
 
 	<section class="event-map">
-		<h5>Event Map</h5>
-		<img id="static-map-img" src="https://maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=14&size=400x400&key=AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM" alt="">
+		<h5>Event Map</h5>	
+		<a href={{event.location.locationMapUrl}} target="_blank">
+		<img id="static-map-img" src={{imgSrc}} alt="">
+		</a>
+		<!--<iframe src={{event.location.locationMapUrl}}></iframe>-->	
+		 <!--<div map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlqLa-v1ZicvzAhvzPyX4p0mbXIzYjGEk&libraries=places&language=en" > 
+	<ng-map center={{event.location.latlng}} zoom="3"></ng-map>
+	</div>				-->
 	</section>
-
-
 </div>
-
-
-
 
 <!-- arik's shopping cart -->
 <!-- <div class="container">
@@ -106,20 +108,5 @@
 			Total: {{ticketSum}}
 		</div>
 	</div> -->
-
-	<!-- <div id="map"></div>
-	<script>
-		function initMap() {
-			var uluru = { lat: -25.363, lng: 131.044 };
-			var map = new google.maps.Map(document.getElementById('map'), {
-				zoom: 4,
-				center: uluru
-			});
-			var marker = new google.maps.Marker({
-				position: uluru,
-				map: map
-			});
-		}
-	</script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBR9ihwGh3phyj4LBWR6x4UtsqqgK9Je9k&callback=initMap">
-	</script> -->
+	
+	
