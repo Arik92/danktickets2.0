@@ -3,7 +3,7 @@
 		<img src="../img/wide-posters/Secret Sesh.png" alt="">
 	</div>
 
-	<div class="ticket-bar">
+	<div class="ticket-bar" cmelo-sticky-top>
 		<p>Tickets</p>
 		<p>$20 - $20,000</p>
 	</div>
@@ -21,37 +21,58 @@
 	</div>
 
 	<section class="event-info">
-		<div class="date-and-time">
-			<div class="date">Fri, Jan 26, 2018</div>
-			<div class="time">7:00PM - 12:00AM</div>
+		<div class="date-location-container">
+			<div class="date-and-time">
+				<h6>Date / Time</h6>
+				<p class="date">Fri, Jan 26, 2018</p>
+				<p class="time">7:00PM - 12:00AM</p>
+			</div>
+	
+			<div class="location">
+				<h6>Location</h6>
+				<p class="address">4857 Fulton Ave</p>
+				<p class="city">Sherman Oaks, CA</p>
+			</div>
 		</div>
 
-		<div class="location">
-			<div class="address">4857 Fulton Ave</div>
-			<div class="city">Sherman Oaks, CA</div>
+		<div class="refund-policy-container">
+			<p>Refund Policy: No Refunds</p>
 		</div>
-
-		<div>Refund Policy</div>
-		<div>No Refunds</div>
 	</section>
 
 	<section class="description">
-		Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-		
-		Sequi cupiditate hic dicta consequuntur recusandae, fuga ipsam ut temporibus. 
-		
-		Nisi ducimus quasi rerum magni dolorum a, tempora unde animi, quod dolor cumque ullam temporibus. 
-		
-		Itaque cumque dolore amet sit nihil, culpa laudantium ea, consectetur nulla sint commodi doloremque enim modi possimus!
+		<h6>Event Description</h6>
+		<p>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, delectus numquam asperiores earum sapiente deserunt!
+		</p>
 	</section>
 
-	<section class="organizer-info"></section>
+	<section class="organizer-info">
+		<div class="organizer-name">Organizer: Secret Sesh</div>
+		<div class="organizer-contact"><a href="">Contact Organizer</a></div>
+		<div class="organizer-profile"><a href="">Organizer Profile</a></div>
+		<div class="organizer-url"><a href="">www.secretsesh.com</a></div>
+	</section>
 
-	<div class="social-links"></div>	
+	<ul class="organizer-social-links">
+			<li ng-repeat="socialLink in socialLinks">
+				<a href="{{ socialLink.url }}">
+					<i class="{{ socialLink.faClass }}"></i>
+				</a>
+			</li>
+	</ul>	
 
-	<section class="sponsor"></section>
+	<section class="sponsor">
+		<div class="red-band">Sponsor</div>
+		<div class="sponsor-img-container">
+			<img src="../img/dummy-ads/vader.jpg" alt="">
+		</div>
+	</section>
 
-	<section class="event-map"></section>
+	<section class="event-map">
+		<h5>Event Map</h5>
+		<img id="static-map-img" src="https://maps.googleapis.com/maps/api/staticmap?center=Berkeley,CA&zoom=14&size=400x400&key=AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM" alt="">
+	</section>
 
 
 </div>

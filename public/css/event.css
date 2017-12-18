@@ -16,6 +16,8 @@
   font-weight: bold;
   padding: 0.5em 0;
   line-height: 1.5em;
+  position: sticky;
+  top: 0;
 }
 
 .ticket-bar p {
@@ -31,6 +33,8 @@
   padding: 1em 1em 1em 3em;
   font-size: 1.3em;
   border: solid 1px black;
+  background: #311B92;
+  color: white;
 }
 
 .event-info-bar .event-name {
@@ -40,15 +44,94 @@
 .event-info-icons {
   display: flex;
   justify-content: space-between;
+
 }
 
 .event-info-icons a {
   display: block;
   padding: 0.5em;
+  color: lightcoral;
 }
 
+section.event-info {
+  background: var(--charcoal);
+  color: white;
+  padding: 2em;
+}
+
+section.event-info .date-location-container {
+  display: flex;
+  justify-content: space-between;
+  /* margin-top: 1em; */
+}
+
+.refund-policy-container {
+  margin-top: 1em;
+}
+
+
 section.description {
-  white-space: pre-wrap;
+  background: #eee;
+  color: var(--charcoal);
+  padding: 2em;
+  font-size: 1.1em;
+}
+
+section.organizer-info {
+  text-align: center;
+  padding: 2em;
+}
+
+section.organizer-info .organizer-name {
+  font-size: 1.5em;
+  color: #009688;
+}
+
+.organizer-social-links {
+  padding: 0 2em 1em;
+  font-size: 2em;
+  display: flex;
+  justify-content: space-between;
+}
+
+section.sponsor {
+background: black;
+margin-bottom: 3rem;
+}
+
+section.sponsor .red-band {
+  width: 100%;
+  padding: 1em;
+  font-size: 1.3em;
+  text-align: center;
+  background: red;
+  color: white;
+}
+
+section.sponsor-img-container {
+  padding: 1em;
+}
+section.sponsor img {
+  display: block;
+  margin: auto;
+  max-height: 400px;  
+}
+
+section.event-map {
+  background: teal;
+  color: white;
+  text-align: center;
+  padding-bottom: 0.5em;
+}
+
+section.event-map h5 {
+  font-size: 1.3em;
+  padding: 1em;
+}
+
+section.event-map img{
+  display: block;
+  margin: auto;
 }
 
 

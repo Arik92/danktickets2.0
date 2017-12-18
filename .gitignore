@@ -4,3 +4,4 @@ bower_components
 .env
 config.js
 img/uploads
+bundle.js

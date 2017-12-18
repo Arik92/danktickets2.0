@@ -66,6 +66,7 @@ body {
   font-size: 14px;
   line-height: 24px;
   min-height: 100%;
+  overflow: auto;
 }
 ul,
 li {
