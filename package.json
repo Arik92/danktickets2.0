@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "./node_modules/bower/bin/bower install",
     "start": "node server.js",
     "build": "browserify ./public/js/controllers/createCtrl.js ./public/js/controllers/editCtrl.js ./public/js/controllers/eventCtrl.js -o ./public/bundle.js",
     "buildStart": "npm run build && node server.js"
@@ -27,6 +28,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
+    "bower": "^1.8.2",
     "browserify": "^14.4.0",
     "cmelo-angular-sticky": "^1.0.2",
     "cors": "^2.8.4",
