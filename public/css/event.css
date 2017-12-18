@@ -6,6 +6,12 @@
 
 .event-poster-head {
   width: 100%;
+  background: black;
+}
+
+.event-poster-head img {
+  display: block;
+  margin: auto;
 }
 
 .ticket-bar {
@@ -55,8 +61,16 @@
 
 section.event-info {
   background: var(--charcoal);
-  color: white;
+  color: white !important;
   padding: 2em;
+}
+
+section.event-info a {
+  color: white !important;
+}
+
+section.event-info .date-and-time {
+  line-height: 1.8em;
 }
 
 section.event-info .date-location-container {
@@ -69,6 +83,10 @@ section.event-info .date-location-container {
   margin-top: 1em;
 }
 
+.description-and-organizer {
+  background: black;
+  margin-bottom: 3rem;
+}
 
 section.description {
   background: #eee;
@@ -91,7 +109,11 @@ section.organizer-info .organizer-name {
   padding: 0 2em 1em;
   font-size: 2em;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.organizer-social-links li {
+  padding: 0 1em;
 }
 
 section.sponsor {
@@ -118,15 +140,27 @@ section.sponsor img {
 }
 
 section.event-map {
-  background: teal;
   color: white;
   text-align: center;
   padding-bottom: 0.5em;
 }
 
+section.event-map .map-container {
+  background: teal;
+  padding: 1em;
+}
+
 section.event-map h5 {
   font-size: 1.3em;
   padding: 1em;
+}
+
+.event-map .direction-notes {
+  text-align: left;
+  background: #eee;
+  border: solid black 1px;
+  padding: 1rem;
+  font-size: 1.1em;
 }
 
 section.event-map img{
@@ -135,12 +169,105 @@ section.event-map img{
 }
 
 
+section.upcoming-events {
+  /* display: none; */
+  font-size: 1em;
+  margin-top: 2em;
+}
 
+section.upcoming-events h3 {
+  text-align: center;
+  font-size: 1.3em;
+  padding: 0 1em;
+}
+
+.upcoming-event-container {
+  display: flex;
+  max-width: 600px;
+  margin: 2em auto;
+  background: #eee;
+  padding: 1em;
+}
+
+.upcoming-event-container img {
+  max-width: 200px;
+  height: auto;
+}
+
+.upcoming-event-container .info-container {
+  padding: 0em 1em;
+}
+
+.upcoming-event-container .date-time {
+  padding: 1em 0;
+}
+
+.upcoming-event-container .price-range {
+  text-align: center;
+}
 
 @media screen and (min-width: 768px) {
   
 }
 
 @media screen and (min-width: 992px) {
+  
+  #event-page-container {
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: 2fr 3fr 3fr;
+    grid-gap: 1em;
+    grid-template-areas: 
+    "sponsor event-bar event-bar"
+    "sponsor event-info event-info"
+    "dso dso event-map"
+    "upcoming upcoming upcoming"
+  }
+
+  section.event-info {
+    padding: 1em 3em;
+    font-size: 1.3em;
+  }
+
+  .ticket-bar {
+    visibility: hidden;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ticket-bar p{
+    display: none;
+  }
+
+  div.event-info-bar {
+    grid-area: event-bar;
+  }  
+
+  section.event-info {
+    grid-area: event-info;
+  }
+
+  div.description-and-organizer {
+    grid-area: dso;
+  }
+
+  ul.organizer-social-links {
+    grid-area: social-links
+  }  
+
+  section.sponsor {
+    grid-area: sponsor;
+    margin-bottom: 0;
+  }
+
+  section.event-map {
+    grid-area: event-map;
+  }
+
+  section.upcoming-events {
+    display: block;
+    grid-area: upcoming;
+  }
 
 }

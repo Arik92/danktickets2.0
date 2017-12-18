@@ -1,12 +1,14 @@
-<div id="event-page-container">
-	<div class="event-poster-head">
-		<img src="../img/wide-posters/Secret Sesh.png" alt="">
-	</div>
+<div class="event-poster-head">
+	<img src="../img/wide-posters/Secret Sesh.png" alt="">
+</div>
 
-	<div class="ticket-bar" cmelo-sticky-top>
-		<p>Tickets</p>
-		<p>$20 - $20,000</p>
-	</div>
+<div class="ticket-bar" cmelo-sticky-top>
+	<p>Tickets</p>
+	<p>$20 - $20,000</p>
+</div>
+
+<div id="event-page-container">
+
 
 	<div class="event-info-bar">
 		<div class="event-name">{{event.title}}</div>
@@ -41,6 +43,7 @@
 		</div>
 	</section>
 
+
 	<section class="description">
 		<h6>Event Description</h6>
 		<p>
@@ -54,15 +57,6 @@
 		<div class="organizer-profile"><a href="">Organizer Profile</a></div>
 		<div class="organizer-url"><a href="">{{event.organizer.website}}</a></div>
 	</section>
-
-	<ul class="organizer-social-links">
-			<li ng-repeat="socialLink in socialLinks">
-				<a href="{{ socialLink.url }}">
-					<i class="{{ socialLink.faClass }}"></i>
-				</a>
-			</li>
-	</ul>	
-
 	<section class="sponsor">
 		<div class="red-band">Sponsor</div>
 		<div class="sponsor-img-container">
@@ -71,16 +65,57 @@
 	</section>
 
 	<section class="event-map">
-		<h5>Event Map</h5>	
-		<a href={{event.location.locationMapUrl}} target="_blank">
+		<div class="map-container">
+			<h5>Event Map</h5>
+			<a href={{event.location.locationMapUrl}} target="_blank">
 		<img id="static-map-img" src={{imgSrc}} alt="">
 		</a>
-		<!--<iframe src={{event.location.locationMapUrl}}></iframe>-->	
-		 <!--<div map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlqLa-v1ZicvzAhvzPyX4p0mbXIzYjGEk&libraries=places&language=en" > 
-	<ng-map center={{event.location.latlng}} zoom="3"></ng-map>
-	</div>				-->
+		</div>
+		<div class="direction-notes" style="color: black">
+			<!--<h5>Direction Notes</h5>
+			<p>Take a Right at the fork Or else you end up in Tijuana</p> -->
+		</div>
+	</section>
+
+	<section class="upcoming-events">
+		<h3>Check Out Other Upcoming Events From This Organizer!</h3>
+		<ul>
+			<li ng-repeat="event in dummyEvents | limitTo: 3" 
+					class="upcoming-event-container"
+			>
+				<div>
+					<img ng-src="{{ event.imgURL }}" alt="">
+					<div class="price-range"> $20 - $2000</div>
+				</div>
+				<div class="info-container">
+					<h4>{{ event.name }}</h4>
+					<div class="date-time">
+						<p> 
+							<a ui-sref="">
+								<i style="color: lightcoral" class="fa fa-calendar-o"></i>
+								{{ event.date }}
+							</a>
+						</p>
+						<p>{{ event.startTime }} - {{ event.endTime }}</p>
+					</div>
+					<div class="location">
+						<p>
+							<a ui-sref="">
+								<i style="color: lightgreen" class="fa fa-map-marker"></i>
+								{{ event.location }}
+							</a>
+						</p>
+					</div>
+				</div>
+			</li>
+		</ul>
+
 	</section>
 </div>
+
+<!-- <div class="dummy-div" cmelo-sticky-top></div> -->
+
+
 
 <!-- arik's shopping cart -->
 <!-- <div class="container">
