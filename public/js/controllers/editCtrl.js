@@ -104,8 +104,8 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
               var submitPic = document.getElementById('fileItem').files[0];
               console.log("in submit! uploading...", submitPic);
               if (submitPic) {
-                Upload.upload({ //'https://danktickets.herokuapp.com/events/deleteAndUpload'
-                    url: 'http://localhost:8000/events/deleteAndUpload', //exposed to upload the file
+                Upload.upload({ //'https://danktickets.herokuapp.com/events/deleteAndUpload' 'http://localhost:8000/events/deleteAndUpload'
+                    url: 'https://danktickets.herokuapp.com/events/deleteAndUpload', //exposed to upload the file
                     data: {
                      file: submitPic,
                      event: $scope.event
