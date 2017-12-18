@@ -87,19 +87,12 @@ app.factory('createService', function ($http) {
 
   const dummyEvents = [
     {
-      imgURL: "../../img/banner-carousel/taco-sesh-square.jpg",
-      bgColor: 'linear-gradient(#1eb089 0%, #7c49ab 100%, #7db9e8 100%)',
-      name: 'Taco Seshhh',
-      date: 'Fri, Jan 26',
-      startTime: '7:00 PM',
-      location: 'Sherman Oaks, CA'
-    },
-    {
       imgURL: "../../img/banner-carousel/Chalice.jpg",
       bgColor: 'linear-gradient(#1eb089 0%, #7c49ab 100%, #7db9e8 100%)',
       name: 'Chalice Palace',
       date: 'Tue, Feb 22',
       startTime: '7:00 PM',
+      endTime: '11:00 PM',
       location: 'Santa Cruz, CA'
     },
     {
@@ -108,6 +101,7 @@ app.factory('createService', function ($http) {
       name: 'Meet Art Sesh',
       date: 'Thu, Mar 15',
       startTime: '7:00 PM',
+      endTime: '11:00 PM',
       location: 'Long Beach, CA'
     },
     {
@@ -116,7 +110,17 @@ app.factory('createService', function ($http) {
       name: 'Oiler Fest',
       date: 'Sun, April 01',
       startTime: '7:00 PM',
+      endTime: '11:00 PM',
       location: 'Oakland, CA'
+    },
+    {
+      imgURL: "../../img/banner-carousel/taco-sesh-square.jpg",
+      bgColor: 'linear-gradient(#1eb089 0%, #7c49ab 100%, #7db9e8 100%)',
+      name: 'Taco Seshhh',
+      date: 'Fri, Jan 26',
+      startTime: '7:00 PM',
+      endTime: '11:00 PM',
+      location: 'Sherman Oaks, CA'
     }
   ];
 

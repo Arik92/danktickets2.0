@@ -7,7 +7,8 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		$scope.ticketCart = [];
 		$scope.ticketSum = 0;
 		$scope.ticketsToAdd = 0;
-		$scope.socialLinks = linkService.socialLinks;		
+		$scope.socialLinks = linkService.socialLinks;	
+		$scope.dummyEvents = createService.dummyEvents;	
 		// setMapSrc();
 	} //initialization  
 	
