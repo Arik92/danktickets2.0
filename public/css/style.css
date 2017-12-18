@@ -39,6 +39,7 @@
 /* variables */
 :root {
   --gradient-theme:linear-gradient(to right, #1eb089 0%, #7c49ab 100%, #7db9e8 100%);
+  --charcoal: #36454f;
 }
 
 /** ====== Imported styles ====== **/
@@ -65,6 +66,7 @@ body {
   font-size: 14px;
   line-height: 24px;
   min-height: 100%;
+  overflow: auto;
 }
 ul,
 li {
@@ -91,7 +93,7 @@ a:active,
 a:focus {
   text-decoration: none;
   outline: none;
-  color: white;
+  /* color: white; */
 }
 .container {
   padding: 0 5px;

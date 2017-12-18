@@ -19,11 +19,22 @@
 	
 	<aside class="aside-events">
 		<div class="filter-btn-container">
-			<div class="upcoming-btn" ng-click="goUpcoming()">Upcoming</div>
-			<div class="local-btn" ng-click="goLocal()">Local</div>			
+			<div class="upcoming-btn" 
+					 ng-click="goUpcoming()"
+					 ng-class="upcomingFlag ? 'filter-btn-active' : '' "
+			>
+					 Upcoming
+			</div>
+			<div class="local-btn" 
+					 ng-click="goLocal()"
+					 ng-class="localFlag ? 'filter-btn-active' : '' "
+			>
+				Local
+			</div>			
 		</div>
 		<ul class="side-events-list">
-			<li  ng-show="upcomingFlag" ng-repeat="event in events |orderBy: 'startTime' |limitTo: 20">
+			<li	ng-show="upcomingFlag" 
+					ng-repeat="event in events |orderBy: 'startTime' |limitTo: 20">
 				<a href="">
 					<p>
 						<span>
@@ -40,7 +51,9 @@
 					</p>
 				</a>
 			</li>
-			<li  ng-show="localFlag"  ng-repeat="event in events |orderBy: 'distance' |limitTo: 20">
+			<li class="local-events"
+					ng-show="localFlag"  
+					ng-repeat="event in events |orderBy: 'distance' |limitTo: 20">
 				<a href="">
 					<p>
 						<span>
@@ -66,13 +79,113 @@
 	</aside>	
 	
 	<main class="main-content">
-		<div class="central-ad-banner">Promtions, Give Aways, Ads, etc.</div>
-		<div class="main-event">main event here</div>
+		<slick class="slick-ad-banner"
+					autoplay="true" 
+					fade="true" 
+					slides-to-show="1" 
+					slides-to-scroll="1" 
+					arrows="false" 
+					center-mode="false" 
+					dots="false"
+		>
+			<div class="ad-container" ng-repeat="ad in dummyAds">
+				<img ng-src="{{ ad.imgURL }}" alt="{{ ad.name }}">
+			</div>
+		</slick>
+
+		<div class="main-event event-poster">
+				<img ng-src="{{ featuredDummyEvent.imgURL }}" class="feature-event-img">
+				<div class="info">
+					<div class="left">
+						<div class="date">
+							<a ui-sref="">
+								<span>
+									<i style="color: lightcoral" class="fa fa-calendar-o"></i>
+									{{ featuredDummyEvent.date }}
+								</span>
+							</a>
+						</div>
+						<div class="name">{{ featuredDummyEvent.name }}</div>
+					</div>
+					<div class="right">
+							<a ui-sref="">
+								<span>
+									<i style="color: lightgreen" class="fa fa-map-marker"></i>
+									{{ featuredDummyEvent.location }}
+								</span>
+							</a>
+					</div>
+			</div>
+		</div>
 	</main>
 
-	<section class="other-events"> Other events here </section>
+	<section class="other-events">
+		<ul class="event-grid-container">
+			<li ng-repeat="event in dummyEvents | limitTo: 4" class="event-poster">
+				<div class="img-container">
+					<img ng-src="{{ event.imgURL }}" class="feature-event-img">
+				</div>
+				<div class="info">
+					<div class="left">
+						<div class="date">
+								<a ui-sref="">
+									<span>
+										<i style="color: lightcoral" class="fa fa-calendar-o"></i>
+										{{ event.date }}
+									</span>
+								</a>
+						</div>
+						<div class="date">{{ event.startTime }}</div>
+						<div class="name">{{ event.name }}</div>
+					</div>
+					<div class="right">
+						<a ui-sref="">
+								<span>
+									<i style="color: lightgreen" class="fa fa-map-marker"></i>
+									{{ event.location }}
+								</span>
+						</a>
+					</div>
+			</div>
+			</li>
+		</ul>
+	</section>
 
-	<aside class="side-content">blogs and links</aside>
+	<aside class="side-content">
+
+		<div class="social-container">
+			<h4>Connect with us!</h4>
+			<ul class="socialLink-grid-container">
+				<li ng-repeat="socialLink in socialLinks">
+					<a href="{{ socialLink.url }}">
+						<i class="{{ socialLink.faClass }}"></i>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+
+		<div class="blogs-container">
+			<h4>Check out our recent blogs</h3>
+			<ul>
+				<li ng-repeat="blog in dummyBlogs">
+					<div class="blog-info-container">
+						<p>{{ blog.name }}</p>
+						<p>{{ blog.date }}</p>
+					</div>
+					<div class="blog-img-container">
+						<img ng-src="{{ blog.imgURL }}" alt="">
+					</div>
+				</li>
+			</ul>
+			<div class="see-all-blogs">
+				<a style="color: blue" 
+					 ui-sref="">
+					Check out the rest of the blogs
+				</a>
+			</div>
+		</div>
+	</aside>
 
 </div>
 
