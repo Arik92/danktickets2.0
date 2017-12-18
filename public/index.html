@@ -29,7 +29,7 @@
 	<!-- node modules -->
 	<link rel="stylesheet" href="ui-bootstrap-custom-2.5.0-csp.css">
 </head>
-<body ng-controller="loginCtrl as login" ng-show="login.loader" ng-cloak>
+<body ng-controller="loginCtrl as login" ng-show="login.loader" ng-cloak cmelo-sticky>
 	<div class="preloader"></div>
 	<header id="header">
 		<hamburger-directive></hamburger-directive>
@@ -88,9 +88,12 @@
 	</ul>
 
 	<footer-directive></footer-directive>
+
+	<!-- scripts -->
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="/angular/angular.js"></script>
 	<script src="/angular-animate/angular-animate.min.js"></script>
+	<script src="/cmelo-angular-sticky/cmelo-sticky.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>

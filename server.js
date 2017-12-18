@@ -58,7 +58,7 @@ app.all('[^.]+', function(req, res) {
   // res.send("GOD DAMN!!!!!!!!!!!!!");
 });
 
-io.on('connection', function(socket) { // I am going to receive an array of tickets that are being bought.
+/*io.on('connection', function(socket) { // I am going to receive an array of tickets that are being bought.
 	// there would be a validation function on the CLIENT to make sure the purchase is currently possible
 	// TODO: take tickets from event
 	// possibility : from 10 mins from connect they have the option of buying the itckts - otherwise disconnect them // change the tickets back
@@ -69,7 +69,7 @@ io.on('connection', function(socket) { // I am going to receive an array of tick
       console.log('Got disconnect!');     
    });
 	// on complete: 
-	});
+	});*/
 //main error handler
 // warning - not for use in production code!
 app.use(function(err, req, res, next) {
