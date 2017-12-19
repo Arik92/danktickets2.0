@@ -1,4 +1,4 @@
-app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location) {
+app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', 'angularLoad', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location, angularLoad) {
   console.log('hello from createCtrl');
   this.$onInit = () => {
 	$scope.currentTickets = [];
@@ -295,14 +295,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       owner: $scope.user._id,
       organizer: $scope.selectedOrganizer,
       type: $scope.selectedType,
-      location: {
-        locationMapUrl: $scope.selectedPlace.url,
-        latlng: {
-          lat: $scope.selectedLat,
-          lng: $scope.selectedLng
-        },
-        locationName: $scope.selectedPlace.formatted_address
-      },
+      location: ,
       //image: $scope.imageName, 95% sure this is only defined in th routes
       startTime: $scope.startDate,
 	  startDateDisplay: $scope.startDateDisplay,
@@ -380,16 +373,44 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
     autocomplete = new google.maps.places.Autocomplete(
       /** @type {!HTMLInputElement} */
       (document.getElementById('autocomplete')), {
-        types: ['geocode']
+        types: ['establishment']
       });
     console.log('autocomplete is', autocomplete)
     // console.log('autocomplete', autocomplete);
     autocomplete.addListener('place_changed', fillInAddress);
   }
+  function formatLocation() {
+	  for (var i=0;i<$scope.selectedPlace.address_components.length;i++) {
+		  if ($scope.selectedPlace.address_components[i].types[0]==='postal_code') {
+			  
+		  }
+	  }
+	  $scope.location = {	  	  
+        locationMapUrl: $scope.selectedPlace.url,
+        latlng: {
+          lat: $scope.selectedLat,
+          lng: $scope.selectedLng
+        },
+        fullAddress: $scope.selectedPlace.formatted_address,
+		venue_name: $scope.selectedPlace.name,
+		address:
+		address2:
+		city:
+		zip:
+		country:
+      }	 
+  }
   function fillInAddress() {
-    // Get the place details from the autocomplete object.
+    // Get the place details from the autocomplete object.	
     $scope.selectedPlace = autocomplete.getPlace();
     console.log('place is', $scope.selectedPlace);
+	formatLocation();
+	//var detailScript = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+$scope.placeId+"&key="+$scope.mapKey;
+	//console.log("detail script!", detailScript);
+	//use angularl load to make that request!
+	/*angularLoad.loadScript(detailScript).then(function(result){
+		console.log("detail search result is ", result);
+	});*/
     $scope.selectedLat = $scope.selectedPlace.geometry.location.lat(); // NOTE: setting current lattitude/longitude for distance calculation
     $scope.selectedLng = $scope.selectedPlace.geometry.location.lng();
     console.log('place lat is', $scope.selectedLat);
@@ -430,7 +451,8 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
   }//addScript
 
   //calling the addScript function
-  var mapSrc = "https://maps.googleapis.com/maps/api/js?key=" + $scope.mapKey + "&libraries=places&language=en";
+  var mapSrc = "https://maps.googleapis.com/maps/api/js?key=" + $scope.mapKey + "&libraries=places&language=en";  
+
   addScript(mapSrc);
   /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
   /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////

@@ -5,7 +5,7 @@ var config = {
 };
 module.exports = config;
 },{}],2:[function(require,module,exports){
-app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location) {
+app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', 'angularLoad', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location, angularLoad) {
   console.log('hello from createCtrl');
   this.$onInit = () => {
 	$scope.currentTickets = [];
@@ -387,16 +387,24 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
     autocomplete = new google.maps.places.Autocomplete(
       /** @type {!HTMLInputElement} */
       (document.getElementById('autocomplete')), {
-        types: ['geocode']
+        types: ['establishment']
       });
     console.log('autocomplete is', autocomplete)
     // console.log('autocomplete', autocomplete);
     autocomplete.addListener('place_changed', fillInAddress);
   }
   function fillInAddress() {
-    // Get the place details from the autocomplete object.
+    // Get the place details from the autocomplete object.	
     $scope.selectedPlace = autocomplete.getPlace();
     console.log('place is', $scope.selectedPlace);
+	$scope.placeId = $scope.selectedPlace.place_id;
+	console.log("place id", $scope.placeId);
+	//var detailScript = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+$scope.placeId+"&key="+$scope.mapKey;
+	//console.log("detail script!", detailScript);
+	//use angularl load to make that request!
+	/*angularLoad.loadScript(detailScript).then(function(result){
+		console.log("detail search result is ", result);
+	});*/
     $scope.selectedLat = $scope.selectedPlace.geometry.location.lat(); // NOTE: setting current lattitude/longitude for distance calculation
     $scope.selectedLng = $scope.selectedPlace.geometry.location.lng();
     console.log('place lat is', $scope.selectedLat);
@@ -437,7 +445,8 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
   }//addScript
 
   //calling the addScript function
-  var mapSrc = "https://maps.googleapis.com/maps/api/js?key=" + $scope.mapKey + "&libraries=places&language=en";
+  var mapSrc = "https://maps.googleapis.com/maps/api/js?key=" + $scope.mapKey + "&libraries=places&language=en";  
+
   addScript(mapSrc);
   /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
   /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
