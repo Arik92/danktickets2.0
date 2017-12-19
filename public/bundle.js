@@ -916,7 +916,7 @@ $scope.updateEndHr = function() {
 app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService', '$document','NgMap','angularLoad', function($scope,$rootScope, $stateParams, createService, $document, NgMap, angularLoad){
 	console.log("state param for event", $stateParams);	
 	this.$onInit = () => {
-		var socket = io(); //might move someplace else
+		//var socket = io(); //might move someplace else
 		var config = require('../config.js');
 		$scope.mapKey = config.MAPS_API_KEY;		
 		var mapSrc = "https://maps.googleapis.com/maps/api/js?key=" + $scope.mapKey + "&libraries=places&language=en";

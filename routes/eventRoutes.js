@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
   })//exec()
 });//get all events that were ever published and populate the publisher field
 
-router.get('/:name', function(req, res, next){
+router.get('/findByOwner/:name', function(req, res, next){
   Event.find().populate('owner organizer').exec(function(err, events){
     if (err) {
       console.error(err);

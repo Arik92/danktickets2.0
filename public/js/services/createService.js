@@ -25,7 +25,7 @@ app.factory('createService', function ($http) {
 
   var getEventsByOwner = function (userName) {
     console.log("id by service is", userName);
-    return $http.get('/events/' + userName)
+    return $http.get('/events/findByOwner/' + userName)
       .then(function (response) {
         return response.data;
       }, function (err) {
