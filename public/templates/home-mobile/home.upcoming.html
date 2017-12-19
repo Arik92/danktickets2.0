@@ -1,0 +1,34 @@
+<section class="upcoming-events">
+		<h3>Upcoming Events in your Area!</h3>
+		<ul>
+			<li ng-repeat="event in dummyEvents | orderBy: 'startTime'" 
+					class="upcoming-event-container"
+			>
+				<div>
+					<img ng-src="{{ event.imgURL }}" alt="">
+					<div class="price-range"> $20 - $2000</div>
+				</div>
+				<div class="info-container">
+					<div class="date-time">
+						<p> 
+							<a ui-sref="">
+								<i style="color: lightcoral" class="fa fa-calendar-o"></i>
+								{{ event.date }}
+							</a>
+						</p>
+						<p>{{ event.startTime }} - {{ event.endTime }}</p>
+					</div>
+					<div class="location">
+						<p>
+							<a ui-sref="">
+								<i style="color: lightgreen" class="fa fa-map-marker"></i>
+								{{ event.location }}
+							</a>
+						</p>
+          </div>
+					<h4>{{ event.name }}</h4>
+				</div>
+			</li>
+		</ul>
+
+	</section>

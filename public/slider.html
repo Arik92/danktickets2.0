@@ -1,5 +1,5 @@
-<div ng-controller="carouselCtrl" 
-     ng-if="showSlider" 
+<div ng-controller="homeCtrl"
+     ng-if="isActive('/home')" 
      class="carousel-container">
   
   <a type="button" class="slick-btn slick-prev-chev">
@@ -20,7 +20,7 @@
          center-mode="false" 
          dots="true"
   >
-    <div ng-repeat="slide in slides" style="background: {{ slide.bgColor }}" class="slick-item-container">
+    <div ng-repeat="slide in dummyEvents" style="background: {{ slide.bgColor }}" class="slick-item-container">
       <img ng-src="{{ slide.imgURL }}" class="slick-img">
       <div class="info">
         <div class="left">

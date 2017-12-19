@@ -15,17 +15,17 @@ app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
     })
     .state('home.local', {
       url: "/local",
-      template: "<h1>Hellooo from Local</h1>",
+      templateUrl: './templates/home-mobile/home.local.html',
       controller: 'homeCtrl'
     })
     .state('home.upcoming', {
       url: "/upcoming",
-      template: "<h1>Hellooo from Upcoming</h1>",
+      templateUrl: './templates/home-mobile/home.upcoming.html',
       controller: 'homeCtrl'
     })
     .state('home.favorites', {
       url: "/favorites",
-      template: "<h1>Hellooo from Favorites</h1>",
+      templateUrl: './templates/home-mobile/home.favorites.html',
       controller: function($scope) {
         console.log('hello from the partial');
         $scope.items = ["A", "List", "Of", "Items"];

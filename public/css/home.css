@@ -5,7 +5,7 @@ html {
 
 body {
   margin-bottom: 2em;
-}
+}  
 
 #desktop-grid-container {
   display: none;
@@ -255,7 +255,7 @@ footer a {
   #desktop-grid-container {
     /* padding: 1em; */
     --my-row-height: 30vh;
-    --ad-banner-height: 15vh;
+    --ad-banner-height: 10vh;
     --card-background-color: #e7deed;
     max-width: 1600px;
     margin: auto;
@@ -284,6 +284,8 @@ footer a {
     grid-area: aside-events;
     background: #4A148C;
     overflow: scroll;
+    width: 100%;
+    max-height: 250vh;
     /* position: fixed; */
   }
 
@@ -296,15 +298,12 @@ footer a {
     cursor: pointer;
     background: white;
     color: black;
+    padding: 0.3em 0;
   }
 
   .filter-btn-active {
     background: purple !important;
     color: white !important;
-  }
-
-  .side-events-list li {
-    transition: all linear 0.3s;
   }
 
   .side-events-list li.ng-hide {
@@ -313,16 +312,21 @@ footer a {
   }
 
   .side-events-list li {
-    /* text-align: center; */
     background: var(--charcoal);
     color: white;
     border: solid black 2px;
     font-size: 1.1em;
-    padding: 1em;
+    padding: 1em 0 1em 1.5em;
+    transition: all linear 0.3s;
   }
 
   .side-events-list a {
     color: white;
+  }
+
+  .side-events-list p {
+    margin: 0;
+    line-height: 1.5em;
   }
 
  
@@ -358,7 +362,7 @@ footer a {
   #desktop-grid-container .feature-event-img {
     width: auto;
     display: block;
-    height: calc(var(--my-row-height) * 2 - (var(--ad-banner-height) + 10vh) );
+    height: calc(var(--my-row-height) * 2 - (var(--ad-banner-height)) );
     margin: 0 auto;
   }
 
@@ -377,6 +381,10 @@ footer a {
     font-size: 1.3em;
     line-height: 1.5em;
     font-family: "Palatino Linotype";
+  }
+
+  .featured-event.event-poster .info  {
+    display: block;
   }
 
   .event-poster .name {
@@ -508,7 +516,7 @@ footer a {
     align-items: center;
     padding: 0.5em;
     margin-bottom: 0.5em;
-    background: var(--charcoal);
+    background: lightslategray;
     color: white;
   }
 
@@ -525,9 +533,28 @@ footer a {
     cursor: pointer;
   }
 
-
- 
-
 }
 
-
+@media screen and (min-width: 1400px) {
+  /* .featured-event.event-poster .info  {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "date location"
+      "start-time ."
+      "name ."
+    
+  }
+  .featured-event.event-poster .info .date {
+    grid-area: date;
+  }
+  .featured-event.event-poster .info .start-time {
+    grid-area: start-time;
+  }
+  .featured-event.event-poster .info .location {
+    grid-area: location;
+  }
+  .featured-event.event-poster .info .name {
+    grid-area: name;
+  } */
+}
