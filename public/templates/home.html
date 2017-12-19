@@ -40,7 +40,7 @@
 						<span>
 							<a ui-sref="event({id: event['_id']})">
 								<i style="color: lightcoral" class="fa fa-calendar-o"></i>
-								{{ event.startDateDisplay }} - {{ event.title | uppercase}}
+								{{ event.startDateDisplay }}
 							</a>
 						</span>
 					</p>
@@ -49,6 +49,13 @@
 							<a href={{event.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i style="color: lightgreen" class="fa fa-map-marker"></i>{{event.location.locationName}}</span></a>							
 						</span>
 					</p>
+					<p>
+							<span>
+								<a ui-sref="event({id: event['_id']})">
+									{{ event.title | uppercase}}
+								</a>
+							</span>
+						</p>
 				</a>
 			</li>
 			<li class="local-events"
@@ -121,24 +128,20 @@
 
 	<section class="other-events">
 		<ul class="event-grid-container">
-			<li ng-repeat="event in dummyEvents | limitTo: 4" class="event-poster">
+			<li ng-repeat="event in dummyEvents | limitTo: 4" class="featured-event event-poster">
 				<div class="img-container">
-					<img ng-src="{{ event.imgURL }}" class="feature-event-img">
+					<img ng-src="{{ event.imgURL }}" class="">
 				</div>
 				<div class="info">
-					<div class="left">
-						<div class="date">
-								<a ui-sref="">
-									<span>
-										<i style="color: lightcoral" class="fa fa-calendar-o"></i>
-										{{ event.date }}
-									</span>
-								</a>
-						</div>
-						<div class="date">{{ event.startTime }}</div>
-						<div class="name">{{ event.name }}</div>
+					<div class="date">
+							<a ui-sref="">
+								<span>
+									<i style="color: lightcoral" class="fa fa-calendar-o"></i>
+									{{ event.date }}, {{ event.startTime }}
+								</span>
+							</a>
 					</div>
-					<div class="right">
+					<div class="location">
 						<a ui-sref="">
 								<span>
 									<i style="color: lightgreen" class="fa fa-map-marker"></i>
@@ -146,6 +149,7 @@
 								</span>
 						</a>
 					</div>
+					<div class="name">{{ event.name }}</div>
 			</div>
 			</li>
 		</ul>

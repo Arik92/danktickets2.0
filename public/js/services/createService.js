@@ -106,22 +106,22 @@ var deleteEvent = function(id) {
       location: 'Long Beach, CA'
     },
     {
-      imgURL: "../../img/banner-carousel/805-oiler-sesh.jpg",
+      imgURL: "../../img/banner-carousel/cannabis-cup.jpg",
       bgColor: 'linear-gradient(blue 0%, #7c49ab 100%, #7db9e8 100%)',
-      name: 'Oiler Fest',
+      name: 'Cannabis Cup',
       date: 'Sun, April 01',
       startTime: '7:00 PM',
       endTime: '11:00 PM',
       location: 'Oakland, CA'
     },
     {
-      imgURL: "../../img/banner-carousel/taco-sesh-square.jpg",
+      imgURL: "../../img/banner-carousel/420-festival.jpg",
       bgColor: 'linear-gradient(#1eb089 0%, #7c49ab 100%, #7db9e8 100%)',
-      name: 'Taco Seshhh',
+      name: '420 Fest',
       date: 'Fri, Jan 26',
       startTime: '7:00 PM',
       endTime: '11:00 PM',
-      location: 'Sherman Oaks, CA'
+      location: 'Pasadena, CA'
     }
   ];
 
