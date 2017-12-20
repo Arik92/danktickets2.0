@@ -1,5 +1,6 @@
 <h1 class="event-header">{{ event.title ? event.title : "Dank Event" }}</h1>
 <div class="event-poster-head">
+	<div ng-if="!event.image">yo yo</div>
 	<img src={{event.image}} alt="">
 </div>
 
@@ -8,7 +9,7 @@
 	<p>$20 - $20,000</p>
 </div>
 
-<div id="event-page-container">
+<div id="event-grid-container">
 
 	<div class="event-info-bar">
 		<div class="event-name">{{event.title}}</div>

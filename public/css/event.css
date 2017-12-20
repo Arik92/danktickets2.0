@@ -1,4 +1,4 @@
-#event-page-container p,h3,h4,h5 {
+#event-grid-container p,h3,h4,h5 {
   margin: 0;
   padding: 0;
 }
@@ -268,7 +268,7 @@ section.upcoming-events h3 {
     font-family: var(--header-font);
   }
   
-  #event-page-container {
+  #event-grid-container {
     margin-top: 1em;
     display: grid;
     grid-template-columns: 2fr 3fr 3fr;
