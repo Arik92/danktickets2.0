@@ -302,14 +302,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       owner: $scope.user._id,
       organizer: $scope.selectedOrganizer,
       type: $scope.selectedType,
-      location: {
-        locationMapUrl: $scope.selectedPlace.url,
-        latlng: {
-          lat: $scope.selectedLat,
-          lng: $scope.selectedLng
-        },
-        locationName: $scope.selectedPlace.formatted_address
-      },
+      location: $scope.location,
       //image: $scope.imageName, 95% sure this is only defined in th routes
       startTime: $scope.startDate,
 	  startDateDisplay: $scope.startDateDisplay,
@@ -393,12 +386,42 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
     // console.log('autocomplete', autocomplete);
     autocomplete.addListener('place_changed', fillInAddress);
   }
+  function formatLocation() {
+	  $scope.location = {};
+	  $scope.location.venue_name = $scope.selectedPlace.name;
+	  $scope.location.fullAddress = $scope.formatted_address;
+	  $scope.location.locationMapUrl = $scope.selectedPlace.url;
+	  $scope.location.latlng = {
+        lat: $scope.selectedLat,
+        lng: $scope.selectedLng
+      };
+	  for (var i=0;i<$scope.selectedPlace.address_components.length;i++) {
+		  switch ($scope.selectedPlace.address_components[i].types[0]) {
+			  case 'postal_code':
+				$scope.location.zip = $scope.selectedPlace.address_components[i].long_name;
+				break;
+			  case 'country':
+				$scope.location.country = $scope.selectedPlace.address_components[i].long_name;
+				break;
+			  case 'administrative_area_level_1':
+				$scope.location.address2 = $scope.selectedPlace.address_components[i].long_name;
+			    break;
+				case 'locality':
+				$scope.location.address = $scope.selectedPlace.address_components[i].long_name;
+			    break;
+				case 'city?':
+				$scope.location.city = $scope.selectedPlace.address_components[i].long_name;
+			    break;
+			  default: break;//??
+		  }//switch address components 		 
+	  }//for	  
+	  $scope.$apply();
+  }
   function fillInAddress() {
     // Get the place details from the autocomplete object.	
     $scope.selectedPlace = autocomplete.getPlace();
     console.log('place is', $scope.selectedPlace);
-	$scope.placeId = $scope.selectedPlace.place_id;
-	console.log("place id", $scope.placeId);
+	formatLocation();
 	//var detailScript = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+$scope.placeId+"&key="+$scope.mapKey;
 	//console.log("detail script!", detailScript);
 	//use angularl load to make that request!

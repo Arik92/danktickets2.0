@@ -295,7 +295,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       owner: $scope.user._id,
       organizer: $scope.selectedOrganizer,
       type: $scope.selectedType,
-      location: ,
+      location: $scope.location,
       //image: $scope.imageName, 95% sure this is only defined in th routes
       startTime: $scope.startDate,
 	  startDateDisplay: $scope.startDateDisplay,
@@ -380,25 +380,35 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
     autocomplete.addListener('place_changed', fillInAddress);
   }
   function formatLocation() {
+	  $scope.location = {};
+	  $scope.location.venue_name = $scope.selectedPlace.name;
+	  $scope.location.fullAddress = $scope.formatted_address;
+	  $scope.location.locationMapUrl = $scope.selectedPlace.url;
+	  $scope.location.latlng = {
+        lat: $scope.selectedLat,
+        lng: $scope.selectedLng
+      };
 	  for (var i=0;i<$scope.selectedPlace.address_components.length;i++) {
-		  if ($scope.selectedPlace.address_components[i].types[0]==='postal_code') {
-			  
-		  }
-	  }
-	  $scope.location = {	  	  
-        locationMapUrl: $scope.selectedPlace.url,
-        latlng: {
-          lat: $scope.selectedLat,
-          lng: $scope.selectedLng
-        },
-        fullAddress: $scope.selectedPlace.formatted_address,
-		venue_name: $scope.selectedPlace.name,
-		address:
-		address2:
-		city:
-		zip:
-		country:
-      }	 
+		  switch ($scope.selectedPlace.address_components[i].types[0]) {
+			  case 'postal_code':
+				$scope.location.zip = $scope.selectedPlace.address_components[i].long_name;
+				break;
+			  case 'country':
+				$scope.location.country = $scope.selectedPlace.address_components[i].long_name;
+				break;
+			  case 'administrative_area_level_1':
+				$scope.location.address2 = $scope.selectedPlace.address_components[i].long_name;
+			    break;
+				case 'locality':
+				$scope.location.address = $scope.selectedPlace.address_components[i].long_name;
+			    break;
+				case 'city?':
+				$scope.location.city = $scope.selectedPlace.address_components[i].long_name;
+			    break;
+			  default: break;//??
+		  }//switch address components 		 
+	  }//for	  
+	  $scope.$apply();
   }
   function fillInAddress() {
     // Get the place details from the autocomplete object.	
