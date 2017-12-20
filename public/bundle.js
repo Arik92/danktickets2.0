@@ -935,7 +935,8 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		console.log($scope.dummyEvents);
 
 		// setMapSrc();
-	} //initialization  		
+	} //initialization  	
+		
 	function initMap() {
 	NgMap.getMap().then(function(map) {
     console.log(map.getCenter());

@@ -100,6 +100,11 @@ a:focus {
   padding: 0 5px;
 }
 
+#main-view {
+  max-width: 1600px;
+  margin: auto;
+}
+
 /** ====== Gradient styles ====== **/
 
 .gradient-overlay {
@@ -260,14 +265,15 @@ header .mainmenu-container > ul > li > a:hover {
   color: #FF8625;
 }
 header .mainmenu-container > ul > li:hover > ul {
-  top: 100%;
+  top: 70%;
+  left: -150%;
   visibility: visible;
   opacity: 1;
 }
 header .mainmenu-container > ul > li > ul {
   position: absolute;
-  top: 200%;
-  left: 0;
+  top: 150%;
+  left: -150%;
   width: 190px;
   border-top: 2px solid #FF8625;
   background: #fff;
