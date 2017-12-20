@@ -3,6 +3,9 @@
   padding: 0;
 }
 
+.event-header {
+  display: none;
+}
 
 .event-poster-head {
   width: 100%;
@@ -30,7 +33,7 @@
   margin: 0;
 }
 
-
+/* event info bar */
 
 .event-info-bar {
   display: flex;
@@ -47,6 +50,16 @@
   font-size: 1.5em;
 }
 
+.event-info-bar .price-range {
+  display: none;
+}
+
+.event-info-bar .tickets-btn {
+  display: none;
+  
+}
+
+
 .event-info-icons {
   display: flex;
   justify-content: space-between;
@@ -55,7 +68,7 @@
 
 .event-info-icons a {
   display: block;
-  padding: 0.5em;
+  padding: 0.7em;
   color: lightcoral;
 }
 
@@ -98,6 +111,8 @@ section.description {
 section.organizer-info {
   text-align: center;
   padding: 2em;
+  background: black;
+  margin-bottom: 2em;
 }
 
 section.organizer-info .organizer-name {
@@ -211,6 +226,47 @@ section.upcoming-events h3 {
 }
 
 @media screen and (min-width: 992px) {
+  .event-header {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: var(--header-font);
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .event-info-bar .event-name {
+    display: none;
+  }
+
+  .event-info-bar .event-info-icons {
+    order: 0;
+  }
+
+  .event-info-icons a {
+    transition: all linear 0.2s;
+  }
+
+  .event-info-icons a:hover {
+    transform: scale(1.3);
+  }
+
+  .event-info-bar .price-range {
+    display: block;
+    order: 1;
+  }
+
+
+  .event-info-bar .tickets-btn {
+    display: block;
+    order: 2;
+    background: #558B2F;
+    color: white;
+    border: solid black 1px;
+    padding: 0.5em 1em;
+    box-shadow: 0.1em 0.2em black;
+    font-family: var(--header-font);
+  }
   
   #event-page-container {
     margin-top: 1em;
@@ -220,7 +276,8 @@ section.upcoming-events h3 {
     grid-template-areas: 
     "sponsor event-bar event-bar"
     "sponsor event-info event-info"
-    "dso dso event-map"
+    "desc desc event-map"
+    "org-info org-info event-map"
     "upcoming upcoming upcoming"
   }
 
@@ -250,6 +307,15 @@ section.upcoming-events h3 {
 
   div.description-and-organizer {
     grid-area: dso;
+  }
+
+  section.description {
+    grid-area: desc;
+  }
+
+  section.organizer-info {
+    grid-area: org-info;
+    margin-bottom: 0;
   }
 
   ul.organizer-social-links {

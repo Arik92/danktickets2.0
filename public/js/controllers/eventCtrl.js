@@ -16,10 +16,12 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		$scope.ticketsToAdd = 0;
 		$scope.socialLinks = linkService.socialLinks;
 	//	initMap();		
-		//$scope.dummyEvents = createService.dummyEvents;	
+		$scope.dummyEvents = createService.dummyEvents;	
+		console.log($scope.dummyEvents);
 
 		// setMapSrc();
-	} //initialization  		
+	} //initialization  	
+		
 	function initMap() {
 	NgMap.getMap().then(function(map) {
     console.log(map.getCenter());

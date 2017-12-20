@@ -3,7 +3,7 @@ var config = {
   MAPS_API_KEY: 'AIzaSyBlqLa-v1ZicvzAhvzPyX4p0mbXIzYjGEk',
   STATIC_MAPS_API_KEY: 'AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM'
 };
-module.exports = config;
+module.exports = config; 
 },{}],2:[function(require,module,exports){
 app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location) {
   console.log('hello from createCtrl');
@@ -931,7 +931,8 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		$scope.ticketsToAdd = 0;
 		$scope.socialLinks = linkService.socialLinks;
 	//	initMap();		
-		//$scope.dummyEvents = createService.dummyEvents;	
+		$scope.dummyEvents = createService.dummyEvents;	
+		console.log($scope.dummyEvents);
 
 		// setMapSrc();
 	} //initialization  		
