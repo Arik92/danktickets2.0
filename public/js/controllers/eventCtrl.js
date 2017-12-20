@@ -1,4 +1,4 @@
-app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService', '$document','NgMap','angularLoad', function($scope,$rootScope, $stateParams, createService, $document, NgMap, angularLoad){
+app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService', '$document','NgMap','angularLoad', '$timeout', function($scope,$rootScope, $stateParams, createService, $document, NgMap, angularLoad, $timeout){
 	console.log("state param for event", $stateParams);	
 	this.$onInit = () => {
 		//var socket = io(); //might move someplace else
@@ -11,6 +11,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 			initEvent();
 		}); */
 		initEvent();
+		showImage();
 		$scope.ticketCart = [];
 		$scope.ticketSum = 0;
 		$scope.ticketsToAdd = 0;
@@ -21,7 +22,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 
 		// setMapSrc();
 	} //initialization  	
-		
+
 	function initMap() {
 	NgMap.getMap().then(function(map) {
     console.log(map.getCenter());
@@ -29,6 +30,13 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
     console.log('markers', map.markers);
     console.log('shapes', map.shapes);
   });
+	}
+
+	function showImage() {
+		console.log('removing class');
+		$timeout(() => {
+			document.querySelector('.poster-image').classList.remove('zero-opacity');
+		}, 300);
 	}
    
 	function initEvent() {
