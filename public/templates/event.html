@@ -1,6 +1,11 @@
-<h1 class="event-header">{{ event.title ? event.title : "Dank Event" }}</h1>
+<h1 class="event-header">{{ event.title }}</h1>
+
 <div class="event-poster-head">
-	<img src={{event.image}} alt="">
+	<img class="poster-image zero-opacity" 
+			 ng-src={{event.image}} 
+			 alt="{{ event.title }}"
+			 ng-class="event.image ? 'static-height' : '' "
+	>
 </div>
 
 <div class="ticket-bar" cmelo-sticky-top>
