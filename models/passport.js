@@ -9,7 +9,7 @@ passport.use(new FacebookStrategy({
       clientSecret: '12d8dcfc4b9a3c728c0b38795a0b500b',
       //callbackURL: "http://localhost:8000/users/facebook/callback",
       callbackURL: "https://danktickets.herokuapp.com/users/facebook/callback",
-      profileFields: ['id', 'displayName', 'photos', 'email']
+      profileFields: ['id', 'displayName', 'picture', 'email']
     },
     function(accessToken, refreshToken, profile, done) {
       //code to check database goes here
@@ -23,7 +23,8 @@ passport.use(new FacebookStrategy({
             email: profile.emails ? profile.emails[0].value : "",
             provider: 'facebook',
             username: profile.displayName,
-            isEmailValidated: true
+            isEmailValidated: true,
+			picture: profile.picture
           });
         } else {
           console.log("this user already exists in mongo!");
