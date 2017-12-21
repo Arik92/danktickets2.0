@@ -81,9 +81,23 @@
            <div class="form-group">
              <label class="control-label" for="source_name"><h1>Event Location: </h1></label>
              <div>
-              <p>Enter any location</p>
-                <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter city">
+              <p>Enter a location venue</p>
+                <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter venue">
              </div>
+			 <div> 
+			 <p>type a location: </p>
+			 <div class="map-container">
+			<h5>Event Map</h5>
+			<a href={{location.locationMapUrl}} target="_blank">
+		<img id="static-map-img" src={{imgSrc}} alt="">
+		</a>
+		</div>
+			 <input type="text" placeholder="venue name" ng-model="location.venue_name">
+			 <input type="text" placeholder="address2" ng-model="location.address2">
+			 <input type="text" placeholder="city" ng-model="location.city">
+			 <input type="text" placeholder="zip" ng-model="location.zip">
+			 <input type="text" placeholder="country" ng-model="location.country">
+			 </div>
            </div>
            <br /><!--input -->
            <div class="form-group">
