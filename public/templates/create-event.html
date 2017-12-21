@@ -84,10 +84,15 @@
               <p>Enter a location venue</p>
                 <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter venue">
              </div>
-			 <div > 
+			 <div> 
 			 <p>type a location: </p>
+			 <div class="map-container">
+			<h5>Event Map</h5>
+			<a href={{location.locationMapUrl}} target="_blank">
+		<img id="static-map-img" src={{imgSrc}} alt="">
+		</a>
+		</div>
 			 <input type="text" placeholder="venue name" ng-model="location.venue_name">
- 			 <input type="text" placeholder="address" ng-model="location.address">
 			 <input type="text" placeholder="address2" ng-model="location.address2">
 			 <input type="text" placeholder="city" ng-model="location.city">
 			 <input type="text" placeholder="zip" ng-model="location.zip">

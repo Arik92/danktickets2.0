@@ -5,6 +5,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
     initProfs();
     initEndDatePicker();
     initStartDatePicker();
+	$scope.ShowLocationPreview = false;
   }  
 ////////////////////////////////////////////////ticket interface//////////////////////////////////////  
 
@@ -400,21 +401,22 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
 				$scope.location.address2 = $scope.selectedPlace.address_components[i].long_name;
 			    break;
 				case 'locality':
-				$scope.location.address = $scope.selectedPlace.address_components[i].long_name;
-			    break;
-				case 'city?':
 				$scope.location.city = $scope.selectedPlace.address_components[i].long_name;
-			    break;
+			    break;				
 			  default: break;//??
 		  }//switch address components 		 
 	  }//for	  
+	  console.log("latlng",$scope.location.latlng);
+	  const staticMapKey = config.STATIC_MAPS_API_KEY;
+			$scope.imgSrc="https://maps.googleapis.com/maps/api/staticmap?center="+$scope.location.latlng.lat+","+$scope.location.latlng.lng+"&zoom=13&size=1200x500&markers=color:red%7Clabel:C%7C"+$scope.location.latlng.lat+","+$scope.location.latlng.lng+"&key=AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM";
+				$scope.ShowLocationPreview = true;
 	  $scope.$apply();
   }
   function fillInAddress() {
     // Get the place details from the autocomplete object.	
     $scope.selectedPlace = autocomplete.getPlace();
     console.log('place is', $scope.selectedPlace);
-	formatLocation();
+	
 	//var detailScript = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+$scope.placeId+"&key="+$scope.mapKey;
 	//console.log("detail script!", detailScript);
 	//use angularl load to make that request!
@@ -425,6 +427,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
     $scope.selectedLng = $scope.selectedPlace.geometry.location.lng();
     console.log('place lat is', $scope.selectedLat);
     console.log('place langtitude is', $scope.selectedLng);
+	formatLocation();
   } //fillInAdress
 
   $scope.getDistanceFromLatLonInKm = function (lat1, lon1, lat2, lon2) {
