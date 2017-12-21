@@ -11,7 +11,6 @@ var UserSchema = new Schema({
   socialId: String,
   picture: String,
   //tickets:  { type: Schema.Types.ObjectId, ref:"" },
-  image: String
 });
 
 //encrypt password mongoose middlware
