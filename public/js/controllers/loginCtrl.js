@@ -30,6 +30,7 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
         //console.log('you are now logged in! msg is ', app);
         //just to be sure
         $rootScope.userDetails = {};
+		console.log("data ", data.data);
         $rootScope.currentUser = data.data.username; // for fb auth as well
         $rootScope.userDetails.username = data.data.username;
         $rootScope.userDetails.email = data.data.email;
