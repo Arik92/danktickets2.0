@@ -34,6 +34,7 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
         $rootScope.userDetails.username = data.data.username;
         $rootScope.userDetails.email = data.data.email;
         $rootScope.userDetails.id = data.data.id;
+		$rootScope.userDetails.picture = data.data.picture;
       });
      }
     //  else  if ($rootScope.currentUser){
