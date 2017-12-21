@@ -57,7 +57,7 @@
 						<li class="scrollToLink" ng-hide="login.username"><a ui-sref="signin">SIGN IN</a></li>
 						<li class="scrollToLink" ng-hide="login.username"><a ui-sref="signup">SIGN UP</a></li>
 						<li class="scrollToLink" ng-show="login.username"><a ui-sref="create">CREATE EVENT</a></li>
-						<li class="scrollToLink dropdown"><i class="fa fa-user" style="color:white" ng-show="login.username"></i> <a ui-sref="profile"> {{ login.username }}</a>
+						<li class="scrollToLink dropdown"><img src={{userDetails.picture}}><i class="fa fa-user" style="color:white" ng-show="login.username"></i> <a ui-sref="profile"> {{ login.username }}</a>
 							<ul class="submenu" ng-show="login.username">
 								<li class="scrollToLink"><a ui-sref="manage">MANAGE EVENTS</a></li>
 								<li class="scrollToLink"><a ui-sref="organizer">NEW ORGANIZER</a></li>
