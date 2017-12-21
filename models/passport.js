@@ -2,13 +2,19 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var passport = require('passport');
 var User   = require('./usermodel');
 var jwt    = require('jsonwebtoken');
+var callbackURL;
+if (process.env.NODE_ENV === 'production') {
+   callbackURL = "https://danktickets.herokuapp.com/users/facebook/callback";
+  } else {
+   callbackURL = "http://localhost:8000/users/facebook/callback";
+  }
 //localhost:8000/users/facebook/callback
 // https://danktickets.herokuapp.com/users/facebook/callback
 passport.use(new FacebookStrategy({
       clientID: '793514707495227',
       clientSecret: '12d8dcfc4b9a3c728c0b38795a0b500b',
-      callbackURL: "http://localhost:8000/users/facebook/callback",
-      //callbackURL: "https://danktickets.herokuapp.com/users/facebook/callback",
+	//callbackURL: "http://localhost:8000/users/facebook/callback",
+      callbackURL: callbackURL,
       profileFields: ['id', 'displayName', 'picture', 'email']
     },
     function(accessToken, refreshToken, profile, done) {
