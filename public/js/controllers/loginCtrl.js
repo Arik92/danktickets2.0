@@ -21,7 +21,7 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
     console.log("I have reached logincrtl, and rootscope current fb user is", $rootScope.currentUser);
     if (authService.isLoggedIn()) {
 		authService.getUser().then(function(data) {
-			console.log("data ", data);
+		console.log("data ", data);
         msg.username = data.data.username;
         msg.email = data.data.email;
         msg.loader = true;
