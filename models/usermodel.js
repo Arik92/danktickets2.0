@@ -9,6 +9,7 @@ var UserSchema = new Schema({
   isEmailValidated: Boolean,
   provider: String,
   socialId: String,
+  picture: String,
   //tickets:  { type: Schema.Types.ObjectId, ref:"" },
   image: String
 });
