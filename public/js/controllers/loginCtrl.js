@@ -24,6 +24,7 @@ app.controller('loginCtrl', function(authService, $timeout, $location, $rootScop
         msg.username = data.data.username;
         msg.email = data.data.email;
         msg.loader = true;
+		msg.picture = data.data.picture;
         msg.id = data.data.id;
         //console.log('you are now logged in! msg is ', app);
         //just to be sure
