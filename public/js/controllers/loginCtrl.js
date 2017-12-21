@@ -56,6 +56,12 @@ app.controller('loginCtrl', function(authService,userService, $timeout, $locatio
         msg.loader = true;
       } else {
         msg.username =$rootScope.currentUser;
+		userService.getUserByName($rootScope.currentUser).then(function(result){
+    console.log("user details: ",result);
+    $scope.navProfile = result;    
+  }, function(err){
+    throw (err)
+  })//GET request route
         msg.loader = true;
       }
 
