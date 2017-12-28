@@ -65,9 +65,11 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       console.log("create user is", $scope.user);
       orService.getOrganizersByUser($rootScope.currentUser).then(function (data2) {
         console.log("data 2", data2);
-        for (var i = 0; i < data2.length; i++) {
-          $scope.profiles[i] = data2[i];
-        }//for
+		if (data2) {
+			for (var i = 0; i < data2.length; i++) {
+			  $scope.profiles[i] = data2[i];
+			}//for
+		}//if 
       })//get organizers
     })//userFactory cb
   }//initProfs //NOTE we need the user fetching here to get that owner id
