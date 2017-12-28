@@ -63,9 +63,11 @@ app.all('[^.]+', function(req, res) {
 	// TODO: take tickets from event
 	// possibility : from 10 mins from connect they have the option of buying the itckts - otherwise disconnect them // change the tickets back
 	console.log('socketedD');
+	socket.emit('')
 	//setTimeout(function(){ alert("your order has expired. please repeat the process"); }, 6000);
 	// on disconnet: set them back
 	socket.once('disconnect', function() {
+		socket.emit('endSave');
       console.log('Got disconnect!');     
    });
 	// on complete: 
