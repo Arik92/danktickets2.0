@@ -140,7 +140,7 @@ module.exports = function (router) {
   //http://localhost:8000/users/authenticate
   //user login route
   router.post('/authenticate', function (req, res) {
-    console.log('authenticate req.body', req.body);
+    //console.log('authenticate req.body', req.body);
 
     // if resetting password, will look for the password
     const hashedNewPassword = bcrypt.hashSync(req.body.password);
@@ -165,10 +165,14 @@ module.exports = function (router) {
         return;
       }
 
+	  /*var token = jwt.sign({
+            id: newUser.id,
+            name: newUser.username,
+          }, 'thisIsTopSecret', { expiresIn: "7d" }); how I did it onn passport.js */
       // this is the key!!!
       if (user.isEmailValidated) {
-        const token = jwt.sign({ username: user.username, email: user.email, id: user._id }, secret, { expiresIn: '72h' });
-        res.json({ success: true, message: 'User authenticated', token: token });
+        const token = jwt.sign({ username: user.username, email: user.email, id: user.id }, secret, { expiresIn: '72h' });
+        res.json({ success: true, message: 'User authenticated', token: token, username: user.username });
       } else {
         res.json({ success: false, message: 'email is not validated!!!' });
 

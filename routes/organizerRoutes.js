@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var Profile = require("../models/profilemodel");
-
 /////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
 var multer = require('multer');
 
@@ -54,16 +53,19 @@ router.get('/:name', function(req, res, next){
     } else {
       console.log("found profiles(route)", profiles);
       var result = [];
-      for (var i=0;i<profiles.length;i++) {
+	  if (profiles) {
+		  console.log(profiles);
+      for (var i=0;i<profiles.length;i++) {		 
         console.log("comparing "+ req.params.name+" and "+ profiles[i].owner.username);
         if (profiles[i].owner.username==req.params.name) {
           result.push(profiles[i]);
         }
       }//for
+	  }
       res.send(result);
     }
   })//exec()
-}) // get event by OWNER id.
+}) // get profiles by OWNER id.
 
 router.post('/upload', function (req, res1, next) {
   upload(req,res1,function(err){

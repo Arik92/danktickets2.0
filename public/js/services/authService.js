@@ -4,6 +4,11 @@ app.factory('authService', function($http, authToken){
   authFactory.login = function(loginData) {
 	  console.log("login data service is", loginData);
     return $http.post('/users/authenticate', loginData).then(function(data){
+		console.log("authservice login token here", data);
+		var loginToken = {
+			token: data.data.token,
+			username: data.data.username
+		}
       authToken.setToken(data.data.token);
       console.log('authServiceCB');
       return data;
@@ -64,11 +69,17 @@ app.factory('authToken', function($window) {
   //authToken.setToken(token)
   authTokenFactory.setToken = function(token) {
     if (token) {
-      $window.localStorage.setItem('token', token);
+      $window.localStorage.setItem('token', token);	 
+          var user = {
+            name: token.username,
+            token: token
+          }
+          localStorage.setItem("user", JSON.stringify(user));
+          //$rootScope.currentUser = user.name;
     } else {
-      $window.localStorage.removeItem('token');
-    }
-  };
+      $window.localStorage.removeItem('token');    
+	};//else 
+  }//setToken
   //authToken.getToken()
   authTokenFactory.getToken = function() {
     return $window.localStorage.getItem('token');
