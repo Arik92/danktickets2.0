@@ -1,4 +1,50 @@
-#event-grid-container p,h3,h4,h5 {
+/* Ticket Modal */
+
+#ticket-register-modal .modal-dialog {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+#ticket-register-modal .modal-header {
+  text-align: center;
+  font-weight: bold;
+}
+
+#ticket-register-modal .ticket-info {
+  display: flex;
+  justify-content: space-between;
+  border: solid 1px #424242;
+  padding: 1rem;
+  border-left: 14px #673AB7 solid;
+  margin-bottom: 100px;
+  box-shadow: 3px 4px #424242;
+}
+
+#ticket-register-modal .modal-footer {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+
+#ticket-register-modal .footer-ticket-details {
+  display: flex;
+}
+
+#ticket-register-modal .footer-ticket-details .ticket-quantity {
+  margin-right: 2rem;
+}
+
+
+/* Event Grid */
+
+#event-grid-container p,
+h3,
+h4,
+h5 {
   margin: 0;
   padding: 0;
 }
@@ -46,6 +92,8 @@
   margin: 0;
 }
 
+
+
 /* event info bar */
 
 .event-info-bar {
@@ -69,14 +117,12 @@
 
 .event-info-bar .tickets-btn {
   display: none;
-  
 }
 
 
 .event-info-icons {
   display: flex;
   justify-content: space-between;
-
 }
 
 .event-info-icons a {
@@ -145,8 +191,8 @@ section.organizer-info .organizer-name {
 }
 
 section.sponsor {
-background: black;
-margin-bottom: 3rem;
+  background: black;
+  margin-bottom: 3rem;
 }
 
 section.sponsor .red-band {
@@ -161,10 +207,11 @@ section.sponsor .red-band {
 section.sponsor-img-container {
   padding: 1em;
 }
+
 section.sponsor img {
   display: block;
   margin: auto;
-  max-height: 400px;  
+  max-height: 400px;
 }
 
 section.event-map {
@@ -191,7 +238,7 @@ section.event-map h5 {
   font-size: 1.1em;
 }
 
-section.event-map img{
+section.event-map img {
   display: block;
   margin: auto;
 }
@@ -234,9 +281,7 @@ section.upcoming-events h3 {
   text-align: center;
 }
 
-@media screen and (min-width: 768px) {
-  
-}
+@media screen and (min-width: 768px) {}
 
 @media screen and (min-width: 992px) {
   .event-header {
@@ -280,18 +325,13 @@ section.upcoming-events h3 {
     box-shadow: 0.1em 0.2em black;
     font-family: var(--header-font);
   }
-  
+
   #event-grid-container {
     margin-top: 1em;
     display: grid;
     grid-template-columns: 2fr 3fr 3fr;
     grid-gap: 1em;
-    grid-template-areas: 
-    "sponsor event-bar event-bar"
-    "sponsor event-info event-info"
-    "desc desc event-map"
-    "org-info org-info event-map"
-    "upcoming upcoming upcoming"
+    grid-template-areas: "sponsor event-bar event-bar" "sponsor event-info event-info" "desc desc event-map" "org-info org-info event-map" "upcoming upcoming upcoming"
   }
 
   section.event-info {
@@ -306,13 +346,13 @@ section.upcoming-events h3 {
     margin: 0;
   }
 
-  .ticket-bar p{
+  .ticket-bar p {
     display: none;
   }
 
   div.event-info-bar {
     grid-area: event-bar;
-  }  
+  }
 
   section.event-info {
     grid-area: event-info;
@@ -333,7 +373,7 @@ section.upcoming-events h3 {
 
   ul.organizer-social-links {
     grid-area: social-links
-  }  
+  }
 
   section.sponsor {
     grid-area: sponsor;
@@ -348,5 +388,4 @@ section.upcoming-events h3 {
     display: block;
     grid-area: upcoming;
   }
-
 }
