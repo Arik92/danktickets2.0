@@ -17,10 +17,10 @@ app.controller('regCtrl', function (userService, authService, $http, $location, 
       console.log(data);
       console.log("data for signup", data.config.data);
       var loginObj = {
-        //"username": data.config.data.username,
+        "username": data.config.data.username,
         "password": data.config.data.password,
-        "email": data.config.data.email
-        // ,"isEmailValidated": data.config.data.isEmailValidated
+        "email": data.config.data.email,
+        "isEmailValidated": data.config.data.isEmailValidated
       };
       if (data.data.success) {
         app.loading = false;

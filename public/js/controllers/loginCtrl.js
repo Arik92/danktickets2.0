@@ -4,11 +4,15 @@ app.controller('loginCtrl', function(authService,userService, $timeout, $locatio
   this.resetInfo.email = '';
 
 	this.$onInit = () => {
-   msg.loginData = {};
+   //msg.loginData = {};
+   $scope.showCreation = false;
    if ($rootScope.currentUser) {
 	   userService.getUserByName($rootScope.currentUser).then(function(result){
     console.log("user details: ",result);
-    $scope.navProfile = result;    
+    $scope.navProfile = result;   
+	/*if ($scope.navProfile.profiles)	{
+		$scope.
+	}//if  */
   }, function(err){
     throw (err)
   })//GET request route
@@ -43,7 +47,8 @@ app.controller('loginCtrl', function(authService,userService, $timeout, $locatio
         $rootScope.userDetails.username = data.data.username;
         $rootScope.userDetails.email = data.data.email;
         $rootScope.userDetails.id = data.data.id;
-		$rootScope.userDetails.picture = data.data.picture;		
+		$rootScope.userDetails.picture = data.data.picture;	
+		$scope.navProfile = $rootScope.userDetails;
       });
      }
     //  else  if ($rootScope.currentUser){
@@ -83,7 +88,8 @@ app.controller('loginCtrl', function(authService,userService, $timeout, $locatio
     msg.loading = true;
     msg.errorMsg = false;
     authService.login(msg.loginData).then(function(data) {
-      if (data.data.success) {
+      if (data.data.success) { 
+		$rootScope.currentUser = data.data.username
         msg.loading = false;
         //create success message
         //redirect to home page

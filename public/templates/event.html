@@ -17,8 +17,8 @@
 
 	<div class="event-info-bar">
 		<div class="event-name">{{event.title}}</div>
-		<div class="price-range">$20 - $2,000</div>
-		<button class="tickets-btn">Tickets / Registration</button>
+		<div class="price-range">$20 - $2,000</div>		
+		<button ui-sref="buy-tickets({id: event['_id']})" class="tickets-btn">Tickets / Registration</button>		
 		<div class="event-info-icons">
 			<a href="">
 				<i class="fa fa-chevron-down" aria-hidden="true"></i>

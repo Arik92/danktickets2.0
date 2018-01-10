@@ -60,6 +60,23 @@ router.get('/findById/:id', function(req, res, next){
     }
   })//exec()
 }) // get event by OWNER id.
+router.get('/eventTickets/:id', function(req, res, next){
+  Event.findOne({_id: req.params.id}, function(err, resultEvent){
+	  if (err) {
+		  console.log("error fetching event tickets");
+		  console.log(err);
+	  } else {
+		  console.log("event", resultEvent);
+		  console.log("result tickets ",resultEvent.eventTickets);
+		  var tickets = [];
+		  for (var i=0;i<resultEvent.eventTickets.length;i++) {
+			tickets.push(resultEvent.eventTickets[i]);
+		}//for
+      res.send(tickets);
+		  //res.send(resultEvent.eventTickets);
+	  }//else 
+  })//find CB 
+}) // get tickets only by event id.
 
 router.get('/searchByActivity/:type', function(req, res, next){
   Event.find({type: req.params.type}, function(err, resultEvents){

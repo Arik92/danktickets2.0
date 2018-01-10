@@ -7,6 +7,9 @@ var UserSchema = new Schema({
   password: String,
   email:   String,
   isEmailValidated: Boolean,
+  //numTicketsSold: Number,
+  //taxForm: { type: Schema.Types.ObjectId, ref:"TaxForm" },
+
   provider: String,
   socialId: String,
   picture: String,
