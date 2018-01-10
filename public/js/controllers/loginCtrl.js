@@ -5,10 +5,14 @@ app.controller('loginCtrl', function(authService,userService, $timeout, $locatio
 
 	this.$onInit = () => {
    //msg.loginData = {};
+   $scope.showCreation = false;
    if ($rootScope.currentUser) {
 	   userService.getUserByName($rootScope.currentUser).then(function(result){
     console.log("user details: ",result);
-    $scope.navProfile = result;    
+    $scope.navProfile = result;   
+	/*if ($scope.navProfile.profiles)	{
+		$scope.
+	}//if  */
   }, function(err){
     throw (err)
   })//GET request route

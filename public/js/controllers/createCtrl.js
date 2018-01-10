@@ -1,12 +1,12 @@
 app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', 'angularLoad', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location, angularLoad) {
   console.log('hello from createCtrl');
   this.$onInit = () => {
-	$scope.currentTickets = [];
-    initProfs();
+	$scope.currentTickets = [];	
+    initProfs();	
     initEndDatePicker();
     initStartDatePicker();
 	$scope.ShowLocationPreview = false;
-  }  
+  }    
 ////////////////////////////////////////////////ticket interface//////////////////////////////////////  
 
   $scope.deleteTempTick = function(index) {

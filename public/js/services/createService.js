@@ -59,6 +59,15 @@ var deleteEvent = function(id) {
   }) //promise callbacks
 } // delete an event
 
+var getTickets = function(id) {
+	return $http.get('/events/eventTickets/'+id).then(function(result) {
+		console.log("service result",result);
+		return result.data;
+	}, function(error){
+		throw (error);
+	})//get ticet CB
+}//get event tickets by ID
+
 
 
   // var vote = function(battle, userId) {
@@ -132,6 +141,7 @@ var deleteEvent = function(id) {
     getEventsByOwner: getEventsByOwner,
     updateEvent: updateEvent,
     deleteEvent: deleteEvent,
-    getEventById: getEventById
+    getEventById: getEventById,
+	getTickets: getTickets
   };
 });
