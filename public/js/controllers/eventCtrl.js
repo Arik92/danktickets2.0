@@ -9,8 +9,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		//addScript(mapSrc);
 		/*angularLoad.loadScript(mapSrc).then(function(result){
 			initEvent();
-		}); */
-		$scope.ticketCart = [];		
+		}); */			
 		initEvent();
 		showImage();
 		//$scope.ticketQuantityOptions = initQuantityOptions();
@@ -59,12 +58,15 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 			var config = require('../config.js');			
 			const staticMapKey = config.STATIC_MAPS_API_KEY;
 			$scope.imgSrc="https://maps.googleapis.com/maps/api/staticmap?center="+$scope.event.location.latlng.lat+","+$scope.event.location.latlng.lng+"&zoom=13&size=1200x500&markers=color:red%7Clabel:C%7C"+$scope.event.location.latlng.lat+","+$scope.event.location.latlng.lng+"&key=AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM";
-			for (var i=0;i<$scope.eventTickets;i++) {
-				$scope.ticketCart[i] = {
+			$scope.ticketCart = [];	
+			for (var i=0;i<$scope.event.eventTickets.length;i++) {
+				var cartObj = {
 					'ticket': $scope.event.eventTickets[i],
 					'howMany': 0
-				}//for
+				}//ticketCart object
+				$scope.ticketCart.push(cartObj);
 			}//for 			
+			console.log("after loop", $scope.ticketCart);
 		}//else
 	  });//getEventById
   }//initEvent	
@@ -94,7 +96,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 									+ staticMapKey;
 	}*/
   
-  $scope.addToCart = function(ticket, numTickets) {
+  /*$scope.addToCart = function(ticket, numTickets) {
 	  if ((numTickets>0)&&(ticket.ticketQ>=numTickets)) {//TODO: WHOLE VALUES ONLY
 	  var cartTicket = {
 		  'ticket': ticket,
@@ -105,23 +107,21 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	  } else {
 		  alert("cannot add that many tickets!");
 	  }//else 
-  }//addToCart  - cart is for the user to mess with and make his order. this doest buy or reserve them yet!
+  }//addToCart  - cart is for the user to mess with and make his order. this doest buy or reserve them yet! */
 	
 	$scope.cartPlus = function(index) {
 	  console.log("ticket cart", $scope.ticketCart);
-	  $scope.ticketCart[index].quantity++;
-  if ($scope.ticketCart[index].quantity<=$scope.ticketCart[index].ticket.ticketQ) {
+	  $scope.ticketCart[index].howMany++;
+		if ($scope.ticketCart[index].howMany<=$scope.ticketCart[index].ticket.ticketQ) {
 	  $scope.updateSum();
-	} else {
-		$scope.ticketCart[index].quantity--;
-	}//else 
+		} else {
+		$scope.ticketCart[index].howMany--;
+	 }//else 
 	}//cartplus
 	
-   $scope.cartMinus = function(index) {
-	  $scope.ticketCart[index].quantity--;
-	  if ($scope.ticketCart[index].quantity===0) {
-		  $scope.removeFromCart(index);
-	  } else {
+   $scope.cartMinus = function(index) {	 
+   if ($scope.ticketCart[index].quantity>0) {	
+ $scope.ticketCart[index].howMany--;   
 	  	  $scope.updateSum();
 	  }//else
 	}//cartMinus
@@ -129,7 +129,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	$scope.updateSum = function() {
 		$scope.ticketSum = 0;
 		for (var i=0;i<$scope.ticketCart.length;i++) {
-			$scope.ticketSum+= $scope.ticketCart[i].ticket.ticketPrice*$scope.ticketCart[i].quantity;
+			$scope.ticketSum+= $scope.ticketCart[i].ticket.ticketPrice*$scope.ticketCart[i].howMany;
 		}//for 
 	} //update sum to update any changes made to ticket quantities
 
