@@ -12,6 +12,8 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		}); */
 		initEvent();
 		showImage();
+		initQuantityOptions();
+		$scope.selectedQuantity = 1;
 		$scope.ticketCart = [];
 		$scope.ticketSum = 0;
 		$scope.ticketsToAdd = 0;
@@ -21,7 +23,14 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		console.log($scope.dummyEvents);
 
 		// setMapSrc();
-	} //initialization  	
+	} //initialization  
+	
+	function initQuantityOptions() {
+		$scope.ticketQuantityOptions = [];
+		for (i=1; i < 11; i++) {
+			$scope.ticketQuantityOptions.push(i);
+		}
+	}
 
 	function initMap() {
 	NgMap.getMap().then(function(map) {
