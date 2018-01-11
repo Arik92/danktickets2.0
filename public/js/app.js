@@ -168,6 +168,7 @@ app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
           }
           localStorage.setItem("user", JSON.stringify(user));
           $rootScope.currentUser = user.name;
+          console.log('rootscope currentUser', $rootScope.currentUser);
           //$rootScope.$broadcast('fbLogin');
           $http.defaults.headers.common.Authorization = 'Bearer ' + user.token;
           $state.go('home');

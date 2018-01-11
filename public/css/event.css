@@ -1,11 +1,11 @@
 /* Ticket Modal */
 
 #ticket-register-modal .modal-dialog {
-  position: fixed;
-  top: 50%;
+  top: 10%;
   left: 0;
   right: 0;
-  transform: translateY(-50%);
+  /* transform: translateY(-50%); */
+  margin-bottom: 200px;
 }
 
 #ticket-register-modal .modal-header {
@@ -19,7 +19,7 @@
   border: solid 1px #424242;
   padding: 1rem;
   border-left: 14px #673AB7 solid;
-  margin: 0 2rem 100px;
+  margin: 0 2rem 0.5rem;
   box-shadow: 3px 4px #424242;
 }
 

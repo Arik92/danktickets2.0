@@ -168,9 +168,9 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title" style="font-style: italic">Register</h4>
 			</div>
-			<div class="modal-body" ng-repeat="ticket in event.eventTickets track by $index">
-				<p>Sale Ends on January 15</p>
-				<div class="ticket-info">
+			<p style="margin: 0 2rem">Sale Ends on January 15</p>
+			<div class="modal-body">
+				<div class="ticket-info" ng-repeat="ticket in event.eventTickets track by $index">
 					<div class="ticket-deets">
 						<p>{{ticket.ticketName}} - ({{ticket.ticketQ}} remaining)</p>
 						<p>Price of admission: {{ticket.ticketPrice}}</p>
@@ -179,13 +179,14 @@
 						<label for="sel1">Quantity:</label>
 						<!--<select class="form-control" id="sel1" 
 										ng-model="selectedQuantity" 
-										ng-options="option for option in ticketQuantityOptions"
+										ng-options="op
+										tion for option in ticketQuantityOptions"
 										ng-change="updateQuantity()"
+								</select>
 						>-->
 						<input class="form-control" placeHolder="how many?" ng-model="ticketsToAdd"></input>
 						<i class="fa fa-plus btn" aria-hidden="true" ng-click="cartPlus($index)"></i>
 						<i class="fa fa-minus btn" aria-hidden="true" ng-click="cartMinus($index)"></i>
-						</select>
 					</div>
 				</div>
 			</div>
