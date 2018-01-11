@@ -1,10 +1,10 @@
 /* Ticket Modal */
 
 #ticket-register-modal .modal-dialog {
-  top: 10%;
+  top: 0;
   left: 0;
   right: 0;
-  /* transform: translateY(-50%); */
+  transform: translateY(-100%);
   margin-bottom: 200px;
 }
 
@@ -281,7 +281,15 @@ section.upcoming-events h3 {
   text-align: center;
 }
 
-@media screen and (min-width: 768px) {}
+@media screen and (min-width: 768px) {
+  #ticket-register-modal .modal-dialog {
+    top: 10%;
+    left: 0;
+    right: 0;
+    transform: translateY(0);
+    margin-bottom: 200px;
+  }
+}
 
 @media screen and (min-width: 992px) {
   .event-header {
