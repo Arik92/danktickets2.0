@@ -1,0 +1,23 @@
+.checkout-page-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.buyer-info, .my-cart {
+  max-width: 500px;
+}
+
+.buyer-info .control-label{
+  /* width: 200px; */
+}
+
+.my-cart .panel-heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout-btn-container {
+  display: flex;
+  justify-content: center;
+}

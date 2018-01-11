@@ -22,7 +22,9 @@
 	<div class="event-info-bar">
 		<div class="event-name">{{event.title}}</div>
 		<div class="price-range">$20 - $2,000</div>		
-		<button ui-sref="buy-tickets({id: event['_id']})" class="tickets-btn">Tickets / Registration</button>		
+		<button class="tickets-btn" data-toggle="modal" data-target="#ticket-register-modal">
+			Tickets / Registration
+		</button>		
 		<div class="event-info-icons">
 			<a href="">
 				<i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -175,17 +177,9 @@
 					</div>
 					<div class="form-group ticket-quantity-select">
 						<label for="sel1">Select Quantity:</label>
-						<select class="form-control" id="sel1">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
-							<option>9</option>
-							<option>10</option>
+						<select class="form-control" id="sel1" 
+										ng-model="selectedQuantity" 
+										ng-options="x for x in ticketQuantities">
 						</select>
 					</div>
 				</div>
@@ -196,9 +190,9 @@
 					<div class="ticket-type">FREE</div>
 				</div>
 				<div style="flex-grow: 1"></div>
-				<button type="button" class="btn btn-success" data-dismiss="modal"
-								ng-init="login.forgotPW = false" 
-								ng-click="console.log('adding tickets to cart')">
+				<button type="button" class="btn btn-success" data-dismiss="modal" 
+								ng-click="addToCart()">
+								<!-- ui-sref="buy-tickets({id: event['_id']})" -->
 								Checkout
 				</button>
 			</div>

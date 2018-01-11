@@ -3,7 +3,7 @@ var config = {
   MAPS_API_KEY: 'AIzaSyBlqLa-v1ZicvzAhvzPyX4p0mbXIzYjGEk',
   STATIC_MAPS_API_KEY: 'AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM'
 };
-module.exports = config;
+module.exports = config; 
 },{}],2:[function(require,module,exports){
 app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', 'angularLoad', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location, angularLoad) {
   console.log('hello from createCtrl');
@@ -964,6 +964,8 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		}); */
 		initEvent();
 		showImage();
+		initDropDownList();
+		$scope.selectedQuantity = 3;
 		$scope.ticketCart = [];
 		$scope.ticketSum = 0;
 		$scope.ticketsToAdd = 0;
@@ -973,7 +975,15 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		console.log($scope.dummyEvents);
 
 		// setMapSrc();
-	} //initialization  	
+	} //initialization  
+	
+	function initDropDownList() {
+		$scope.ticketQuantities = [];
+		for (i=1; i < 11; i++) {
+			$scope.ticketQuantities.push(i);
+		}
+		console.log($scope.ticketQuantities);
+	}
 
 	function initMap() {
 	NgMap.getMap().then(function(map) {
