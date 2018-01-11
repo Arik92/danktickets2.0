@@ -10,11 +10,11 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		/*angularLoad.loadScript(mapSrc).then(function(result){
 			initEvent();
 		}); */
+		$scope.ticketCart = [];		
 		initEvent();
 		showImage();
-		$scope.ticketQuantityOptions = initQuantityOptions();
-		$scope.selectedQuantity = 1;
-		$scope.ticketCart = [];
+		//$scope.ticketQuantityOptions = initQuantityOptions();
+		//$scope.selectedQuantity = 1;		
 		$scope.ticketSum = 0;
 		$scope.ticketsToAdd = 0;
 		$scope.socialLinks = linkService.socialLinks;
@@ -59,7 +59,11 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 			var config = require('../config.js');			
 			const staticMapKey = config.STATIC_MAPS_API_KEY;
 			$scope.imgSrc="https://maps.googleapis.com/maps/api/staticmap?center="+$scope.event.location.latlng.lat+","+$scope.event.location.latlng.lng+"&zoom=13&size=1200x500&markers=color:red%7Clabel:C%7C"+$scope.event.location.latlng.lat+","+$scope.event.location.latlng.lng+"&key=AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM";
-			
+			for (var i=0;i<$scope.eventTickets;i++) {
+				$scope.ticketCart[i] = {
+					'ticket': $scope.event.eventTickets[i]
+				}
+			}//for 			
 		}//else
 	  });//getEventById
   }//initEvent	
