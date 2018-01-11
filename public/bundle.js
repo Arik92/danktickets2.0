@@ -964,8 +964,8 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		}); */
 		initEvent();
 		showImage();
-		initDropDownList();
-		$scope.selectedQuantity = 3;
+		initQuantityOptions();
+		$scope.selectedQuantity = 1;
 		$scope.ticketCart = [];
 		$scope.ticketSum = 0;
 		$scope.ticketsToAdd = 0;
@@ -977,12 +977,11 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		// setMapSrc();
 	} //initialization  
 	
-	function initDropDownList() {
-		$scope.ticketQuantities = [];
+	function initQuantityOptions() {
+		$scope.ticketQuantityOptions = [];
 		for (i=1; i < 11; i++) {
-			$scope.ticketQuantities.push(i);
+			$scope.ticketQuantityOptions.push(i);
 		}
-		console.log($scope.ticketQuantities);
 	}
 
 	function initMap() {
