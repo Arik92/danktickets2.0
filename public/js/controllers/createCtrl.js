@@ -56,7 +56,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
     userService.getUserByName($rootScope.currentUser).then(function (user) {
       $scope.user = user;
       console.log("create user is", $scope.user);
-      orService.getOrganizersByUser($rootScope.currentUser).then(function (data2) {
+      orService.getOrganizersByUser($scope.user._id).then(function (data2) {
         console.log("data 2", data2);
 		if (data2) {
 			for (var i = 0; i < data2.length; i++) {

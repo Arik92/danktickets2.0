@@ -63,7 +63,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
     userService.getUserByName($rootScope.currentUser).then(function (user) {
       $scope.user = user;
       console.log("create user is", $scope.user);
-      orService.getOrganizersByUser($rootScope.currentUser).then(function (data2) {
+      orService.getOrganizersByUser($scope.user._id).then(function (data2) {
         console.log("data 2", data2);
 		if (data2) {
 			for (var i = 0; i < data2.length; i++) {
@@ -1061,12 +1061,12 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	
 	$scope.cartPlus = function(index) {
 	  console.log("ticket cart", $scope.ticketCart);
-	  /*$scope.ticketCart[index].quantity++;
+	  $scope.ticketCart[index].quantity++;
   if ($scope.ticketCart[index].quantity<=$scope.ticketCart[index].ticket.ticketQ) {
 	  $scope.updateSum();
 	} else {
 		$scope.ticketCart[index].quantity--;
-	}//else */
+	}//else 
 	}//cartplus
 	
    $scope.cartMinus = function(index) {
