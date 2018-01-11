@@ -70,7 +70,7 @@ router.get('/:name', function(req, res, next){
       console.log(err);
       res.send(err);
     }  else {
-      console.log("removed", removedProfile);
+      //console.log("removed", removedProfile);
       res.send(foundProfiles);
     }
 });
