@@ -47,7 +47,7 @@ router.get('/findById/:id', function(req, res, next){
   })//exec()
 }) // get event by OWNER id.
 router.get('/:name', function(req, res, next){
-  Profile.find().populate('owner').exec(function(err, profiles){
+  /*Profile.find({owner}).populate('owner').exec(function(err, profiles){
     if (err) {
       console.error(err);
     } else {
@@ -64,7 +64,16 @@ router.get('/:name', function(req, res, next){
 	  }
       res.send(result);
     }
-  })//exec()
+  })//exec() */
+  Profile.find({ owner: req.params.name }, function(err, foundProfiles) {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }  else {
+      console.log("removed", removedProfile);
+      res.send(foundProfiles);
+    }
+});
 }) // get profiles by OWNER id.
 
 router.post('/upload', function (req, res1, next) {
