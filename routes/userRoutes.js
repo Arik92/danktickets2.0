@@ -19,6 +19,7 @@ module.exports = function (router) {
         console.log(err);
       } else {
         res.send(user);
+        console.log('user from searchbyname', user);
       }//else
     })//findCb
   }) // get event by token?
