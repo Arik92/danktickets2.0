@@ -61,8 +61,9 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 			$scope.imgSrc="https://maps.googleapis.com/maps/api/staticmap?center="+$scope.event.location.latlng.lat+","+$scope.event.location.latlng.lng+"&zoom=13&size=1200x500&markers=color:red%7Clabel:C%7C"+$scope.event.location.latlng.lat+","+$scope.event.location.latlng.lng+"&key=AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM";
 			for (var i=0;i<$scope.eventTickets;i++) {
 				$scope.ticketCart[i] = {
-					'ticket': $scope.event.eventTickets[i]
-				}
+					'ticket': $scope.event.eventTickets[i],
+					'howMany': 0
+				}//for
 			}//for 			
 		}//else
 	  });//getEventById
@@ -107,6 +108,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
   }//addToCart  - cart is for the user to mess with and make his order. this doest buy or reserve them yet!
 	
 	$scope.cartPlus = function(index) {
+	  console.log("ticket cart", $scope.ticketCart);
 	  $scope.ticketCart[index].quantity++;
   if ($scope.ticketCart[index].quantity<=$scope.ticketCart[index].ticket.ticketQ) {
 	  $scope.updateSum();
