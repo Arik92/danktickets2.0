@@ -1081,7 +1081,9 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	$scope.updateSum = function() {
 		$scope.ticketSum = 0;
 		for (var i=0;i<$scope.ticketCart.length;i++) {
+			if ($scope.ticketCart[i].howMany>0) {
 			$scope.ticketSum+= $scope.ticketCart[i].ticket.ticketPrice*$scope.ticketCart[i].howMany;
+			}//if ticet sum is greater than 0 somehow(user bruteforcing negative value
 		}//for 
 	} //update sum to update any changes made to ticket quantities
 
