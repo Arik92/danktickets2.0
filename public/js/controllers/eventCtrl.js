@@ -1,4 +1,4 @@
-app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService', '$document','NgMap','angularLoad', '$timeout', function($scope,$rootScope, $stateParams, createService, $document, NgMap, angularLoad, $timeout){
+app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService', '$document','NgMap','angularLoad', '$timeout','$state', function($scope,$rootScope, $stateParams, createService, $document, NgMap, angularLoad, $timeout, $state){
 	console.log("state param for event", $stateParams);	
 	this.$onInit = () => {
 		//var socket = io(); //might move someplace else
@@ -61,8 +61,11 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 			$scope.ticketCart = [];	
 			for (var i=0;i<$scope.event.eventTickets.length;i++) {
 				var cartObj = {
-					'ticket': $scope.event.eventTickets[i],
-					'howMany': 0
+					'ticketName': $scope.event.eventTickets[i].ticketName,
+					'ticketPrice': $scope.event.eventTickets[i].ticketPrice,					
+					'howMany': 0,
+					'title': $scope.event.title,
+					'eventId': $scope.event._id
 				}//ticketCart object
 				$scope.ticketCart.push(cartObj);
 			}//for 			
@@ -130,7 +133,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		$scope.ticketSum = 0;
 		for (var i=0;i<$scope.ticketCart.length;i++) {
 			if ($scope.ticketCart[i].howMany>0) {
-			$scope.ticketSum+= $scope.ticketCart[i].ticket.ticketPrice*$scope.ticketCart[i].howMany;
+			$scope.ticketSum+= $scope.ticketCart[i].ticketPrice*$scope.ticketCart[i].howMany;
 			}//if ticet sum is greater than 0 somehow(user bruteforcing negative value
 		}//for 
 	} //update sum to update any changes made to ticket quantities
@@ -142,6 +145,25 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	}//rrmove from cart
   $scope.checkout = function() {
 	  console.log("final checkout",$scope.ticketCart);
+	  for (var i=0;i<$scope.ticketCart.length;i++) {
+		  if ($scope.ticketCart[i].howMany<=0) {
+			  $scope.ticketCart.splice(i,1);
+		  }//if
+	  }//for cleaning out empty entries
+	  var storageCart= localStorage.getItem('dankCart');
+	  if (storageCart) {
+	  var cartData = JSON.parse(storageCart);
+	   	for (var j=0;j<$scope.ticketCart.length;j++) {
+			for (var i=0;i<cartData.length;i++) {
+				if ($scope.ticketCart[j].ticketName===cartData[i].ticketName) {
+					cartData[i].howMany+= $scope.ticketCart[j].howMany;
+				}
+			}//for looping storage cart 
+		}//for looping ticket cart 
+	  }// if adding to already existing cart 
+	  console.log("cart before setting", $scope.ticketCart);
+	  localStorage.setItem('dankCart', JSON.stringify($scope.ticketCart));
+	  $state.go('/cart');
 	//TODO: check that the event has said number of tickets available. if it does, connect to socket and reserve tickets
 	// have a request to update the db about and reserve said tickets 
 	//

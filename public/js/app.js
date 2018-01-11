@@ -41,9 +41,9 @@ app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/event.html',
       controller: 'eventCtrl'
     })
-	 .state('buy-tickets', {
-      url: '/tickets/:id',
-      templateUrl: '/templates/buy-tickets.html',
+	 .state('ticket-cart', {
+      url: '/cart',
+      templateUrl: '/templates/ticket-cart.html',
       controller: 'ticketCtrl'
     })
     .state('profile', {
