@@ -184,7 +184,7 @@
 										ng-change="updateQuantity()"
 								</select>
 						>-->
-						<input class="form-control" min="0" type="number" placeHolder="Select Quantity" ng-model="ticketCart[$index].howMany" ng-change="updateSum()"></input>						
+						<input class="form-control" min="0" max="{{ ticket.ticketQ }}" type="number" placeHolder="Select Quantity" ng-model="ticketCart[$index].howMany" ng-change="updateSum()"></input>						
 						</select>
 					</div>
 				</div>
