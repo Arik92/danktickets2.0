@@ -176,17 +176,19 @@
 						<p>Free</p>
 					</div>
 					<div class="form-group ticket-quantity-select">
-						<label for="sel1">Select Quantity:</label>
+						<label for="sel1">Quantity:</label>
 						<select class="form-control" id="sel1" 
 										ng-model="selectedQuantity" 
-										ng-options="option for option in ticketQuantityOptions">
+										ng-options="option for option in ticketQuantityOptions"
+										ng-change="updateQuantity()"
+						>
 						</select>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
 				<div class="footer-ticket-details">
-					<div class="ticket-quantity">QTY: 1</div>
+					<div class="ticket-quantity">QTY: {{ selectedQuantity }}</div>
 					<div class="ticket-type">FREE</div>
 				</div>
 				<div style="flex-grow: 1"></div>
