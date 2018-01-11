@@ -3,7 +3,7 @@ var config = {
   MAPS_API_KEY: 'AIzaSyBlqLa-v1ZicvzAhvzPyX4p0mbXIzYjGEk',
   STATIC_MAPS_API_KEY: 'AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM'
 };
-module.exports = config; 
+module.exports = config;
 },{}],2:[function(require,module,exports){
 app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', 'angularLoad', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location, angularLoad) {
   console.log('hello from createCtrl');
@@ -964,7 +964,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		}); */
 		initEvent();
 		showImage();
-		initQuantityOptions();
+		$scope.ticketQuantityOptions = initQuantityOptions();
 		$scope.selectedQuantity = 1;
 		$scope.ticketCart = [];
 		$scope.ticketSum = 0;
@@ -978,10 +978,11 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	} //initialization  
 	
 	function initQuantityOptions() {
-		$scope.ticketQuantityOptions = [];
+		const ticketQuantityOptions = [];
 		for (i=1; i < 11; i++) {
-			$scope.ticketQuantityOptions.push(i);
+			ticketQuantityOptions.push(i);
 		}
+		return ticketQuantityOptions;
 	}
 
 	function initMap() {
