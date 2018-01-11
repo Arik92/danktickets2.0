@@ -12,7 +12,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		}); */
 		initEvent();
 		showImage();
-		initQuantityOptions();
+		$scope.ticketQuantityOptions = initQuantityOptions();
 		$scope.selectedQuantity = 1;
 		$scope.ticketCart = [];
 		$scope.ticketSum = 0;
@@ -26,10 +26,11 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	} //initialization  
 	
 	function initQuantityOptions() {
-		$scope.ticketQuantityOptions = [];
+		const ticketQuantityOptions = [];
 		for (i=1; i < 11; i++) {
-			$scope.ticketQuantityOptions.push(i);
+			ticketQuantityOptions.push(i);
 		}
+		return ticketQuantityOptions;
 	}
 
 	function initMap() {
