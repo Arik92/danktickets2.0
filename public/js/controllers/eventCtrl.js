@@ -1,4 +1,4 @@
-app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService', '$document','NgMap','angularLoad', '$timeout','$state', function($scope,$rootScope, $stateParams, createService, $document, NgMap, angularLoad, $timeout, $state){
+app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService', '$document','NgMap','angularLoad', '$timeout','$state','$location', function($scope,$rootScope, $stateParams, createService, $document, NgMap, angularLoad, $timeout, $state, $location){
 	console.log("state param for event", $stateParams);	
 	this.$onInit = () => {
 		//var socket = io(); //might move someplace else
@@ -152,18 +152,19 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	  }//for cleaning out empty entries
 	  var storageCart= localStorage.getItem('dankCart');
 	  if (storageCart) {
-	  var cartData = JSON.parse(storageCart);
+		var cartData = JSON.parse(storageCart);
 	   	for (var j=0;j<$scope.ticketCart.length;j++) {
-			for (var i=0;i<cartData.length;i++) {
-				if ($scope.ticketCart[j].ticketName===cartData[i].ticketName) {
-					cartData[i].howMany+= $scope.ticketCart[j].howMany;
-				}
-			}//for looping storage cart 
+			cartData.push($scope.ticketCart[j]);
 		}//for looping ticket cart 
-	  }// if adding to already existing cart 
-	  console.log("cart before setting", $scope.ticketCart);
-	  localStorage.setItem('dankCart', JSON.stringify($scope.ticketCart));
-	  $state.go('/cart');
+			  localStorage.setItem('dankCart', JSON.stringify(cartData)); // if merging was made, 
+	  }else {
+		 	  localStorage.setItem('dankCart', JSON.stringify($scope.ticketCart));
+	  }//else not loading a new cart
+	  //console.log("cart before setting", $scope.ticketCart);
+	  $timeout(function () {
+              $location.path('/cart');
+            }, 2000);
+	  //$state.go('/cart');
 	//TODO: check that the event has said number of tickets available. if it does, connect to socket and reserve tickets
 	// have a request to update the db about and reserve said tickets 
 	//
