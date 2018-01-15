@@ -67,7 +67,7 @@ body {
   font-size: 14px;
   line-height: 24px;
   min-height: 100%;
-  overflow: auto;
+  /* overflow: auto; */
 }
 ul,
 li {
@@ -265,15 +265,15 @@ header .mainmenu-container > ul > li > a:hover {
   color: #FF8625;
 }
 header .mainmenu-container > ul > li:hover > ul {
-  top: 70%;
-  left: -150%;
+  top: 80%;
+  right: 0;
   visibility: visible;
   opacity: 1;
 }
 header .mainmenu-container > ul > li > ul {
   position: absolute;
-  top: 150%;
-  left: -150%;
+  top: 110%;
+  right: 0;
   width: 190px;
   border-top: 2px solid #FF8625;
   background: #fff;
