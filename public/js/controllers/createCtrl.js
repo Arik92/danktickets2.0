@@ -320,7 +320,8 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       //console.log("compared " + isLegit + " and ok. and the result is" + isLegit.localeCompare("ok"));
       if (submitPic) {
         Upload.upload({ // 'http://localhost:8000/events/upload'
-          url: 'https://danktickets.herokuapp.com/events/upload',//webAPI exposed to upload the file
+          url: 'http://localhost:8000/events/upload',
+          // url: 'https://danktickets.herokuapp.com/events/upload',//webAPI exposed to upload the file
           data: {
             file: submitPic,
             event: evt
@@ -333,7 +334,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
             $scope.showRedirect = true;
             $timeout(function () {
               $location.path('/');
-            }, 2000);
+            }, 500);
             //$window.alert('Success'  + resp.config.data.file.name + ' uploaded');
             $scope.imageName = resp.data.file_name;
             console.log("image name will be?", $scope.imageName);
