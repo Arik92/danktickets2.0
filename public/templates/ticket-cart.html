@@ -19,6 +19,7 @@
           <th>Fee</th>
           <th>Quantity: </th>
           <th>Subtotal</th>
+		  <th><button class="btn btn-danger" ng-click="remove($index)">remove</button></th>
         </tr>
         <tr>
           <td><a ui-sref="event({id: item.eventId})">{{item.title}}<br/> {{item.ticketName}}</td>
@@ -27,7 +28,7 @@
           <td>{{item.howMany}}</td>
           <td>{{item.howMany*item.ticketPrice}}</td>
         </tr>
-		<button class="btn btn-danger" ng-click="remove($index)">remove</button>
+		<button class="btn btn-warning" ng-click="clear()">clear</button>
       </table>
     </div>
   </div>
