@@ -88,6 +88,17 @@ router.get('/searchByActivity/:type', function(req, res, next){
   })//findCb
 }) //NOTE: get event by a specific type criteria. for future use
 
+router.get('/generalSearch/:searchQuery', function(req, res, next){
+	//var queryPattern = /req.params.query/;
+  Event.find({$or: [{title: {$regex: req.params.searchQuery, $options: 'i'}},{description: {$regex: req.params.searchQuery, $options: 'i'}} ]}, function(err, resultEvents){
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(resultEvents);
+    }//else
+  })//findCb
+}) //NOTE: get event by a specific type criteria. for future use
+
 router.post('/upload', function (req, res1, next) {
   upload(req,res1,function(err){
              if(err){
