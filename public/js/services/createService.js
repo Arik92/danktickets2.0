@@ -68,6 +68,14 @@ var getTickets = function(id) {
 	})//get ticet CB
 }//get event tickets by ID
 
+var generalSearch = function(searchQuery) {
+	return $http.get('/events/generalSearch/'+searchQuery).then(function(result){
+		return result.data;
+	}, function(error) {
+		throw (error);
+	});
+}
+
 
 
   // var vote = function(battle, userId) {
@@ -142,6 +150,7 @@ var getTickets = function(id) {
     updateEvent: updateEvent,
     deleteEvent: deleteEvent,
     getEventById: getEventById,
-	getTickets: getTickets
+	getTickets: getTickets,
+	generalSearch: generalSearch
   };
 });
