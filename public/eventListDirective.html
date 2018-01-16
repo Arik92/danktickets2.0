@@ -1,0 +1,41 @@
+<section class="upcoming-events">
+  <h1 style="text-align: center">{{eventsheader}}</h1 style="text-align: center">
+  <ul>
+    <li ng-repeat="event in myevents | limitTo: mylimit" 
+        class="upcoming-event-container"
+    >
+      <div class="event-img-container">
+        <img ng-src="{{ event.imgURL }}" alt="event image">
+      </div>
+      <div class="ticket-type">Premium</div>
+      <div class="info-container">
+        <div class="date-time">
+          <p> 
+            <a ui-sref="">
+              <i style="color: lightcoral" class="fa fa-calendar-o"></i>
+              {{ event.date }}
+            </a>
+          </p>
+          <p>{{ event.startTime }} - {{ event.endTime }}</p>
+        </div>
+        <div class="location">
+          <p>
+            <a ui-sref="">
+              <i style="color: lightgreen" class="fa fa-map-marker"></i>
+              {{ event.location }}
+            </a>
+          </p>
+        </div>
+        <h4>{{ event.name }}</h4>
+      </div>
+      <div class="event-footer-container">
+        <ul class="tags">
+          <li>#Weed</li>
+        </ul>
+        <div class="share">share</div>
+        <div class="bookmark">bookmark</div>
+      </div>
+    </li>
+  </ul>
+
+</section>

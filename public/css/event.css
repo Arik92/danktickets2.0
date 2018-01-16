@@ -39,6 +39,7 @@
 }
 
 
+
 /* Event Grid */
 
 #event-grid-container p,
@@ -91,6 +92,7 @@ h5 {
 .ticket-bar p {
   margin: 0;
 }
+
 
 
 
@@ -245,43 +247,64 @@ section.event-map img {
 
 
 section.upcoming-events {
-  /* display: none; */
-  font-size: 1em;
-  margin-top: 2em;
-}
-
-section.upcoming-events h3 {
-  text-align: center;
-  font-size: 1.3em;
-  padding: 0 1em;
-}
-
-.upcoming-event-container {
-  display: flex;
+  font-size: 1rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
   max-width: 600px;
-  margin: 2em auto;
-  background: #eee;
-  padding: 1em;
 }
 
-.upcoming-event-container img {
-  max-width: 200px;
-  height: auto;
+section.upcoming-events .upcoming-event-container {
+  margin-bottom: 1.5rem;
+  display: grid;
+  border: solid 0.75px #424242;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas: 
+    "img info"
+    "type info"
+    "footer footer"
 }
 
-.upcoming-event-container .info-container {
-  padding: 0em 1em;
+.upcoming-events .event-img-container {
+  grid-area: img;
+}
+.upcoming-events .ticket-type {
+  grid-area: type;
+  background: #424242;
+  color: #fafafa;
+}
+.upcoming-events .info-container {
+  grid-area: info;
+}
+.upcoming-events .event-footer-container {
+  grid-area: footer;
+  /* nested grid */
+  display: flex;
+} 
+
+.ticket-type, .info-container {
+  padding: 0 1rem;
 }
 
-.upcoming-event-container .date-time {
-  padding: 1em 0;
+.event-footer-container ul {
+  flex-grow: 1;
 }
 
-.upcoming-event-container .price-range {
-  text-align: center;
+.event-footer-container>ul, .event-footer-container>div {
+  border: solid 0.5px #bdbdbd;
+  padding: 0 0.5rem;
 }
 
 @media screen and (min-width: 768px) {
+
+  section.upcoming-events .upcoming-event-container {
+    grid-template-areas: 
+      "img info"
+      "type footer"
+    
+  }  
+
+
+
   #ticket-register-modal .modal-dialog {
     top: 10%;
     left: 0;
