@@ -116,7 +116,7 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
   $scope.search = function() {
 	  console.log("searcing for",$scope.searchString);
 	  	createService.generalSearch($scope.searchString).then(function(result){
-			console.log("searching for"+$scope.searchString+"yields:");
+			console.log("searching for "+$scope.searchString+" yields:");
 			console.log(result);
 		});
 	  //TODO: in the future, go to 'search/:searchString state and onInit get results array
