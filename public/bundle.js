@@ -1103,16 +1103,16 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		  }//if
 	  }//for cleaning out empty entries
 	  var storageCart= localStorage.getItem('dankCart');
-	  console.log("storage cart", storageCart);
-	  console.log("what are you?", typeof(storageCart));
+	  //console.log("storage cart", storageCart);
+	  //console.log("what are you?", typeof(storageCart));
 	  if (storageCart) {
 		//var cartData = storageCart;
 		var cartData = JSON.parse(storageCart);
-		console.log("the type of cartdata",typeof(cartData));
-		console.log("the type of cartdata",cartData);
+		//console.log("the type of cartdata",typeof(cartData));
+		//console.log("the type of cartdata",cartData);
 		//console.log("cart data after stringify", cartData);
 	   	for (var j=0;j<cartData.length;j++) {
-			console.log("current cartData", cartData[i]);
+			//console.log("current cartData", cartData[j]);
 			$scope.ticketCart.push(cartData[j]);
 		}//for looping ticket cart 
 			  //localStorage.setItem('dankCart', JSON.stringify(cartData)); // if merging was made, 
