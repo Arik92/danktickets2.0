@@ -17,7 +17,7 @@ app.controller('ticketCtrl', ['createService', '$scope', '$window', '$stateParam
 		}		
 		$scope.remove = function (index) {
 			$scope.dankCart.splice(index, 1);
-			localStorage.setItem('dankCart', $scope.dankCart);
+			localStorage.setItem('dankCart', JSON.stringify($scope.dankCart));
 		}
 		$scope.clear = function() {
 			localStorage.removeItem('dankCart');
