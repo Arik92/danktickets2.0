@@ -246,14 +246,15 @@ section.event-map img {
 }
 
 
-section.upcoming-events {
+.upcoming-events {
   font-size: 1rem;
   margin: 2rem auto;
   padding: 0 1rem;
   max-width: 600px;
 }
 
-section.upcoming-events .upcoming-event-container {
+.upcoming-events .upcoming-event-container {
+  font-size: 1.3rem; 
   margin-bottom: 1.5rem;
   display: grid;
   border: solid 0.75px #424242;
@@ -266,6 +267,8 @@ section.upcoming-events .upcoming-event-container {
 
 .upcoming-events .event-img-container {
   grid-area: img;
+  max-height: 122px;
+  overflow: hidden;
 }
 .upcoming-events .ticket-type {
   grid-area: type;
@@ -291,12 +294,16 @@ section.upcoming-events .upcoming-event-container {
 
 .event-footer-container>ul, .event-footer-container>div {
   border: solid 0.5px #bdbdbd;
-  padding: 0 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.event-footer-container .fa, .event-footer-container>ul {
+  font-size: 1.3rem;
 }
 
 @media screen and (min-width: 768px) {
 
-  section.upcoming-events .upcoming-event-container {
+  .upcoming-events .upcoming-event-container {
     grid-template-areas: 
       "img info"
       "type footer"
@@ -415,7 +422,7 @@ section.upcoming-events .upcoming-event-container {
     grid-area: event-map;
   }
 
-  section.upcoming-events {
+  .upcoming-events {
     display: block;
     grid-area: upcoming;
   }
