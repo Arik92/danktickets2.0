@@ -41,6 +41,11 @@ app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/event.html',
       controller: 'eventCtrl'
     })
+    .state('search', {
+      url: '/search/:string',
+      templateUrl: '/templates/search-results.html',
+      controller: 'searchCtrl'
+    })
 	 .state('ticket-cart', {
       url: '/cart',
       templateUrl: '/templates/ticket-cart.html',
