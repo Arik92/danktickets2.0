@@ -1,26 +1,27 @@
 <ul class="upcoming-events">
   <li ng-repeat="event in myevents | limitTo: mylimit" class="upcoming-event-container">
-    <div class="event-img-container">
-      <img ng-src="{{ event.imgURL }}" alt="event image">
-    </div>
+  <div class="event-img-container " id="card-img-holder" style="background-image: url({{event.image}});">   
+     </div>    
     <div class="ticket-type">Premium</div>
     <div class="info-container">
       <div class="date-time">
           <a ui-sref="">
             <i style="color: lightcoral" class="fa fa-calendar-o"></i>
-            {{ event.date }}, {{ event.startTime }} - {{ event.endTime }}
+
+            {{ event.startDateDisplay }}
           </a>
+        </p>
+        <p>{{ event.startDateDisplay }} - {{ event.endDateDisplay }}</p>
       </div>
       <div class="location">
-          <a ui-sref="">
-            <i style="color: lightgreen" class="fa fa-map-marker"></i>
-            {{ event.location }}
-          </a>
+        <p>          
+			<span>							
+				<a href={{event.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i style="color: lightgreen" class="fa fa-map-marker"></i>{{event.location.locationName}}</span></a>							
+			</span>         
+        </p>
       </div>
-      <p ng-if="event.organizer.name" class="presented-by">
-        <span style="font-style: italic">{{ event.organizer.name }}</span> presents
-      </p>
-      <h3>{{ event.name }}</h3>
+      <h4>{{ event.title }}</h4>
+
     </div>
     <div class="event-footer-container">
       <ul class="tags">

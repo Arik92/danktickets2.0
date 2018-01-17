@@ -51,7 +51,7 @@ router.get('/findByOwner/:name', function(req, res, next){
 }) // get event by OWNER name.
 
 router.get('/findById/:id', function(req, res, next){
-  Event.find({_id: req.params.id}).populate('organizer tickets').exec(function(err,foundEvent){
+  Event.find({_id: req.params.id}).populate('organizer').exec(function(err,foundEvent){
     if (err) {
       console.error(err);
     } else {
@@ -90,13 +90,22 @@ router.get('/searchByActivity/:type', function(req, res, next){
 
 router.get('/generalSearch/:searchQuery', function(req, res, next){
 	//var queryPattern = /req.params.query/;
-  Event.find({$or: [{title: {$regex: req.params.searchQuery, $options: 'i'}},{description: {$regex: req.params.searchQuery, $options: 'i'}} ]}, function(err, resultEvents){
+  Event.find({
+	  $or: 
+	  [{
+		  title: {$regex: req.params.searchQuery, $options: 'i'}
+		  },{
+		  description: {$regex: req.params.searchQuery, $options: 'i'}
+		  },{
+		  name: {$regex: req.params.searchQuery, $options: 'i'}
+	  }]
+		  }).populate('organizer').exec(function(err, resultEvents){
     if (err) {
       console.log(err);
     } else {
       res.send(resultEvents);
     }//else
-  })//findCb
+  })//exec
 }) //NOTE: get event by a specific type criteria. for future use
 
 router.post('/upload', function (req, res1, next) {

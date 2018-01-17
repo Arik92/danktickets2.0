@@ -18,6 +18,7 @@ var eventSchema = new Schema({
   type: String,
   organizer: { type: Schema.Types.ObjectId, ref:"Profile" },
   location: Object,  
+  // organizerName: String,
   image: String,
   startTime: Number,
   startDateDisplay: String,
