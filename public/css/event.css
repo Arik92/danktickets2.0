@@ -245,6 +245,7 @@ section.event-map img {
   margin: auto;
 }
 
+/* upcoming events directive styling */
 
 .upcoming-events {
   font-size: 1rem;
@@ -280,9 +281,13 @@ section.event-map img {
 }
 .upcoming-events .event-footer-container {
   grid-area: footer;
-  /* nested grid */
   display: flex;
 } 
+
+.upcoming-events .presented-by {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
 
 .ticket-type, .info-container {
   padding: 0 1rem;
