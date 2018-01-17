@@ -111,7 +111,8 @@ var generalSearch = function(searchQuery) {
       date: 'Tue, Feb 22',
       startTime: '7:00 PM',
       endTime: '11:00 PM',
-      location: 'Santa Cruz, CA'
+      location: 'Santa Cruz, CA',
+      organizer: {name: 'The Undertaker'}
     },
     {
       imgURL: "../../img/banner-carousel/meet-art-sesh.jpg",
@@ -120,7 +121,8 @@ var generalSearch = function(searchQuery) {
       date: 'Thu, Mar 15',
       startTime: '7:00 PM',
       endTime: '11:00 PM',
-      location: 'Long Beach, CA'
+      location: 'Long Beach, CA',
+      organizer: {name: 'The Rock'}
     },
     {
       imgURL: "../../img/banner-carousel/cannabis-cup.jpg",
@@ -129,7 +131,8 @@ var generalSearch = function(searchQuery) {
       date: 'Sun, April 01',
       startTime: '7:00 PM',
       endTime: '11:00 PM',
-      location: 'Oakland, CA'
+      location: 'Oakland, CA',
+      organizer: {name: 'Stone Cold Steve Austin'}
     },
     {
       imgURL: "../../img/banner-carousel/420-festival.jpg",
@@ -138,7 +141,8 @@ var generalSearch = function(searchQuery) {
       date: 'Fri, Jan 26',
       startTime: '7:00 PM',
       endTime: '11:00 PM',
-      location: 'Pasadena, CA'
+      location: 'Pasadena, CA',
+      organizer: {name: 'Triple H'}
     }
   ];
 

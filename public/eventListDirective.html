@@ -6,23 +6,21 @@
     <div class="ticket-type">Premium</div>
     <div class="info-container">
       <div class="date-time">
-        <p>
           <a ui-sref="">
             <i style="color: lightcoral" class="fa fa-calendar-o"></i>
-            {{ event.date }}
+            {{ event.date }}, {{ event.startTime }} - {{ event.endTime }}
           </a>
-        </p>
-        <p>{{ event.startTime }} - {{ event.endTime }}</p>
       </div>
       <div class="location">
-        <p>
           <a ui-sref="">
             <i style="color: lightgreen" class="fa fa-map-marker"></i>
             {{ event.location }}
           </a>
-        </p>
       </div>
-      <h4>{{ event.name }}</h4>
+      <p ng-if="event.organizer.name" class="presented-by">
+        <span style="font-style: italic">{{ event.organizer.name }}</span> presents
+      </p>
+      <h3>{{ event.name }}</h3>
     </div>
     <div class="event-footer-container">
       <ul class="tags">
