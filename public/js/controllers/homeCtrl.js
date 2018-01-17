@@ -113,13 +113,13 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
     }
     return blogs;
   }
-  $scope.search = function() {
+  /*$scope.search = function() {
 	  console.log("searcing for",$scope.searchString);
 	  	createService.generalSearch($scope.searchString).then(function(result){
 			console.log("searching for "+$scope.searchString+" yields:");
 			console.log(result);
 		});
 	  //TODO: in the future, go to 'search/:searchString state and onInit get results array
-  }
+  }*/
 
 }]);
