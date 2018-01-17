@@ -254,6 +254,7 @@ section.upcoming-events {
 }
 
 section.upcoming-events .upcoming-event-container {
+  font-size: 1.3rem; 
   margin-bottom: 1.5rem;
   display: grid;
   border: solid 0.75px #424242;
@@ -266,6 +267,8 @@ section.upcoming-events .upcoming-event-container {
 
 .upcoming-events .event-img-container {
   grid-area: img;
+  max-height: 122px;
+  overflow: hidden;
 }
 .upcoming-events .ticket-type {
   grid-area: type;
@@ -291,7 +294,11 @@ section.upcoming-events .upcoming-event-container {
 
 .event-footer-container>ul, .event-footer-container>div {
   border: solid 0.5px #bdbdbd;
-  padding: 0 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.event-footer-container .fa, .event-footer-container>ul {
+  font-size: 1.3rem;
 }
 
 @media screen and (min-width: 768px) {
