@@ -1,5 +1,36 @@
 <main>
   <div class="search-map" style="text-align: center">I'm a map</div>
-  <div class="filter-container" style="text-align: center"> here are some filters</div>
-  <event-list-directive myevents="events" mylimit="3"></event-list-directive>
+  <div class="filter-container" style="text-align: center">
+  here are some filters
+    <button class="btn btn-success" ng-click="defaultFilter()">Default</button>
+  <button class="btn btn-info" ng-click="priceFilter()">by Price</button>
+  <button class="btn btn-info" ng-click="dateFilter()">by Date</button>
+  </div>  
+  <div ng-show="relevanceFlag">
+  <h3>By title: </h3>
+  <event-list-directive myevents="titleEvents" mylimit="3"></event-list-directive>
+  <h3>By Organizer: </h3>
+  <event-list-directive myevents="organizerEvents" mylimit="3"></event-list-directive>
+  <h3>By description: </h3>
+  <event-list-directive myevents="nearbyEvents" mylimit="3"></event-list-directive>
+  </div>
+  <div ng-show="priceFlag">
+  <filtered-event-directive myevents="events" myFilter="event.minTicketPrice" mylimit="3"></filtered-event-directive>
+  </div>
+  <div ng-show="dateFlag">
+  <filtered-event-directive myevents="events" myFilter="event.startTime" mylimit="3"></filtered-event-directive>
+  </div>
+  <!--<div ng-show="relevanceFlag"></div>
+  <div ng-show="relevanceFlag"></div> -->
+  <div>
+	<h3>Nearby events</h3>
+	<div ng-hide="nearbyEvents">
+		<p>couldnt find and events withim 50 miles of your location</p>
+	</div>
+	<div ng-show="nearbyEvents">
+		<event-list-directive myevents="nearbyEvents" mylimit="3"></event-list-directive>
+	</div>
+  </div>
+
+  <!--<event-list-directive myevents="events" mylimit="3"></event-list-directive>-->
 </main>
