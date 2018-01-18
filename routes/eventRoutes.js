@@ -90,7 +90,8 @@ router.get('/searchByActivity/:type', function(req, res, next){
 
 router.get('/generalSearch/:searchQuery', function(req, res, next){
 	//var queryPattern = /req.params.query/;
-  Event.find({
+	//Event.find().then(function(error, 
+  /*Event.find({
 	  $or: 
 	  [{
 		  title: {$regex: req.params.searchQuery, $options: 'i'}
@@ -105,7 +106,17 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
     } else {
       res.send(resultEvents);
     }//else
-  })//exec
+  })//exec */
+	Event.find().populate('organizer').exec(function(err, resultEvents) {		
+		var patt = new RegExp(req.params.searchQuery);		
+		var searchResults =[];
+		for (var i=0;i<resultEvents.length;i++) {			
+			if ((resultEvents[i].organizer.name.search(patt)!=-1)||(resultEvents[i].description.search(patt)!=-1)||(resultEvents[i].title.search(patt)!=-1)) {
+			searchResults.push(resultEvents[i]);	
+			}//if query was found in either the title, description, or organizer fields 			
+		}//for i 
+		res.send(searchResults);
+	})// event cb 
 }) //NOTE: get event by a specific type criteria. for future use
 
 router.post('/upload', function (req, res1, next) {
