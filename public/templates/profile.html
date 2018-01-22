@@ -1,33 +1,29 @@
-<div class="profile-settings-container">
+<h2 class="settings-header page-centering">Profile Settings</h2>
+<hr>
+<div class="profile-settings-container page-centering">
 
-  <section>
-    <h1>Account Information</h1>
-    <hr>
+  <nav class="settings-nav">
+    <ul>
+      <li ng-repeat="tab in profileTabs track by $index" ng-class="{ activeSetting: isSet($index) }">
+        <a href ng-click="setTab($index)">{{tab}}</a>
+      </li>
+    </ul>
+  </nav>
 
-    <div class="account-email-container">
-      <h2>
-        Account email address
-      </h2>
-      <div class="email-info-container">
-        <p>
-          myemail@gmail.com
-        </p>
-        <button>Change that shit</button>
+  <section ng-show="isSet(0)" class="info-section">
+    <div>
+      <!-- <h3 class="section-header">Account Info</h3> -->
+      <div class="profile-photo-container">
+        <div class="dotted-container">
+          <h4>Profile Photo</h4>
+          <p>Add a profile image</p>
+        </div>
       </div>
     </div>
-
-    <div class="profile-photo-container">
-      <h2>Profile Photo</h2>
-      <div>Add a profile image</div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
+    <div class="container settings-info-container">
       <form>
-        <h2>Contact Us</h2>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5 col-md-offset-1">
             <div class="form-group">
               <label for="first">First Name</label>
               <input type="text" class="form-control" placeholder="" id="first">
@@ -35,7 +31,7 @@
           </div>
           <!--  col-md-6   -->
 
-          <div class="col-md-6">
+          <div class="col-md-5">
             <div class="form-group">
               <label for="last">Last Name</label>
               <input type="text" class="form-control" placeholder="" id="last">
@@ -46,7 +42,7 @@
 
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5 col-md-offset-1">
             <div class="form-group">
               <label for="company">Company</label>
               <input type="text" class="form-control" placeholder="" id="company">
@@ -56,7 +52,7 @@
           </div>
           <!--  col-md-6   -->
 
-          <div class="col-md-6">
+          <div class="col-md-5">
 
             <div class="form-group">
               <label for="phone">Phone Number</label>
@@ -69,7 +65,7 @@
 
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5 col-md-offset-1">
 
             <div class="form-group">
               <label for="email">Email address</label>
@@ -78,12 +74,11 @@
           </div>
           <!--  col-md-6   -->
 
-          <div class="col-md-6">
+          <div class="col-md-5">
             <div class="form-group">
-              <label for="url">Your Website
-                <small>Please include http://</small>
+              <label for="url">Your Website URL
               </label>
-              <input type="url" class="form-control" id="url" placeholder="url">
+              <input type="url" class="form-control" id="url" placeholder="http://">
             </div>
 
           </div>
@@ -91,9 +86,22 @@
         </div>
         <!--  row   -->
 
-        <button type="save" class="btn btn-primary">Save</button>
+        <button class="btn btn-primary info-save-btn">Save</button>
       </form>
     </div>
-
   </section>
+
+  <!-- Other Sections -->
+  <section ng-show="isSet(1)">
+    <h3 class="section-header">Password Reset</h3>
+  </section>
+
+  <section ng-show="isSet(2)">
+    <h3 class="section-header">Email Preferences</h3>
+  </section>
+
+  <section ng-show="isSet(3)">
+    <h3 class="section-header">Close Account</h3>
+  </section>
+
 </div>

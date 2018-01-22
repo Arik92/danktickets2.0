@@ -1,0 +1,98 @@
+.page-centering {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.settings-header {
+  text-align: center;
+  padding: 2rem 0 0 0;
+  margin-bottom: 0
+}
+
+.settings-content-container {
+  /* max-width: 690px; */
+  /* margin: auto; */
+}
+
+.activeSetting {
+  background: purple;
+}
+
+.activeSetting a {
+  color: white;
+}
+
+nav.settings-nav {
+  display: flex;
+  justify-content: center;
+  background: #eeeeee;
+  padding: 0.5rem 0;
+}
+
+nav.settings-nav li {
+  padding: 0.2rem;
+  text-align: center;
+}
+
+.section-header {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.profile-photo-container {
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #eeeeee;
+  border-radius: 25px;
+  padding: 0 1.5rem;
+}
+
+.dotted-container {
+  border: dashed 3px lightblue;
+  padding: 2rem;
+}
+
+.settings-info-container {
+  padding: 0 1.5rem;
+  margin: 2rem auto;
+  /* width: 90%; */
+}
+
+.info-save-btn {
+  display: block;
+  width: 150px; 
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 1024px) {
+
+  .profile-settings-container {
+    display: flex;
+  }
+
+  .settings-header{
+    text-align: left;
+    padding-left: 2rem;
+  }
+
+  nav.settings-nav {
+    width: 150px;
+  }
+
+  section.info-section {
+    width: 768px;
+  }
+
+  .settings-info-container {
+    width: 100%;
+  }
+
+  nav.settings-nav li {
+    padding: 0.5rem 1rem;
+  }
+}

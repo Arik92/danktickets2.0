@@ -9,7 +9,8 @@ app.controller('profileCtrl',['userService','$scope','$window','$rootScope', fun
   })//GET request route
 	 }
   this.$onInit = () => {
-   userPrep(); 
+    initTabs();
+    userPrep(); 
   }
   $scope.submit = function(){ //function to call on form submit
               //TODO: check if from is valid
@@ -56,4 +57,21 @@ app.controller('profileCtrl',['userService','$scope','$window','$rootScope', fun
                 });
               }//else just update the event
         }//sumbit
+
+  
+  //// ===================== tabs stuff ===========================
+  function initTabs() {
+    $scope.tab = 0;    
+    $scope.profileTabs = ['Account Info', 'Password Reset', 'Email Preferences', 'Close Account'];
+  }
+
+  $scope.setTab = function(newTab){
+    $scope.tab = newTab;
+  };
+
+  $scope.isSet = function(tabNum){
+    return $scope.tab === tabNum;
+  };
+
+  
 }]);
