@@ -1,6 +1,8 @@
 <ul class="upcoming-events">
   <li ng-repeat="event in myevents | limitTo: mylimit" class="upcoming-event-container">
-    <div class="event-img-container " id="card-img-holder" style="background-image: url({{event.image}});">
+    <div class="event-img-container " id="card-img-holder">
+      <img ng-if="event.image" ng-src="{{ event.image }}" alt="{{ event.title }}">
+      <img ng-if="!event.image" src="" alt="{{ event.title }}">
     </div>
     <div class="ticket-type">Premium</div>
     <div class="info-container">
