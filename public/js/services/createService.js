@@ -43,38 +43,38 @@ app.factory('createService', function ($http) {
     }) // add promise
   }// post event
 
-var updateEvent = function(event) {
-  return $http.put('/events/' + event._id, event).then(function(result) {
-    return result.data;
-  }, function(error) {
-    throw error;
-  })
-}
-var deleteEvent = function(id) {	
-  return $http.delete('/events/' + id).then(function(result) {
-    console.log("event that was deleted: ", result);
-    return result.data; //??
-  }, function(error) {
-    throw (error);
-  }) //promise callbacks
-} // delete an event
+  var updateEvent = function (event) {
+    return $http.put('/events/' + event._id, event).then(function (result) {
+      return result.data;
+    }, function (error) {
+      throw error;
+    })
+  }
+  var deleteEvent = function (id) {
+    return $http.delete('/events/' + id).then(function (result) {
+      console.log("event that was deleted: ", result);
+      return result.data; //??
+    }, function (error) {
+      throw (error);
+    }) //promise callbacks
+  } // delete an event
 
-var getTickets = function(id) {
-	return $http.get('/events/eventTickets/'+id).then(function(result) {
-		console.log("service result",result);
-		return result.data;
-	}, function(error){
-		throw (error);
-	})//get ticet CB
-}//get event tickets by ID
+  var getTickets = function (id) {
+    return $http.get('/events/eventTickets/' + id).then(function (result) {
+      console.log("service result", result);
+      return result.data;
+    }, function (error) {
+      throw (error);
+    })//get ticet CB
+  }//get event tickets by ID
 
-var generalSearch = function(searchQuery) {
-	return $http.get('/events/generalSearch/'+searchQuery).then(function(result){
-		return result.data;
-	}, function(error) {
-		throw (error);
-	});
-}
+  var generalSearch = function (searchQuery) {
+    return $http.get('/events/generalSearch/' + searchQuery).then(function (result) {
+      return result.data;
+    }, function (error) {
+      throw (error);
+    });
+  }
 
 
 
@@ -105,44 +105,48 @@ var generalSearch = function(searchQuery) {
 
   const dummyEvents = [
     {
-      imgURL: "../../img/banner-carousel/Chalice.jpg",
+      image: "../../img/banner-carousel/Chalice.jpg",
       bgColor: 'linear-gradient(#1eb089 0%, #7c49ab 100%, #7db9e8 100%)',
-      name: 'Chalice Palace',
-      date: 'Tue, Feb 22',
+      title: 'Chalice Palace',
+      startDateDisplay: 'Tue, Feb 22',
+      endDateDisplay: 'Tue, Feb 26',
       startTime: '7:00 PM',
       endTime: '11:00 PM',
-      location: 'Santa Cruz, CA',
-      organizer: {name: 'The Undertaker'}
+      location: {locationName: 'San Diego'},
+      organizer: { name: 'The Undertaker' }
     },
     {
-      imgURL: "../../img/banner-carousel/meet-art-sesh.jpg",
+      image: "../../img/banner-carousel/meet-art-sesh.jpg",
       bgColor: 'linear-gradient(red 0%, #7c49ab 100%, #7db9e8 100%)',
-      name: 'Meet Art Sesh',
-      date: 'Thu, Mar 15',
+      title: 'Meet Art Sesh',
+      startDateDisplay: 'Thu, Mar 15',
+      endDateDisplay: 'Thu, Mar 16',
       startTime: '7:00 PM',
       endTime: '11:00 PM',
-      location: 'Long Beach, CA',
-      organizer: {name: 'The Rock'}
+      location: {locationName: 'San Diego'},
+      organizer: { name: 'The Rock' }
     },
     {
-      imgURL: "../../img/banner-carousel/cannabis-cup.jpg",
+      image: "../../img/banner-carousel/cannabis-cup.jpg",
       bgColor: 'linear-gradient(blue 0%, #7c49ab 100%, #7db9e8 100%)',
-      name: 'Cannabis Cup',
-      date: 'Sun, April 01',
+      title: 'Cannabis Cup',
+      startDateDisplay: 'Sun, April 01',
+      endDateDisplay: 'Sun, April02',
       startTime: '7:00 PM',
       endTime: '11:00 PM',
-      location: 'Oakland, CA',
-      organizer: {name: 'Stone Cold Steve Austin'}
+      location: {locationName: 'San Diego'},
+      organizer: { name: 'Stone Cold Steve Austin' }
     },
     {
-      imgURL: "../../img/banner-carousel/420-festival.jpg",
+      image: "../../img/banner-carousel/420-festival.jpg",
       bgColor: 'linear-gradient(#1eb089 0%, #7c49ab 100%, #7db9e8 100%)',
-      name: '420 Fest',
-      date: 'Fri, Jan 26',
+      title: '420 Fest',
+      startDateDisplay: 'Fri, Jan 26',
+      endDateDisplay: 'Fri, Jan 28',
       startTime: '7:00 PM',
       endTime: '11:00 PM',
-      location: 'Pasadena, CA',
-      organizer: {name: 'Triple H'}
+      location: {locationName: 'San Diego'},
+      organizer: { name: 'Triple H' }
     }
   ];
 
@@ -154,7 +158,7 @@ var generalSearch = function(searchQuery) {
     updateEvent: updateEvent,
     deleteEvent: deleteEvent,
     getEventById: getEventById,
-	getTickets: getTickets,
-	generalSearch: generalSearch
+    getTickets: getTickets,
+    generalSearch: generalSearch
   };
 });
