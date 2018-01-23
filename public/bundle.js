@@ -59,6 +59,12 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
 
   function initProfs() {
     $scope.profiles = [];
+	var dummyProf = {
+		'_id': -1,
+		'name': "Select an organizer profile"
+	}
+	$scope.profiles.push(dummyProf);
+	//$scope.selectedOrganizer = $scope.profiles[0];
     console.log("initial profs", $rootScope.currentUser);
     userService.getUserByName($rootScope.currentUser).then(function (user) {
       $scope.user = user;
@@ -67,8 +73,10 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
         console.log("data 2", data2);
 		if (data2) {
 			for (var i = 0; i < data2.length; i++) {
-			  $scope.profiles[i] = data2[i];
-			}//for
+			  $scope.profiles.push(data2[i]);
+			}//for			
+		//$scope.$apply();	
+		console.log("profiles", $scope.profiles);
 		}//if 
       })//get organizers
     })//userFactory cb
@@ -363,6 +371,10 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       } else {
         createService.postEvent(evt).then(function (resp) {
           console.log("Event added successfully through service!")
+		  $scope.showRedirect = true;
+            $timeout(function () {
+              $location.path('/');
+            }, 500);
         })
       }
     }
