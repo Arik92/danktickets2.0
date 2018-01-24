@@ -109,10 +109,10 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
   })//exec */
 	Event.find().populate('organizer').exec(function(err, resultEvents) {		
 		var patt = new RegExp(req.params.searchQuery, 'i');
-		console.log(patt);
+		console.log("regex is", patt);
 		var searchResults =[];
 		for (var i=0;i<resultEvents.length;i++) {			
-			if ((resultEvents[i].organizer.name.search(patt)!=-1)||(resultEvents[i].description.search(patt)!=-1)||(resultEvents[i].title.search(patt)!=-1)) {
+			if ((patt.test(resultEvents[i].organizer.name))||(patt.test(resultEvents[i].description))||(patt.test(resultEvents[i].title))) {
 			searchResults.push(resultEvents[i]);	
 			}//if query was found in either the title, description, or organizer fields 			
 		}//for i 

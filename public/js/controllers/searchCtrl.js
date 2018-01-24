@@ -1,15 +1,15 @@
 app.controller('searchCtrl', ['$scope', '$window', 'createService', '$stateParams', function ($scope, $window, createService, $stateParams) {
 
 	function filter() {
-		var patt = new RegExp($stateParams.string);
+		var patt = new RegExp($stateParams.string, 'i');
 		$scope.organizerEvents = [];
 		$scope.titleEvents = [];
 		$scope.descriptionEvents = [];
 		for (var i = 0; i < $scope.events.length; i++) {
 			setCheapestTicket($scope.events[i]);
-			if ($scope.events[i].title.search(patt) != -1) {
+			if (patt.test($scope.events[i].title)) {
 				$scope.titleEvents.push($scope.events[i]);
-			} else if ($scope.events[i].organizer.name.search(patt) != -1) {
+			} else if (patt.test($scope.events[i].organizer.name)) {
 				$scope.organizerEvents.push($scope.events[i]);
 			} else {
 				$scope.descriptionEvents.push($scope.events[i]);
