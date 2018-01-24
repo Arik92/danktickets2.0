@@ -69,6 +69,8 @@ app.factory('createService', function ($http) {
   }//get event tickets by ID
 
   var generalSearch = function (searchQuery) {
+	  //searchQuery = '/'+searchQuery+'/'+i;
+	  console.log('service patt', searchQuery);
     return $http.get('/events/generalSearch/' + searchQuery).then(function (result) {
       return result.data;
     }, function (error) {

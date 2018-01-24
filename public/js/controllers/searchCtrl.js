@@ -108,5 +108,4 @@ app.controller('searchCtrl', ['$scope', '$window', 'createService', '$stateParam
 			filter();
 		});// CB
 	}//onInit
-
 }]);
