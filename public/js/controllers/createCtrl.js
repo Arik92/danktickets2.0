@@ -302,6 +302,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
     var submitPic = document.getElementById('fileItem').files[0];
     console.log("in submit! uploading...", submitPic);
     var evt = {
+	  version: 1,
       title: $scope.eName,
       owner: $scope.user._id,
       organizer: $scope.selectedOrganizer,

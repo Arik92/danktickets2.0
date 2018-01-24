@@ -16,6 +16,7 @@ app.controller('orCtrl', ['orService', 'userService', '$scope', 'Upload', '$wind
     var submitPic = document.getElementById('fileItem').files[0];
     console.log("in submit! uploading...", submitPic);
     var organizer = {
+	  version: 1,
       name: $scope.oName,
       owner: $scope.user._id,
       about: $scope.oDesc,
