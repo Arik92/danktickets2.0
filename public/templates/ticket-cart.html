@@ -40,7 +40,7 @@
             </tr>
           </table>
           <hr>
-          <div><strong>Total:</strong> $200</div>
+          <div><strong>Total:</strong> {{ dankCartTotal | currency }}</div>
         </div>
       </div>
     </div>
@@ -73,9 +73,17 @@
                 <input type="email" class="form-control" placeholder="Enter email">
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group checkout-final">
+              <p style="padding-left: 2rem">We process all payments through trusted third party vendors.</p>
+              <p>All major credit cards and Bitcoin accepted <i class="fa fa-lg fa-smile-o" aria-hidden="true">.</i></p>
+              <div>
+                <i class="fa fa-lg fa-credit-card-alt" aria-hidden="true"></i>
+                <i class="fa fa-lg fa-cc-paypal" aria-hidden="true"></i>
+                <i class="fa fa-lg fa-cc-stripe" aria-hidden="true"></i>
+                <i class="fa fa-lg fa-btc" aria-hidden="true"></i>
+              </div>
               <div class="checkout-btn-container">
-                <button type="submit" class="btn btn-success checkout-btn">Checkout</button>
+                <button type="submit" class="btn btn-success checkout-btn">Proceed to Checkout</button>
               </div>
             </div>
           </form>

@@ -3,24 +3,38 @@ app.controller('ticketCtrl', ['createService', '$scope', '$window', '$stateParam
 		this.$onInit = () => {
 			//localStorage.removeItem('dankCart');// PANIC button
 			$scope.params = $stateParams;
-			 var storageCart= localStorage.getItem('dankCart');
-			 console.log("storage cart from cart",storageCart);
+			var storageCart = localStorage.getItem('dankCart');
+			console.log("storage cart from cart", storageCart);
 			if (storageCart) {
-             $scope.dankCart = JSON.parse(storageCart);
-			 console.log( $scope.dankCart);
-			} 			
+				$scope.dankCart = JSON.parse(storageCart);
+				console.log($scope.dankCart);
+			}
 			//$scope.tickets = tickets;
-			//console.log($scope.params);      
+			//console.log($scope.params); 
+			getDankCartTotal();
 		}//onInit 
 		$scope.showTickets = function () {
 			console.log("Ticketss", $scope.eventTickets);
-		}		
+		}
 		$scope.remove = function (index) {
 			$scope.dankCart.splice(index, 1);
 			localStorage.setItem('dankCart', JSON.stringify($scope.dankCart));
 		}
-		$scope.clear = function() {
+		$scope.clear = function () {
 			localStorage.removeItem('dankCart');
 			console.log("removed", localstorage.getItem('dankCart'));
 		}
+
+		function getSubtotal(item) {
+			return item.howMany * item.ticketPrice;
+		}
+
+		function getDankCartTotal() {
+			const total = $scope.dankCart.reduce((total, item) => {
+				return total += getSubtotal(item);
+			}, 0)
+
+			$scope.dankCartTotal = total;
+		}
+
 	}]);
