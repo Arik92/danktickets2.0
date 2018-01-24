@@ -12,7 +12,7 @@ app.controller('searchCtrl', ['$scope', '$window', 'createService', '$stateParam
 			} else if ($scope.events[i].organizer.name.search(patt) != -1) {
 				$scope.organizerEvents.push($scope.events[i]);
 			} else {
-				descriptionEvents.push($scope.events[i]);
+				$scope.descriptionEvents.push($scope.events[i]);
 			}//else 
 		}//for 
 		if ($scope.nearbyEvents === []) {

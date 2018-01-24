@@ -13,6 +13,7 @@ var User = require("./usermodel");
 });
 var ticket = mongoose.model("Ticket", ticketSchema); */
 var eventSchema = new Schema({
+  version: Number,
   owner: { type: Schema.Types.ObjectId, ref:"User" },
   title: String,
   type: String,

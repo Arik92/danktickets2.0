@@ -25,6 +25,7 @@ passport.use(new FacebookStrategy({
           console.error(err);
         } if (!user) {
           user = new User({
+			version: 1,
             socialId: profile.id,
             email: profile.emails ? profile.emails[0].value : "",
             provider: 'facebook',

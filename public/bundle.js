@@ -3,7 +3,7 @@ var config = {
   MAPS_API_KEY: 'AIzaSyBlqLa-v1ZicvzAhvzPyX4p0mbXIzYjGEk',
   STATIC_MAPS_API_KEY: 'AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM'
 };
-module.exports = config; 
+module.exports = config;
 },{}],2:[function(require,module,exports){
 app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', 'angularLoad', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location, angularLoad) {
   console.log('hello from createCtrl');
@@ -335,8 +335,8 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       //console.log("compared " + isLegit + " and ok. and the result is" + isLegit.localeCompare("ok"));
       if (submitPic) {
         Upload.upload({ // 'http://localhost:8000/events/upload'
-          url: 'http://localhost:8000/events/upload',
-          // url: 'https://danktickets.herokuapp.com/events/upload',//webAPI exposed to upload the file
+          //url: 'http://localhost:8000/events/upload',
+           url: 'https://danktickets.herokuapp.com/events/upload',//webAPI exposed to upload the file
           data: {
             file: submitPic,
             event: evt
