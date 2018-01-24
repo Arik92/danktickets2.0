@@ -2,10 +2,30 @@
   background: purple !important;
 }
 
+/* grid definitions */
+.search-results-map {
+  display: none;
+  grid-area: map;
+  max-height: 296px;
+}
+.search-result-string {
+  grid-area: string;
+  text-align: center;
+  margin: 1rem 0;
+}
 .search-filter-container {
+  grid-area: filter;
   display: flex;
   justify-content: center;
   margin: 2rem;
+}
+.search-events-container {
+  grid-area: events;
+}
+
+.search-page-container {
+  max-width: 1200px;
+  margin: 3rem auto;
 }
 
 .search-filter-container button {
@@ -16,15 +36,36 @@
   text-align: center;
 }
 
-.search-results-map {
-  display: none;
-}
+
 
 @media screen and (min-width: 768px) {
   .search-results-map {
     display: block;
     max-width: 300px;
-    padding: 2rem;
+    padding: 1rem;
+    background: lightblue;
     margin: 0 auto;
   }
+}
+
+
+@media screen and (min-width: 1024px) {
+  .search-page-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+      "map string"
+      "map filter"
+      "map events"
+  }
+
+  .search-result-string {
+    font-size: 4rem;
+    /* text-align: left; */
+  }
+
+  .search-filter-container {
+    /* justify-content: flex-start; */
+  }
+
 }
