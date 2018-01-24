@@ -67,6 +67,7 @@ body {
   font-size: 14px;
   line-height: 24px;
   min-height: 100%;
+  background: #F8F8FA;
   /* overflow: auto; */
 }
 ul,

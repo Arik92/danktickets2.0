@@ -257,6 +257,7 @@ section.event-map img {
 .upcoming-events .upcoming-event-container {
   font-size: 1.3rem; 
   margin-bottom: 1.5rem;
+  background: #FFFFFF;
   display: grid;
   border: solid 0.75px #424242;
   grid-template-columns: 1fr 2fr;
