@@ -1,0 +1,30 @@
+.active-filter {
+  background: purple !important;
+}
+
+.search-filter-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+}
+
+.search-filter-container button {
+  margin-right: 2rem;
+}
+
+.search-results h4 {
+  text-align: center;
+}
+
+.search-results-map {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .search-results-map {
+    display: block;
+    max-width: 300px;
+    padding: 2rem;
+    margin: 0 auto;
+  }
+}
