@@ -42,11 +42,11 @@
 					<div class=" logo">
 						<a ui-sref="home"><img src="img/resources/logo.png" alt="Logo Image"></a>
 					</div>
-					<form class="navbar-form" role="search" ng-controller="homeCtrl">
+					<form class="navbar-form" role="search" ng-controller="homeCtrl" ng-sumbit="search()">
 							<div class="input-group add-on">
 								<input class="form-control" placeholder="Search Events" name="srch-term" id="srch-term" type="text" ng-model="searchString">
 								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit" ng-click="search()"><a ui-sref="search({string: searchString})"><i class="glyphicon glyphicon-search"></i></a></button>
+									<button class="btn btn-default" type="submit" ng-click="search()"><i class="glyphicon glyphicon-search"></i></button>
 								</div>
 							</div>
 					</form>

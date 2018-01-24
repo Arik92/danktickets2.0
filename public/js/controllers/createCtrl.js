@@ -328,8 +328,8 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       //console.log("compared " + isLegit + " and ok. and the result is" + isLegit.localeCompare("ok"));
       if (submitPic) {
         Upload.upload({ // 'http://localhost:8000/events/upload'
-          url: 'http://localhost:8000/events/upload',
-          // url: 'https://danktickets.herokuapp.com/events/upload',//webAPI exposed to upload the file
+          //url: 'http://localhost:8000/events/upload',
+           url: 'https://danktickets.herokuapp.com/events/upload',//webAPI exposed to upload the file
           data: {
             file: submitPic,
             event: evt

@@ -1,4 +1,4 @@
-app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$rootScope', '$scope', '$http', '$window', '$location', function (createService, dankAdService, linkService, $rootScope, $scope, $http, $window, $location) {
+app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$rootScope', '$scope', '$http', '$window', '$location','$state', function (createService, dankAdService, linkService, $rootScope, $scope, $http, $window, $location, $state) {
 
   this.$onInit = () => {
     console.log("hello from hoe ctrl");
@@ -113,13 +113,10 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
     }
     return blogs;
   }
-  /*$scope.search = function() {
+  $scope.search = function() {
 	  console.log("searcing for",$scope.searchString);
-	  	createService.generalSearch($scope.searchString).then(function(result){
-			console.log("searching for "+$scope.searchString+" yields:");
-			console.log(result);
-		});
+	  $state.go('search', {string:$scope.searchString});	
 	  //TODO: in the future, go to 'search/:searchString state and onInit get results array
-  }*/
+  }
 
 }]);
