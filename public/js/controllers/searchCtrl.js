@@ -1,113 +1,111 @@
 app.controller('searchCtrl', ['$scope', '$window', 'createService', '$stateParams', function ($scope, $window, createService, $stateParams) {
-	
+
 	function filter() {
 		var patt = new RegExp($stateParams.string);
 		$scope.organizerEvents = [];
 		$scope.titleEvents = [];
-		$scope.descriptionEvents = [];		
-		for (var i=0;i<$scope.events.length;i++) {			
+		$scope.descriptionEvents = [];
+		for (var i = 0; i < $scope.events.length; i++) {
 			setCheapestTicket($scope.events[i]);
-			if ($scope.events[i].title.search(patt)!=-1) {
+			if ($scope.events[i].title.search(patt) != -1) {
 				$scope.titleEvents.push($scope.events[i]);
-			}else if ($scope.events[i].organizer.name.search(patt)!=-1) {
+			} else if ($scope.events[i].organizer.name.search(patt) != -1) {
 				$scope.organizerEvents.push($scope.events[i]);
 			} else {
 				$scope.descriptionEvents.push($scope.events[i]);
 			}//else 
 		}//for 
-	if ($scope.nearbyEvents===[]) {
-		$scope.nearbyEvents = undefined;
-	}
-	console.log("by title ", $scope.titleEvents);
-	console.log("by org ", $scope.organizerEvents);
-	console.log("by description ", $scope.descriptionEvents);
+		if ($scope.nearbyEvents === []) {
+			$scope.nearbyEvents = undefined;
+		}
+		console.log("by title ", $scope.titleEvents);
+		console.log("by org ", $scope.organizerEvents);
+		console.log("by description ", $scope.descriptionEvents);
 	}//filter
-	
+
 	$scope.useOwnLocation = function () {
 		$scope.nearbyEvents = [];
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (success) {
-        console.log("success", success);
-        $scope.selectedLat = success.coords.latitude;
-        $scope.selectedLng = success.coords.longitude;
-        $scope.timeStamp = success.timestamp / 1000;
-        for (var i = 0; i < $scope.events.length; i++) {
-          $scope.events[i].distance = $scope.getDistanceFromLatLonInMiles($scope.events[i].location.latlng.lat, $scope.events[i].location.latlng.lng, $scope.selectedLat, $scope.selectedLng);
-          $scope.events[i].distance = Math.round($scope.events[i].distance * 100) / 100;
-          console.log("distance is", $scope.events[i].distance);
-		  if ($scope.events[i].distance<=50) {
-				$scope.nearbyEvents.push($scope.events[i]);
-			}
-        }//for 	
-		if ($scope.nearbyEvents[0]===undefined) {
-			console.log("empty nearby");
-		$scope.nearbyEvents = undefined;
-		}		
-        $scope.$apply();
-      });//navigator cb  
-    } else {
-      alert("this browser does not support location services");
-    }//else 
-  }//useOwnLocation
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function (success) {
+				console.log("success", success);
+				$scope.selectedLat = success.coords.latitude;
+				$scope.selectedLng = success.coords.longitude;
+				$scope.timeStamp = success.timestamp / 1000;
+				for (var i = 0; i < $scope.events.length; i++) {
+					$scope.events[i].distance = $scope.getDistanceFromLatLonInMiles($scope.events[i].location.latlng.lat, $scope.events[i].location.latlng.lng, $scope.selectedLat, $scope.selectedLng);
+					$scope.events[i].distance = Math.round($scope.events[i].distance * 100) / 100;
+					console.log("distance is", $scope.events[i].distance);
+					if ($scope.events[i].distance <= 50) {
+						$scope.nearbyEvents.push($scope.events[i]);
+					}
+				}//for 	
+				if ($scope.nearbyEvents[0] === undefined) {
+					console.log("empty nearby");
+					$scope.nearbyEvents = undefined;
+				}
+				$scope.$apply();
+			});//navigator cb  
+		} else {
+			alert("this browser does not support location services");
+		}//else 
+	}//useOwnLocation
 
-  $scope.getDistanceFromLatLonInMiles = function (lat1, lon1, lat2, lon2) {
-    console.log("comparing" + lat1 + " and " + lon1 + " and " + lat2 + " lon 2: " + lon2);
-    var R = 6371; // Radius of the earth in km
-    var dLat = deg2rad(lat2 - lat1); // deg2rad below
-    var dLon = deg2rad(lon2 - lon1);
-    var a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = (R * c) * 0.621371; // Distance in miles: 1km= 0.621371 miles
-    return d;
-  }
+	$scope.getDistanceFromLatLonInMiles = function (lat1, lon1, lat2, lon2) {
+		console.log("comparing" + lat1 + " and " + lon1 + " and " + lat2 + " lon 2: " + lon2);
+		var R = 6371; // Radius of the earth in km
+		var dLat = deg2rad(lat2 - lat1); // deg2rad below
+		var dLon = deg2rad(lon2 - lon1);
+		var a =
+			Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+			Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+			Math.sin(dLon / 2) * Math.sin(dLon / 2);
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		var d = (R * c) * 0.621371; // Distance in miles: 1km= 0.621371 miles
+		return d;
+	}
 
-  function deg2rad(deg) {
-    return deg * (Math.PI / 180)
-  }
-	function setCheapestTicket(currEvent) {	
+	function deg2rad(deg) {
+		return deg * (Math.PI / 180)
+	}
+	function setCheapestTicket(currEvent) {
 		console.log(currEvent);
 		var min = currEvent.eventTickets[0].ticketPrice;
-		for (var i=0;i<currEvent.eventTickets.length;i++) {
-			if ((currEvent.eventTickets[i].ticketPrice<min)&&(currEvent.eventTickets[i].ticketQ>0)) {
+		for (var i = 0; i < currEvent.eventTickets.length; i++) {
+			if ((currEvent.eventTickets[i].ticketPrice < min) && (currEvent.eventTickets[i].ticketQ > 0)) {
 				min = currEvent.eventTickets[i].ticketPrice;
 			}//if found a new Minimum
 		}//for 
 		currEvent.minTicketPrice = min;
 	}//set cheapest ticket price (part of filter function)
-	$scope.defaultFilter = function() {
+	$scope.defaultFilter = function () {
 		$scope.relevanceFlag = true;
 		$scope.priceFlag = false;
 		$scope.dateFlag = false;
 	}//defaultFilter
-	$scope.priceFilter = function() {
+	$scope.priceFilter = function () {
 		$scope.relevanceFlag = false;
 		$scope.priceFlag = true;
 		$scope.dateFlag = false;
 	}//defaultFilter
-	$scope.dateFilter = function() {
+	$scope.dateFilter = function () {
 		$scope.relevanceFlag = false;
 		$scope.priceFlag = false;
 		$scope.dateFlag = true;
 	}//defaultFilter
-  this.$onInit = () => {
-	  $scope.defaultFilter();
-	/*$scope.relevanceFlag = true;
-	$scope.priceFlag = false;
-	$scope.dateFlag = false;*/
-	console.log("searching for", $stateParams.string);    
-    //$scope.dummyEvents = createService.dummyEvents;	
-    //console.log($scope.dummyEvents);
-    createService.generalSearch($stateParams.string).then(function (result) {
-		console.log("search result", result);
-		if (result) {
-		$scope.events = result;	
-		$scope.useOwnLocation();		
-		filter();	
-		}		
-    });// CB
-  }//onInit
-
+	this.$onInit = () => {
+		$scope.defaultFilter();
+		/*$scope.relevanceFlag = true;
+		$scope.priceFlag = false;
+		$scope.dateFlag = false;*/
+		console.log("searching for", $stateParams.string);
+		$scope.searchString = $stateParams.string;
+		//$scope.dummyEvents = createService.dummyEvents;	
+		//console.log($scope.dummyEvents);
+		createService.generalSearch($stateParams.string).then(function (result) {
+			console.log("search result", result);
+			$scope.events = result;
+			$scope.useOwnLocation();
+			filter();
+		});// CB
+	}//onInit
 }]);

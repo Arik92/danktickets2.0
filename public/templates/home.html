@@ -126,23 +126,19 @@
 		</div>
 	</main>
 
-	<div class="other-events">
-		<event-list-directive myevents="dummyEvents" mylimit="4"></event-list-directive>
-	</div>
-
 	<!-- grid style - to keep or not to keep? that is the question-->
-	<!-- <section class="other-events">
+	<section class="other-events">
 		<ul class="event-grid-container">
 			<li ng-repeat="event in dummyEvents | limitTo: 4" class="featured-event event-poster">
 				<div class="img-container">
-					<img ng-src="{{ event.imgURL }}" class="">
+					<img ng-src="{{ event.image }}" class="">
 				</div>
 				<div class="info">
 					<div class="date">
 							<a ui-sref="">
 								<span>
 									<i style="color: lightcoral" class="fa fa-calendar-o"></i>
-									{{ event.date }}, {{ event.startTime }}
+									{{ event.startDateDisplay }}, {{ event.startTime }}
 								</span>
 							</a>
 					</div>
@@ -150,15 +146,15 @@
 						<a ui-sref="">
 								<span>
 									<i style="color: lightgreen" class="fa fa-map-marker"></i>
-									{{ event.location }}
+									{{ event.location.locationName }}
 								</span>
 						</a>
 					</div>
-					<div class="name">{{ event.name }}</div>
+					<div class="name">{{ event.title }}</div>
 			</div>
 			</li>
 		</ul>
-	</section> -->
+	</section>
 
 	<aside class="side-content">
 

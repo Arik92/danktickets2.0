@@ -1,0 +1,69 @@
+.active-filter {
+  background: purple !important;
+}
+
+/* grid definitions */
+.search-results-map {
+  display: none;
+  grid-area: map;
+}
+.search-result-string {
+  grid-area: string;
+  text-align: center;
+  margin: 1rem 0;
+}
+.search-filter-container {
+  grid-area: filter;
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+}
+.search-events-container {
+  grid-area: events;
+}
+
+.search-page-container {
+  max-width: 1200px;
+  margin: 3rem auto;
+}
+
+.search-filter-container button {
+  margin-right: 2rem;
+}
+
+.search-results h4 {
+  text-align: center;
+}
+
+
+
+@media screen and (min-width: 768px) {
+  .search-results-map {
+    display: block;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+  .search-page-container {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+      "map string"
+      "map filter"
+      "map events"
+  }
+
+  .search-result-string {
+    font-size: 5rem;
+    /* text-align: left; */
+  }
+
+  .search-filter-container {
+    /* justify-content: flex-start; */
+  }
+
+}
