@@ -6,10 +6,10 @@ app.config(function ($httpProvider) {
 
 app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
-  $urlRouterProvider.otherwise('/home');
+  $urlRouterProvider.otherwise('/');
   $stateProvider
     .state('home', {
-      url: '/home',
+      url: '/',
       templateUrl: '/templates/home.html',
       controller: 'homeCtrl'
     })

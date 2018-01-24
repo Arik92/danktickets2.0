@@ -1,11 +1,10 @@
 .checkout-page-container {
-  max-width: 960px;
+  /* max-width: 960px; */
   margin: 0 auto;
   padding: 2rem;
 }
 
 .buyer-info, .my-cart {
-  max-width: 500px;
 }
 
 .buyer-info .control-label{
@@ -20,4 +19,14 @@
 .checkout-btn-container {
   display: flex;
   justify-content: center;
+}
+
+.cart-desktop {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .cart-desktop {
+    display: block;
+  }
 }
