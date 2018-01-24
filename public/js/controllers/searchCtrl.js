@@ -102,9 +102,11 @@ app.controller('searchCtrl', ['$scope', '$window', 'createService', '$stateParam
     //console.log($scope.dummyEvents);
     createService.generalSearch($stateParams.string).then(function (result) {
 		console.log("search result", result);
+		if (result) {
 		$scope.events = result;	
 		$scope.useOwnLocation();		
-		filter();		
+		filter();	
+		}		
     });// CB
   }//onInit
 
