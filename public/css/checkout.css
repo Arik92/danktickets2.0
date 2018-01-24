@@ -31,6 +31,10 @@
   display: none;
 }
 
+.checkout-tbl th, .checkout-tbl td {
+  text-align: center;
+}
+
 @media screen and (min-width: 768px) {
   .cart-desktop {
     display: block;
