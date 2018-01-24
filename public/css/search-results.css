@@ -6,7 +6,6 @@
 .search-results-map {
   display: none;
   grid-area: map;
-  max-height: 296px;
 }
 .search-result-string {
   grid-area: string;
@@ -41,9 +40,7 @@
 @media screen and (min-width: 768px) {
   .search-results-map {
     display: block;
-    max-width: 300px;
     padding: 1rem;
-    background: lightblue;
     margin: 0 auto;
   }
 }
@@ -52,6 +49,7 @@
 @media screen and (min-width: 1024px) {
   .search-page-container {
     display: grid;
+    grid-gap: 2rem;
     grid-template-columns: 1fr 2fr;
     grid-template-areas:
       "map string"
@@ -60,7 +58,7 @@
   }
 
   .search-result-string {
-    font-size: 4rem;
+    font-size: 5rem;
     /* text-align: left; */
   }
 
