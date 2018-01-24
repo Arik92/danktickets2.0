@@ -10,12 +10,11 @@
           </div>
         </div>
         <div class="panel-body" style="overflow-x: scroll">
-          <table class="table">
+          <table class="table checkout-tbl">
             <button class="btn btn-danger" ng-click="clear()"><i class="fa fa-lg fa-trash" aria-hidden="true"></i> clear cart</button>
             <tr>
               <th>Event</th>
               <th >Ticket Type</th>
-              <th >Organizer</th>
               <th>Price/Ticket</th>
               <th>Fee</th>
               <th>Quantity</th>
@@ -27,7 +26,6 @@
             <tr ng-repeat="item in dankCart track by $index">
               <td><a ui-sref="event({id: item.eventId})">{{item.title}}</td>
               <td >{{item.ticketName}}</td>
-              <td >{{item.organizer}}</td>
               <td>{{item.ticketPrice | currency}}</td>
               <td>2$</td>
               <td>{{item.howMany}}</td>
