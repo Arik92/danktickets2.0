@@ -25,9 +25,13 @@ app.controller('ticketCtrl', ['createService', '$scope', '$window', '$stateParam
 			console.log("removed", localstorage.getItem('dankCart'));
 		}
 
+		function getSubtotal(item) {
+			return item.howMany * item.ticketPrice;
+		}
+
 		function getDankCartTotal() {
-			const total = $scope.dankCart.reduce((total, ticket) => {
-				return total += ticket.ticketPrice;
+			const total = $scope.dankCart.reduce((total, item) => {
+				return total += getSubtotal(item);
 			}, 0)
 
 			$scope.dankCartTotal = total;
