@@ -73,5 +73,39 @@ app.controller('profileCtrl',['userService','$scope','$window','$rootScope', fun
     return $scope.tab === tabNum;
   };
 
+  //// ===================== checkboxes ===========================
+  
+  $scope.eventMailOptions = [
+    { title: 'Updates of new Dank Ticket Features', selected: 'true'},
+    { title: 'Weekly event guide and recommendations', selected: 'true'},
+    { title: 'Requests for additional information', selected: 'true'},
+  ]
+
+  $scope.organizerMailOptions = [
+    { title: 'Updates about new Dank Ticket features for organizers', selected: 'true'},
+    { title: 'Monthly tips for organizing events', selected: 'true'},
+    { title: 'Event Sales Recap', selected: 'true'},
+  ]
+
+  $scope.clearAll = function(options) {
+    options.forEach((option) => {
+      option.selected = false;
+    })
+  }
+
+  //// ===================== account closing radio stuff ===========================
+  
+  $scope.accountClosing = [
+    { title: 'you guys suck', optionId: 0 },
+    { title: 'I quit weed (wtf!?)', optionId: 1 },
+    { title: 'You guys are too good, I just need to save money', optionId: 2 },
+    { title: 'Other(please explain)', optionId: 3, isOther: true }
+  ]
+
+  $scope.closingOption = {
+    id: 0
+  } 
+
+  $scope.otherClosingOption = "";
   
 }]);
