@@ -1,46 +1,77 @@
-<main class="search-page-container">
-  <div class="search-results-map">
-    <img src="../img/google-map-placeholder.png" alt="">
+<main class="search-page-container" ng-class="titleEvents.length < 3 ? 'bottom-spacer' : '' ">
+
+  <div class="map-filter-container">
+    <img src="../img/google-map-placeholder.png" class="search-results-map" alt="">
+    <div class="extra-search-filters">
+      <!-- location search -->
+      <div class="search-location has-feedback">
+        <input type="text" class="form-control" placeholder="filter by location">
+        <span style="color: purple" class="fa fa-map-marker form-control-feedback"></span>
+      </div>
+      <!-- other filtas -->
+      <ul class="other-filter-container">
+        <li ng-repeat="filterType in filterTypes track by $index">
+          <h3 ng-click="flipIcon($index)" slide-toggle="#filter-container_{{$index}}" class="filter-title">
+            {{ filterType.title }} 
+            <i ng-class="filterType.isOpen ? 'rotate-180' : '' " class="fa fa-chevron-down" aria-hidden="true"></i>
+          </h3>
+          <ul id="filter-container_{{$index}}" class="slideable" easing="linear" duration="0.2s">
+            <li ng-repeat="filter in filterType.filters" class="filter">
+              <p>{{ filter }}</p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <!-- <div class="filter-results-toggle">
+        <p style="color: steelblue">Filter Results <i class="fa fa-chevron-down" aria-hidden="true"></i></p>
+      </div> -->
+    </div>
   </div>
-  <h3 class="search-result-string">
-    <span style="font-style: italic">{{ searchString}}</span>
-    Events
-  </h3>
-  <div class="search-filter-container">
-    <button ng-class="relevanceFlag ? 'active-filter': null" class="btn btn-info" ng-click="defaultFilter()">Default</button>
-    <button ng-class="priceFlag ? 'active-filter': null" class="btn btn-info" ng-click="priceFilter()">by Price</button>
-    <button ng-class="dateFlag ? 'active-filter': null" class="btn btn-info" ng-click="dateFilter()">by Date</button>
-  </div>
-  <div class="search-events-container">
-    <div ng-show="relevanceFlag" class="search-results">
-      <div ng-if="titleEvents.length">
-        <h4>Matching Event Names </h4>
-        <event-list-directive myevents="titleEvents" mylimit="3"></event-list-directive>
-      </div>
-      <div ng-if="organizerEvents.length">
-        <h4>Matching Organizer</h4>
-        <event-list-directive myevents="organizerEvents" mylimit="3"></event-list-directive>
-      </div>
-      <div ng-if="nearbyEvents.length">
-        <h4>Matching Description</h4>
-        <event-list-directive myevents="nearbyEvents" mylimit="3"></event-list-directive>
-      </div>
+
+  <div class="right-side-container">
+    <h3 class="search-result-string">
+       Results for 
+      <span style="font-style: italic">{{ searchString}}</span>
+      Events
+    </h3>
+  
+    <!-- <button ng-class="priceFlag ? 'active-filter': null" class="btn btn-info" ng-click="priceFilter()">by Price</button> -->
+    <div class="search-filter-container">
+      <div ng-class="relevanceFlag ? 'active-filter': null" class="" ng-click="defaultFilter()">Relevance</div>
+      <div ng-class="dateFlag ? 'active-filter': null" class="" ng-click="dateFilter()">Date</div>
     </div>
-    <div ng-show="priceFlag" class="search-results">
-      <h4>Ordered By Price</h4>
-      <event-list-directive myevents="events" myfilter="event.minTicketPrice" mylimit="3"></event-list-directive>
-    </div>
-    <div ng-show="dateFlag" class="search-results">
-      <h4>Ordered By Date</h4>
-      <event-list-directive myevents="events" myfilter="event.startTime" mylimit="3"></event-list-directive>
-    </div>
-    <!--<div ng-show="relevanceFlag"></div>
-    <div ng-show="relevanceFlag"></div> -->
-    <div class="search-results">
-      <h4>Events Near You</h4>
-      <h3 ng-if="!nearbyEvents" style="text-align: center">Couldn't find matching events within 50 miles</h3>
-      <div ng-if="nearbyEvents">
-        <event-list-directive myevents="nearbyEvents" mylimit="3"></event-list-directive>
+  
+    <div class="search-events-container">
+      <div ng-show="relevanceFlag" class="search-results">
+        <div ng-if="titleEvents.length">
+          <h4>Matching Event Titles </h4>
+          <event-list-directive myevents="titleEvents" mylimit="3"></event-list-directive>
+        </div>
+        <div ng-if="organizerEvents.length">
+          <h4>Matching Organizer</h4>
+          <event-list-directive myevents="organizerEvents" mylimit="3"></event-list-directive>
+        </div>
+        <div ng-if="nearbyEvents.length">
+          <h4>Matching Description</h4>
+          <event-list-directive myevents="nearbyEvents" mylimit="3"></event-list-directive>
+        </div>
+      </div>
+      <div ng-show="priceFlag" class="search-results">
+        <h4>Ordered By Price</h4>
+        <event-list-directive myevents="events" myfilter="event.minTicketPrice" mylimit="3"></event-list-directive>
+      </div>
+      <div ng-show="dateFlag" class="search-results">
+        <h4>Ordered By Date</h4>
+        <event-list-directive myevents="events" myfilter="event.startTime" mylimit="3"></event-list-directive>
+      </div>
+      <!--<div ng-show="relevanceFlag"></div>
+      <div ng-show="relevanceFlag"></div> -->
+      <div class="search-results" style="margin-top: 50px">
+        <h4>Events Near You</h4>
+        <h3 ng-if="!nearbyEvents" style="text-align: center">Sorry, Couldn't find any events within 50 miles</h3>
+        <div ng-if="nearbyEvents">
+          <event-list-directive myevents="nearbyEvents" mylimit="3"></event-list-directive>
+        </div>
       </div>
     </div>
   </div>

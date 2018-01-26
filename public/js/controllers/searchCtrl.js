@@ -108,4 +108,28 @@ app.controller('searchCtrl', ['$scope', '$window', 'createService', '$stateParam
 			filter();
 		});// CB
 	}//onInit
+
+	//// ===================== filter types ===========================
+	$scope.filterTypes = [
+		{
+			title: 'event type',
+			isOpen: false,
+			filters: ['all', 'convention', 'meeting', 'concert']
+		},
+		{
+			title: 'date',
+			isOpen: false,
+			filters: ['all', 'today', 'tomorrow', 'this week', 'this weekend', 'next week', 'next month', 'custom date']
+		},
+		{
+			title: 'price',
+			isOpen: false,
+			filters: ['all', 'paid', 'free']
+		}
+	];
+
+	$scope.flipIcon = (index) => {
+		$scope.filterTypes[index].isOpen = !$scope.filterTypes[index].isOpen; 
+	}
+	
 }]);
