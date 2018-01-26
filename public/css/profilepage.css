@@ -3,6 +3,11 @@
   margin: 0 auto;
 }
 
+.warning-text {
+  font-size: 1.5rem;
+  color: red;
+}
+
 .settings-header {
   text-align: center;
   padding: 2rem 0 0 0;
@@ -81,7 +86,35 @@ nav.settings-nav li {
   margin: 0 auto;
 }
 
+/* close account */
+.confirm-close-container {
+  margin-top: 3rem;
+}
+
+.confirm-close-container .close-input-container {
+  display: flex;
+  margin-bottom: 3rem;
+}
+
+.close-input-container p {
+  margin-right: 2rem;
+  width: 150px;
+}
+.close-input-container input {
+  width: 40%;
+}
+
 @media screen and (min-width: 1024px) {
+
+  .profile-settings-container>section {
+    margin-left: 1rem;
+  }
+
+  .profile-settings-container>.left-aligned {
+    margin-left: 5rem;
+    margin-bottom: 200px;
+    width: 50%;
+  }
 
   .profile-settings-container {
     display: flex;
@@ -89,7 +122,16 @@ nav.settings-nav li {
 
   .settings-header {
     text-align: left;
-    padding-left: 2rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .settings-section-header {
+    padding: 1rem;
+    text-align: center;
+  }
+  .settings-section-header-left{
+    text-align: left;
   }
 
   nav.settings-nav {
