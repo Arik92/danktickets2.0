@@ -107,7 +107,10 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
       res.send(resultEvents);
     }//else
   })//exec */
-	Event.find().populate('organizer').exec(function(err, resultEvents) {		
+	Event.find().populate('organizer').exec(function(err, resultEvents) {	
+		if (err) {
+			res.send(err);
+	} else {
 		var patt = new RegExp(req.params.searchQuery, 'i');
 		console.log("regex is", patt);
 		var searchResults =[];
@@ -117,7 +120,8 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
 			}//if query was found in either the title, description, or organizer fields 			
 		}//for i 
 		res.send(searchResults);
-	})// event cb 
+		}//else
+	})// event cb 	
 }) //NOTE: get event by a specific type criteria. for future use
 
 router.post('/upload', function (req, res1, next) {
