@@ -70,8 +70,9 @@ app.factory('createService', function ($http) {
 
   var generalSearch = function (searchQuery) {
 	  //searchQuery = '/'+searchQuery+'/'+i;
-	  //console.log('service patt', searchQuery);
+	  console.log('service patt', searchQuery);
     return $http.get('/events/generalSearch/' + searchQuery).then(function (result) {
+		console.log("SERVICE results", result);
       return result.data;
     }, function (error) {
       throw (error);
