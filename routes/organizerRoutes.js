@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Profile = require("../models/profilemodel");
+var User = require("../models/usermodel");
+
 /////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
 var multer = require('multer');
 
@@ -48,15 +50,23 @@ router.get('/findById/:id', function(req, res, next){
 }) // get organizer by its unique id.
 router.get('/:name', function(req, res, next){
   Profile.find().populate({
-	  path:'owner',
-	  match: {name: req.params.name}
-  }).exec(function(err, foundProfiles) {
+	  path: 'owner',
+	  model: 'User',
+	  match: {username: req.params.name}
+	  }).exec(function(err, foundProfiles) {
     if (err) {
       console.log(err);
       res.send(err);
-    }  else {      
-      res.send(foundProfiles);
-    }
+    }  else {   
+		console.log("found profiles", foundProfiles);
+		var result = [];
+		for (var i=0;i<foundProfiles.length;i++) {
+			if (foundProfiles[i].owner) {
+				result.push(foundProfiles[i]);
+			}
+		}//for 
+		  res.send(result);
+    }//else
 });
 }) // get profiles by OWNER Name.
 

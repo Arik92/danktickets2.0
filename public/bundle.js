@@ -64,14 +64,15 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
 		'name': "Select an organizer profile"
 	}*/
 	//$scope.profiles.push(dummyProf);
-	$scope.selectedProfile = "Select an organizer";
-	$scope.selectedOrganizer = "(please choose one)";
+	$scope.pleaseSelectOrg = true;
+	$scope.selectedProfile = "Select an organizer";	
+	//$scope.selectedOrganizer = "(please choose one)";
 	//$scope.selectedOrganizer = $scope.profiles[0];
     console.log("initial profs", $rootScope.currentUser);
     userService.getUserByName($rootScope.currentUser).then(function (user) {
       $scope.user = user;
       console.log("create user is", $scope.user);
-      orService.getOrganizersByUser($scope.user._id).then(function (data2) {
+      orService.getOrganizersByUser($scope.user.username).then(function (data2) {
         console.log("data 2", data2);
 		if (data2) {
 			for (var i = 0; i < data2.length; i++) {
@@ -85,6 +86,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
   }//initProfs //NOTE we need the user fetching here to get that owner id
   // initProfs();
   $scope.selectProf = function () {
+	  $scope.pleaseSelectOrg = false;	
     console.log("selected profile is", $scope.selectedOrganizer);
   }
   //////////////////////////////////// initializing pickers ////////////////////////////////////////////
