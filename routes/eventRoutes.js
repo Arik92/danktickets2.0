@@ -107,10 +107,14 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
       res.send(resultEvents);
     }//else
   })//exec */
-	Event.find().populate('organizer').exec(function(err, resultEvents) {	
+	Event.find().populate({
+		path: 'organizer',
+		select: 'name'
+	}).exec(function(err, resultEvents) {	
 		if (err) {
 			res.send(err);
 	} else {
+		console.log("events results so far ", resultEvents);
 		var patt = new RegExp(req.params.searchQuery, 'i');
 		console.log("regex is", patt);
 		var searchResults =[];
@@ -120,22 +124,27 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
 			//TODO: request 1 - same but without the organizer.req2 - where the organizer name matches the pattern
 			}//if query was found in either the title, description, or organizer fields 			
 		}//for i 
-		Event.find.populate({
+		console.log("search results", searchResults);
+		Event.find().populate({
 			path: 'organizer',
-			match: { name: { $regex: req.params.searchQuery }},
-		}).exec(function(err2, orgEvents) {
-			if (err2) {
-				res.send(err2);
-			} else {
-				for (i=0;i<orgEvents.length;i++) {
-					searchEvents.push(orgEvents[i]);
-				}//for 
-				res.send(searchResults);
-			}
-		}//organizer CB 
+			select: 'name',
+			match: { name: { $regex: patt }},
+			}).exec(function(err2, orgEvents) {
+				console.log("orgEvents", orgEvents);
+				if (err2) {
+					res.send(err2);
+				} else {
+					if (orgEvents.length>0) {
+						for (i=0;i<orgEvents.length;i++) {
+							searchResults.push(orgEvents[i]);
+						}//for 
+					}//if
+					res.send(searchResults);
+				}//else 
+		})//organizer CB 
 		//res.send(searchResults);
-		}//else
-	})// event cb 	
+		}//else found first events
+	})// exec	
 }) //NOTE: get event by a specific type criteria. for future use
 
 router.post('/upload', function (req, res1, next) {
