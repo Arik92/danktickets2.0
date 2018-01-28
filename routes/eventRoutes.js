@@ -114,6 +114,7 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
 		if (err) {
 			res.send(err);
 	} else {
+		console.log("results ", resultEvents);
 		var patt = new RegExp(req.params.searchQuery, 'i');
 		console.log("regex is", patt);
 		var searchResults =[];
