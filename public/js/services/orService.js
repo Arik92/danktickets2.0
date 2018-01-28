@@ -1,8 +1,8 @@
 app.factory('orService', function($http){
   
-  var getOrganizersByUser = function(userId) {
-    return $http.get('/organizers/'+userId).then(function(result) {
-      console.log("result from organizer service service: ");
+  var getOrganizersByUser = function(userName) {
+    return $http.get('/organizers/'+userName).then(function(result) {
+      console.log("result from organizer service: ");
       console.log(result.data);
       return result.data;
     }, function(error) {
