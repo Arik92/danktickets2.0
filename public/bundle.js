@@ -3,7 +3,7 @@ var config = {
   MAPS_API_KEY: 'AIzaSyBlqLa-v1ZicvzAhvzPyX4p0mbXIzYjGEk',
   STATIC_MAPS_API_KEY: 'AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM'
 };
-module.exports = config; 
+module.exports = config;
 },{}],2:[function(require,module,exports){
 app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', 'angularLoad', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location, angularLoad) {
   console.log('hello from createCtrl');
@@ -59,11 +59,13 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
 
   function initProfs() {
     $scope.profiles = [];
-	var dummyProf = {
+	/*var dummyProf = {
 		'_id': -1,
 		'name': "Select an organizer profile"
-	}
-	$scope.profiles.push(dummyProf);
+	}*/
+	//$scope.profiles.push(dummyProf);
+	$scope.selectedProfile = "Select an organizer";
+	$scope.selectedOrganizer = "(please choose one)";
 	//$scope.selectedOrganizer = $scope.profiles[0];
     console.log("initial profs", $rootScope.currentUser);
     userService.getUserByName($rootScope.currentUser).then(function (user) {

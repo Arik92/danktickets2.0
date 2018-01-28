@@ -51,9 +51,9 @@
           <h4>Matching Organizer</h4>
           <event-list-directive myevents="organizerEvents" mylimit="3"></event-list-directive>
         </div>
-        <div ng-if="nearbyEvents.length">
+        <div ng-if="descriptionEvents.length">
           <h4>Matching Description</h4>
-          <event-list-directive myevents="nearbyEvents" mylimit="3"></event-list-directive>
+          <event-list-directive myevents="descriptionEvents" mylimit="3"></event-list-directive>
         </div>
       </div>
       <div ng-show="priceFlag" class="search-results">
