@@ -59,12 +59,13 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
 
   function initProfs() {
     $scope.profiles = [];
-	var dummyProf = {
+	/*var dummyProf = {
 		'_id': -1,
 		'name': "Select an organizer profile"
-	}
+	}*/
 	//$scope.profiles.push(dummyProf);
 	$scope.selectedProfile = "Select an organizer";
+	$scope.selectedOrganizer = "(please choose one)";
 	//$scope.selectedOrganizer = $scope.profiles[0];
     console.log("initial profs", $rootScope.currentUser);
     userService.getUserByName($rootScope.currentUser).then(function (user) {
