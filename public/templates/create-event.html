@@ -9,7 +9,7 @@
           </div>
           <div class="form-group">
             <label class="control-label" for="source_name"><h2>Organizer: </h2> </label>
-			<p>Selected organizer: {{selectedOrganizer}}</p>
+			<p>Selected : {{selectedOrganizer}}</p>
             <div>
               <select ng-model="selectedOrganizer"  ng-options="profile._id as profile.name for profile in profiles" class="form-control input-md" ng-change="selectProf()">
 				<!--<option>Select your organiza</option>
