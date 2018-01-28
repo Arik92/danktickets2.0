@@ -114,11 +114,12 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
 		if (err) {
 			res.send(err);
 	} else {
+		console.log("results ", resultEvents);
 		var patt = new RegExp(req.params.searchQuery, 'i');
 		console.log("regex is", patt);
 		var searchResults =[];
 		for (var i=0;i<resultEvents.length;i++) {			
-			if ((patt.test(resultEvents[i].organizer.name))||(patt.test(resultEvents[i].description))||(patt.test(resultEvents[i].title))) {
+			if ((patt.test(resultEvents[i].description))||(patt.test(resultEvents[i].title))) {
 			searchResults.push(resultEvents[i]);	
 			//TODO: request 1 - same but without the organizer.req2 - where the organizer name matches the pattern
 			}//if query was found in either the title, description, or organizer fields 			
