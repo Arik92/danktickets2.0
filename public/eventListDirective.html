@@ -1,7 +1,7 @@
 <ul class="upcoming-events">
   <li ng-repeat="event in myevents | limitTo: mylimit | orderBy: myfilter" class="upcoming-event-container">
     <div class="event-img-container " id="card-img-holder">
-      <img ng-if="event.image" ng-src="{{ event.image }}" alt="{{ event.title }}">
+      <img ng-if="event.image" ng-src="{{event.image}}" err-src="../img/Placeholder.png" alt="{{ event.title }}">
       <img ng-if="!event.image" src="../img/Placeholder.png " alt="{{ event.title }}">
     </div>
     <div class="ticket-type">{{ event.minTicketPrice | currency : '$' : 0 }}</div>

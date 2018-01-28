@@ -1,4 +1,4 @@
-var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload', 'slick', 'ui.bootstrap', 'ngAnimate', 'cmelo.angularSticky', 'ngMap', 'angularLoad', 'angularSlideables']);
+var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload', 'slick', 'ui.bootstrap', 'ngAnimate', 'cmelo.angularSticky', 'ngMap', 'angularLoad', 'angularSlideables', 'angular-err-src']);
 
 app.config(function ($httpProvider) {
   $httpProvider.interceptors.push('authServiceInterceptors');
