@@ -61,7 +61,10 @@ app.controller('orCtrl', ['orService', 'userService', '$scope', 'Upload', '$wind
       });
     } else {
       orService.postOrganizer(organizer).then(function (resp) {
-        console.log("Event added successfully through service!")
+        console.log("Event added successfully through service!");
+		$timeout(function () {
+            $location.path('/');
+          }, 2000);
       })
     }//else
   };//scope.upload
