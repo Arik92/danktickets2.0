@@ -4,7 +4,6 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "./node_modules/bower/bin/bower install",
     "start": "node server.js",
     "build": "browserify ./public/js/controllers/createCtrl.js ./public/js/controllers/editCtrl.js ./public/js/controllers/eventCtrl.js -o ./public/bundle.js",
     "buildStart": "npm run build && node server.js"
@@ -26,6 +25,8 @@
     "angular-err-src": "^1.0.4",
     "angular-file-upload": "^2.5.0",
     "angular-load": "^0.5.0",
+    "angular-slick": "0.0.0",
+    "angularslick": "^0.2.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
@@ -51,6 +52,7 @@
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
+    "slick-carousel": "^1.8.1",
     "socket.io": "^2.0.4"
   },
   "description": ""
