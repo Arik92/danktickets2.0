@@ -5,7 +5,9 @@
     <div class="extra-search-filters">
       <!-- location search -->
       <div class="search-location has-feedback">
-        <input type="text" class="form-control" placeholder="filter by location">
+		<form ng-submit="locationFilter()">
+        <input type="text" ng-model="locationString" class="form-control" placeholder="filter by location">
+		</form>
         <span style="color: purple" class="fa fa-map-marker form-control-feedback"></span>
       </div>
       <!-- other filtas -->
@@ -63,6 +65,10 @@
       <div ng-show="dateFlag" class="search-results">
         <h4>Ordered By Date</h4>
         <event-list-directive myevents="events" myfilter="event.startTime" mylimit="3"></event-list-directive>
+      </div>
+	   <div ng-show="locationFlag" class="search-results">
+        <h4>Events in {{locationString}}</h4>
+        <event-list-directive myevents="locationEvents" mylimit="3"></event-list-directive>
       </div>
       <!--<div ng-show="relevanceFlag"></div>
       <div ng-show="relevanceFlag"></div> -->
