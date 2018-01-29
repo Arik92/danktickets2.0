@@ -9,6 +9,8 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
   console.log('hello from createCtrl');
   this.$onInit = () => {
 	$scope.currentTickets = [];	
+	$scope.startHr = $scope.startHrCalender[0];
+	$scope.endHr = $scope.endHrCalender[0];
     initProfs();	
     initEndDatePicker();
     initStartDatePicker();
@@ -180,8 +182,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
     });
   }
 
-  $scope.startHrCalender = [
-    '',
+  $scope.startHrCalender = [   
     '12:00 AM',
     '12:30 AM',
     '01:00 AM',
@@ -233,7 +234,6 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
   ];
   // $scope.startHr = $scope.startHrCalender[0];
   $scope.endHrCalender = [
-    '',
     '12:00 AM',
     '12:30 AM',
     '01:00 AM',
@@ -294,7 +294,8 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
   }
   $scope.compareDates = function () {
     var diff = $scope.endDate - $scope.startDate;
-    if (diff > 0) {
+	console.log("the dirf is "+diff);
+    if (diff >= -20) {
       return true;
     } else {
       return false;
@@ -303,9 +304,18 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
 
   function validator() {
     var validatorError = "ok";
+	console.log("comapre dates ", $scope.compareDates());
     if ($scope.compareDates() === false) {
       validatorError = "Invaid Event dates! Make sure the event dates are valid";
-    }
+    } else if ($scope.eName==null) {
+	  validatorError = "Please enter an event name!";
+	} else if ($scope.selectedOrganizer==null) {
+	  validatorError = "Please select an organizer!";
+	} else if ($scope.selectedType==null) {
+	  validatorError = "Please select an event type!";
+	} else if ($scope.location==null) {
+	  validatorError = "Please select event's location(at least a venue/locatlity is required)!";
+	}
     return validatorError;
   }//validator
 
