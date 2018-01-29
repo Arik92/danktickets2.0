@@ -81,23 +81,39 @@ app.controller('searchCtrl', ['$scope', '$window', 'createService', '$stateParam
 		$scope.relevanceFlag = true;
 		$scope.priceFlag = false;
 		$scope.dateFlag = false;
+		$scope.locationFlag = false;
 	}//defaultFilter
 	$scope.priceFilter = function () {
 		$scope.relevanceFlag = false;
 		$scope.priceFlag = true;
 		$scope.dateFlag = false;
+		$scope.locationFlag = false;
 	}//defaultFilter
 	$scope.dateFilter = function () {
 		$scope.relevanceFlag = false;
 		$scope.priceFlag = false;
 		$scope.dateFlag = true;
+		$scope.locationFlag = false;
 	}//defaultFilter
+	$scope.locationFilter = function() {
+		$scope.locationEvents = [];
+		var locationPatt = new RegExp($scope.locationString, 'i');		
+		for (var i=0;i<$scope.events.length;i++) {			
+			if ((locationPatt.test($scope.events[i].location.venue_name))||(locationPatt.test($scope.events[i].location.city))) {
+				$scope.locationEvents.push($scope.events[i]);
+			}//if location match
+		}//for 		
+		$scope.relevanceFlag = false;
+		$scope.priceFlag = false;
+		$scope.dateFlag = false;
+		$scope.locationFlag = true;
+	}//reSearch 
 	this.$onInit = () => {
 		$scope.defaultFilter();
 		/*$scope.relevanceFlag = true;
 		$scope.priceFlag = false;
 		$scope.dateFlag = false;*/
-		console.log("searching for", $stateParams.string);
+		//console.log("searching for", $stateParams.string);
 		$scope.searchString = $stateParams.string;
 		//$scope.dummyEvents = createService.dummyEvents;	
 		//console.log($scope.dummyEvents);
