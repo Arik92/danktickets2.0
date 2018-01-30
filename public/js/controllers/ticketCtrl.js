@@ -18,11 +18,14 @@ app.controller('ticketCtrl', ['createService', '$scope', '$window', '$stateParam
 		}
 		$scope.remove = function (index) {
 			$scope.dankCart.splice(index, 1);
-			localStorage.setItem('dankCart', JSON.stringify($scope.dankCart));
+			localStorage.setItem('dankCart', JSON.stringify($scope.dankCart));			
+			getDankCartTotal();
 		}
 		$scope.clear = function () {
-			localStorage.removeItem('dankCart');
-			console.log("removed", localstorage.getItem('dankCart'));
+			console.log("removing", localStorage.getItem('dankCart'));	
+			localStorage.removeItem('dankCart');	
+			$scope.dankCart = [];
+			$scope.dankCartTotal = 0;
 		}
 
 		function getSubtotal(item) {
@@ -30,10 +33,12 @@ app.controller('ticketCtrl', ['createService', '$scope', '$window', '$stateParam
 		}
 
 		function getDankCartTotal() {
-			const total = $scope.dankCart.reduce((total, item) => {
-				return total += getSubtotal(item);
-			}, 0)
-
+			var total = 0;
+			if ($scope.dankCart!=null) {
+				total = $scope.dankCart.reduce((sum, item) => {
+					return sum += getSubtotal(item);
+				}, 0)
+			}//if
 			$scope.dankCartTotal = total;
 		}
 
