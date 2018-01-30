@@ -14,7 +14,7 @@ const sendNodeMail = require('./nodeMailing');
 module.exports = function (router) {
 
   router.get('/searchByName/:name', function (req, res, next) {
-    User.findOne({ username: req.params.name }, function (err, user) {
+    User.findOne({ _id: req.params.name }, function (err, user) {
       if (err) {
         console.log(err);
       } else {
