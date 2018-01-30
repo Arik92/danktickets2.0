@@ -1,13 +1,13 @@
-app.controller('ticketCtrl', ['createService', '$scope', '$window', '$stateParams', '$state', '$timeout', '$location',
-	function (createService, $scope, $window, $stateParams, $state, $timeout, $location) {
+app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window', '$stateParams', '$state', '$timeout', '$location',
+	function (purchaseService,$rootScope, $scope, $window, $stateParams, $state, $timeout, $location) {
 		this.$onInit = () => {
-			//localStorage.removeItem('dankCart');// PANIC button
-			$scope.params = $stateParams;
+			//localStorage.removeItem('dankCart');// PANIC button			
+			console.log("rootScope", $rootScope.currentUser);
 			var storageCart = localStorage.getItem('dankCart');
 			console.log("storage cart from cart", storageCart);
 			if (storageCart) {
 				$scope.dankCart = JSON.parse(storageCart);
-				console.log($scope.dankCart);
+				console.log("dankCART ", $scope.dankCart);
 			}
 			//$scope.tickets = tickets;
 			//console.log($scope.params); 
@@ -40,6 +40,13 @@ app.controller('ticketCtrl', ['createService', '$scope', '$window', '$stateParam
 				}, 0)
 			}//if
 			$scope.dankCartTotal = total;
+		}
+		
+		$scope.buyTickets = function(){
+			purchaseService.buyCart($scope.dankCart, ).then(function(err, res){
+				console.log("purchased!");
+			}) //cb 
+			console.log('buying tickets');
 		}
 
 	}]);
