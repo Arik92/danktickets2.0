@@ -8,6 +8,7 @@ var UserSchema = new Schema({
   password: String,
   email:   String,
   isEmailValidated: Boolean,
+  shoppingCart: Object,
   //numTicketsSold: Number,
   //taxForm: { type: Schema.Types.ObjectId, ref:"TaxForm" },
   provider: String,

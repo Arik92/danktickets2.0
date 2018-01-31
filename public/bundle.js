@@ -978,7 +978,7 @@ $scope.updateEndHr = function() {
 }]);
 
 },{"../config.js":1}],4:[function(require,module,exports){
-app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService', '$document','NgMap','angularLoad', '$timeout','$state','$location', function($scope,$rootScope, $stateParams, createService, $document, NgMap, angularLoad, $timeout, $state, $location){
+app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService', 'purchaseService', '$document','NgMap','angularLoad', '$timeout','$state','$location', function($scope,$rootScope, $stateParams, createService, purchaseService, $document, NgMap, angularLoad, $timeout, $state, $location){
 	console.log("state param for event", $stateParams);	
 	this.$onInit = () => {
 		//var socket = io(); //might move someplace else
@@ -1109,61 +1109,45 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	  }//else
 	}//cartMinus
 	
-	$scope.updateSum = function() {
-		var shouldUpdate = true;
+	$scope.updateSum = function() {		
 		console.log("the shopping cart is ", $scope.ticketCart);
 		console.log("the event tickets are ", $scope.event.eventTickets);
-
 		for (var i=0;i<$scope.ticketCart.length;i++) {
 			if ($scope.ticketCart[i].howMany===undefined) {
 				alert("cannot add that many tickets");
-				$scope.ticketCart[i].howMany = $scope.event.eventTickets[i].ticketQ;
-				shouldUpdate = false;
+				$scope.ticketCart[i].howMany = $scope.event.eventTickets[i].ticketQ;				
 			}//if cannot purchase that many 
-		}//for 
-		if (shouldUpdate) {
+		}//for 		
 			$scope.ticketSum = 0;
 			for (i=0;i<$scope.ticketCart.length;i++) {
+				console.log("what am I even comparing?", $scope.ticketCart[i]);
 				if ($scope.ticketCart[i].howMany>0) {
 				$scope.ticketSum+= $scope.ticketCart[i].ticketPrice*$scope.ticketCart[i].howMany;
-				}//if ticet sum is greater than 0 somehow(user bruteforcing negative value
-			}//for 
-		}//if should update the sum 
+				}//if ticket sum is greater than 0 somehow(user bruteforcing negative value
+			}//for 		
+			console.log("the new sum is ", $scope.ticketSum);
 	} //update sum to update any changes made to ticket quantities
 
 	$scope.removeFromCart = function(index) {
-		//$scope.ticketSum-=$scope.ticketCart[index].ticketPrice*$scope.ticketCart[index].ticketQ; feels DRY
 	 $scope.ticketCart.splice(index, 1);
 	 $scope.updateSum();
-	}//rrmove from cart
+	}//remove from cart
+	
   $scope.checkout = function() {
 	  console.log("final checkout",$scope.ticketCart);
 	  for (var i=0;i<$scope.ticketCart.length;i++) {
 		  if ($scope.ticketCart[i].howMany<=0) {
 			  $scope.ticketCart.splice(i,1);
 		  }//if
-	  }//for cleaning out empty entries
-	  var storageCart= localStorage.getItem('dankCart');
-	  //console.log("storage cart", storageCart);
-	  //console.log("what are you?", typeof(storageCart));
-	  if (storageCart) {
-		//var cartData = storageCart;
-		var cartData = JSON.parse(storageCart);
-		//console.log("the type of cartdata",typeof(cartData));
-		//console.log("the type of cartdata",cartData);
-		//console.log("cart data after stringify", cartData);
-	   	for (var j=0;j<cartData.length;j++) {
-			//console.log("current cartData", cartData[j]);
-			$scope.ticketCart.push(cartData[j]);
-		}//for looping ticket cart 
-			  //localStorage.setItem('dankCart', JSON.stringify(cartData)); // if merging was made, 
-	  }else {		 	 
-	  }//else not loading a new cart
-	  //console.log("cart before setting", $scope.ticketCart);
-	   localStorage.setItem('dankCart', JSON.stringify($scope.ticketCart));
-	  $timeout(function () {
+	  }//for cleaning out empty entries	 	  
+	  
+	  purchaseService.saveCart($rootScope.currentUser, $scope.ticketCart).then(function(result){
+		  console.log("ive saved cart for ", $rootScope.currentUser);
+				$timeout(function () {
               $location.path('/cart');
             }, 2000);
+			});			   
+	  
 	  //$state.go('/cart');
 	//TODO: check that the event has said number of tickets available. if it does, connect to socket and reserve tickets
 	// have a request to update the db about and reserve said tickets 
