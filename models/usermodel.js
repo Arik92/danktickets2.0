@@ -10,7 +10,6 @@ var UserSchema = new Schema({
   isEmailValidated: Boolean,
   //numTicketsSold: Number,
   //taxForm: { type: Schema.Types.ObjectId, ref:"TaxForm" },
-
   provider: String,
   socialId: String,
   picture: String,

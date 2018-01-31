@@ -163,17 +163,17 @@ app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
       controller: 'editProfileCtrl'
     })
     .state('auth', {
-      url: '/authorization?token&name',
+      url: '/authorization?token&id',
       controller: function ($stateParams, $state, $rootScope, $http) {
         console.log("state params are", $stateParams);
         if ($stateParams.token) {
           var user = {
-            name: $stateParams.name,
+            id: $stateParams.id,
             token: $stateParams.token
           }
           localStorage.setItem("user", JSON.stringify(user));
-          $rootScope.currentUser = user.name;
-          console.log('rootscope currentUser', $rootScope.currentUser);
+          $rootScope.currentUser = user.id;		  
+          console.log('rootscope currentUser', $rootScope.currentUser);		 
           //$rootScope.$broadcast('fbLogin');
           $http.defaults.headers.common.Authorization = 'Bearer ' + user.token;
           $state.go('home');
@@ -184,8 +184,8 @@ app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
 app.run(function ($rootScope, authService) {
   var user = JSON.parse(localStorage.getItem("user"));
   if (user) {
-    $rootScope.currentUser = user.name;
-    console.log(localStorage);
+    $rootScope.currentUser = user.id;
+    console.log('user is: ', user);
     //$rootScope.$broadcast('fbLogin');
   }
   // if (authService.isLoggedIn()) {

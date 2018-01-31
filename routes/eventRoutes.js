@@ -231,6 +231,30 @@ router.put('/:id', function(req, res1, next) {
    }//else
   });//mongo CB
 })// put route - without updating pictures
+router.put('/buyTicket/:id', function(req, res, next) {// the id == the id of the user/ buyer
+  console.log("request body is", req.body); // req.body == the dank cart.
+  for (var i=0;i<req.body.dankCart.length;i++) {
+  Event.find({id: req.body.dankCart[i].eventId}, function(error, foundEvent){
+		  if (error) {
+			  throw (error)
+		  } else {
+			  console.log("found ",foundEvent);	
+			  if (i===req.body.dankCart.length) {
+				  res.send("done");
+			  }
+		  }//else 
+	  });
+  }//for 
+ 
+  /*Event.findByIdAndUpdate(req.body._id, req.body, { new: true }, function(error, event) {
+    if (error) {
+     console.error(error)
+     return next(error);
+    } else {
+     res1.send(event);
+   }//else
+  });//mongo CB */
+})// put route - without updating pictures
 module.exports = router;
 
 // var express = require('express');

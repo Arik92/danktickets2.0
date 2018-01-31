@@ -14,7 +14,7 @@ const sendNodeMail = require('./nodeMailing');
 module.exports = function (router) {
 
   router.get('/searchByName/:name', function (req, res, next) {
-    User.findOne({ username: req.params.name }, function (err, user) {
+    User.findOne({ _id: req.params.name }, function (err, user) {
       if (err) {
         console.log(err);
       } else {
@@ -28,9 +28,9 @@ module.exports = function (router) {
   router.get('/facebook/callback',
     passport.authenticate('facebook', { session: false, failureRedirect: '/' }),
     function (req, res) {
-      console.log(req.user);
+      console.log("fb user", req.user);
       // Successful authentication, redirect home.
-      res.redirect('/authorization?token=' + req.user.token + "&name=" + req.user.name);
+      res.redirect('/authorization?token=' + req.user.token + '&id=' + req.user.id);
     });
 
   // http://localhost:8000/users/users
@@ -173,7 +173,7 @@ module.exports = function (router) {
       // this is the key!!!
       if (user.isEmailValidated) {
         const token = jwt.sign({ username: user.username, email: user.email, id: user.id }, secret, { expiresIn: '72h' });
-        res.json({ success: true, message: 'User authenticated', token: token, username: user.username });
+        res.json({ success: true, message: 'User authenticated', token: token, username: user.username, id: user.id });
       } else {
         res.json({ success: false, message: 'email is not validated!!!' });
 
