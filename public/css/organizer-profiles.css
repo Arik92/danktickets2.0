@@ -1,0 +1,78 @@
+/* od is for 'organizer dashboard' */
+
+.organizer-manager-container {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.od-top-level {
+  text-align: center;
+}
+
+.od-nav ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.od-nav ul>li {
+  padding: 0.8rem 1.2rem;
+  margin: 0.5rem;
+  border: 1px solid #424242;
+  box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.od-toggle-container {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  align-items: center;
+}
+
+.od-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.od-image-container {
+  width: 200px;
+  height: 200px;
+  background: #e0e0e0;
+  margin: 0 auto 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.od-image-container .fa {
+  font-size: 10rem;
+}
+
+
+@media screen and (min-width: 768px) {
+  .od-top-level {
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .select-organizer {
+    width: 250px;
+  }
+  
+  .od-toggle-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  
+  .od-nav ul>li {
+    margin: 1rem;
+  }
+
+}

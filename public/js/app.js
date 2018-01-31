@@ -150,7 +150,7 @@ app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
     .state('userprofiles', {
       url: '/manage-organizers',
       templateUrl: '/templates/manage-organizers.html',
-      controller: 'manageProfCtrl'
+      controller: 'manageOrganizerCtrl'
     })
     .state('edit', {
       url: '/edit-event/:id',

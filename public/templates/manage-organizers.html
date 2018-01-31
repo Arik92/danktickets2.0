@@ -1,53 +1,96 @@
-  <!-- #page-title -->
-<!--   <section id="page-title" class="gradient-overlay">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h1>Manage Your Organizer Profiles</h1>
+<div class="organizer-manager-container container">
+
+  <div class="od-top-level">
+    <h1>Manage Organizers</h1>
+    <div class="select-organizer">
+      <div class="form-group">
+        <label for="sel1">Select Your Organizer</label>
+        <select class="form-control" id="sel1">
+          <option>Organizer 1</option>
+          <option>Organizer 2</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <nav class="od-nav">
+    <ul>
+      <li ng-repeat="tab in organizerTabs track by $index" ng-class="{ activeSetting: isSet($index) }">
+        <a href="" ng-click="setTab($index)">{{ tab }}</a>
+      </li>
+    </ul>
+  </nav>
+
+  <section ng-show="isSet(0)">
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+        <div class="od-toggle-container">
+          <h3>Organizer Profile</h3>
+          <div class="view-toggle">
+            <button class="btn btn-success">Save</button>
+            <button class="btn btn-default">View</button>
+          </div>
         </div>
       </div>
     </div>
-  </section> -->
-  <!-- /#page-title -->
 
-  <!-- #blog -->
-  <section id="blog"  class="blog-archive">
-    <div class="container">
-      <div class="row blog-post-container">
-        <div class="col-lg-7 col-md-7 col-sm-7">
-          <div class="section-title">
-            <h1>Manage Your Organizer Profiles</h1>
+    <div class="row">
+      <div class="od-content">
+        <div class="col-sm-5 col-sm-offset-1">
+          <div class="form-group">
+            <label for="first">Name</label>
+            <input type="text" class="form-control" placeholder="Pick an Organizer Name">
           </div>
-        </div>
-        <div class="col-lg-8 col-md-8 col-sm-12">
-          <div class="row">
-            <!-- .single-post -->
-            <div class="single-post thumbnail col-lg-12 col-md-12 col-sm-12 wow fadeIn" ng-repeat="profile in profiles track by $index">
-              <div class="img-holder pull-left" id="card-img-holder" style="background-image: url({{profile.image}});height:auto;">
-                <img src="img/blog/1.jpg" style="opacity:0;" alt="">
-              </div>
-              <div class="content pull-left">
-                <h3>{{profile.name}}</h3>
-                <p class="meta"><a href="#">{{profile.websites}}</a></p>
-                <p class="length-limiter">About: {{profile.about}}</p>
-                <a ui-sref="editprofile({id: profile._id })" class="read-more hvr-bounce-to-right">Edit Profile</a>
-              </div>
+          <div class="od-editor">
+            Enter Text Here
+          </div>
+          <div class="url-display">
+            <h5>Profile URL is:</h5>
+            <p>www.danktickets/picklerick.com</p>
+          </div>
+          <div class="form-group">
+            <label for="first">Website</label>
+            <input type="text" class="form-control" placeholder="Enter your organizer website">
+          </div>
+          <div class="social-form-container">
+            <div class="form-group" ng-repeat="socialForm in socialForms track by $index">
+              <label ng-if="$index === 0" for="first">Social</label>
+              <input ng-model="socialForm.model" class="form-control" type="text" class="form-control" placeholder="{{ socialForm.name }}">
             </div>
-            <!-- /.single-post -->
           </div>
         </div>
+
+        <div class="col-sm-4 col-sm-offset-1 od-upload-container">
+          <h3 style>Organizer Image</h3>
+          <div class="od-image-container">
+              <div class="od-image-placeholder">
+                <i class="fa fa-2x fa-user" aria-hidden="true"></i>
+              </div>
+          </div>
+          <button class="btn btn-info">Upload Image</button>
+        </div>
       </div>
-      <!-- .post-pagination -->
-      <div class="post-pagination text-center">
-        <ul>
-          <li><span>1</span></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-        </ul>
-      </div>
-      <!-- /.post-pagination -->
     </div>
   </section>
-  <!-- /#blog -->
+
+  <section ng-show="isSet(1)">
+    <h3>{{ organizerTabs[1] }}</h3>
+  </section>
+
+  <section ng-show="isSet(2)">
+    <h3>{{ organizerTabs[2] }}</h3>
+  </section>
+
+  <section ng-show="isSet(3)">
+    <h3>{{ organizerTabs[3] }}</h3>
+  </section>
+
+  <section ng-show="isSet(4)">
+    <h3>{{ organizerTabs[4] }}</h3>
+  </section>
+
+  <section ng-show="isSet(5)">
+    <h3>{{ organizerTabs[5] }}</h3>
+  </section>
+
+</div>

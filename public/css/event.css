@@ -43,9 +43,9 @@
 /* Event Grid */
 
 #event-grid-container p,
-h3,
-h4,
-h5 {
+#event-grid-containe h3,
+#event-grid-containe h4,
+#event-grid-containe h5 {
   margin: 0;
   padding: 0;
 }
