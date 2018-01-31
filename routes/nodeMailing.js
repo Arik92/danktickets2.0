@@ -40,6 +40,8 @@ function sendNodeMail(user, msgType) {
   });
 }
 
+//// ===================== Helpers ===========================
+
 function setUrl() {
   let url;
   if (process.env.NODE_ENV === 'production') {
@@ -73,6 +75,8 @@ function setEmailOutput(user, msgType, url) {
       </a>
     `;
       break;
+    case 'send-tickets':
+      output = `<h1>Here's Your tickets bitch</h1>`
   }
   return output;
 }
@@ -107,7 +111,7 @@ function setMailConfig() {
         rejectUnauthorized: false
       }
     };
-    // mailjet testing
+    // mailjet testing with local host
     /*   mailConfig = {
         host: 'in-v3.mailjet.com',
         port: 587,
