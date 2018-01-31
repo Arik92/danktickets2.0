@@ -1,13 +1,13 @@
-app.controller('ticketCtrl', ['createService', '$scope', '$window', '$stateParams', '$state', '$timeout', '$location',
-	function (createService, $scope, $window, $stateParams, $state, $timeout, $location) {
+app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window', '$stateParams', '$state', '$timeout', '$location',
+	function (purchaseService,$rootScope, $scope, $window, $stateParams, $state, $timeout, $location) {
 		this.$onInit = () => {
-			//localStorage.removeItem('dankCart');// PANIC button
-			$scope.params = $stateParams;
+			//localStorage.removeItem('dankCart');// PANIC button			
+			console.log("rootScope", $rootScope.currentUser);
 			var storageCart = localStorage.getItem('dankCart');
 			console.log("storage cart from cart", storageCart);
 			if (storageCart) {
 				$scope.dankCart = JSON.parse(storageCart);
-				console.log($scope.dankCart);
+				console.log("dankCART ", $scope.dankCart);
 			}
 			//$scope.tickets = tickets;
 			//console.log($scope.params); 
@@ -18,11 +18,14 @@ app.controller('ticketCtrl', ['createService', '$scope', '$window', '$stateParam
 		}
 		$scope.remove = function (index) {
 			$scope.dankCart.splice(index, 1);
-			localStorage.setItem('dankCart', JSON.stringify($scope.dankCart));
+			localStorage.setItem('dankCart', JSON.stringify($scope.dankCart));			
+			getDankCartTotal();
 		}
 		$scope.clear = function () {
-			localStorage.removeItem('dankCart');
-			console.log("removed", localstorage.getItem('dankCart'));
+			console.log("removing", localStorage.getItem('dankCart'));	
+			localStorage.removeItem('dankCart');	
+			$scope.dankCart = [];
+			$scope.dankCartTotal = 0;
 		}
 
 		function getSubtotal(item) {
@@ -30,11 +33,20 @@ app.controller('ticketCtrl', ['createService', '$scope', '$window', '$stateParam
 		}
 
 		function getDankCartTotal() {
-			const total = $scope.dankCart.reduce((total, item) => {
-				return total += getSubtotal(item);
-			}, 0)
-
+			var total = 0;
+			if ($scope.dankCart!=null) {
+				total = $scope.dankCart.reduce((sum, item) => {
+					return sum += getSubtotal(item);
+				}, 0)
+			}//if
 			$scope.dankCartTotal = total;
+		}
+		
+		$scope.buyTickets = function(){
+			purchaseService.buyCart($scope.dankCart, ).then(function(err, res){
+				console.log("purchased!");
+			}) //cb 
+			console.log('buying tickets');
 		}
 
 	}]);

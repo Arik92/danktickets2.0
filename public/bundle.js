@@ -3,7 +3,7 @@ var config = {
   MAPS_API_KEY: 'AIzaSyBlqLa-v1ZicvzAhvzPyX4p0mbXIzYjGEk',
   STATIC_MAPS_API_KEY: 'AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM'
 };
-module.exports = config; 
+module.exports = config;
 },{}],2:[function(require,module,exports){
 app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', 'angularLoad', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location, angularLoad) {
   console.log('hello from createCtrl');
@@ -1110,12 +1110,25 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	}//cartMinus
 	
 	$scope.updateSum = function() {
-		$scope.ticketSum = 0;
+		var shouldUpdate = true;
+		console.log("the shopping cart is ", $scope.ticketCart);
+		console.log("the event tickets are ", $scope.event.eventTickets);
+
 		for (var i=0;i<$scope.ticketCart.length;i++) {
-			if ($scope.ticketCart[i].howMany>0) {
-			$scope.ticketSum+= $scope.ticketCart[i].ticketPrice*$scope.ticketCart[i].howMany;
-			}//if ticet sum is greater than 0 somehow(user bruteforcing negative value
+			if ($scope.ticketCart[i].howMany===undefined) {
+				alert("cannot add that many tickets");
+				$scope.ticketCart[i].howMany = $scope.event.eventTickets[i].ticketQ;
+				shouldUpdate = false;
+			}//if cannot purchase that many 
 		}//for 
+		if (shouldUpdate) {
+			$scope.ticketSum = 0;
+			for (i=0;i<$scope.ticketCart.length;i++) {
+				if ($scope.ticketCart[i].howMany>0) {
+				$scope.ticketSum+= $scope.ticketCart[i].ticketPrice*$scope.ticketCart[i].howMany;
+				}//if ticet sum is greater than 0 somehow(user bruteforcing negative value
+			}//for 
+		}//if should update the sum 
 	} //update sum to update any changes made to ticket quantities
 
 	$scope.removeFromCart = function(index) {
