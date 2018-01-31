@@ -19,7 +19,6 @@ module.exports = function (router) {
         console.log(err);
       } else {
         res.send(user);
-        console.log('user from searchbyname', user);
       }//else
     })//findCb
   }) // get event by token?
@@ -56,7 +55,29 @@ module.exports = function (router) {
       });
     }
   });
-
+  router.get('/shoppingCart/:id', function (req, res, next) {
+	       User.findOne({ _id: req.params.id }, function (err, user) {
+      if (err) {
+        console.log(err);
+      } else {		  
+		  if (user.shoppingCart) {
+        res.send(user.shoppingCart);       
+		  } else {
+			  res.send([]);
+		  }
+      }//else
+    })//findCb
+  }) // get a user's shopping cart
+  router.put('/shoppingCart/:id', function (req, res, next) {	 
+  console.log("shoppeing cart ", req.body);
+  User.findOneAndUpdate({ _id: req.params.id },{$set: {'shoppingCart': req.body}}, {new: true}, function (err, user) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(user.shoppingCart);       
+      }//else
+    })//findCb
+  }) // update a user's shopping cart
   //http://localhost:8000/users/forgotPassword
   // validate new user from nodemailer link
   router.post('/forgotPassword', function (req, res) {
