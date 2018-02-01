@@ -5,10 +5,12 @@
     <div class="select-organizer">
       <div class="form-group">
         <label for="sel1">Select Your Organizer</label>
-        <select class="form-control" id="sel1">
+		 <select ng-model="selectedOrganizer"  ng-options="profile.name for profile in profiles" class="form-control input-md" >
+         </select>
+        <!--<select class="form-control" id="sel1">
           <option>Organizer 1</option>
           <option>Organizer 2</option>
-        </select>
+        </select> -->
       </div>
     </div>
   </div>
@@ -38,11 +40,11 @@
       <div class="od-content">
         <div class="col-sm-5 col-sm-offset-1">
           <div class="form-group">
-            <label for="first">Name</label>
+            <label for="first">Name: {{selectedOrganizer.name}}</label>
             <input type="text" class="form-control" placeholder="Pick an Organizer Name">
           </div>
           <div class="od-editor">
-            Enter Text Here
+            About: {{selectedOrganizer.about}}
           </div>
           <div class="url-display">
             <h5>Profile URL is:</h5>
@@ -50,6 +52,7 @@
           </div>
           <div class="form-group">
             <label for="first">Website</label>
+			{{selectedOrganizer.website}}
             <input type="text" class="form-control" placeholder="Enter your organizer website">
           </div>
           <div class="social-form-container">

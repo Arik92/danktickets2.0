@@ -3,6 +3,7 @@ app.controller('manageOrganizerCtrl', ['orService', '$scope', '$rootScope', func
   // console.log("root scope usr", $rootScope.currentUser);
 
   this.$onInit = () => {
+	organizerPrep()
     initTabs();
     initSocialForms();
     // organizerPrep();
