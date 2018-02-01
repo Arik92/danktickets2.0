@@ -19,7 +19,7 @@ app.controller('manageOrganizerCtrl', ['orService', '$scope', '$rootScope', func
       $scope.profiles = result;
       $scope.profiles.push({ name: '──────────', disabled: true })
       $scope.profiles.push({ name: 'Create New Organizer' })
-      $scope.selectedOrganizer = null;
+      $scope.selectedOrganizer = result[0];
     }, function (err) {
       throw (err)
     })//GET request route 

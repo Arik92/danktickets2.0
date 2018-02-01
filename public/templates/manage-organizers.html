@@ -42,8 +42,8 @@
       <div class="od-content">
         <div class="col-sm-5 col-sm-offset-1">
           <div class="form-group">
-            <label for="first">Name: {{selectedOrganizer.name}}</label>
-            <input type="text" class="form-control" placeholder="Pick an Organizer Name">
+            <label for="first">Name</label>
+            <input type="text" class="form-control" ng-model="selectedOrganizer.name" placeholder="Pick an Organizer Name">
           </div>
           <div class="od-editor">
             About: {{selectedOrganizer.about}}
