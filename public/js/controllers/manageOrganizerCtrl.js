@@ -3,16 +3,23 @@ app.controller('manageOrganizerCtrl', ['orService', '$scope', '$rootScope', func
   // console.log("root scope usr", $rootScope.currentUser);
 
   this.$onInit = () => {
-	organizerPrep()
+    checkUser();
     initTabs();
     initSocialForms();
-    // organizerPrep();
+    organizerPrep();
+  }
+
+  function checkUser() {
+    $scope.isUserSignedIn = $rootScope.currentUser;
   }
 
   function organizerPrep() {
     orService.getOrganizersByUser($rootScope.currentUser).then(function (result) {
-      console.log("All profiles by ", $rootScope.currentUser + ":" + result);
+      console.log("All profiles by ", $rootScope.currentUser, result);
       $scope.profiles = result;
+      $scope.profiles.push({ name: '──────────', disabled: true })
+      $scope.profiles.push({ name: 'Create New Organizer' })
+      $scope.selectedOrganizer = null;
     }, function (err) {
       throw (err)
     })//GET request route 
@@ -26,6 +33,14 @@ app.controller('manageOrganizerCtrl', ['orService', '$scope', '$rootScope', func
       { name: 'Twitter', model: $scope.twitInput },
       { name: 'LinkedIn', model: $scope.liInput },
     ]
+  }
+
+  $scope.selectedItemChanged = function (selectedOrganizer) {
+    if (selectedOrganizer.name === 'Create New Organizer') {
+      console.log('creating new organizer');
+      return;
+    }
+    console.log('you picked option:', selectedOrganizer );
   }
 
   //// ===================== tabs stuff ===========================

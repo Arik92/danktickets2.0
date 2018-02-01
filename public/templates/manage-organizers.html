@@ -1,16 +1,18 @@
-<div class="organizer-manager-container container">
+<!-- validating that user is signed in -->
+<h1 class="not-signed-in" ng-if="!isUserSignedIn" style="text-align: center; margin: 5rem auto 500px">Please Sign In To See This Page!</h1>
+
+<div class="organizer-manager-container container" ng-if="isUserSignedIn">
 
   <div class="od-top-level">
     <h1>Manage Organizers</h1>
     <div class="select-organizer">
       <div class="form-group">
         <label for="sel1">Select Your Organizer</label>
-		 <select ng-model="selectedOrganizer"  ng-options="profile.name for profile in profiles" class="form-control input-md" >
-         </select>
-        <!--<select class="form-control" id="sel1">
-          <option>Organizer 1</option>
-          <option>Organizer 2</option>
-        </select> -->
+        <select ng-model="selectedOrganizer" 
+                ng-options="profile as profile.name disable when profile.disabled for profile in profiles" 
+                ng-change="selectedItemChanged(selectedOrganizer)"
+                class="form-control input-md">
+        </select>
       </div>
     </div>
   </div>
@@ -52,7 +54,7 @@
           </div>
           <div class="form-group">
             <label for="first">Website</label>
-			{{selectedOrganizer.website}}
+            {{selectedOrganizer.website}}
             <input type="text" class="form-control" placeholder="Enter your organizer website">
           </div>
           <div class="social-form-container">
@@ -66,9 +68,9 @@
         <div class="col-sm-4 col-sm-offset-1 od-upload-container">
           <h3 style>Organizer Image</h3>
           <div class="od-image-container">
-              <div class="od-image-placeholder">
-                <i class="fa fa-2x fa-user" aria-hidden="true"></i>
-              </div>
+            <div class="od-image-placeholder">
+              <i class="fa fa-2x fa-user" aria-hidden="true"></i>
+            </div>
           </div>
           <button class="btn btn-info">Upload Image</button>
         </div>
