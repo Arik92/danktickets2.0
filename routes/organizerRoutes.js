@@ -49,26 +49,21 @@ router.get('/findById/:id', function(req, res, next){
   })//exec()
 }) // get organizer by its unique id.
 router.get('/:name', function(req, res, next){
-  Profile.find().populate({
-	  path: 'owner',
-	  model: 'User',
-	  match: {username: req.params.name}
-	  }).exec(function(err, foundProfiles) {
-    if (err) {
-      console.log(err);
-      res.send(err);
-    }  else {   
-		console.log("found profiles", foundProfiles);
-		var result = [];
-		for (var i=0;i<foundProfiles.length;i++) {
-			if (foundProfiles[i].owner) {
-				result.push(foundProfiles[i]);
-			}
-		}//for 
-		  res.send(result);
-    }//else
-});
-}) // get profiles by OWNER Name.
+  Profile.find(function(err, profiles) {
+	  if (err) {
+		  throw (err);
+	  } else {
+		  var foundProfiles = [];
+		  for (var i=0;i<profiles.length;i++) {
+			  //console.log("comparing"+profiles[i].owner.valueOf()+" and "+req.params.name);
+			  if (profiles[i].owner.valueOf()==req.params.name) {
+				  foundProfiles.push(profiles[i]);
+			  }
+		  }//for 
+		  res.send(foundProfiles);
+	  }//else 
+  })//find cb 
+}); // get profiles by OWNER Name.
 
 router.post('/upload', function (req, res1, next) {
   upload(req,res1,function(err){

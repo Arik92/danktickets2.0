@@ -1119,8 +1119,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 			}//if cannot purchase that many 
 		}//for 		
 			$scope.ticketSum = 0;
-			for (i=0;i<$scope.ticketCart.length;i++) {
-				console.log("what am I even comparing?", $scope.ticketCart[i]);
+			for (i=0;i<$scope.ticketCart.length;i++) {				
 				if ($scope.ticketCart[i].howMany>0) {
 				$scope.ticketSum+= $scope.ticketCart[i].ticketPrice*$scope.ticketCart[i].howMany;
 				}//if ticket sum is greater than 0 somehow(user bruteforcing negative value
