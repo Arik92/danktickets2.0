@@ -1,4 +1,4 @@
-app.controller('manageOrganizerCtrl', ['orService', '$scope', '$rootScope', function (orService, $scope, $rootScope) {
+app.controller('manageOrganizerCtrl', ['orService', '$scope', '$rootScope','Upload', function (orService, $scope, $rootScope, Upload) {
 
   // console.log("root scope usr", $rootScope.currentUser);
 
@@ -26,6 +26,10 @@ app.controller('manageOrganizerCtrl', ['orService', '$scope', '$rootScope', func
       { name: 'Twitter', model: $scope.twitInput },
       { name: 'LinkedIn', model: $scope.liInput },
     ]
+  }
+  
+  $scope.showOrg = function() {
+	  console.log("selected organizer", $scope.selectedOrganizer);
   }
 
   //// ===================== tabs stuff ===========================

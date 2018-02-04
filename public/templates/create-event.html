@@ -10,15 +10,17 @@
           <div class="form-group">
             <label class="control-label" for="source_name"><h2>Organizer: </h2> </label>
 			<div ng-show="pleaseSelectOrg">
+			
 			<p>(please choose one)</p>
-			</div>
+			</div>			
             <div>
               <select ng-model="selectedOrganizer"  ng-options="profile._id as profile.name for profile in profiles" class="form-control input-md" ng-change="selectProf()" required>
 				<!--<option>Select your organiza</option>
                 <option ng-repeat="organizer in profiles track by $index" value="{{organizer._id}}">{{organizer.name}}</option>-->
               </select>
             </div>
-          </div>
+          </div>		 
+		  
           <div class="form-group">
             <label class="control-label" for="source_name"><h2>Title</h2</label>
             <br>
