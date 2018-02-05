@@ -1,16 +1,18 @@
-<div class="organizer-manager-container container">
+<!-- validating that user is signed in -->
+<h1 class="not-signed-in" ng-if="!isUserSignedIn" style="text-align: center; margin: 5rem auto 500px">Please Sign In To See This Page!</h1>
+
+<div class="organizer-manager-container container" ng-if="isUserSignedIn">
 
   <div class="od-top-level">
     <h1>Manage Organizers</h1>
     <div class="select-organizer">
       <div class="form-group">
         <label for="sel1">Select Your Organizer</label>
-		 <select ng-model="selectedOrganizer"  ng-options="profile.name for profile in profiles" class="form-control input-md" >
-         </select>
-        <!--<select class="form-control" id="sel1">
-          <option>Organizer 1</option>
-          <option>Organizer 2</option>
-        </select> -->
+        <select ng-model="selectedOrganizer" 
+                ng-options="profile as profile.name disable when profile.disabled for profile in profiles" 
+                ng-change="selectedItemChanged(selectedOrganizer)"
+                class="form-control input-md">
+        </select>
       </div>
     </div>
   </div>
@@ -29,7 +31,7 @@
         <div class="od-toggle-container">
           <h3>Organizer Profile</h3>
           <div class="view-toggle">
-            <button class="btn btn-success">Save</button>
+            <button class="btn btn-success" ng-click="test()">Save</button>
             <button class="btn btn-default">View</button>
           </div>
         </div>
@@ -40,8 +42,8 @@
       <div class="od-content">
         <div class="col-sm-5 col-sm-offset-1">
           <div class="form-group">
-            <label for="first">Name: {{selectedOrganizer.name}}</label>
-            <input type="text" class="form-control" placeholder="Pick an Organizer Name">
+            <label for="first">Name</label>
+            <input type="text" class="form-control" ng-model="selectedOrganizer.name" placeholder="Pick an Organizer Name">
           </div>
           <div class="od-editor">
             About: {{selectedOrganizer.about}}
@@ -52,7 +54,7 @@
           </div>
           <div class="form-group">
             <label for="first">Website</label>
-			{{selectedOrganizer.website}}
+            {{selectedOrganizer.website}}
             <input type="text" class="form-control" placeholder="Enter your organizer website">
           </div>
           <div class="social-form-container">
@@ -64,17 +66,63 @@
         </div>
 
         <div class="col-sm-4 col-sm-offset-1 od-upload-container">
-          <h3 style>Organizer Image</h3>
-          <div class="od-image-container">
-              <div class="od-image-placeholder">
+          <form>
+            <h3 style>Organizer Image</h3>
+            <div class="od-image-container"
+                 ngf-drop ng-model="picFile" ngf-pattern="image/*"
+            >
+                <img-crop ng-show="picFile" 
+                          image="picFile  | ngfDataUrl"  
+                          result-image="croppedDataUrl" 
+                          >
+                </img-crop>
+              <div class="od-image-placeholder" ng-if="!picFile">
                 <i class="fa fa-2x fa-user" aria-hidden="true"></i>
               </div>
-          </div>
-          <button class="btn btn-info">Upload Image</button>
+            </div>
+            <!-- <button class="btn btn-info">Upload Image</button> -->
+            <!-- <label for="file-upload" class="custom-file-upload">
+                <i class="fa fa-cloud-upload"></i>Upload Image
+            </label>
+            <input id="file-upload" type="file"/> -->
+            <button ngf-select ng-model="picFile" accept="image/*">
+              Select Picture
+            </button>
+            <div>Cropped Image:</div>
+            <div>
+              <img ng-src="{{croppedDataUrl}}" />
+            </div>
+            <button ng-click="upload(croppedDataUrl, picFile.name)">Submit</button> 
+          </form>
         </div>
+
       </div>
     </div>
   </section>
+
+  <!-- <form name="myForm">
+    <div>Crop Image and Upload</div>
+    <button ngf-select ng-model="picFile" accept="image/*">
+        Select Picture</button>
+    <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
+         class="cropArea">
+        <img-crop image="picFile  | ngfDataUrl"                 
+        result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+        </img-crop>
+    </div>
+    <div>
+        <img ng-src="{{croppedDataUrl}}" />
+    </div>
+    <button ng-click="upload(croppedDataUrl, picFile.name)">Submit</button> 
+        
+    <span class="progress" ng-show="progress >= 0">
+      <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+    </span>
+    <span ng-show="result">Upload Successful</span>
+    <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+</form> -->
+
+
 
   <section ng-show="isSet(1)">
     <h3>{{ organizerTabs[1] }}</h3>
