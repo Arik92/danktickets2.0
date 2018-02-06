@@ -1,4 +1,4 @@
-app.controller('manageOrganizerCtrl', ['Upload', 'orService', '$timeout', '$scope', '$rootScope', function (Upload, orService, $timeout, $scope, $rootScope) {
+app.controller('manageOrganizerCtrl', ['orService', '$timeout', '$scope', '$rootScope', function (orService, $timeout, $scope, $rootScope) {
 
 
   // console.log("root scope usr", $rootScope.currentUser);
