@@ -6,7 +6,7 @@ var express     = require('express');
 //var cors = require('cors');
 var app         = express();
 var server      = require('http').createServer(app);
-var io          = require('socket.io')(server);
+//var io          = require('socket.io')(server);
 var port        = process.env.PORT || '8000';
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
@@ -17,12 +17,17 @@ var eventRoutes = require('./routes/eventRoutes');
 var organizerRoutes = require('./routes/organizerRoutes');
 var passport    = require('./models/passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+
 //var path        = require('path');
 //var social      = require('./passport/passport')(app, passport);
 //var expressSession = require('express-session');
 //var LocalStrategy = require('passport-local').Strategy;
-
-
+/*var cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: process.env.cloudinary_cloud_name, 
+  api_key: process.env.cloudinary_api_key, 
+  api_secret: process.env.cloudinary_api_secret 
+}); */
 
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 app.use(passport.initialize());
@@ -50,6 +55,7 @@ app.use(function(req, res, next) {
         next();
   });
 
+  
 
 
 
