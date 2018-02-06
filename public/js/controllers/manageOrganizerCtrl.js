@@ -1,5 +1,6 @@
 app.controller('manageOrganizerCtrl', ['Upload', 'orService', '$timeout', '$scope', '$rootScope', function (Upload, orService, $timeout, $scope, $rootScope) {
 
+
   // console.log("root scope usr", $rootScope.currentUser);
 
   this.$onInit = () => {
@@ -7,54 +8,32 @@ app.controller('manageOrganizerCtrl', ['Upload', 'orService', '$timeout', '$scop
     initTabs();
     initSocialForms();
     organizerPrep();
-    // setImageCropStuff();
-    $scope.picFile = '';
-    $scope.croppedDataUrl = '';
+    // setImageCropStuff();    
   }
 
-  $scope.test = function() {
-    console.log($scope.croppedDataUrl);
-    console.log($scope.picFile);
-    console.log($scope.ngfDataUrl);
-  }
+  
+  $scope.initUploader = function() {
+	  cloudinary.openUploadWidget({ cloud_name: 'newoldroad-com',
+	  upload_preset: 'organizer_pgznub8n',
+	  theme: 'white',
+	  multiple: false,
+	  cropping_show_back_button: true,
+	  cropping: 'server',
+	  cropping_coordinates_mode:'custom',
+	  sources: ['local', 'url', 'facebook', 'instagram', 'dropbox']
+	  }, 
+      function(error, result) { 
+	  console.log(result);
+	  // for HTTPS $scope.previewImg = result.secure_url;
+	  $scope.previewImg = result[0].url;	  
+	  $scope.$apply();
+	  });
+  }//initUploader
+  
 
   function checkUser() {
     $scope.isUserSignedIn = $rootScope.currentUser;
-  }
-
-  $scope.upload = function (dataUrl, name) {
-    Upload.upload({
-        url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-        data: {
-            file: Upload.dataUrltoBlob(dataUrl, name)
-        },
-    }).then(function (response) {
-        $timeout(function () {
-            $scope.result = response.data;
-        });
-    }, function (response) {
-        if (response.status > 0) $scope.errorMsg = response.status 
-            + ': ' + response.data;
-    }, function (evt) {
-        $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-    });
-}
-
-  // function setImageCropStuff() {
-  //   $scope.myImage='';
-  //   $scope.myCroppedImage='';
-  // }
-
-  // $scope.handleFileSelect=function(evt) {
-  //   var file=evt.currentTarget.files[0];
-  //   var reader = new FileReader();
-  //   reader.onload = function (evt) {
-  //     $scope.$apply(function($scope){
-  //       $scope.myImage=evt.target.result;
-  //     });
-  //   };
-  //   reader.readAsDataURL(file);
-  // };
+  } 
 
   function organizerPrep() {
     orService.getOrganizersByUser($rootScope.currentUser).then(function (result) {
@@ -74,6 +53,10 @@ app.controller('manageOrganizerCtrl', ['Upload', 'orService', '$timeout', '$scop
       { name: 'Twitter', model: $scope.twitInput },
       { name: 'LinkedIn', model: $scope.liInput },
     ]
+  }
+  
+  $scope.showOrg = function() {
+	  console.log("selected organizer", $scope.selectedOrganizer);
   }
 
   $scope.selectedItemChanged = function (selectedOrganizer) {
