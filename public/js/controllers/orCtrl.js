@@ -27,6 +27,7 @@ app.controller('orCtrl', ['orService', 'userService', '$scope', 'Upload', '$wind
     };// event post object
     if (submitPic) {
       Upload.upload({
+		 //url: 'http://localhost:8000/organizers/upload',
         url: 'https://danktickets.herokuapp.com/organizers/upload', //webAPI exposed to upload the file
         data: {
           file: submitPic,

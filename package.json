@@ -34,6 +34,7 @@
     "bower": "^1.8.2",
     "browserify": "^14.4.0",
     "chart.js": "^2.7.1",
+    "cloudinary": "^1.9.1",
     "cmelo-angular-sticky": "^1.0.2",
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",
