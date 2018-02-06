@@ -15,7 +15,7 @@ app.controller('manageOrganizerCtrl', ['orService', '$timeout', '$scope', '$root
   $scope.initUploader = function() {
 	  cloudinary.openUploadWidget({ cloud_name: 'newoldroad-com',
 	  upload_preset: 'organizer_pgznub8n',
-	  theme: 'white',
+	  theme: 'purple',
 	  multiple: false,
 	  cropping_show_back_button: true,
 	  cropping: 'server',
@@ -25,8 +25,8 @@ app.controller('manageOrganizerCtrl', ['orService', '$timeout', '$scope', '$root
       function(error, result) { 
 	  console.log(result);
 	  // for HTTPS $scope.previewImg = result.secure_url;
-	  $scope.previewImg = result[0].url;	  
-	  $scope.$apply();
+	  $scope.previewImg = result[0].url;
+	$scope.$apply();	  
 	  });
   }//initUploader
   

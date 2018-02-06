@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
   })//exec()
 });//get all events that were ever published and populate the publisher field
 
-router.get('/findByOwner/:name', function(req, res, next){
+router.get('/findByOwner/:id', function(req, res, next){
   Event.find().populate('owner organizer').exec(function(err, events){
     if (err) {
       console.error(err);
@@ -37,13 +37,10 @@ router.get('/findByOwner/:name', function(req, res, next){
       //console.log("found events(route)", events);
       var result = [];
       for (var i=0;i<events.length;i++) {
-        //console.log("comparing *"+ req.params.name+"* and *"+ events[i].owner.username+"*");
-		if (events[i].owner) {
-			if (req.params.name.localeCompare(events[i].owner.username)===0) {
-				//console.log("got in");
-			result.push(events[i]);
-			} // comparing owners
-		} // if for SOME REASON the event doesnt have an owner. which shouldnt ever happen
+        console.log("comparing *"+ req.params.id+"* and *"+ events[i].owner._id+"*");
+		if (events[i].owner._id==req.params.id) {
+				  result.push(events[i]);
+			  }
       }//for	 
       res.send(result);
     }
