@@ -68,27 +68,21 @@
             </div>
           </div>
            <div class="form-group">
-             <label class="control-label" for="source_name"><h3>Image</h3></label>
-             <div>
-               <input id="fileItem" type="file" name="eventPic" ng-model="file"
-               ngf-pattern="'image/*'"
-               accept="image/*"
-               ngf-max-size="20MB" >
-             </div>
-           </div>
-           <div class="form-group">
-            
-
-            <button type="submit" ng-click="preview()" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Preview</button>
-             <div id="preview">
-             </div>
-           </div>
+             <label class="control-label" for="source_name"><h1>Event Image</h1></label><br/>
+			<a href="#" id="upload_widget_opener" ng-click="initUploader()">Select An Event Image</a>
+            <div class="od-image-container">     
+			<img ng-src={{previewImg}} />
+              <div class="od-image-placeholder" ng-if="!previewImg">
+                <i class="fa fa-2x fa-user" aria-hidden="true"></i>
+              </div>
+            </div>   
+           </div>          
            <br /><!--input -->
            <div class="form-group">
              <label class="control-label" for="source_name"><h1>Event Location: </h1></label>
              <div>
               <p>Enter a location venue</p>
-                <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter venue">
+                <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter venue" required>
              </div>
 			 <div> 
 			 <p>type a location: </p>

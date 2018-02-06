@@ -1,4 +1,4 @@
-app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', 'Upload', '$window', '$timeout', '$rootScope', '$location', 'angularLoad', function (createService, orService, userService, $scope, Upload, $window, $timeout, $rootScope, $location, angularLoad) {
+app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', '$window', '$timeout', '$rootScope', '$location', 'angularLoad', function (createService, orService, userService, $scope, $window, $timeout, $rootScope, $location, angularLoad) {
   console.log('hello from createCtrl');
   this.$onInit = () => {
 	$scope.currentTickets = [];	
@@ -53,31 +53,14 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
   ];
 
   function initProfs() {
-    $scope.profiles = [];
-	/*var dummyProf = {
-		'_id': -1,
-		'name': "Select an organizer profile"
-	}*/
-	//$scope.profiles.push(dummyProf);
-	$scope.pleaseSelectOrg = true;
-	$scope.selectedProfile = "Select an organizer";	
-	//$scope.selectedOrganizer = "(please choose one)";
-	//$scope.selectedOrganizer = $scope.profiles[0];
-    console.log("initial profs", $rootScope.currentUser);
-    userService.getUserByName($rootScope.currentUser).then(function (user) {
-      $scope.user = user;
-      console.log("create user is", $scope.user);
-      orService.getOrganizersByUser($scope.user.username).then(function (data2) {
-        console.log("data 2", data2);
-		if (data2) {
-			for (var i = 0; i < data2.length; i++) {
-			  $scope.profiles.push(data2[i]);
-			}//for			
-		//$scope.$apply();	
-		console.log("profiles", $scope.profiles);
-		}//if 
-      })//get organizers
-    })//userFactory cb
+	  $scope.profiles = [];
+   orService.getOrganizersByUser($rootScope.currentUser).then(function (result) {
+      console.log("All profiles by ", $rootScope.currentUser, result);
+      $scope.profiles = result;
+      $scope.selectedOrganizer = result[0];
+    }, function (err) {
+      throw (err)
+    })//GET request route 
   }//initProfs //NOTE we need the user fetching here to get that owner id
   // initProfs();
   $scope.selectProf = function () {
@@ -311,18 +294,32 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
 	}
     return validatorError;
   }//validator
-
-  $scope.upload = function () {
-    var submitPic = document.getElementById('fileItem').files[0];
-    console.log("in submit! uploading...", submitPic);
+  
+	$scope.initUploader = function() {
+	  cloudinary.openUploadWidget({ cloud_name: 'newoldroad-com',
+	  upload_preset: 'events_single_oan5e5w1',
+	  theme: 'purple',
+	  multiple: false,
+	  cropping_show_back_button: true,
+	  cropping: 'server',
+	  cropping_coordinates_mode:'custom',
+	  sources: ['local', 'url', 'facebook', 'instagram', 'dropbox']
+	  }, 
+      function(error, result) { 
+	  console.log(result);
+	  // for HTTPS $scope.previewImg = result.secure_url;
+	  $scope.previewImg = result[0].url;	
+		$scope.$apply();
+	  });
+  }//initUploader		
+  $scope.upload = function () {     
     var evt = {
 	  version: 1,
       title: $scope.eName,
-      owner: $scope.user._id,
+      owner: $rootScope.currentUser,
       organizer: $scope.selectedOrganizer,
       type: $scope.selectedType,
-      location: $scope.location,
-      //image: $scope.imageName, 95% sure this is only defined in th routes
+      location: $scope.location,      
       startTime: $scope.startDate,
 	  startDateDisplay: $scope.startDateDisplay,
       startHr: $scope.startHr,
@@ -332,7 +329,8 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       description: $scope.eDesc,
       numTickets: $scope.totalTickets, //tickets remaining
       isPrivate: $scope.isPrivate,
-      showRemainingTicks: $scope.showRemain
+      showRemainingTicks: $scope.showRemain,
+	  image: $scope.previewImg
     };// event post object
     evt.eventTickets = [];
     for (var i = 0; i < $scope.currentTickets.length; i++) {
@@ -340,43 +338,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
     }// for filling ticket array
     var isLegit = validator();
     if (isLegit.localeCompare("ok") === 0) {
-      //console.log("compared " + isLegit + " and ok. and the result is" + isLegit.localeCompare("ok"));
-      if (submitPic) {
-        Upload.upload({ // 'http://localhost:8000/events/upload'
-          //url: 'http://localhost:8000/events/upload',
-           url: 'https://danktickets.herokuapp.com/events/upload',//webAPI exposed to upload the file
-          data: {
-            file: submitPic,
-            event: evt
-          } //pass file as data, should be user ng-model
-        }).then(function (resp) { //upload function returns a promise
-          console.log("controller response is", resp);
-          if (resp.data.error_code === 0) { //validate success
-            console.log("response file object", resp.config.data.file);
-            console.log("added event successfully!");
-            $scope.showRedirect = true;
-            $timeout(function () {
-              $location.path('/');
-            }, 500);
-            //$window.alert('Success'  + resp.config.data.file.name + ' uploaded');
-            $scope.imageName = resp.data.file_name;
-            console.log("image name will be?", $scope.imageName);
-            //  publishEvent(); // call a function to submit the whole event
-          } else {
-            console.log(resp.data);
-            $window.alert("response is", resp.data);
-          }
-        }, function (error) { //catch error
-          console.log('Error status: ' + error);
-          // $window.alert('Error status: ' + resp.status);
-          // }, function (evt) {
-          //     console.log(evt);
-          //     // var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-          //     // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-          //     // $scope.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
-          // });
-        });
-      } else {
+      //console.log("compared " + isLegit + " and ok. and the result is" + isLegit.localeCompare("ok"));      
         createService.postEvent(evt).then(function (resp) {
           console.log("Event added successfully through service!")
 		  $scope.showRedirect = true;
@@ -384,7 +346,7 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
               $location.path('/');
             }, 500);
         })
-      }
+    
     }
     else {
       alert(isLegit);
@@ -498,36 +460,4 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
 
   addScript(mapSrc);
   /////////////////////////////////////////// Map interface /////////////////////////////////////////////////////////
-  /////////////////////////////////////////// Image handling /////////////////////////////////////////////////////////
-  $scope.preview = function () {
-    var prevFile = document.getElementById('fileItem').files[0];
-    var img = document.createElement("img");
-    img.classList.add("obj");
-    img.file = prevFile;
-    img.height = 250;
-    img.width = 250;
-    //console.log("img object to be added", img);
-    document.getElementById('preview').removeChild(document.getElementById('preview').firstChild);
-    document.getElementById('preview').appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
-    //TODO: need to specify preview size
-    //file reader
-    var reader = new FileReader();
-    reader.onload = (function (aImg) {
-      return function (e) {
-        aImg.src = e.target.result;
-        //console.log("reader result:", reader.result);
-      };
-    })
-      (img);
-    reader.readAsDataURL(prevFile);
-  }//handleFiles
-
-  function checkNames() {
-    var patt = /w+/;
-    if (!$scope.eName) {
-      alert("fill enter an event name");
-      return false;
-    }
-    return true;
-  }//checkNames
 }]);

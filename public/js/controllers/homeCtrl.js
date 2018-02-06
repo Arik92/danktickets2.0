@@ -39,9 +39,11 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
         $scope.selectedLng = success.coords.longitude;
         $scope.timeStamp = success.timestamp / 1000;
         for (var i = 0; i < $scope.events.length; i++) {
+			if ($scope.events[i].location) {
           $scope.events[i].distance = $scope.getDistanceFromLatLonInMiles($scope.events[i].location.latlng.lat, $scope.events[i].location.latlng.lng, $scope.selectedLat, $scope.selectedLng);
           $scope.events[i].distance = Math.round($scope.events[i].distance * 100) / 100;
           console.log("distance is", $scope.events[i].distance);
+			} 
         }//for 		
         $scope.$apply();
       });//navigator cb  
