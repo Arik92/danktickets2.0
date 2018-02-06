@@ -81,8 +81,60 @@
     </div>
   </section>
 
-  <section ng-show="isSet(1)">
-    <h3>{{ organizerTabs[1] }}</h3>
+  <!-- charts! -->
+  <section ng-show="isSet(1)" style="margin-top: 1rem">
+    <div class="row" style="margin-bottom: 3rem">
+      <div class="bar-filter-container col-sm-2 col-sm-offset-1">
+        <div class="bar-filter-container chart-card">
+          <h4>Filters:</h4>
+          <div class="bar-btn-box">
+            <button class="btn btn-info">Current Events</button>
+            <button class="btn btn-info">Past Events</button>
+          </div>
+        </div>
+      </div>
+      <div class="chart-and-title-container col-sm-8">
+        <div class="sales-by-event-container chart-card">
+          <h3>Sales By Event</h3>
+          <div class="bar-chart-container">
+            <canvas class="chart chart-bar" 
+                    chart-data="barData" 
+                    chart-labels="barLabels" 
+                    chart-click="barClick"
+            >
+            </canvas> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-5 col-sm-offset-1" style="margin-right: 0">
+          <div class="sales-by-event-container chart-card">
+              <h3>Sales By Event</h3>
+              <div class="bar-chart-container">
+                <canvas class="chart chart-doughnut" 
+                        chart-data="barData" 
+                        chart-labels="barLabels" 
+                        chart-click="barClick"
+                >
+                </canvas> 
+              </div>
+            </div>
+      </div>
+      <div class="col-sm-5">
+          <div class="sales-by-event-container chart-card">
+              <h3>Sales By Event</h3>
+              <div class="bar-chart-container">
+                <canvas class="chart chart-bar" 
+                        chart-data="barData" 
+                        chart-labels="barLabels" 
+                        chart-click="barClick"
+                >
+                </canvas> 
+              </div>
+            </div>
+      </div>
+    </div>
   </section>
 
   <section ng-show="isSet(2)">
