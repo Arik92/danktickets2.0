@@ -125,7 +125,15 @@
 
 
   <section ng-show="isSet(1)">
-    <h3>{{ organizerTabs[1] }}</h3>
+    <h3>Sales By Event</h3>
+    <div class="bar-chart-container">
+      <canvas class="chart chart-bar" 
+              chart-data="barData" 
+              chart-labels="barLabels" 
+              chart-click="barClick"
+      >
+      </canvas> 
+    </div>
   </section>
 
   <section ng-show="isSet(2)">

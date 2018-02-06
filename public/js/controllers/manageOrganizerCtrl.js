@@ -82,7 +82,7 @@ app.controller('manageOrganizerCtrl', ['Upload', 'orService', '$timeout', '$scop
 
   //// ===================== tabs stuff ===========================
   function initTabs() {
-    $scope.tab = 0;
+    $scope.tab = 1;
     $scope.organizerTabs = ['Profile', 'Dashboard', 'Manage Events', 'Create Event', 'Add Sub-Organizer', 'Check Attendees'];
   }
 
@@ -92,6 +92,22 @@ app.controller('manageOrganizerCtrl', ['Upload', 'orService', '$timeout', '$scop
 
   $scope.isSet = function (tabNum) {
     return $scope.tab === tabNum;
+  };
+
+  //// ===================== chart stuff ===========================
+  function getRandomColor() {
+
+  }
+  
+  $scope.barLabels = ["dank sesh", "chalice palace", "toker heaven", "sativa-sesh", "smoke break", "cali-greens", "tacos and titties"];
+  $scope.barData = [
+    [65, 59, 80, 57, 96, 58, 85],
+  ];
+
+  $scope.barColors = ['', 'orange', 'red', 'green', 'blue', 'lightgrey', ]
+
+  $scope.barClick = function (points, evt) {
+    console.log(points, evt);
   };
 
 }]);
