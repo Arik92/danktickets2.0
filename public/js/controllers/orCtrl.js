@@ -25,11 +25,10 @@ $scope.initUploader = function() {
 	  console.log(result);
 	  // for HTTPS $scope.previewImg = result.secure_url;
 	  $scope.previewImg = result[0].url;	
+	  $scope.$apply();
 	  });
   }//initUploader
-  $scope.upload = function () {
-    var submitPic = document.getElementById('fileItem').files[0];
-    console.log("in submit! uploading...", submitPic);
+  $scope.upload = function () {        
     var organizer = {
 	  version: 1,
       name: $scope.oName,
@@ -43,10 +42,10 @@ $scope.initUploader = function() {
     };// event post object    
       orService.postOrganizer(organizer).then(function (resp) {
         console.log("Organizer added successfully through service!");
+		$scope.showRedirect = true;
 		$timeout(function () {
             $location.path('/');
           }, 2000);
       })  
   };//scope.upload
-  //////////////////////file upload /////////////////////////////////////////////////////////////   
 }]);
