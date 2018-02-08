@@ -20,14 +20,14 @@ var upload = multer({ storage: storage }).single('file');
 /////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
 
 router.get('/', function (req, res, next) {
-  Event.find().populate('organizer').exec(function(err, events){
+  Event.find({"ongoing": true}).populate('organizer').exec(function(err, events){
     if (err) {
       console.error(err);
     } else {
-      res.send(events)
+      res.send(events);
     }
   })//exec()
-});//get all events that were ever published and populate the publisher field
+});//get all events that are ongoing(have not ended and have tickets) and populate the publisher field
 
 router.get('/findByOwner/:id', function(req, res, next){
   Event.find().populate('owner organizer').exec(function(err, events){
