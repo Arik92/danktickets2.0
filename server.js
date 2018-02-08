@@ -30,6 +30,28 @@ cloudinary.config({
 }); */
 
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
+/* *****************************************MANUAL PATCH */
+var Event = require("./models/eventmodel"); 
+  Event.update({},{$set: {"ongoing": true}} ,{multi: true},function(err, events){
+	  if (err) {
+		  throw (err);
+	  } else {
+		  console.log("events",events);
+		  console.log("all events are ongoing now");
+	  }//else 
+  });//epdate cb
+/* *****************************************MANUAL PATCH */
+ /*setInterval(function(){ 
+  //	function that checks the db for events who'se time is up and updates them
+  var Event = require("../models/eventmodel");
+  var currDate = new Date();
+  var currSec = currDate.getTime();
+  Event.update({endTime: {$lt: currSec}},{$set: {isOngoing: false}} ,function(err, events){
+	  if (err) {
+		  throw (err);
+	  }
+  });
+ }, 1000 * 60 * 60 * 24); //once a day */
 app.use(passport.initialize());
 //app.use(morgan('dev'));
 app.use(express.static('public'));

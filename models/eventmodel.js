@@ -39,7 +39,8 @@ var eventSchema = new Schema({
   ], //o
   numTickets: Number, //tickets remaining
   isPrivate: Boolean,
-  showRemainingTicks: Boolean
+  showRemainingTicks: Boolean,
+  ongoing: Boolean
 });
 
 
