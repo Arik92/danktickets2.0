@@ -39,8 +39,8 @@ mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets
 		  console.log("events",events);
 		  console.log("all events are ongoing now");
 	  }//else 
-  });//epdate cb*/
-	var Event = require("./models/eventmodel");
+  });//epdate cb
+var Event = require("./models/eventmodel");
   var currDate = new Date();
   var currSec = currDate.getTime();
   console.log("current time in milliseconds", currSec);
@@ -50,7 +50,7 @@ mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets
 	  } else {
 		  console.log("updated", events);
 	  }//else 
-  });// 1000 * 60 * 60 * 24
+  });// 1000 * 60 * 60 * 24 
 /* *****************************************MANUAL PATCH */
 
  setInterval(function(){ 
@@ -66,7 +66,7 @@ mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets
 		  console.log("updated", events);
 	  }//else 
   });// 1000 * 60 * 60 * 24
- }, 10000  ); //once a day  
+ }, 1000 * 60 * 60 * 24  ); //once a day  
 app.use(passport.initialize());
 //app.use(morgan('dev'));
 app.use(express.static('public'));
