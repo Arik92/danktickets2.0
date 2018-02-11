@@ -87,6 +87,7 @@ app.controller('loginCtrl', function(authService,userService, $timeout, $locatio
 	  //console.log("login data looks like", loginData);
     msg.loading = true;
     msg.errorMsg = false;
+	loginData.email = loginData.email.toLowerCase();
     authService.login(msg.loginData).then(function(data) {
       if (data.data.success) { 
 		$rootScope.currentUser = data.data.username

@@ -19,7 +19,7 @@ app.controller('regCtrl', function (userService, authService, $http, $location, 
       var loginObj = {
         "username": data.config.data.username,
         "password": data.config.data.password,
-        "email": data.config.data.email,
+        "email": data.config.data.email.toLowerCase(),
         "isEmailValidated": data.config.data.isEmailValidated
       };
       if (data.data.success) {
