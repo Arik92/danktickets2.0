@@ -85,6 +85,9 @@ router.get('/searchByActivity/:type', function(req, res, next){
   })//findCb
 }) //NOTE: get event by a specific type criteria. for future use
 
+function escapeRegex (text) {
+	return text.replace(/[-[\]{}()*+?.,\\^$|#s]/g, "\\$&");
+}
 router.get('/generalSearch/:searchQuery', function(req, res, next){
 	//var queryPattern = /req.params.query/;
 	//Event.find().then(function(error, 
@@ -104,7 +107,7 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
       res.send(resultEvents);
     }//else
   })//exec */
-	Event.find().populate({
+	Event.find({ongoing: true}).populate({
 		path: 'organizer',
 		select: 'name'
 		}).exec(function(err, resultEvents) {	
@@ -112,7 +115,7 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
 			res.send(err);
 	} else {
 		console.log("results ", resultEvents);
-		var patt = new RegExp(req.params.searchQuery, 'i');
+		var patt = new RegExp(escapeRegex(req.params.searchQuery), 'gi');
 		console.log("regex is", patt);
 		var searchResults =[];
 		for (var i=0;i<resultEvents.length;i++) {			

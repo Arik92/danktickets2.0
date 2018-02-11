@@ -337,7 +337,8 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       numTickets: $scope.totalTickets, //tickets remaining
       isPrivate: $scope.isPrivate,
       showRemainingTicks: $scope.showRemain,
-	  image: $scope.previewImg
+	  image: $scope.previewImg,
+	  ongoing: true
     };// event post object
     evt.eventTickets = [];
     for (var i = 0; i < $scope.currentTickets.length; i++) {
