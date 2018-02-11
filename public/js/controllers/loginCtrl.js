@@ -76,7 +76,7 @@ app.controller('loginCtrl', ['authService', 'userService', '$timeout', '$locatio
   //// ===================== forgot password stuff ===========================
   
   this.sendEmail = function() {
-    authService.forgotPassword(this.resetInfo).then((res) => {
+    authService.forgotPassword(this.resetInfo).then(function(res) {
       console.log('authservice res', res);
     })
   }

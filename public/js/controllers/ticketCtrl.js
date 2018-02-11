@@ -42,7 +42,7 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 			var total = 0;
 			console.log("cart now", $scope.dankCart);
 			if ($scope.dankCart.length>0) {
-				total = $scope.dankCart.reduce((sum, item) => {
+				total = $scope.dankCart.reduce(function(sum, item) {
 					return sum += getSubtotal(item);
 				}, 0)
 			}//if

@@ -27,14 +27,14 @@ function (authService, $scope, $window, $stateParams, $state, $timeout, $locatio
 
     if (!this.doPasswordsMatch) return;
 
-    authService.updatePassword(this.resetInfo).then((res) => {
+    authService.updatePassword(this.resetInfo).then(function(res) {
       console.log("res after update", res);
       if (res.data.success) {
 
         this.passwordUpdated = true;
 
         // login
-        authService.login(res.data.user).then((result) => {
+        authService.login(res.data.user).then(function(result) {
           console.log("result", result);
           $timeout(function() {
             $location.path('/')
@@ -46,7 +46,7 @@ function (authService, $scope, $window, $stateParams, $state, $timeout, $locatio
     })
   } 
 
-this.comparePasswords = (pw1, pw2) => {
+this.comparePasswords = function(pw1, pw2) {
   return pw1 === pw2 ? true : false;
 }
 

@@ -56,7 +56,7 @@ app.controller('profileCtrl',['userService','$scope','$window','$rootScope', fun
   ]
 
   $scope.clearAll = function(options) {
-    options.forEach((option) => {
+    options.forEach(function(option) {
       option.selected = false;
     })
   }
