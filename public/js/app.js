@@ -160,7 +160,7 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
     })
     .state('publicprofile', {
       url: '/public-profile', // /:name/:id
-      templateUrl: '/templates/public-profile.html'
+      templateUrl: '/templates/public-profile.html',
       controller: 'publicProfileCtrl'
     })
 	.state('editprofile', {

@@ -3,7 +3,9 @@
 		<div class="col col-md-6">
 			<div class="pic-container">
 				<h1>Pickle rick</h1>
-				<div> Insert pickle picture here</div>
+				<div class="profile-pic-container"> 
+					<img src="" alt="Profile picture"/>
+				</div>
 			</div>
 			<div class="description-container">
 				<h3>Organizer description: </h3>
@@ -17,9 +19,21 @@
 			</div>
 			<div class="profile-media-container">
 			<h3>Social</h3>
-			<ul >
-				<li><a href="">dummyzQ</a></li>
-			</ul>
+				<ul class="profile-social">
+					<li ng-repeat="socialLink in socialLinks">
+						<a href="{{ socialLink.url }}">
+						<i class="{{ socialLink.faClass }}"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col col-md-8 col-md-offset-2">
+			<div class="profile-filter-container">
+				<button class="btn btn-primary" >Current events</button>
+				<button class="btn btn-danger" >Past events</button>
 			</div>
 		</div>
 	</div>

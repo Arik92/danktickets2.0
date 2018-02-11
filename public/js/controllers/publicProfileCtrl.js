@@ -1,29 +1,13 @@
-app.controller('publicProfileCtrl', ['orService', '$scope', '$window', '$stateParams', '$state', '$timeout', '$location',
-  function (orService, $scope, $window, $stateParams, $state, $timeout, $location) {
-
-    this.$onInit = () => {
-      $scope.params = $stateParams;
-      console.log($scope.params);
-
-      this.doValidation();
-    }
-
-
-
-    this.doValidation = () => {
-      authService.validateEmail($scope.params).then((res) => {
-        console.log("res after validation", res);
-        if (res.data.success) {
-          authService.login(res.data.user).then((result) => {
-            console.log("result", result);
-            $timeout(() => {
-              $location.path('/')
-            }, 3000);
-          })
-        }
-      })
-    }
-
-
-
+app.controller('publicProfileCtrl', ['orService', '$scope', function (orService, $scope) {
+	function startSocials() {
+		$scope.socialLinks = [
+    { platform: "instagram", url:"#", faClass: "fa fa-instagram" },
+    { platform: "facebook", url:"#", faClass: "fa fa-facebook" },
+    { platform: "snapchat", url:"#", faClass: "fa fa-snapchat" },
+    { platform: "twitter", url:"#", faClass: "fa fa-twitter" }
+  ];
+	}
+    this.$onInit = function() {     
+      startSocials();      
+    }  
   }]);
