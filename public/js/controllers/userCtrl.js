@@ -1,5 +1,5 @@
-app.controller('regCtrl', function (userService, authService, $http, $location, $timeout) {
-	this.$onInit = () => {
+app.controller('regCtrl', ['userService', 'authService', '$http', '$location', '$timeout', function (userService, authService, $http, $location, $timeout) {
+	this.$onInit = function() {
 	 app.is18 = false; 
  }
 	
@@ -46,7 +46,7 @@ app.controller('regCtrl', function (userService, authService, $http, $location, 
       }
     });
   };
-});
+}]);
 
 // app.controller('indexCtrl', function($scope, $rootScope, $http) {
 //   $scope.logout = function() {

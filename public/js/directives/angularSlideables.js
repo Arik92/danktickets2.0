@@ -1,5 +1,5 @@
 angular.module('angularSlideables', [])
-.directive('slideable', function () {
+.directive('slideable', [function () {
     return {
         restrict:'C',
         compile: function (element, attr) {
@@ -21,8 +21,8 @@ angular.module('angularSlideables', [])
             };
         }
     };
-})
-.directive('slideToggle', function() {
+}])
+.directive('slideToggle', [function() {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
@@ -46,4 +46,4 @@ angular.module('angularSlideables', [])
             });
         }
     }
-});
+}]);

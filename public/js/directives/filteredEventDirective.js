@@ -1,4 +1,4 @@
-app.directive('filteredEventDirective', function ($compile) {
+app.directive('filteredEventDirective', function () {
   return {
     restrict: 'E',
     scope: {
@@ -6,7 +6,7 @@ app.directive('filteredEventDirective', function ($compile) {
       mylimit: "=",
       myfilter: "="
     },
-    controller: ($scope) => {
+    controller:  function() {
       console.log('yo from filtered events directive');
     },
     templateUrl: 'filteredEventDirective.html',

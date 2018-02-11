@@ -1,4 +1,4 @@
-app.factory('purchaseService', function($http){
+app.factory('purchaseService', ['$http', function($http){
   purchaseFactory = {};
   purchaseFactory.buyCart = function(dankcart, id){
 	  return $http.put('/events/buyTicket/'+id, dankCart).then(function(result){
@@ -25,4 +25,4 @@ app.factory('purchaseService', function($http){
   };//getCart 
   
   return purchaseFactory;
-});
+}]);

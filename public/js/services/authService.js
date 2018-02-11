@@ -1,4 +1,4 @@
-app.factory('authService', function($http, authToken){
+app.factory('authService', ['$http', 'authToken', function($http, authToken){
   var authFactory = {};
 
   authFactory.login = function(loginData) {
@@ -63,9 +63,9 @@ app.factory('authService', function($http, authToken){
   };
 
   return authFactory; 
-})
+}])
 
-app.factory('authToken', function($window) {
+app.factory('authToken', ['$window', function($window) {
   var authTokenFactory = {};
   //authToken.setToken(token)
   authTokenFactory.setToken = function(token) {
@@ -88,9 +88,9 @@ app.factory('authToken', function($window) {
     return $window.localStorage.getItem('token');
   };
   return authTokenFactory;
-})
+}])
 
-app.factory('authServiceInterceptors', function(authToken) {
+app.factory('authServiceInterceptors', ['authToken', function(authToken) {
   var authServiceInterceptors = {};
   authServiceInterceptors.request = function(config) {
     var token = authToken.getToken();
@@ -98,7 +98,7 @@ app.factory('authServiceInterceptors', function(authToken) {
     return config;
   }
   return authServiceInterceptors;
-})
+}])
 
 function errorCallBack(err) {
   console.log(err);

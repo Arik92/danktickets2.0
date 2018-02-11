@@ -1,6 +1,6 @@
 app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$rootScope', '$scope', '$http', '$window', '$location','$state', function (createService, dankAdService, linkService, $rootScope, $scope, $http, $window, $location, $state) {
 
-  this.$onInit = () => {
+  this.$onInit = function() {
     console.log("hello from hoe ctrl");
     homeEventsPrep();
     $scope.socialLinks = linkService.socialLinks;
@@ -92,7 +92,7 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
   }
 
   function getDummyEvents() {
-    let events = [];
+    var events = [];
     for (i = 0; i < 15; i++) {
       events.push({
         name: 'Dank Event!!',
@@ -105,7 +105,7 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
   }
 
   function getDummyBlogs() {
-    let blogs = [];
+    var blogs = [];
     for (i = 0; i < 4; i++) {
       blogs.push({
         name: 'Grow Weed For Free!',

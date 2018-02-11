@@ -1,4 +1,4 @@
-app.factory('orService', function($http){
+app.factory('orService', ['$http', function($http){
   
   var getOrganizersByUser = function(userName) {
     return $http.get('/organizers/'+userName).then(function(result) {
@@ -64,4 +64,4 @@ app.factory('orService', function($http){
         deleteOrganizer: deleteOrganizer,
 		getOrganizerById: getOrganizerById
     };
-});
+}]);

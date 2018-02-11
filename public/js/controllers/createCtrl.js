@@ -1,6 +1,6 @@
 app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', '$window', '$timeout', '$rootScope', '$location', 'angularLoad', function (createService, orService, userService, $scope, $window, $timeout, $rootScope, $location, angularLoad) {
   console.log('hello from createCtrl');
-  this.$onInit = () => {
+  this.$onInit = function() {
 	$scope.currentTickets = [];	
 	$scope.startHr = $scope.startHrCalender[0];
 	$scope.endHr = $scope.endHrCalender[0];

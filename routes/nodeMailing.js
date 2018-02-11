@@ -26,7 +26,7 @@ function sendNodeMail(user, msgType) {
   let transporter = nodemailer.createTransport(mailConfig);
 
   // send mail with defined transport object
-  transporter.sendMail(mailOptions, (err, info) => {
+  transporter.sendMail(mailOptions, function(err, info) {
     console.log('sendMail triggered');
     if (err) {
       console.log('Error occurred. ' + err.message);

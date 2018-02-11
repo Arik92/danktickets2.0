@@ -1,7 +1,7 @@
 app.controller('validateCtrl', ['authService', '$scope', '$window', '$stateParams', '$state', '$timeout', '$location',
   function (authService, $scope, $window, $stateParams, $state, $timeout, $location) {
 
-    this.$onInit = () => {
+    this.$onInit = function() {
       $scope.params = $stateParams;
       console.log($scope.params);
 
@@ -10,13 +10,13 @@ app.controller('validateCtrl', ['authService', '$scope', '$window', '$stateParam
 
 
 
-    this.doValidation = () => {
-      authService.validateEmail($scope.params).then((res) => {
+    this.doValidation = function() {
+      authService.validateEmail($scope.params).then(function(res) {
         console.log("res after validation", res);
         if (res.data.success) {
-          authService.login(res.data.user).then((result) => {
+          authService.login(res.data.user).then(function(result) {
             console.log("result", result);
-            $timeout(() => {
+            $timeout(function() {
               $location.path('/')
             }, 3000);
           })
