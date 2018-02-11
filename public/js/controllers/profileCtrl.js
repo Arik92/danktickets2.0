@@ -8,7 +8,7 @@ app.controller('profileCtrl',['userService','$scope','$window','$rootScope', fun
     throw (err)
   })//GET request route
 	 }
-  this.$onInit = () => {
+  this.$onInit = function() {
     initTabs();
     userPrep(); 
   }

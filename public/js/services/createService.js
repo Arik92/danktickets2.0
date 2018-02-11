@@ -1,4 +1,4 @@
-app.factory('createService', function ($http) {
+app.factory('createService', ['$http', function ($http) {
 
   var getEventById = function (id) {
     return $http.get('/events/findById/' + id).then(function (result) {
@@ -164,4 +164,4 @@ app.factory('createService', function ($http) {
     getTickets: getTickets,
     generalSearch: generalSearch
   };
-});
+}]);

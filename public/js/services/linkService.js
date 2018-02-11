@@ -1,4 +1,4 @@
-app.factory('linkService', function(){
+app.factory('linkService', [function(){
   linkService = {};
 
   linkService.socialLinks = [
@@ -18,4 +18,4 @@ app.factory('linkService', function(){
   ]
 
   return linkService;
-});
+}]);

@@ -1,6 +1,6 @@
 app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$rootScope', '$scope', '$http', '$window', '$location','$state', function (createService, dankAdService, linkService, $rootScope, $scope, $http, $window, $location, $state) {
 
-  this.$onInit = () => {
+  this.$onInit = function() {
     console.log("hello from hoe ctrl");
     homeEventsPrep();
     $scope.socialLinks = linkService.socialLinks;

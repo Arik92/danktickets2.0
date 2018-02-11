@@ -1,6 +1,6 @@
 app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService', 'purchaseService', '$document','NgMap','angularLoad', '$timeout','$state','$location', function($scope,$rootScope, $stateParams, createService, purchaseService, $document, NgMap, angularLoad, $timeout, $state, $location){
 	console.log("state param for event", $stateParams);	
-	this.$onInit = () => {
+	this.$onInit = function() {
 		//var socket = io(); //might move someplace else
 		var config = require('../config.js');
 		$scope.mapKey = config.MAPS_API_KEY;		
@@ -43,7 +43,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 
 	function showImage() {
 		console.log('removing class');
-		$timeout(() => {
+		$timeout(function() {
 			document.querySelector('.poster-image').classList.remove('zero-opacity');
 		}, 300);
 	}

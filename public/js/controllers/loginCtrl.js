@@ -1,9 +1,9 @@
-app.controller('loginCtrl', function(authService,userService, $timeout, $location, $rootScope, $scope) {
+app.controller('loginCtrl', ['authService', 'userService', '$timeout', '$location', '$rootScope', '$scope', function(authService, userService, $timeout, $location, $rootScope, $scope) {
   var msg = this;
   this.resetInfo = {};
   this.resetInfo.email = '';
 
-	this.$onInit = () => {
+	this.$onInit = function() {
    //msg.loginData = {};
    $scope.showCreation = false;
    if ($rootScope.currentUser) {
@@ -75,7 +75,7 @@ app.controller('loginCtrl', function(authService,userService, $timeout, $locatio
 
   //// ===================== forgot password stuff ===========================
   
-  this.sendEmail = () => {
+  this.sendEmail = function() {
     authService.forgotPassword(this.resetInfo).then((res) => {
       console.log('authservice res', res);
     })
@@ -116,4 +116,4 @@ app.controller('loginCtrl', function(authService,userService, $timeout, $locatio
     authService.logout();
     $location.path('/');
   }
-});
+}]);

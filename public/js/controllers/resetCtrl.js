@@ -13,13 +13,13 @@ function (authService, $scope, $window, $stateParams, $state, $timeout, $locatio
   this.passwordUpdated = false;
   this.updateFailed = false;
 
-  this.$onInit = () => {
+  this.$onInit = function() {
     $scope.params = $stateParams;
     console.log($scope.params);
 
   }
 
-  this.resetPassword = () => {
+  this.resetPassword = function() {
 
     // check that password confirmation matches
     // this.doPasswordsMatch = this.comparePasswords(this.resetInfo.password, this.resetInfo.pwConfirm);
@@ -36,7 +36,7 @@ function (authService, $scope, $window, $stateParams, $state, $timeout, $locatio
         // login
         authService.login(res.data.user).then((result) => {
           console.log("result", result);
-          $timeout(() => {
+          $timeout(function() {
             $location.path('/')
           }, 3000);
         })

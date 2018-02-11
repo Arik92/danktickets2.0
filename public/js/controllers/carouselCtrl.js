@@ -1,6 +1,6 @@
 app.controller('carouselCtrl',['$scope','$window', function( $scope, $window){
   
-  this.$onInit = () => { 
+  this.$onInit = function() { 
 
   }
 

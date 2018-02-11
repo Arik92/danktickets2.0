@@ -22,7 +22,7 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 	  });//getEventById
   }//initProfs
   
-  this.$onInit = () => {
+  this.$onInit = function() {
 			console.log('init fired');
 			initEventAndProfs();			
 			addScript(mapSrc); 		

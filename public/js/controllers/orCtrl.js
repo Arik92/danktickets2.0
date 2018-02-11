@@ -1,5 +1,5 @@
 app.controller('orCtrl', ['orService', 'userService', '$scope', '$window', '$timeout', '$rootScope', '$location', function (orService, userService, $scope, $window, $timeout, $rootScope, $location) {
-  
+
   userService.getUserByName($rootScope.currentUser).then(function (user) {
     $scope.user = user;
     console.log("create user is", $scope.user);
@@ -11,26 +11,27 @@ app.controller('orCtrl', ['orService', 'userService', '$scope', '$window', '$tim
     })//get organizers */
   })//userFactory cb
 
-$scope.initUploader = function() {
-	  cloudinary.openUploadWidget({ cloud_name: 'newoldroad-com',
-	  upload_preset: 'organizer_pgznub8n',
-	  theme: 'purple',
-	  multiple: false,
-	  cropping_show_back_button: true,
-	  cropping: 'server',
-	  cropping_coordinates_mode:'custom',
-	  sources: ['local', 'url', 'facebook', 'instagram', 'dropbox']
-	  }, 
-      function(error, result) { 
-	  console.log(result);
-	  // for HTTPS $scope.previewImg = result.secure_url;
-	  $scope.previewImg = result[0].url;	
-	  $scope.$apply();
-	  });
+  $scope.initUploader = function () {
+    cloudinary.openUploadWidget({
+      cloud_name: 'newoldroad-com',
+      upload_preset: 'organizer_pgznub8n',
+      theme: 'purple',
+      multiple: false,
+      cropping_show_back_button: true,
+      cropping: 'server',
+      cropping_coordinates_mode: 'custom',
+      sources: ['local', 'url', 'facebook', 'instagram', 'dropbox']
+    },
+      function (error, result) {
+        console.log(result);
+        // for HTTPS $scope.previewImg = result.secure_url;
+        $scope.previewImg = result[0].url;
+        $scope.$apply();
+      });
   }//initUploader
-  $scope.upload = function () {        
+  $scope.upload = function () {
     var organizer = {
-	  version: 1,
+      version: 1,
       name: $scope.oName,
       owner: $rootScope.currentUser,
       about: $scope.oDesc,
@@ -38,14 +39,14 @@ $scope.initUploader = function() {
       facebook: $scope.oFace,
       twitter: $scope.oTwitt,
       instagram: $scope.oInst,
-	  image: $scope.previewImg
+      image: $scope.previewImg
     };// event post object    
-      orService.postOrganizer(organizer).then(function (resp) {
-        console.log("Organizer added successfully through service!");
-		$scope.showRedirect = true;
-		$timeout(function () {
-            $location.path('/');
-          }, 2000);
-      })  
+    orService.postOrganizer(organizer).then(function (resp) {
+      console.log("Organizer added successfully through service!");
+      $scope.showRedirect = true;
+      $timeout(function () {
+        $location.path('/');
+      }, 2000);
+    })
   };//scope.upload
 }]);

@@ -1,4 +1,4 @@
-app.factory('timeService', function () {
+app.factory('timeService', [function () {
   timeService = {};
 
  timeService.msToDate = function(ms) {
@@ -7,4 +7,4 @@ app.factory('timeService', function () {
  }
 
   return timeService;
-});
+}]);

@@ -1,6 +1,6 @@
 app.controller('navToggleCtrl',['$scope','$log', '$state', function( $scope, $log, $state){
   
-  this.$onInit = () => {
+  this.$onInit = function() {
     
   }
 

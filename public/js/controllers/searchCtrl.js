@@ -108,7 +108,7 @@ app.controller('searchCtrl', ['$scope', '$window', 'createService', '$stateParam
 		$scope.dateFlag = false;
 		$scope.locationFlag = true;
 	}//reSearch 
-	this.$onInit = () => {
+	this.$onInit = function() {
 		$scope.defaultFilter();
 		/*$scope.relevanceFlag = true;
 		$scope.priceFlag = false;
