@@ -1,6 +1,6 @@
 app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window', '$stateParams', '$state', '$timeout', '$location',
 	function (purchaseService,$rootScope, $scope, $window, $stateParams, $state, $timeout, $location) {
-		this.$onInit = () => {
+		this.$onInit = function() {
 			//localStorage.removeItem('dankCart');// PANIC button			
 			console.log("rootScope", $rootScope.currentUser);
 			purchaseService.getCart($rootScope.currentUser).then(function(result){

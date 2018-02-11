@@ -1,11 +1,11 @@
 var app = angular.module('dankTickets', ['ui.router', 'slick', 'ui.bootstrap', 'ngAnimate', 'cmelo.angularSticky', 'ngMap', 'angularLoad', 'angularSlideables', 'angular-err-src', 'chart.js']);
 
 
-app.config(function ($httpProvider) {
+app.config([ '$httpProvider', function ($httpProvider) {
   $httpProvider.interceptors.push('authServiceInterceptors');
-})
+}])
 
-app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
+app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function ($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/');
   $stateProvider
@@ -181,8 +181,9 @@ app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
         }
       }//controller
     })
-});
-app.run(function ($rootScope, authService) {
+}]);
+
+app.run([ 'authService', '$rootScope', function (authService, $rootScope) {
   var user = JSON.parse(localStorage.getItem("user"));
   if (user) {
     $rootScope.currentUser = user.id;
@@ -213,4 +214,4 @@ app.run(function ($rootScope, authService) {
   //   // $rootScope.loader = true;
   //
   // }
-});
+}]);

@@ -3,7 +3,7 @@ app.controller('manageOrganizerCtrl', ['orService', '$timeout', '$scope', '$root
 
   // console.log("root scope usr", $rootScope.currentUser);
 
-  this.$onInit = () => {
+  this.$onInit = function() {
     checkUser();
     initTabs();
     initSocialForms();

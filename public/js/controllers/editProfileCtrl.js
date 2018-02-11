@@ -11,7 +11,7 @@ app.controller('editProfileCtrl',['orService','userService','$scope' ,'Upload','
 			}//else
 		});
 		};
-		this.$onInit = () => {
+		this.$onInit = function() {
 			console.log('init fired');
 			profileServiceinit();
 		}//onInit		

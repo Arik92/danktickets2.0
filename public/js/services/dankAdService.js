@@ -1,4 +1,4 @@
-app.factory('dankAdService', function(){
+app.factory('dankAdService', [function(){
   var adService = {};
 
   adService.dummyAds = [
@@ -17,4 +17,4 @@ app.factory('dankAdService', function(){
   ];
 
   return adService;
-});
+}]);
