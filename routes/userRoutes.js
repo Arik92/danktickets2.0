@@ -82,11 +82,11 @@ module.exports = function (router) {
   // validate new user from nodemailer link
   router.post('/forgotPassword', function (req, res) {
     // this is a mongodb find
-    User.find((err, users) => {
+    User.find(function(err, users) {
       if (err) throw err;
 
       // this is a native javascript find
-      const matchingUser = users.find((user) => {
+      const matchingUser = users.find(function(user) {
         return user.email === req.body.email;
       })
 
@@ -103,11 +103,11 @@ module.exports = function (router) {
   //http://localhost:8000/users/forgotPassword
   router.post('/updatePassword', function (req, res) {
     // this is a mongodb find
-    User.find((err, users) => {
+    User.find(function(err, users) {
       if (err) throw err;
 
       // this is a native javascript find
-      const matchingUser = users.find((user) => {
+      const matchingUser = users.find(function(user) {
         return user._id.valueOf().toString() === req.body.userId;
       })
 
@@ -122,7 +122,7 @@ module.exports = function (router) {
 
       matchingUser.password = hashedNewPassword;
 
-      User.findByIdAndUpdate(matchingUser._id, matchingUser, { new: true }, (error, updatedUser) => {
+      User.findByIdAndUpdate(matchingUser._id, matchingUser, { new: true }, function(error, updatedUser){
         if (err) throw err;
         res.json({ success: true, message: 'User password updated and saved to db', user: updatedUser });
       })
@@ -134,11 +134,11 @@ module.exports = function (router) {
   // validate new user from nodemailer link
   router.post('/emailValidate', function (req, res) {
     // this is a mongodb find
-    User.find((err, users) => {
+    User.find(function(err, users) {
       if (err) throw err;
 
       // this is a native javascript find
-      const matchingUser = users.find((user) => {
+      const matchingUser = users.find(function(user) {
         return user._id.valueOf().toString() === req.body.userId;
       })
 
@@ -152,7 +152,7 @@ module.exports = function (router) {
       matchingUser.isEmailValidated = true;
       console.log('matchingUser', matchingUser);
 
-      User.findByIdAndUpdate(matchingUser._id, matchingUser, { new: true }, (error, newUser) => {
+      User.findByIdAndUpdate(matchingUser._id, matchingUser, { new: true }, function(error, newUser) {
         if (err) throw err;
         res.json({ success: true, message: 'User validated and saved to db', user: newUser });
       })

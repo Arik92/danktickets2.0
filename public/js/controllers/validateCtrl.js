@@ -11,10 +11,10 @@ app.controller('validateCtrl', ['authService', '$scope', '$window', '$stateParam
 
 
     this.doValidation = function() {
-      authService.validateEmail($scope.params).then((res) => {
+      authService.validateEmail($scope.params).then(function(res) {
         console.log("res after validation", res);
         if (res.data.success) {
-          authService.login(res.data.user).then((result) => {
+          authService.login(res.data.user).then(function(result) {
             console.log("result", result);
             $timeout(function() {
               $location.path('/')
