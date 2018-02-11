@@ -1,4 +1,4 @@
-app.controller('footerCtrl', ['linkService', '$scope', function (linkService, $scope,) {
+app.controller('footerCtrl', ['linkService', '$scope', function (linkService, $scope) {
   
 
     this.$onInit = function() {

@@ -3,11 +3,11 @@ var config = {
   MAPS_API_KEY: 'AIzaSyBlqLa-v1ZicvzAhvzPyX4p0mbXIzYjGEk',
   STATIC_MAPS_API_KEY: 'AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM'
 };
-module.exports = config;
+module.exports = config; 
 },{}],2:[function(require,module,exports){
 app.controller('createCtrl', ['createService', 'orService', 'userService', '$scope', '$window', '$timeout', '$rootScope', '$location', 'angularLoad', function (createService, orService, userService, $scope, $window, $timeout, $rootScope, $location, angularLoad) {
   console.log('hello from createCtrl');
-  this.$onInit = () => {
+  this.$onInit = function() {
 	$scope.currentTickets = [];	
 	$scope.startHr = $scope.startHrCalender[0];
 	$scope.endHr = $scope.endHrCalender[0];
@@ -337,7 +337,8 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       numTickets: $scope.totalTickets, //tickets remaining
       isPrivate: $scope.isPrivate,
       showRemainingTicks: $scope.showRemain,
-	  image: $scope.previewImg
+	  image: $scope.previewImg,
+	  ongoing: true
     };// event post object
     evt.eventTickets = [];
     for (var i = 0; i < $scope.currentTickets.length; i++) {
@@ -494,7 +495,7 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 	  });//getEventById
   }//initProfs
   
-  this.$onInit = () => {
+  this.$onInit = function() {
 			console.log('init fired');
 			initEventAndProfs();			
 			addScript(mapSrc); 		
@@ -891,7 +892,7 @@ $scope.updateEndHr = function() {
 },{"../config.js":1}],4:[function(require,module,exports){
 app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService', 'purchaseService', '$document','NgMap','angularLoad', '$timeout','$state','$location', function($scope,$rootScope, $stateParams, createService, purchaseService, $document, NgMap, angularLoad, $timeout, $state, $location){
 	console.log("state param for event", $stateParams);	
-	this.$onInit = () => {
+	this.$onInit = function() {
 		//var socket = io(); //might move someplace else
 		var config = require('../config.js');
 		$scope.mapKey = config.MAPS_API_KEY;		
@@ -934,7 +935,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 
 	function showImage() {
 		console.log('removing class');
-		$timeout(() => {
+		$timeout(function() {
 			document.querySelector('.poster-image').classList.remove('zero-opacity');
 		}, 300);
 	}
