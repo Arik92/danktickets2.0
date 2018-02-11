@@ -1,0 +1,24 @@
+.profile-social {
+	display: flex;	
+}
+.profile-social li {
+	font-size: 3rem;
+    margin: 2rem;
+    padding: 1rem;
+}
+.profile-pic-container {
+	height: 300px;
+	width: 300px;
+}
+.profile-pic-container img {
+	height: 100%;
+	width: 100%;
+}
+.profile-filter-container  {
+	display: flex;
+	justify-content: center;
+}
+.profile-filter-container  button{
+	margin-right: 2rem;
+	display: block;
+}
