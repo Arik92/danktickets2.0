@@ -65,7 +65,7 @@ app.controller('manageOrganizerCtrl', ['orService', '$timeout', '$scope', '$root
 
   //// ===================== tabs stuff ===========================
   function initTabs() {
-    $scope.tab = 1;
+    $scope.tab = 0;
     $scope.organizerTabs = ['Profile', 'Dashboard', 'Manage Events', 'Create Event', 'Add Sub-Organizer', 'Check Attendees'];
   }
 
@@ -91,6 +91,19 @@ app.controller('manageOrganizerCtrl', ['orService', '$timeout', '$scope', '$root
 
   $scope.barClick = function (points, evt) {
     console.log(points, evt);
+  };
+
+  //// ===================== ng-quill stuff ===========================
+  $scope.title = '';
+  $scope.changeDetected = false;
+
+  $scope.editorCreated = function (editor) {
+      console.log(editor);
+  };
+  $scope.contentChanged = function (editor, html, text, delta, oldDelta) {
+      $scope.changeDetected = true;
+      console.log($scope.title);
+      console.log('editor: ', editor, 'html: ', html, 'text:', text, 'delta:', delta, 'oldDelta:', oldDelta);
   };
 
 }]);
