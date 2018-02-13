@@ -73,8 +73,8 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
 
   //// ===================== tabs stuff ===========================
   function initTabs() {
-    $scope.tab = 0;
-    $scope.organizerTabs = ['Organizer Info', 'Dashboard', 'Manage Events', 'Add Sub-Organizer', 'Check Attendees', 'Organizer Settings'];
+    $scope.tab = 1;
+    $scope.organizerTabs = ['Organizer Info', 'Stats', 'Manage Events', 'Add Sub-Organizer', 'Check Attendees', 'Organizer Settings'];
   }
 
   $scope.setTab = function (newTab) {
