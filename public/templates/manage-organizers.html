@@ -31,7 +31,7 @@
         <div class="od-toggle-container">
           <h3>Organizer Profile</h3>
           <div class="view-toggle">
-            <button class="btn btn-success" >Save</button>
+            <button ng-click="saveQuill()" class="btn btn-success" >Save</button>
             <button class="btn btn-default">View</button>
           </div>
         </div>
@@ -47,6 +47,12 @@
           </div>
           <div class="od-editor">
             About: {{selectedOrganizer.about}}
+            <ng-quill-editor ng-model="title" 
+                             on-editor-created="editorCreated(editor)" 
+                             on-content-changed="contentChanged(editor, html, text, delta, oldDelta)"
+                             id="organiza-quill">
+
+            </ng-quill-editor>
           </div>
           <div class="url-display">
             <h5>Profile URL is:</h5>

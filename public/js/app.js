@@ -1,8 +1,36 @@
-var app = angular.module('dankTickets', ['ui.router', 'slick', 'ui.bootstrap', 'ngAnimate', 'cmelo.angularSticky', 'ngMap', 'angularLoad', 'angularSlideables', 'angular-err-src', 'chart.js']);
+var app = angular.module('dankTickets', ['ui.router', 'slick', 'ui.bootstrap', 'ngAnimate', 'cmelo.angularSticky', 'ngMap', 'angularLoad', 'angularSlideables', 'chart.js', 'ngQuill']);
 
 
-app.config([ '$httpProvider', function ($httpProvider) {
+app.config([ 'ngQuillConfigProvider', '$httpProvider', function (ngQuillConfigProvider, $httpProvider) {
   $httpProvider.interceptors.push('authServiceInterceptors');
+  
+  // ng-quill config
+  var config = {
+    modules: {
+      toolbar: [
+        ['bold', 'italic', 'underline'],        // toggled buttons
+        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        // [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+        // [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+        // [{ 'direction': 'rtl' }],                         // text direction
+
+        // [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+
+        // ['clean'],                                         // remove formatting button
+
+        // ['link', 'image']                         // link and image, video
+      ]
+    },
+    theme: 'snow',
+    placeholder: 'Describe yo Dank Self ...'
+  }
+  ngQuillConfigProvider.set(config);
 }])
 
 app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function ($locationProvider, $stateProvider, $urlRouterProvider) {
