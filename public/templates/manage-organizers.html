@@ -4,7 +4,7 @@
 <div class="organizer-manager-container container" ng-if="isUserSignedIn">
 
   <div class="od-top-level">
-    <h1>Manage Organizers</h1>
+    <h1>Organizer Dashboard</h1>
     <div class="select-organizer">
       <div class="form-group">
         <label for="sel1">Select Your Organizer</label>
@@ -32,7 +32,9 @@
           <h3>Organizer Profile</h3>
           <div class="view-toggle">
             <button class="btn btn-success" >Save</button>
-            <button class="btn btn-default">View</button>
+            <a ui-sref="publicprofile({name: selectedOrganizer.name,id: selectedOrganizer._id, orgParam: selectedOrganizer})">
+			<button class="btn btn-default">View</button>
+			</a>
           </div>
         </div>
       </div>

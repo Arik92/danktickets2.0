@@ -31,12 +31,7 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
         console.log('hello from the partial');
         $scope.items = ["A", "List", "Of", "Items"];
       }
-    })
-    .state('home.home', {
-      url: "/list",
-      template: "<h1>yoooo we backkk</yo>",
-      controller: 'homeCtrl'
-    })
+    })    
     .state('event', {
       url: '/event/:id',
       templateUrl: '/templates/event.html',
@@ -149,7 +144,7 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       templateUrl: '/templates/event2.html'
     })
     .state('userprofiles', {
-      url: '/manage-organizers',
+      url: '/organizer-dashboard',
       templateUrl: '/templates/manage-organizers.html',
       controller: 'manageOrganizerCtrl'
     })
@@ -159,13 +154,14 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       controller: 'editCtrl'
     })
     .state('publicprofile', {
-      url: '/public-profile', // /:name/:id
+      url: '/public-profile/:name/:id', // /:name/:id
       templateUrl: '/templates/public-profile.html',
+	   params: {orgParam: null},
       controller: 'publicProfileCtrl'
     })
 	.state('editprofile', {
       url: '/edit-profile/:id',
-      templateUrl: '/templates/edit-organizer.html',
+      templateUrl: '/templates/edit-organizer.html',	 
       controller: 'editProfileCtrl'
     })
     .state('auth', {
