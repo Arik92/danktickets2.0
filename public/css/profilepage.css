@@ -3,6 +3,10 @@
   margin: 0 auto;
 }
 
+.mobile-padder {
+  padding: 0 1.5rem 2rem;
+}
+
 .warning-text {
   font-size: 1.5rem;
   color: red;

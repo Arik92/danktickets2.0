@@ -24,6 +24,11 @@
     <div class="container settings-info-container">
       <form>
         <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+              <h4>General Info</h4>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-md-5 col-md-offset-1">
             <div class="form-group">
               <label for="first">First Name</label>
@@ -87,13 +92,48 @@
         </div>
         <!--  row   -->
 
+        <div class="billing-info" style="margin-top: 1.5rem">
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+              <h4>Billing Info</h4>
+              <div class="form-group">
+                <label for="email">Address</label>
+                <input type="email" class="form-control" id="email" placeholder="email">
+              </div>
+              <div class="form-group">
+                <label for="email">Address 2</label>
+                <input type="email" class="form-control" id="email" placeholder="email">
+              </div>
+              <div class="form-group">
+                <label for="email">City</label>
+                <input type="email" class="form-control" id="email" placeholder="email">
+              </div>
+              <div class="form-group">
+                <label for="email">Country</label>
+                <input type="email" class="form-control" id="email" placeholder="email">
+              </div>
+            </div>
+          </div>
+  
+          <div class="row">
+              <div class="form-group col-md-5 col-md-offset-1">
+                <label for="email">Zip/Postal Code</label>
+                <input type="email" class="form-control" id="email" placeholder="email">
+              </div>
+              <div class="form-group col-md-5">
+                <label for="email">State</label>
+                <input type="email" class="form-control" id="email" placeholder="email">
+              </div>
+          </div>
+        </div>
+
         <button class="btn btn-primary info-save-btn">Save</button>
       </form>
     </div>
   </section>
 
   <!-- Other Sections -->
-  <section ng-show="isSet(1)" class="left-aligned">
+  <section ng-show="isSet(1)" class="left-aligned mobile-padder">
     <h3 class="settings-section-header-left">Password Reset</h3>
     <hr>
     <div class="password-container">
@@ -115,7 +155,18 @@
     </div>
   </section>
 
-  <section ng-show="isSet(2)" class="left-aligned">
+  <section ng-show=isSet(2) class="left-aligned mobile-padder">
+    <h3 class="settings-section-header-left">Credit/Debit Cards</h3>
+    <hr>
+
+    <div class="row show-hide-message" ng-if="true">
+      <div class="alert alert-info"> No cards currently on file</div>
+    </div>
+    
+
+  </section>
+
+  <section ng-show="isSet(3)" class="left-aligned mobile-padder">
     <h3 class="settings-section-header-left">Email Preferences</h3>
     <hr>
 
@@ -152,7 +203,7 @@
 
   </section>
 
-  <section ng-show="isSet(3)" class="left-aligned">
+  <section ng-show="isSet(4)" class="left-aligned mobile-padder">
     <h3 class="settings-section-header-left">Close Account</h3>
     <hr>
     <p>Thanks for using Dank Tickets. Sad to see you go.</p>
