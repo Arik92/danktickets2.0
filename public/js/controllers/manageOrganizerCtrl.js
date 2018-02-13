@@ -97,8 +97,28 @@ app.controller('manageOrganizerCtrl', ['orService', '$timeout', '$scope', '$root
   $scope.title = '';
   $scope.changeDetected = false;
 
+  $scope.saveQuill = function() {
+    var deltaContents = $scope.editor.getContents();
+    console.log(deltaContents);
+    localStorage.setItem('deltaContents', JSON.stringify(deltaContents));
+  }
+
+  function getQuillDelta() {
+    var deltaContents = JSON.parse(localStorage.getItem('deltaContents'));
+    return deltaContents;
+  }
+
   $scope.editorCreated = function (editor) {
       console.log(editor);
+      $scope.editor = editor;
+
+      var existingDelta = getQuillDelta();
+      if (existingDelta) {
+        editor.setContents(existingDelta);
+      } else {
+        console.log('no previous deltas');
+        return;
+      }
   };
   $scope.contentChanged = function (editor, html, text, delta, oldDelta) {
       $scope.changeDetected = true;
