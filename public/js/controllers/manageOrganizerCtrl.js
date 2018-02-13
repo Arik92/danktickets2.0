@@ -75,8 +75,8 @@ app.controller('manageOrganizerCtrl', ['orService', '$timeout', '$scope', '$root
 
   $scope.isSet = function (tabNum) {
     return $scope.tab === tabNum;
-  };
-
+  }
+  
   //// ===================== chart stuff ===========================
   function getRandomColor() {
 

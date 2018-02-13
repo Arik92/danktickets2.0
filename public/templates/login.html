@@ -49,13 +49,13 @@
               </li>
             </ul>
             <br>
-            <div class="row show-hide-message" ng-show="login.successMsg">
+            <div class="row show-hide-message" ng-if="login.successMsg">
               <div class="alert alert-success">{{ login.successMsg }} <span class="glyphicon glyphicon-repeat fast-right-spinner"></span></div>
             </div>
-            <div class="row show-hide-message" ng-show="login.errorMsg">
+            <div class="row show-hide-message" ng-if="login.errorMsg">
               <div class="alert alert-danger">{{ login.errorMsg }}</div>
             </div>
-            <div class="row show-hide-message" ng-show="facebook.errorMsg">
+            <div class="row show-hide-message" ng-if="facebook.errorMsg">
               <div class="alert alert-danger">{{ facebook.errorMsg }}</div>
             </div>
             <div class="row show-hide-message" ng-if="login.forgotPW">

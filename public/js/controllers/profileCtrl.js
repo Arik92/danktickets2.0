@@ -26,11 +26,10 @@ app.controller('profileCtrl',['userService','$scope','$window','$rootScope', fun
             
         }//sumbit
 
-  
   //// ===================== tabs stuff ===========================
   function initTabs() {
     $scope.tab = 0;    
-    $scope.profileTabs = ['Account Info', 'Password Reset', 'Email Preferences', 'Close Account'];
+    $scope.profileTabs = ['Account Info', 'Password Reset', 'Credit/Debit Cards', 'Email Preferences', 'Close Account'];
   }
 
   $scope.setTab = function(newTab){
