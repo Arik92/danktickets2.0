@@ -43,17 +43,17 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       controller: 'homeCtrl'
     })
     .state('home.local', {
-      url: "/local",
+      url: "local",
       templateUrl: './templates/home-mobile/home.local.html',
       controller: 'homeCtrl'
     })
     .state('home.upcoming', {
-      url: "/upcoming",
+      url: "upcoming",
       templateUrl: './templates/home-mobile/home.upcoming.html',
       controller: 'homeCtrl'
     })
     .state('home.favorites', {
-      url: "/favorites",
+      url: "favorites",
       templateUrl: './templates/home-mobile/home.favorites.html',
       controller: function($scope) {
         console.log('hello from the partial');
