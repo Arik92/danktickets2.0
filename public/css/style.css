@@ -43,6 +43,11 @@
   --header-font: "Palatino Linotype";
 }
 
+[ng-quill-editor] { display: block; }
+#organiza-quill .ql-container {
+  min-height: 150px;
+}
+
 /** ====== Imported styles ====== **/
 
 @import url('https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900');
