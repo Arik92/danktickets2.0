@@ -1,4 +1,4 @@
-app.controller('manageOrganizerCtrl', ['orService', '$timeout', '$scope', '$rootScope', function (orService, $timeout, $scope, $rootScope) {
+app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', '$scope', '$rootScope', function (orService, createService, $timeout, $scope, $rootScope) {
 
 
   // console.log("root scope usr", $rootScope.currentUser);
@@ -40,6 +40,10 @@ app.controller('manageOrganizerCtrl', ['orService', '$timeout', '$scope', '$root
       console.log("All profiles by ", $rootScope.currentUser, result);
       $scope.profiles = result;
       $scope.selectedOrganizer = result[0];
+	  createService.getEventsByOrganizer($scope.selectedOrganizer._id).then(function(result){
+		//console.log("organizer's events", result);
+		$scope.events = result;
+	});
     }, function (err) {
       throw (err)
     })//GET request route 
@@ -61,6 +65,10 @@ app.controller('manageOrganizerCtrl', ['orService', '$timeout', '$scope', '$root
 
   $scope.selectedItemChanged = function (selectedOrganizer) {
     console.log('you picked option:', selectedOrganizer );
+	createService.getEventsByOrganizer(selectedOrganizer._id).then(function(result){
+		//console.log("organizer's events", result);
+		$scope.events = result;
+	});
   }
 
   //// ===================== tabs stuff ===========================
@@ -93,6 +101,10 @@ app.controller('manageOrganizerCtrl', ['orService', '$timeout', '$scope', '$root
     console.log(points, evt);
   };
 
+  //// ===================== manage events(by organizer) ===========================
+  
+  //// ===================== manage events ===========================
+  
   //// ===================== ng-quill stuff ===========================
   $scope.title = '';
   $scope.changeDetected = false;
