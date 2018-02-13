@@ -186,7 +186,12 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       templateUrl: '/templates/edit-event.html',
       controller: 'editCtrl'
     })
-    .state('editprofile', {
+    .state('publicprofile', {
+      url: '/public-profile', // /:name/:id
+      templateUrl: '/templates/public-profile.html',
+      controller: 'publicProfileCtrl'
+    })
+	.state('editprofile', {
       url: '/edit-profile/:id',
       templateUrl: '/templates/edit-organizer.html',
       controller: 'editProfileCtrl'
