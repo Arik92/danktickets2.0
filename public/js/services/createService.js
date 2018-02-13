@@ -32,6 +32,15 @@ app.factory('createService', ['$http', function ($http) {
         console.error(err);
       });
   }// getting events by a certain publisher
+  
+  var getEventsByOrganizer = function (id) {    
+    return $http.get('/events/findByOrganizer/' + id)
+      .then(function (response) {
+        return response.data;
+      }, function (err) {
+        console.error(err);
+      });
+  }// getting events by a certain publisher
 
   var postEvent = function (event) {
     return $http.post('/events', event).then(function (result) {
@@ -162,6 +171,7 @@ app.factory('createService', ['$http', function ($http) {
     deleteEvent: deleteEvent,
     getEventById: getEventById,
     getTickets: getTickets,
-    generalSearch: generalSearch
+    generalSearch: generalSearch,
+	getEventsByOrganizer: getEventsByOrganizer
   };
 }]);

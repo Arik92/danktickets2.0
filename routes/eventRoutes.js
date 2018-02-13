@@ -4,6 +4,10 @@ var Event = require("../models/eventmodel");
 var User = require("../models/usermodel");
 //var Profile = require("../models/")
 
+function toObjectId(string) {
+	var ObjectId = (require('mongoose').Types.ObjectId);
+    return new ObjectId(string);
+}
 /////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
 var multer = require('multer');
 
@@ -45,7 +49,18 @@ router.get('/findByOwner/:id', function(req, res, next){
       res.send(result);
     }
   })//exec()
-}) // get event by OWNER name.
+}) // get event by OWNER ID.
+
+router.get('/findByOrganizer/:id', function(req, res, next){
+	var organizerQuery = toObjectId(req.params.id);
+  Event.find({organizer: organizerQuery}, function(err, events){
+    if (err) {
+      console.error(err);
+    } else {         	 
+      res.send(events);
+    }
+  })//exec()
+}) // get event by Organizer name.
 
 router.get('/findById/:id', function(req, res, next){
   Event.find({_id: req.params.id}).populate('organizer').exec(function(err,foundEvent){
