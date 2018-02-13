@@ -33,46 +33,40 @@
 			</div>			
 		</div>
 		<ul class="side-events-list">
-			<li	ng-show="upcomingFlag" 
-					ng-repeat="event in events |orderBy: 'startTime' |limitTo: 20">
-				<a href="">
+			<li	ng-show="upcomingFlag"	ng-repeat="event in events |orderBy: 'startTime' |limitTo: 20">
+				<a ui-sref="event({id: event['_id']})">
 					<p>
-						<span>
-							<a ui-sref="event({id: event['_id']})">
+						<span>							
 								<i style="color: lightcoral" class="fa fa-calendar-o"></i>
-								{{ event.startDateDisplay }}
-							</a>
+								{{ event.startDateDisplay }}							
 						</span>
 					</p>
 					<p>
 						<span>							
-							<a href={{event.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i style="color: lightgreen" class="fa fa-map-marker"></i>{{event.location.venue_name}}</span></a>							
+							<span class="length-limiter"><i style="color: lightgreen" class="fa fa-map-marker"></i>{{event.location.venue_name}}</span>				
 						</span>
 					</p>
 					<p>
-							<span>
-								<a ui-sref="event({id: event['_id']})">
-									{{ event.title | uppercase}}
-								</a>
+							<span>								
+									{{ event.title | uppercase}}								
 							</span>
-						</p>
-				</a>
+						</p>	
+				</a>						
 			</li>
+			
 			<li class="local-events"
 					ng-show="localFlag"  
 					ng-repeat="event in events |orderBy: 'distance' |limitTo: 20">
-				<a href="">
+				<a ui-sref="event({id: event['_id']})">
 					<p>
-						<span>
-							<a ui-sref="event({id: event['_id']})">
+						<span>							
 								<i style="color: lightcoral" class="fa fa-calendar-o"></i>
-								{{ event.startDateDisplay }} - {{ event.title | uppercase}}
-							</a>
+								{{ event.startDateDisplay }} - {{ event.title | uppercase}}							
 						</span>
 					</p>
 					<p>
 						<span>							
-							<a href={{event.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i style="color: lightgreen" class="fa fa-map-marker"></i>{{event.location.venue_name}}</span></a>							
+							<span class="length-limiter"><i style="color: lightgreen" class="fa fa-map-marker"></i>{{event.location.venue_name}}</span>						
 						</span>
 					</p>
 					<p>
