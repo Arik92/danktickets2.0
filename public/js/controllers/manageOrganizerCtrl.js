@@ -74,7 +74,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
   //// ===================== tabs stuff ===========================
   function initTabs() {
     $scope.tab = 1;
-    $scope.organizerTabs = ['Organizer Info', 'Dashboard', 'Manage Events', 'Add Sub-Organizer', 'Check Attendees', 'Organizer Settings'];
+    $scope.organizerTabs = ['Organizer Info', 'Stats', 'Manage Events', 'Add Sub-Organizer', 'Check Attendees', 'Organizer Settings'];
   }
 
   $scope.setTab = function (newTab) {
@@ -89,7 +89,14 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
   function getRandomColor() {
 
   }
-  
+  $scope.selectEvent = function(selected) {
+	  $scope.selectedEvent = selected;
+	  //TODO; initialize pie and donut charts
+	  for var (i=0;i<selectedEvent.tickets.eventTickets.length;i++) {
+		  
+	  }
+  }// an organizer event was chosen
+  $scope.donutLabels = ["sold", "available"];
   $scope.barLabels = ["dank sesh", "chalice palace", "toker heaven", "sativa-sesh", "smoke break", "cali-greens", "tacos and titties"];
   $scope.barData = [
     [65, 59, 80, 57, 96, 58, 85],
