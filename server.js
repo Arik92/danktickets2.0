@@ -31,6 +31,43 @@ cloudinary.config({
 
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 /* *****************************************MANUAL PATCH */
+var Event = require("./models/eventmodel"); 
+var dummyTickets = [{	  
+		 ticketType: "Paid",
+		 ticketPrice: 77,
+		 ticketName: "dankDummy",
+		 ticketQ: 7,
+		 isFree: false,
+		 ticketsSold: 1		  
+  }];
+  Event.update({},{$set: {"eventTickets": dummyTickets}} ,{multi: true},function(err, events){
+	  if (err) {
+		  throw (err);
+	  } else {
+		  console.log("events",events);
+		  console.log("ticket properties updated");
+	  }//else 
+  });//epdate cb
+
+ /*var Event = require("./models/eventmodel"); 
+  Event.find({}, function(err, events){
+	  if (err) {
+		  throw (err);
+	  } else {
+		  for (var i=0;i<events.length;i++) {
+			  for (var j=0;j<events[i].eventTickets.length;j++) {
+				  events[i].eventTickets[j].ticketsSold = 1;
+			  }//for looping in an event's ticket array 
+		  }//for looping through all events 
+		 events.save(function(err2, savedEvents){
+			  if (err2) {
+				  throw (err2);
+			  } else {
+				  console.log("saved and UPDATED event tickets!");
+			  }//else 
+		  });		  
+	  }//else 
+  });//epdate cb
  /*var Event = require("./models/eventmodel"); 
   Event.update({},{$set: {"ongoing": true}} ,{multi: true},function(err, events){
 	  if (err) {
@@ -55,7 +92,7 @@ var Event = require("./models/eventmodel");
 
  setInterval(function(){ 
   //	function that checks the db for events who'se time is up and updates them
-  var Event = require("./models/eventmodel");
+  //var Event = require("./models/eventmodel");
   var currDate = new Date();
   var currSec = currDate.getTime();
   console.log("current time in milliseconds", currSec);
@@ -66,7 +103,7 @@ var Event = require("./models/eventmodel");
 		  console.log("updated", events);
 	  }//else 
   });// 1000 * 60 * 60 * 24
- }, 1000 * 60 ); //once a day   */
+ }, 1000 * 60*60 ); //once an hour? day/   */
 app.use(passport.initialize());
 //app.use(morgan('dev'));
 app.use(express.static('public'));
