@@ -34,7 +34,8 @@ var eventSchema = new Schema({
 		 ticketPrice: Number,
 		 ticketName: String,
 		 ticketQ: Number,
-		 isFree: Boolean		 
+		 isFree: Boolean,
+		 ticketSold: Number	
 	  }	  
   ], //o
   numTickets: Number, //tickets remaining

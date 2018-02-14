@@ -89,7 +89,14 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
   function getRandomColor() {
 
   }
-  
+  $scope.selectEvent = function(selected) {
+	  $scope.selectedEvent = selected;
+	  //TODO; initialize pie and donut charts
+	  for var (i=0;i<selectedEvent.tickets.eventTickets.length;i++) {
+		  
+	  }
+  }// an organizer event was chosen
+  $scope.donutLabels = ["sold", "available"];
   $scope.barLabels = ["dank sesh", "chalice palace", "toker heaven", "sativa-sesh", "smoke break", "cali-greens", "tacos and titties"];
   $scope.barData = [
     [65, 59, 80, 57, 96, 58, 85],
