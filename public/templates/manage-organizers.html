@@ -91,8 +91,13 @@
 
   <!-- charts! -->
   <section ng-show="isSet(1)" style="margin-top: 1rem">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h2>All Events Overview</h2>
+      </div>
+    </div>
     <div class="row" style="margin-bottom: 3rem">
-      <div class="bar-filter-container col-sm-2 col-sm-offset-1">
+      <div class="bar-filter-container col-md-2 col-md-offset-1">
         <div class="bar-filter-container chart-card">
           <h4>Filters:</h4>
           <div class="bar-btn-box">
@@ -101,7 +106,7 @@
           </div>
         </div>
       </div>
-      <div class="chart-and-title-container col-sm-8">
+      <div class="chart-and-title-container col-md-8">
         <div class="sales-by-event-container chart-card">
           <h3>Total revenue from tickets sold by event</h3>
           <div class="bar-chart-container">
@@ -115,11 +120,43 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h2>Zoom in on Events</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">
+        <div class="form-group">
+          <label for="sel1">Select Current Events</label>
+          <select ng-model="selectedOrganizer" 
+                  ng-options="profile as profile.name disable when profile.disabled for profile in profiles" 
+                  ng-change="selectedItemChanged(selectedOrganizer)"
+                  class="form-control input-md">
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="sel1">Select Past Events</label>
+          <select ng-model="selectedOrganizer" 
+                  ng-options="profile as profile.name disable when profile.disabled for profile in profiles" 
+                  ng-change="selectedItemChanged(selectedOrganizer)"
+                  class="form-control input-md">
+          </select>
+        </div>
+      </div>
+    </div>
+=======
 	<div class="row chart-and-title-container col-sm-8">
 	Zoom in on an event's stats:  *select an event from dropdownn * *select past or ongoing*
 	</div>
+>>>>>>> c502049cc99a73716123bffd3ffb69380e226608
     <div class="row">
-      <div class="col-sm-5 col-sm-offset-1" style="margin-right: 0">
+      <div class="col-md-5 col-md-offset-1" style="margin-right: 0">
           <div class="sales-by-event-container chart-card">
               <h3>Tickets Available vs Sold</h3>
               <div class="bar-chart-container">
@@ -132,7 +169,7 @@
               </div>
             </div>
       </div>
-      <div class="col-sm-5">
+      <div class="col-md-5">
           <div class="sales-by-event-container chart-card">
               <h3>Tickets sold by ticket type</h3>
               <div class="bar-chart-container">
