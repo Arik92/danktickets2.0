@@ -31,7 +31,7 @@ cloudinary.config({
 
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 /* *****************************************MANUAL PATCH */
-var Event = require("./models/eventmodel"); 
+/*var Event = require("./models/eventmodel"); 
 var dummyTickets = [{	  
 		 ticketType: "Paid",
 		 ticketPrice: 77,
@@ -92,7 +92,7 @@ var Event = require("./models/eventmodel");
 
  setInterval(function(){ 
   //	function that checks the db for events who'se time is up and updates them
-  //var Event = require("./models/eventmodel");
+  var Event = require("./models/eventmodel");
   var currDate = new Date();
   var currSec = currDate.getTime();
   console.log("current time in milliseconds", currSec);
@@ -103,7 +103,7 @@ var Event = require("./models/eventmodel");
 		  console.log("updated", events);
 	  }//else 
   });// 1000 * 60 * 60 * 24
- }, 1000 * 60*60 ); //once an hour? day/   */
+ }, 1000*60*60); //once an hour? day/   */
 app.use(passport.initialize());
 //app.use(morgan('dev'));
 app.use(express.static('public'));

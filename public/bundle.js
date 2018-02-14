@@ -36,7 +36,8 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
       ticketPrice: 0,
       ticketName: type + " Ticket",
       ticketQ: 0,
-      free: isFree
+      free: isFree,
+	  ticketsSold: 1 //for mockup reasons
     }
     console.log("added ticket is ", ticket);
     $scope.currentTickets.push(ticket);
