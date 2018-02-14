@@ -92,7 +92,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
   $scope.selectEvent = function(selected) {
 	  $scope.selectedEvent = selected;
 	  //TODO; initialize pie and donut charts
-	  for var (i=0;i<selectedEvent.tickets.eventTickets.length;i++) {
+	  for (var i=0;i<selectedEvent.tickets.eventTickets.length;i++) {
 		  
 	  }
   }// an organizer event was chosen
