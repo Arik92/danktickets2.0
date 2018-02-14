@@ -43,6 +43,25 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
 	  createService.getEventsByOrganizer($scope.selectedOrganizer._id).then(function(result){
 		//console.log("organizer's events", result);
 		$scope.events = result;
+		$scope.ongoingOrgEvents = [];
+		$scope.pastOrgEvents = [];
+		$scope.selectedStatEvent = {};
+		for (var i=0;i<$scope.events.length;i++) {
+			if ($scope.events[i].ongoing) {
+				$scope.ongoingOrgEvents.push($scope.events[i]);
+			} else {
+				$scope.pastOrgEvents.push($scope.events[i]);
+			}//else pushing events to approprate arrays
+		}//for 
+		/*$scope.selectedCurr = $scope.ongoingOrgEvents[0];
+		$scope.selectedPast = $scope.pastOrgEvents[0];
+		if ($scope.selectedCurr) {
+			$scope.selectedStatEvent = $scope.selectedCurr;
+		} else {
+			$scope.selectedStatEvent = $scope.selectedPast;
+		}//else */
+		$scope.setBarData($scope.ongoingOrgEvents);
+		console.log("this organizer's current events",$scope.ongoingOrgEvents);
 	});
     }, function (err) {
       throw (err)
@@ -68,8 +87,26 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
 	createService.getEventsByOrganizer(selectedOrganizer._id).then(function(result){
 		//console.log("organizer's events", result);
 		$scope.events = result;
+		$scope.ongoingOrgEvents = [];
+		$scope.pastOrgEvents = [];
+		//TODO CAP EVENT LENGTH TO 10 ON BOTH ARRAYS88888888888888888888888888888888888888888888888888888888888
+		for (var i=0;i<$scope.events.length;i++) {
+			if ($scope.events[i].ongoing) {
+				$scope.ongoingOrgEvents.push($scope.events[i]);
+			} else {
+				$scope.pastOrgEvents.push($scope.events[i]);
+			}//else pushing events to approprate arrays
+		}//for 
+		$scope.setBarData($scope.ongoingOrgEvents);
 	});
-  }
+  }//when organizer changes 
+  
+  $scope.selectedStatEventChanged = function(evt) {
+	  console.log("selected event: ", evt);
+	  $scope.selectedStatEvent = evt;
+	  setDonutData();
+	  setPieData();
+  }//when event changes 
 
   //// ===================== tabs stuff ===========================
   function initTabs() {
@@ -89,18 +126,44 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
   function getRandomColor() {
 
   }
-  $scope.selectEvent = function(selected) {
-	  $scope.selectedEvent = selected;
-	  //TODO; initialize pie and donut charts
-	  for (var i=0;i<selectedEvent.tickets.eventTickets.length;i++) {
-		  
-	  }
-  }// an organizer event was chosen
+  $scope.setBarData = function(evts) {
+	   $scope.barData = [];
+	  $scope.barLabels = [];
+	  for (var i=0;i<evts.length;i++) {
+		  $scope.barLabels[i] = evts[i].title;
+		  $scope.barData[i] = 0;
+		  for (var j=0;j<evts[i].eventTickets.length;j++) {
+			  $scope.barData[i] +=evts[i].eventTickets[j].ticketsSold*evts[i].eventTickets[j].ticketPrice;
+		  }// for event tickets 
+	  }//for evts 
+	  console.log("bar data", $scope.barData);
+  }//set bar data
+  setDonutData = function() {
+	  $scope.donutData = [];
+	  var totalSold = 0;
+	  var total = 0;
+	  for (var i=0;i<$scope.selectedStatEvent.eventTickets.length;i++) {
+		  totalSold+= $scope.selectedStatEvent.eventTickets[i].ticketsSold;
+		  total+= $scope.selectedStatEvent.eventTickets[i].ticketQ;
+	  }	  
+	  $scope.donutData[0] = totalSold;
+	  $scope.donutData[1] = total;
+  }//setDonutData 
+  setPieData = function() {
+	  $scope.pieData = [];
+	  $scope.pieLabels = [];	  
+	  for (var i=0;i<$scope.selectedStatEvent.eventTickets.length;i++) {
+		  $scope.pieLabels[i] = $scope.selectedStatEvent.eventTickets[i].ticketType;
+		  $scope.pieData[i] = $scope.selectedStatEvent.eventTickets[i].ticketsSold;
+	  }	  
+	  $scope.donutData[0] = totalSold;
+	  $scope.donutData[1] = total;
+  }//setDonutData 
   $scope.donutLabels = ["sold", "available"];
-  $scope.barLabels = ["dank sesh", "chalice palace", "toker heaven", "sativa-sesh", "smoke break", "cali-greens", "tacos and titties"];
-  $scope.barData = [
+  //$scope.barLabels = ["dank sesh", "chalice palace", "toker heaven", "sativa-sesh", "smoke break", "cali-greens", "tacos and titties"];
+  /*$scope.barData = [
     [65, 59, 80, 57, 96, 58, 85],
-  ];
+  ];*/
 
   $scope.barColors = ['', 'orange', 'red', 'green', 'blue', 'lightgrey', ]
 

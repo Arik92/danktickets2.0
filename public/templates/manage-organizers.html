@@ -101,8 +101,8 @@
         <div class="bar-filter-container chart-card">
           <h4>Filters:</h4>
           <div class="bar-btn-box">
-            <button class="btn btn-info">Current Events</button>
-            <button class="btn btn-info">Past Events</button>
+            <button class="btn btn-info" ng-click="setBarData(ongoingOrgEvents)">Current Events</button>
+            <button class="btn btn-info" ng-click="setBarData(pastOrgEvents)">Past Events</button>
           </div>
         </div>
       </div>
@@ -130,9 +130,9 @@
       <div class="col-md-3 col-md-offset-1">
         <div class="form-group">
           <label for="sel1">Select Current Events</label>
-          <select ng-model="selectedOrganizer" 
-                  ng-options="profile as profile.name disable when profile.disabled for profile in profiles" 
-                  ng-change="selectedItemChanged(selectedOrganizer)"
+          <select ng-model="selectedCurr" 
+                  ng-options="ongoing as ongoing.title for ongoing in ongoingOrgEvents" 
+                  ng-change="selectedStatEventChanged(selectedCurr)"
                   class="form-control input-md">
           </select>
         </div>
@@ -140,9 +140,9 @@
       <div class="col-md-3">
         <div class="form-group">
           <label for="sel1">Select Past Events</label>
-          <select ng-model="selectedOrganizer" 
-                  ng-options="profile as profile.name disable when profile.disabled for profile in profiles" 
-                  ng-change="selectedItemChanged(selectedOrganizer)"
+          <select ng-model="selectedPast" 
+                  ng-options="past as past.title for past in pastOrgEvents" 
+                  ng-change="selectedStatEventChanged(selectedPast)"
                   class="form-control input-md">
           </select>
         </div>
