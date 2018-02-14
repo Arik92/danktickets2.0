@@ -54,6 +54,7 @@
 input[type="file"] {
   display: none;
 }
+
 .custom-file-upload {
   border: 1px solid #ccc;
   display: inline-block;
@@ -62,7 +63,9 @@ input[type="file"] {
 }
 
 
+
 /* chart section */
+
 .chart-card {
   background: #f5f5f5;
   border-radius: 4px;
@@ -71,8 +74,14 @@ input[type="file"] {
 }
 
 .bar-filter-container button {
-  width: 125px;
+  width: 100px;
+  font-size: 1.2rem;
+  margin: 0 auto 1rem;
   text-align: center;
+}
+
+.bar-filter-container {
+  margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -85,23 +94,20 @@ input[type="file"] {
   .select-organizer {
     width: 250px;
   }
-  
+
   .od-toggle-container {
     flex-direction: row;
     justify-content: space-between;
   }
 }
 
-@media screen and (min-width: 1024px) {  
+@media screen and (min-width: 992px) {
   .od-nav ul>li {
     margin: 1rem;
   }
 
   .bar-filter-container {
-    height: 430px;
-  }
-
-  .bar-filter-container button:first-child {
-    margin-bottom: 1rem;
+    height: 381.4px;
+    margin-bottom: 0;
   }
 }
