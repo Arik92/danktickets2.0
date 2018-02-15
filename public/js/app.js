@@ -1,5 +1,5 @@
 var app = angular.module('dankTickets', 
-  ['ui.router', 'ui.carousel', 'ui.bootstrap', 'ngAnimate', 'cmelo.angularSticky', 'ngMap', 'angularLoad', 'angularSlideables', 'chart.js', 'ngQuill']);
+  ['ui.router', 'ui.carousel', 'ngAnimate', 'cmelo.angularSticky', 'ngMap', 'angularLoad', 'angularSlideables', 'chart.js', 'ngQuill']);
 
 
 app.config([ 'ngQuillConfigProvider', '$httpProvider', function (ngQuillConfigProvider, $httpProvider) {

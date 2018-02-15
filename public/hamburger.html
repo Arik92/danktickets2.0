@@ -1,23 +1,23 @@
-<button
-  class="nav-toggler"
-  uib-dropdown
-  on-toggle="toggled(open)"
-  uib-dropdown-toggle
->
-  <i class="fa fa-bars"></i>
-  <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown"
-  style="left: -150px">
-	<!--<li role="menuitem"><img src={{userDetails.picture}}></li> -->
-    <li role="menuitem"><a ng-click="goToState('browse')">Browse events</a></li>
-    <li role="menuitem" ng-show="login.username"><a ng-click="goToState('create')">Create Event</a></li>
+<div class="hamburger-container" style="position: relative">
+  <button
+    class="nav-toggler"
+    ng-click="toggleDropDown()"
+  >
+    <i class="fa fa-bars"></i>
+  </button>
+  
+  <ul class="mobile-dropdown-menu" ng-show="isOpen">
+  <!--<li role="menuitem"><img src={{userDetails.picture}}></li> -->
+    <li ng-click="toggleDropDown()" role=""><a ui-sref="browse">Browse events</a></li>
+    <li ng-click="toggleDropDown()" ng-show="login.username"><a ui-sref="create">Create Event</a></li>
     <li class="divider"></li>
-    <li role="menuitem" ng-show="login.username"><a ng-click="goToState('profile')">My Profile</a></li>
-    <li role="menuitem" ng-show="login.username"><a ng-click="goToState('manage')">Manage Events</a></li>
-    <li role="menuitem" ng-show="login.username"><a ng-click="goToState('organizer')">New Organizer</a></li>
-    <li role="menuitem" ng-show="login.username"><a ng-click="goToState('userprofiles')">Organizer Dashboard</a></li>
+    <li ng-click="toggleDropDown()" ng-show="login.username"><a ui-sref="profile" >My Profile</a></li>
+    <li ng-click="toggleDropDown()" ng-show="login.username"><a ui-sref="manage" >Manage Events</a></li>
+    <li ng-click="toggleDropDown()" ng-show="login.username"><a ui-sref="organizer" >New Organizer</a></li>
+    <li ng-click="toggleDropDown()" ng-show="login.username"><a ui-sref="userprofile" >Organizer Dashboard</a></li>
     <li class="divider" ng-show="login.username"></li>
-    <li role="menuitem" ng-show="login.username"><a ng-click="login.logout()">Log Out</a></li>
-    <li role="menuitem" ng-hide="login.username"><a ng-click="goToState('signin')">SIGN IN</a></li>
-    <li role="menuitem" ng-hide="login.username"><a ng-click="goToState('signup')">SIGN UP</a></li>
+    <li ng-click="toggleDropDown()" ng-show="login.username"><a ng-click="login.logout()">Log Out</a></li>
+    <li ng-click="toggleDropDown()" ng-hide="login.username"><a ui-sref="signin">SIGN IN</a></li>
+    <li ng-click="toggleDropDown()" ng-hide="login.username"><a ui-sref="signup">SIGN UP</a></li>
   </ul>
-</button>
+</div>
