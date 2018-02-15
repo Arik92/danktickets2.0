@@ -78,9 +78,33 @@
 			</li>
 		</ul>
 	</aside>	
+
+	<div class="ui-ad-container">
+		<ui-carousel 
+			slides="dummyAds"
+			slides-to-show="1"
+			slides-to-scroll="1"
+			initial-slide="1"
+			autoplay="true"
+			autoplay-speed="4000"
+			dots="false"
+			arrows="false"
+		>
+			
+			<carousel-item>
+				<div class="ad-item-container">
+					<div class="ad-img-container" style="height: 70px">
+						<img ng-src="{{ item.imgURL }}" alt="" style="height: 100%; display: block; margin: 0 auto">
+					</div>
+				</div>
+			</carousel-item>
+		</ui-carousel>
+	</div>
+
 	
 	<main class="main-content">
-		<slick class="slick-ad-banner"
+
+		<!-- <slick class="slick-ad-banner"
 					autoplay="true" 
 					fade="true" 
 					slides-to-show="1" 
@@ -92,10 +116,15 @@
 			<div class="ad-container" ng-repeat="ad in dummyAds">
 				<img ng-src="{{ ad.imgURL }}" alt="{{ ad.name }}">
 			</div>
-		</slick>
+		</slick> -->
 
+		
 		<div class="main-event event-poster animated fadeInRight">
-				<img ng-src="{{ featuredDummyEvent.imgURL }}" class="feature-event-img">
+				<div class="wtf" style="display: flex; justify-content: center">
+					<div class="feature-event-img">
+						<img ng-src="{{ featuredDummyEvent.imgURL }}" style="max-height: 100%">
+					</div>
+				</div>
 				<div class="info">
 					<div class="left">
 						<div class="date">

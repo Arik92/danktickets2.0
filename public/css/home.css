@@ -260,11 +260,11 @@ footer a {
     max-width: 1600px;
     margin: auto;
     display: grid;
-    grid-gap: 0.5em;
+    grid-gap: 0.3em;
     grid-template-columns: 1.5fr 3fr 1.2fr;
-    grid-template-rows: repeat(4, minmax(var(--my-row-height), auto));
+    /* grid-template-rows: repeat(4, minmax(var(--my-row-height), auto)); */
     grid-template-areas: 
-      "aside-events main-content main-content"
+      "aside-events ads ads"
       "aside-events main-content main-content"
       "aside-events other-events side-content"
       "aside-events other-events side-content"
@@ -336,6 +336,18 @@ footer a {
   main.main-content {
     grid-area: main-content;
     background: steelblue;
+  }
+
+  .ui-ad-container {
+    grid-area: ads;
+    border: solid black 1px;
+    background: #3F51B5;
+    color: white;
+    /* height: var(--ad-banner-height); */
+  }
+
+  .ui-ad-container .ui-carousel {
+    margin: 0;
   }
 
   .slick-ad-banner {
