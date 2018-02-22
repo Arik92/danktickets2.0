@@ -21,7 +21,7 @@
   "homepage": "https://github.com/Arik92/danktickets#readme",
   "dependencies": {
     "@uirouter/angularjs": "^1.0.3",
-    "angular": "^1.6.5",
+    "angular": "^1.6.8",
     "angular-animate": "^1.6.7",
     "angular-file-upload": "^2.5.0",
     "angular-load": "^0.5.0",
