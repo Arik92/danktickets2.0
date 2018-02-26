@@ -12,26 +12,35 @@
 	<!-- <link rel="stylesheet" href="../owl.carousel/dist/assets/owl.carousel.min.css" />
 	<link rel="stylesheet" href="../owl.carousel/dist/assets/owl.theme.default.css" /> -->
 	<!-- slick carousel -->
-	<link rel="stylesheet" href="../slick-carousel/slick/slick.css">
-	<link rel="stylesheet" href="../slick-carousel/slick/slick-theme.css">
+	<!-- <link rel="stylesheet" href="../slick-carousel/slick/slick.css"> -->
+	<!-- <link rel="stylesheet" href="../slick-carousel/slick/slick-theme.css"> -->
+	<link rel="stylesheet" href="/angular-ui-carousel/dist/ui-carousel.min.css">
 	<!-- font-awesome -->
 	<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css"/>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 	<!-- main stylesheet -->
 	<link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/custom-checkbox.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/event.css">
 	<link rel="stylesheet" href="css/checkout.css">
 	<link rel="stylesheet" href="css/profilepage.css">
+	<link rel="stylesheet" href="css/search-results.css">
+	<link rel="stylesheet" href="css/organizer-profiles.css">
+	<link rel="stylesheet" href="css/publicprof.css">
 	<!-- responsive stylesheet -->
 	<link rel="stylesheet" href="css/responsive.css">
 	<link rel="stylesheet" href="css/home.css">
 	<link rel="stylesheet" href="/js-datepicker/datepicker.css">
-	<!-- Morris stylesheet -->
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 	<!-- node modules -->
 	<link rel="stylesheet" href="ui-bootstrap-custom-2.5.0-csp.css">
+	<!-- <link rel="stylesheet" href="//cdn.quilljs.com/1.2.0/quill.snow.css"> -->
+	<!-- <link rel="stylesheet" href="//cdn.quilljs.com/1.2.0/quill.bubble.css"> -->
+	<link rel="stylesheet" href="/quill/dist/quill.core.css">
+	<link rel="stylesheet" href="/quill/dist/quill.bubble.css">
+	<link rel="stylesheet" href="/quill/dist/quill.snow.css">
 </head>
+
 <body ng-controller="loginCtrl as login" ng-show="login.loader" ng-cloak cmelo-sticky>
 	<div class="preloader"></div>
 	<header id="header">
@@ -43,11 +52,11 @@
 					<div class=" logo">
 						<a ui-sref="home"><img src="img/resources/logo.png" alt="Logo Image"></a>
 					</div>
-					<form class="navbar-form" role="search" ng-controller="homeCtrl">
+					<form class="navbar-form" role="search" ng-controller="homeCtrl" ng-sumbit="search()">
 							<div class="input-group add-on">
 								<input class="form-control" placeholder="Search Events" name="srch-term" id="srch-term" type="text" ng-model="searchString">
 								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit" ng-click="search()"><a ui-sref="search({string: searchString})"><i class="glyphicon glyphicon-search"></i></a></button>
+									<button class="btn btn-default" type="submit" ng-click="search()"><i class="glyphicon glyphicon-search"></i></button>
 								</div>
 							</div>
 					</form>
@@ -65,9 +74,9 @@
 								<li class="scrollToLink"><a ui-sref="ticket-cart">SHOPPING CART</a></li>
 								<li class="scrollToLink"><a ui-sref="manage">MANAGE EVENTS</a></li>
 								<li class="scrollToLink"><a ui-sref="organizer">NEW ORGANIZER</a></li>
-								<li class="scrollToLink"><a ui-sref="userprofiles">ORGANIZER PROFILES</a></li>
+								<li class="scrollToLink"><a ui-sref="userprofiles">ORGANIZER DASHBOARD</a></li>
 								<li class="scrollToLink"><a ui-sref="profile">PROFILE SETTINGS</a></li>
-								<li class="scrollToLink"><a ui-sref="signup" ng-click="login.logout()">LOG OUT</a></li>
+								<li class="scrollToLink"><a ui-sref="signin" ng-click="login.logout()">LOG OUT</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -94,36 +103,49 @@
 	<footer-directive></footer-directive>
 
 	<!-- scripts -->
-	<script src="/socket.io/socket.io.js"></script>
+	<!-- <script src="/socket.io/socket.io.js"></script> -->
 	<script src="/angular/angular.js"></script>
+	<script src="/quill/dist/quill.min.js"></script>
+	<script src="/ng-quill/dist/ng-quill.min.js"></script>
+	<!-- slideable directive -->
+	<script src="js/directives/angularSlideables.js"></script>
 	<script src="/angular-animate/angular-animate.min.js"></script>
 	<script src="/cmelo-angular-sticky/cmelo-sticky.js"></script>
+	<script src="/moment/min/moment.min.js"></script>
 	<script src="/ngmap/build/scripts/ng-map.js"></script>
 	<script src="/angular-load/dist/angular-load.min.js"></script>
-	<script src="js/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="/jquery/dist/jquery.min.js"></script>
+	<!-- <script src="/slick-carousel/slick/slick.min.js"></script> -->
+	<!-- <script src="/angular-slick/dist/slick.js"></script> -->
+	<script src="/angular-ui-carousel/dist/ui-carousel.min.js"></script>
+	<script src="/chart.js/dist/Chart.min.js"></script>
+	<script src="/angular-chart.js/dist/angular-chart.min.js"></script>
+	<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 	<script src="/@uirouter/angularjs/release/angular-ui-router.js"></script>	
 	<script src="ng-file-upload/dist/ng-file-upload.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
- <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+  <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>  
 	<!-- js folders -->
 	<script src="js-datepicker/datepicker.min.js"></script>
 	<script src="js/app.js"></script>
 	<!-- Services -->
 	<script src="js/services/orService.js"></script>
 	<script src="js/services/createService.js"></script>
+	<script src="js/services/purchaseService.js"></script>
 	<script src="js/services/userService.js"></script>
 	<script src="js/services/authService.js"></script>
 	<script src="js/services/dankAdService.js"></script>
 	<script src="js/services/linkService.js"></script>
-	<script> console.log("yo I'm pickle rick") </script>
+	<script src="js/services/timeService.js"></script>
 	<script src="/bundle.js"></script>
 	<!-- Controllers -->
 	<script src="js/controllers/homeCtrl.js"></script>
 	<script src="js/controllers/orCtrl.js"></script>
 	<script src="js/controllers/editProfileCtrl.js"></script>
 	<script src="js/controllers/userCtrl.js"></script>
+	<script src="js/controllers/publicProfileCtrl.js"></script>
 	<!-- <script src="js/controllers/eventCtrl.js"></script>-->
 	<script src="js/controllers/browseCtrl.js"></script>	
 	<!-- <script src="js/controllers/editCtrl.js"></script> -->
@@ -132,28 +154,15 @@
 	<script src="js/controllers/manageCtrl.js"></script>
 	<script src="js/controllers/navToggleCtrl.js"></script>
 	<script src="js/controllers/carouselCtrl.js"></script>
-	<script src="js/controllers/manageProfCtrl.js"></script>
 	<script src="js/controllers/ticketCtrl.js"></script>
 	<script src="js/controllers/validateCtrl.js"></script>
 	<script src="js/controllers/resetCtrl.js"></script>
 	<script src="js/controllers/footerCtrl.js"></script>
 	<script src="js/controllers/searchCtrl.js"></script>
+	<script src="js/controllers/manageOrganizerCtrl.js"></script>
 
-	<!-- JQuery -->
-	<script src="js/jquery.themepunch.tools.min.js"></script>
-	<script src="js/jquery.themepunch.revolution.min.js"></script>
-	<script src="js/countdown.min.js"></script>
-	<script src="js/jquery.easing.min.js"></script>
-	<script src="js/jquery.fancybox.pack.js"></script>
-	<script src="js/jquery.mixitup.min.js"></script>
-	<script src="js/jquery.bxslider.min.js"></script>
-	<script src="js/jquery.appear.js"></script>
-	<script src="js/jquery.countTo.js"></script>
-	<script src="js/circle-progress.js"></script>
-	<script src="js/wow.js"></script>
-	<script src="js/validate.js"></script>
+	<!-- controls page fade in, alexandra script -->
 	<script src="js/custom.js"></script>
-	<!--<script src="js/dashboard.js"></script>-->
 	<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=59ae72b5c975c80011bcfd3a&product=inline-share-buttons' async='async'></script>
 	<!-- Directives -->
 	<script src="js/directives/navDirective.js"></script>
@@ -162,11 +171,6 @@
 	<script src="js/directives/sliderDirective.js"></script>
 	<script src="js/directives/filteredEventDirective.js"></script>
 	<script src="js/directives/eventListDirective.js"></script>
-	<!-- slick carousel -->
-	<script src="../slick-carousel/slick/slick.js"></script>
-	<script src="../angular-slick/dist/slick.js"></script>
-	<script src="../angular-slick/dist/slick.js"></script>
-	<!-- ui-bootstrap-custom-buid -->
-	<script src="ui-bootstrap-custom-tpls-2.5.0.min.js"></script>
+	
 </body>
 </html>

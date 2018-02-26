@@ -9,26 +9,30 @@
           </div>
           <div class="form-group">
             <label class="control-label" for="source_name"><h2>Organizer: </h2> </label>
-			<p>Selected organizer: {{selectedOrganizer}}</p>
+			<div ng-show="pleaseSelectOrg">
+			
+			<p>(please choose one)</p>
+			</div>			
             <div>
-              <select ng-model="selectedOrganizer"  ng-options="profile._id as profile.name for profile in profiles" class="form-control input-md" ng-change="selectProf()">
+              <select ng-model="selectedOrganizer"  ng-options="profile._id as profile.name for profile in profiles" class="form-control input-md" ng-change="selectProf()" required>
 				<!--<option>Select your organiza</option>
                 <option ng-repeat="organizer in profiles track by $index" value="{{organizer._id}}">{{organizer.name}}</option>-->
               </select>
             </div>
-          </div>
+          </div>		 
+		  
           <div class="form-group">
             <label class="control-label" for="source_name"><h2>Title</h2</label>
             <br>
             <br>
             <div>
-              <input id="source_name" class="form-control input-md" name="source_name" ng-model="eName" type="text" placeholder="Fancy Feast">
+              <input id="source_name" class="form-control input-md" name="source_name" ng-model="eName" type="text" placeholder="Fancy Feast" required>
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label" for="source_name"><h3>Event Type</h3></label>
+            <label class="control-label" for="source_name" required><h3>Event Type</h3></label>
             <div>
-              <p>selected item is : {{selectedType}}</p>
+              <p>Its a {{selectedType}}</p>
         <select ng-model="selectedType" class="form-control input-md">
           <option ng-repeat="type in typeOptions" value="{{type}}">{{type}}</option>
         </select>
@@ -64,27 +68,21 @@
             </div>
           </div>
            <div class="form-group">
-             <label class="control-label" for="source_name"><h3>Image</h3></label>
-             <div>
-               <input id="fileItem" type="file" name="eventPic" ng-model="file"
-               ngf-pattern="'image/*'"
-               accept="image/*"
-               ngf-max-size="20MB" >
-             </div>
-           </div>
-           <div class="form-group">
-            
-
-            <button type="submit" ng-click="preview()" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:22%;background-color:transparent;color:black"> Preview</button>
-             <div id="preview">
-             </div>
-           </div>
+             <label class="control-label" for="source_name"><h1>Event Image</h1></label><br/>
+			<a href="#" id="upload_widget_opener" ng-click="initUploader()">Select An Event Image</a>
+            <div class="od-image-container">     
+			<img ng-src={{previewImg}} />
+              <div class="od-image-placeholder" ng-if="!previewImg">
+                <i class="fa fa-2x fa-user" aria-hidden="true"></i>
+              </div>
+            </div>   
+           </div>          
            <br /><!--input -->
            <div class="form-group">
              <label class="control-label" for="source_name"><h1>Event Location: </h1></label>
              <div>
               <p>Enter a location venue</p>
-                <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter venue">
+                <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter venue" required>
              </div>
 			 <div> 
 			 <p>type a location: </p>
@@ -94,9 +92,9 @@
 		<img id="static-map-img" src={{imgSrc}} alt="">
 		</a>
 		</div>
-			 <input type="text" placeholder="venue name" ng-model="location.venue_name">
+			 <input type="text" placeholder="venue name" ng-model="location.venue_name" required>
 			 <input type="text" placeholder="address2" ng-model="location.address2">
-			 <input type="text" placeholder="city" ng-model="location.city">
+			 <input type="text" placeholder="city" ng-model="location.city" required>
 			 <input type="text" placeholder="zip" ng-model="location.zip">
 			 <input type="text" placeholder="country" ng-model="location.country">
 			 </div>

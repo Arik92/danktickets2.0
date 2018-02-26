@@ -1,5 +1,5 @@
-app.controller('regCtrl', function (userService, authService, $http, $location, $timeout) {
-	this.$onInit = () => {
+app.controller('regCtrl', ['userService', 'authService', '$http', '$location', '$timeout', function (userService, authService, $http, $location, $timeout) {
+	this.$onInit = function() {
 	 app.is18 = false; 
  }
 	
@@ -19,7 +19,7 @@ app.controller('regCtrl', function (userService, authService, $http, $location, 
       var loginObj = {
         "username": data.config.data.username,
         "password": data.config.data.password,
-        "email": data.config.data.email,
+        "email": data.config.data.email.toLowerCase(),
         "isEmailValidated": data.config.data.isEmailValidated
       };
       if (data.data.success) {
@@ -46,7 +46,7 @@ app.controller('regCtrl', function (userService, authService, $http, $location, 
       }
     });
   };
-});
+}]);
 
 // app.controller('indexCtrl', function($scope, $rootScope, $http) {
 //   $scope.logout = function() {

@@ -14,12 +14,11 @@ const sendNodeMail = require('./nodeMailing');
 module.exports = function (router) {
 
   router.get('/searchByName/:name', function (req, res, next) {
-    User.findOne({ username: req.params.name }, function (err, user) {
+    User.findOne({ _id: req.params.name }, function (err, user) {
       if (err) {
         console.log(err);
       } else {
         res.send(user);
-        console.log('user from searchbyname', user);
       }//else
     })//findCb
   }) // get event by token?
@@ -28,9 +27,9 @@ module.exports = function (router) {
   router.get('/facebook/callback',
     passport.authenticate('facebook', { session: false, failureRedirect: '/' }),
     function (req, res) {
-      console.log(req.user);
+      console.log("fb user", req.user);
       // Successful authentication, redirect home.
-      res.redirect('/authorization?token=' + req.user.token + "&name=" + req.user.name);
+      res.redirect('/authorization?token=' + req.user.token + '&id=' + req.user.id);
     });
 
   // http://localhost:8000/users/users
@@ -56,16 +55,38 @@ module.exports = function (router) {
       });
     }
   });
-
+  router.get('/shoppingCart/:id', function (req, res, next) {
+	       User.findOne({ _id: req.params.id }, function (err, user) {
+      if (err) {
+        console.log(err);
+      } else {		  
+		  if (user.shoppingCart) {
+        res.send(user.shoppingCart);       
+		  } else {
+			  res.send([]);
+		  }
+      }//else
+    })//findCb
+  }) // get a user's shopping cart
+  router.put('/shoppingCart/:id', function (req, res, next) {	 
+  console.log("shoppeing cart ", req.body);
+  User.findOneAndUpdate({ _id: req.params.id },{$set: {'shoppingCart': req.body}}, {new: true}, function (err, user) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(user.shoppingCart);       
+      }//else
+    })//findCb
+  }) // update a user's shopping cart
   //http://localhost:8000/users/forgotPassword
   // validate new user from nodemailer link
   router.post('/forgotPassword', function (req, res) {
     // this is a mongodb find
-    User.find((err, users) => {
+    User.find(function(err, users) {
       if (err) throw err;
 
       // this is a native javascript find
-      const matchingUser = users.find((user) => {
+      const matchingUser = users.find(function(user) {
         return user.email === req.body.email;
       })
 
@@ -82,11 +103,11 @@ module.exports = function (router) {
   //http://localhost:8000/users/forgotPassword
   router.post('/updatePassword', function (req, res) {
     // this is a mongodb find
-    User.find((err, users) => {
+    User.find(function(err, users) {
       if (err) throw err;
 
       // this is a native javascript find
-      const matchingUser = users.find((user) => {
+      const matchingUser = users.find(function(user) {
         return user._id.valueOf().toString() === req.body.userId;
       })
 
@@ -101,7 +122,7 @@ module.exports = function (router) {
 
       matchingUser.password = hashedNewPassword;
 
-      User.findByIdAndUpdate(matchingUser._id, matchingUser, { new: true }, (error, updatedUser) => {
+      User.findByIdAndUpdate(matchingUser._id, matchingUser, { new: true }, function(error, updatedUser){
         if (err) throw err;
         res.json({ success: true, message: 'User password updated and saved to db', user: updatedUser });
       })
@@ -113,11 +134,11 @@ module.exports = function (router) {
   // validate new user from nodemailer link
   router.post('/emailValidate', function (req, res) {
     // this is a mongodb find
-    User.find((err, users) => {
+    User.find(function(err, users) {
       if (err) throw err;
 
       // this is a native javascript find
-      const matchingUser = users.find((user) => {
+      const matchingUser = users.find(function(user) {
         return user._id.valueOf().toString() === req.body.userId;
       })
 
@@ -131,7 +152,7 @@ module.exports = function (router) {
       matchingUser.isEmailValidated = true;
       console.log('matchingUser', matchingUser);
 
-      User.findByIdAndUpdate(matchingUser._id, matchingUser, { new: true }, (error, newUser) => {
+      User.findByIdAndUpdate(matchingUser._id, matchingUser, { new: true }, function(error, newUser) {
         if (err) throw err;
         res.json({ success: true, message: 'User validated and saved to db', user: newUser });
       })
@@ -173,7 +194,7 @@ module.exports = function (router) {
       // this is the key!!!
       if (user.isEmailValidated) {
         const token = jwt.sign({ username: user.username, email: user.email, id: user.id }, secret, { expiresIn: '72h' });
-        res.json({ success: true, message: 'User authenticated', token: token, username: user.username });
+        res.json({ success: true, message: 'User authenticated', token: token, username: user.username, id: user.id });
       } else {
         res.json({ success: false, message: 'email is not validated!!!' });
 

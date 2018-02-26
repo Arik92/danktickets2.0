@@ -1,7 +1,7 @@
-app.controller('footerCtrl', ['linkService', '$scope', function (linkService, $scope,) {
+app.controller('footerCtrl', ['linkService', '$scope', function (linkService, $scope) {
   
 
-    this.$onInit = () => {
+    this.$onInit = function() {
       console.log("hello from footer ctrl");
       $scope.socialLinks = linkService.socialLinks;
       $scope.footerLinks = linkService.footerLinks;

@@ -4,6 +4,10 @@ var Event = require("../models/eventmodel");
 var User = require("../models/usermodel");
 //var Profile = require("../models/")
 
+function toObjectId(string) {
+	var ObjectId = (require('mongoose').Types.ObjectId);
+    return new ObjectId(string);
+}
 /////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
 var multer = require('multer');
 
@@ -20,16 +24,16 @@ var upload = multer({ storage: storage }).single('file');
 /////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
 
 router.get('/', function (req, res, next) {
-  Event.find().populate('organizer').exec(function(err, events){
+  Event.find({"ongoing": true}).populate('organizer').exec(function(err, events){
     if (err) {
       console.error(err);
     } else {
-      res.send(events)
+      res.send(events);
     }
   })//exec()
-});//get all events that were ever published and populate the publisher field
+});//get all events that are ongoing(have not ended and have tickets) and populate the publisher field
 
-router.get('/findByOwner/:name', function(req, res, next){
+router.get('/findByOwner/:id', function(req, res, next){
   Event.find().populate('owner organizer').exec(function(err, events){
     if (err) {
       console.error(err);
@@ -37,18 +41,26 @@ router.get('/findByOwner/:name', function(req, res, next){
       //console.log("found events(route)", events);
       var result = [];
       for (var i=0;i<events.length;i++) {
-        //console.log("comparing *"+ req.params.name+"* and *"+ events[i].owner.username+"*");
-		if (events[i].owner) {
-			if (req.params.name.localeCompare(events[i].owner.username)===0) {
-				//console.log("got in");
-			result.push(events[i]);
-			} // comparing owners
-		} // if for SOME REASON the event doesnt have an owner. which shouldnt ever happen
+        console.log("comparing *"+ req.params.id+"* and *"+ events[i].owner._id+"*");
+		if (events[i].owner._id==req.params.id) {
+				  result.push(events[i]);
+			  }
       }//for	 
       res.send(result);
     }
   })//exec()
-}) // get event by OWNER name.
+}) // get event by OWNER ID.
+
+router.get('/findByOrganizer/:id', function(req, res, next){
+	var organizerQuery = toObjectId(req.params.id);
+  Event.find({organizer: organizerQuery}, function(err, events){
+    if (err) {
+      console.error(err);
+    } else {         	 
+      res.send(events);
+    }
+  })//exec()
+}) // get event by Organizer name.
 
 router.get('/findById/:id', function(req, res, next){
   Event.find({_id: req.params.id}).populate('organizer').exec(function(err,foundEvent){
@@ -88,6 +100,9 @@ router.get('/searchByActivity/:type', function(req, res, next){
   })//findCb
 }) //NOTE: get event by a specific type criteria. for future use
 
+function escapeRegex (text) {
+	return text.replace(/[-[\]{}()*+?.,\\^$|#s]/g, "\\$&");
+}
 router.get('/generalSearch/:searchQuery', function(req, res, next){
 	//var queryPattern = /req.params.query/;
 	//Event.find().then(function(error, 
@@ -107,16 +122,26 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
       res.send(resultEvents);
     }//else
   })//exec */
-	Event.find().populate('organizer').exec(function(err, resultEvents) {		
-		var patt = new RegExp(req.params.searchQuery);		
+	Event.find({ongoing: true}).populate({
+		path: 'organizer',
+		select: 'name'
+		}).exec(function(err, resultEvents) {	
+		if (err) {
+			res.send(err);
+	} else {
+		console.log("results ", resultEvents);
+		var patt = new RegExp(escapeRegex(req.params.searchQuery), 'gi');
+		console.log("regex is", patt);
 		var searchResults =[];
 		for (var i=0;i<resultEvents.length;i++) {			
-			if ((resultEvents[i].organizer.name.search(patt)!=-1)||(resultEvents[i].description.search(patt)!=-1)||(resultEvents[i].title.search(patt)!=-1)) {
+			if ((patt.test(resultEvents[i].organizer.name))||(patt.test(resultEvents[i].description))||(patt.test(resultEvents[i].title))) {
 			searchResults.push(resultEvents[i]);	
+			//TODO: request 1 - same but without the organizer.req2 - where the organizer name matches the pattern
 			}//if query was found in either the title, description, or organizer fields 			
 		}//for i 
 		res.send(searchResults);
-	})// event cb 
+		}//else
+	})// event cb 	
 }) //NOTE: get event by a specific type criteria. for future use
 
 router.post('/upload', function (req, res1, next) {
@@ -220,6 +245,30 @@ router.put('/:id', function(req, res1, next) {
      res1.send(event);
    }//else
   });//mongo CB
+})// put route - without updating pictures
+router.put('/buyTicket/:id', function(req, res, next) {// the id == the id of the user/ buyer
+  console.log("request body is", req.body); // req.body == the dank cart.
+  for (var i=0;i<req.body.dankCart.length;i++) {
+  Event.find({id: req.body.dankCart[i].eventId}, function(error, foundEvent){
+		  if (error) {
+			  throw (error)
+		  } else {
+			  console.log("found ",foundEvent);	
+			  if (i===req.body.dankCart.length) {
+				  res.send("done");
+			  }
+		  }//else 
+	  });
+  }//for 
+ 
+  /*Event.findByIdAndUpdate(req.body._id, req.body, { new: true }, function(error, event) {
+    if (error) {
+     console.error(error)
+     return next(error);
+    } else {
+     res1.send(event);
+   }//else
+  });//mongo CB */
 })// put route - without updating pictures
 module.exports = router;
 

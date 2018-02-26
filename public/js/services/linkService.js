@@ -1,4 +1,4 @@
-app.factory('linkService', function($http){
+app.factory('linkService', [function(){
   linkService = {};
 
   linkService.socialLinks = [
@@ -18,4 +18,4 @@ app.factory('linkService', function($http){
   ]
 
   return linkService;
-});
+}]);

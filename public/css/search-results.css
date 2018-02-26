@@ -1,0 +1,140 @@
+.active-filter {
+  border-bottom: solid 4px purple !important;
+}
+
+.bottom-spacer {
+  margin-bottom: 200px !important;
+}
+
+.rotate-180 {
+  transform: rotateX(-180deg);
+}
+
+.search-results-map {
+  display: none;
+  grid-area: map;
+}
+
+
+
+/* grid definitions */
+
+.map-filter-container {
+  grid-area: mfc;
+}
+
+.search-result-string {
+  grid-area: string;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.search-filter-container {
+  grid-area: filter;
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+}
+
+.search-events-container {
+  grid-area: events;
+}
+
+.search-events-container h4 {
+  margin-bottom: 2rem;
+}
+
+.search-page-container {
+  max-width: 1200px;
+  margin: 3rem auto;
+}
+
+.search-filter-container div {
+  text-align: center;
+  border: solid 1px #757575;
+  border-radius: 2px;
+  padding: 0.5rem 1rem;
+}
+
+.search-results h4 {
+  text-align: center;
+}
+
+.search-location {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.other-filter-container {
+  width: 90%;
+  margin: 2rem auto;
+  color: steelblue;
+}
+
+.other-filter-container .filter-container {
+  margin: 1rem 2rem;
+}
+
+.filter-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 0 0.5rem 1rem;
+  border-bottom: 1px solid #D2D6DF;
+}
+
+.filter-title i{
+  transition: all 0.2s linear;
+}
+
+.filter-results-toggle {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+@media screen and (min-width: 768px) {
+  .search-results-map {
+    display: block;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+  .search-page-container {
+    display: flex;
+  }
+
+  .map-filter-container {
+    width: 25%;
+    margin-right: 2rem;
+  }
+  .search-result-string {
+    text-align: left;
+  }
+  .search-filter-container {
+    justify-content: flex-end;
+  }
+
+  
+
+  .search-events-container {
+   
+    
+  }
+
+
+
+
+  .search-result-string {
+    font-size: 5rem;
+    /* text-align: left; */
+  }
+
+  .search-filter-container {
+    /* justify-content: flex-start; */
+  }
+}

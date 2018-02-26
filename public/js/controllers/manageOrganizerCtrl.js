@@ -1,0 +1,211 @@
+app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', '$scope', '$rootScope', function (orService, createService, $timeout, $scope, $rootScope) {
+
+
+  // console.log("root scope usr", $rootScope.currentUser);
+
+  this.$onInit = function() {
+    checkUser();
+    initTabs();
+    initSocialForms();
+    organizerPrep();
+    // setImageCropStuff();    
+  }
+
+  
+  $scope.initUploader = function() {
+	  cloudinary.openUploadWidget({ cloud_name: 'newoldroad-com',
+	  upload_preset: 'organizer_pgznub8n',
+	  theme: 'purple',
+	  multiple: false,
+	  cropping_show_back_button: true,
+	  cropping: 'server',
+	  cropping_coordinates_mode:'custom',
+	  sources: ['local', 'url', 'facebook', 'instagram', 'dropbox']
+	  }, 
+      function(error, result) { 
+	  console.log(result);
+	  // for HTTPS $scope.previewImg = result.secure_url;
+	  $scope.previewImg = result[0].url;
+	$scope.$apply();	  
+	  });
+  }//initUploader
+  
+
+  function checkUser() {
+    $scope.isUserSignedIn = $rootScope.currentUser;
+  } 
+
+  function organizerPrep() {
+    orService.getOrganizersByUser($rootScope.currentUser).then(function (result) {
+      console.log("All profiles by ", $rootScope.currentUser, result);
+      $scope.profiles = result;
+      $scope.selectedOrganizer = result[0];
+	  createService.getEventsByOrganizer($scope.selectedOrganizer._id).then(function(result){
+		//console.log("organizer's events", result);
+		$scope.events = result;
+		$scope.ongoingOrgEvents = [];
+		$scope.pastOrgEvents = [];
+		$scope.selectedStatEvent = {};
+		for (var i=0;i<$scope.events.length;i++) {
+			if ($scope.events[i].ongoing) {
+				$scope.ongoingOrgEvents.push($scope.events[i]);
+			} else {
+				$scope.pastOrgEvents.push($scope.events[i]);
+			}//else pushing events to approprate arrays
+		}//for 
+		/*$scope.selectedCurr = $scope.ongoingOrgEvents[0];
+		$scope.selectedPast = $scope.pastOrgEvents[0];
+		if ($scope.selectedCurr) {
+			$scope.selectedStatEvent = $scope.selectedCurr;
+		} else {
+			$scope.selectedStatEvent = $scope.selectedPast;
+		}//else */
+		$scope.setBarData($scope.ongoingOrgEvents);
+		console.log("this organizer's current events",$scope.ongoingOrgEvents);
+	});
+    }, function (err) {
+      throw (err)
+    })//GET request route 
+  }
+
+  function initSocialForms() {
+    $scope.socialForms = [
+      { name: 'Facebook', model: $scope.fbInput },
+      { name: 'Instagram', model: $scope.igInput },
+      { name: 'Snapchat', model: $scope.scInput },
+      { name: 'Twitter', model: $scope.twitInput },
+      { name: 'LinkedIn', model: $scope.liInput },
+    ]
+  }
+  
+  $scope.showOrg = function() {
+	  console.log("selected organizer", $scope.selectedOrganizer);
+  }
+
+  $scope.selectedItemChanged = function (selectedOrganizer) {
+    console.log('you picked option:', selectedOrganizer );
+	createService.getEventsByOrganizer(selectedOrganizer._id).then(function(result){
+		//console.log("organizer's events", result);
+		$scope.events = result;
+		$scope.ongoingOrgEvents = [];
+		$scope.pastOrgEvents = [];
+		//TODO CAP EVENT LENGTH TO 10 ON BOTH ARRAYS88888888888888888888888888888888888888888888888888888888888
+		for (var i=0;i<$scope.events.length;i++) {
+			if ($scope.events[i].ongoing) {
+				$scope.ongoingOrgEvents.push($scope.events[i]);
+			} else {
+				$scope.pastOrgEvents.push($scope.events[i]);
+			}//else pushing events to approprate arrays
+		}//for 
+		$scope.setBarData($scope.ongoingOrgEvents);
+	});
+  }//when organizer changes 
+  
+  $scope.selectedStatEventChanged = function(evt) {
+	  console.log("selected event: ", evt);
+	  $scope.selectedStatEvent = evt;
+	  setDonutData();
+	  setPieData();
+  }//when event changes 
+
+  //// ===================== tabs stuff ===========================
+  function initTabs() {
+    $scope.tab = 1;
+    $scope.organizerTabs = ['Organizer Info', 'Stats', 'Manage Events', 'Add Sub-Organizer', 'Check Attendees', 'Organizer Settings'];
+  }
+
+  $scope.setTab = function (newTab) {
+    $scope.tab = newTab;
+  };
+
+  $scope.isSet = function (tabNum) {
+    return $scope.tab === tabNum;
+  }
+  
+  //// ===================== chart stuff ===========================
+  function getRandomColor() {
+
+  }
+  $scope.setBarData = function(evts) {
+	   $scope.barData = [];
+	  $scope.barLabels = [];
+	  for (var i=0;i<evts.length;i++) {
+		  $scope.barLabels[i] = evts[i].title;
+		  $scope.barData[i] = 0;
+		  for (var j=0;j<evts[i].eventTickets.length;j++) {
+			  $scope.barData[i] +=evts[i].eventTickets[j].ticketsSold*evts[i].eventTickets[j].ticketPrice;
+		  }// for event tickets 
+	  }//for evts 
+	  console.log("bar data", $scope.barData);
+  }//set bar data
+  setDonutData = function() {
+	  $scope.donutData = [];
+	  var totalSold = 0;
+	  var total = 0;
+	  for (var i=0;i<$scope.selectedStatEvent.eventTickets.length;i++) {
+		  totalSold+= $scope.selectedStatEvent.eventTickets[i].ticketsSold;
+		  total+= $scope.selectedStatEvent.eventTickets[i].ticketQ;
+	  }	  
+	  $scope.donutData[0] = totalSold;
+	  $scope.donutData[1] = total;
+  }//setDonutData 
+  setPieData = function() {
+	  $scope.pieData = [];
+	  $scope.pieLabels = [];	  
+	  for (var i=0;i<$scope.selectedStatEvent.eventTickets.length;i++) {
+		  $scope.pieLabels[i] = $scope.selectedStatEvent.eventTickets[i].ticketType;
+		  $scope.pieData[i] = $scope.selectedStatEvent.eventTickets[i].ticketsSold;
+	  }	  
+	  $scope.donutData[0] = totalSold;
+	  $scope.donutData[1] = total;
+  }//setDonutData 
+  $scope.donutLabels = ["sold", "available"];
+  //$scope.barLabels = ["dank sesh", "chalice palace", "toker heaven", "sativa-sesh", "smoke break", "cali-greens", "tacos and titties"];
+  /*$scope.barData = [
+    [65, 59, 80, 57, 96, 58, 85],
+  ];*/
+
+  $scope.barColors = ['', 'orange', 'red', 'green', 'blue', 'lightgrey', ]
+
+  $scope.barClick = function (points, evt) {
+    console.log(points, evt);
+  };
+
+  //// ===================== manage events(by organizer) ===========================
+  
+  //// ===================== manage events ===========================
+  
+  //// ===================== ng-quill stuff ===========================
+  $scope.title = '';
+  $scope.changeDetected = false;
+
+  $scope.saveQuill = function() {
+    var deltaContents = $scope.editor.getContents();
+    console.log(deltaContents);
+    localStorage.setItem('deltaContents', JSON.stringify(deltaContents));
+  }
+
+  function getQuillDelta() {
+    var deltaContents = JSON.parse(localStorage.getItem('deltaContents'));
+    return deltaContents;
+  }
+
+  $scope.editorCreated = function (editor) {
+      console.log(editor);
+      $scope.editor = editor;
+
+      var existingDelta = getQuillDelta();
+      if (existingDelta) {
+        editor.setContents(existingDelta);
+      } else {
+        console.log('no previous deltas');
+        return;
+      }
+  };
+  $scope.contentChanged = function (editor, html, text, delta, oldDelta) {
+      $scope.changeDetected = true;
+      console.log($scope.title);
+      console.log('editor: ', editor, 'html: ', html, 'text:', text, 'delta:', delta, 'oldDelta:', oldDelta);
+  };
+
+}]);

@@ -13,6 +13,7 @@ var User = require("./usermodel");
 });
 var ticket = mongoose.model("Ticket", ticketSchema); */
 var eventSchema = new Schema({
+  version: Number,
   owner: { type: Schema.Types.ObjectId, ref:"User" },
   title: String,
   type: String,
@@ -33,12 +34,14 @@ var eventSchema = new Schema({
 		 ticketPrice: Number,
 		 ticketName: String,
 		 ticketQ: Number,
-		 isFree: Boolean		 
+		 isFree: Boolean,
+		 ticketsSold: Number	
 	  }	  
-  ], //o
+  ], //o  
   numTickets: Number, //tickets remaining
   isPrivate: Boolean,
-  showRemainingTicks: Boolean
+  showRemainingTicks: Boolean,
+  ongoing: Boolean
 });
 
 

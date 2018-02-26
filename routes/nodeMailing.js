@@ -26,7 +26,7 @@ function sendNodeMail(user, msgType) {
   let transporter = nodemailer.createTransport(mailConfig);
 
   // send mail with defined transport object
-  transporter.sendMail(mailOptions, (err, info) => {
+  transporter.sendMail(mailOptions, function(err, info) {
     console.log('sendMail triggered');
     if (err) {
       console.log('Error occurred. ' + err.message);
@@ -39,6 +39,8 @@ function sendNodeMail(user, msgType) {
     // res.status(200).send('email sent');
   });
 }
+
+//// ===================== Helpers ===========================
 
 function setUrl() {
   let url;
@@ -73,6 +75,8 @@ function setEmailOutput(user, msgType, url) {
       </a>
     `;
       break;
+    case 'send-tickets':
+      output = `<h1>Here's Your tickets bitch</h1>`
   }
   return output;
 }
@@ -107,7 +111,7 @@ function setMailConfig() {
         rejectUnauthorized: false
       }
     };
-    // mailjet testing
+    // mailjet testing with local host
     /*   mailConfig = {
         host: 'in-v3.mailjet.com',
         port: 587,

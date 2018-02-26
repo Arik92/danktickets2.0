@@ -1,53 +1,249 @@
-  <!-- #page-title -->
-<!--   <section id="page-title" class="gradient-overlay">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h1>Manage Your Organizer Profiles</h1>
+<!-- validating that user is signed in -->
+<h1 class="not-signed-in" ng-if="!isUserSignedIn" style="text-align: center; margin: 5rem auto 500px">Please Sign In To See This Page!</h1>
+
+<div class="organizer-manager-container container" ng-if="isUserSignedIn">
+
+  <div class="od-top-level">
+    <h1>Organizer Dashboard</h1>
+    <div class="select-organizer">
+      <div class="form-group">
+        <label for="sel1">Select Your Organizer</label>
+        <select ng-model="selectedOrganizer" 
+                ng-options="profile as profile.name disable when profile.disabled for profile in profiles" 
+                ng-change="selectedItemChanged(selectedOrganizer)"
+                class="form-control input-md">
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <nav class="od-nav">
+    <ul>
+      <li ng-repeat="tab in organizerTabs track by $index" ng-class="{ activeSetting: isSet($index) }">
+        <a href="" ng-click="setTab($index)">{{ tab }}</a>
+      </li>
+    </ul>
+  </nav>
+
+  <section ng-show="isSet(0)">
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+        <div class="od-toggle-container">
+          <h3>Organizer Profile</h3>
+          <div class="view-toggle">
+            <button ng-click="saveQuill()" class="btn btn-success" >Save</button>
+            <a ui-sref="publicprofile({name: selectedOrganizer.name,id: selectedOrganizer._id, orgParam: selectedOrganizer})">
+			<button class="btn btn-default">View</button>
+			</a>
+          </div>
         </div>
       </div>
     </div>
-  </section> -->
-  <!-- /#page-title -->
 
-  <!-- #blog -->
-  <section id="blog"  class="blog-archive">
-    <div class="container">
-      <div class="row blog-post-container">
-        <div class="col-lg-7 col-md-7 col-sm-7">
-          <div class="section-title">
-            <h1>Manage Your Organizer Profiles</h1>
+    <div class="row">
+      <div class="od-content">
+        <div class="col-sm-5 col-sm-offset-1">
+          <div class="form-group">
+            <label for="first">Name</label>
+            <input type="text" class="form-control" ng-model="selectedOrganizer.name" placeholder="Pick an Organizer Name">
           </div>
-        </div>
-        <div class="col-lg-8 col-md-8 col-sm-12">
-          <div class="row">
-            <!-- .single-post -->
-            <div class="single-post thumbnail col-lg-12 col-md-12 col-sm-12 wow fadeIn" ng-repeat="profile in profiles track by $index">
-              <div class="img-holder pull-left" id="card-img-holder" style="background-image: url({{profile.image}});height:auto;">
-                <img src="img/blog/1.jpg" style="opacity:0;" alt="">
-              </div>
-              <div class="content pull-left">
-                <h3>{{profile.name}}</h3>
-                <p class="meta"><a href="#">{{profile.websites}}</a></p>
-                <p class="length-limiter">About: {{profile.about}}</p>
-                <a ui-sref="editprofile({id: profile._id })" class="read-more hvr-bounce-to-right">Edit Profile</a>
-              </div>
+          <div class="od-editor">
+            About: {{selectedOrganizer.about}}
+            <ng-quill-editor ng-model="title" 
+                             on-editor-created="editorCreated(editor)" 
+                             on-content-changed="contentChanged(editor, html, text, delta, oldDelta)"
+                             id="organiza-quill">
+
+            </ng-quill-editor>
+          </div>
+          <div class="url-display">
+            <h5>Profile URL is:</h5>
+            <p>www.danktickets/picklerick.com</p>
+          </div>
+          <div class="form-group">
+            <label for="first">Website</label>
+            {{selectedOrganizer.website}}
+            <input type="text" class="form-control" placeholder="Enter your organizer website">
+          </div>
+          <div class="social-form-container">
+            <div class="form-group" ng-repeat="socialForm in socialForms track by $index">
+              <label ng-if="$index === 0" for="first">Social</label>
+              <input ng-model="socialForm.model" class="form-control" type="text" class="form-control" placeholder="{{ socialForm.name }}">
             </div>
-            <!-- /.single-post -->
           </div>
         </div>
+
+        <div class="col-sm-4 col-sm-offset-1 od-upload-container">
+          <form>
+            <h3 style>Organizer Image</h3>
+			<a href="#" id="upload_widget_opener" ng-click="initUploader()">Select organizer image</a>
+            <div class="od-image-container">     
+			<img ng-src={{previewImg}} />
+              <div class="od-image-placeholder" ng-if="!previewImg">
+                <i class="fa fa-2x fa-user" aria-hidden="true"></i>
+              </div>
+            </div>                               
+          </form>
+        </div>
       </div>
-      <!-- .post-pagination -->
-      <div class="post-pagination text-center">
-        <ul>
-          <li><span>1</span></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-        </ul>
-      </div>
-      <!-- /.post-pagination -->
     </div>
   </section>
-  <!-- /#blog -->
+
+  <!-- charts! -->
+  <section ng-show="isSet(1)" style="margin-top: 1rem">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h2>All Events Overview</h2>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 3rem">
+      <div class="bar-filter-container col-md-2 col-md-offset-1">
+        <div class="bar-filter-container chart-card">
+          <h4>Filters:</h4>
+          <div class="bar-btn-box">
+            <button class="btn btn-info" ng-click="setBarData(ongoingOrgEvents)">Current Events</button>
+            <button class="btn btn-info" ng-click="setBarData(pastOrgEvents)">Past Events</button>
+          </div>
+        </div>
+      </div>
+      <div class="chart-and-title-container col-md-8">
+        <div class="sales-by-event-container chart-card">
+          <h3>Total revenue from tickets sold by event</h3>
+          <div class="bar-chart-container">
+            <canvas class="chart chart-bar" 
+                    chart-data="barData" 
+                    chart-labels="barLabels" 
+                    chart-click="barClick"
+            >
+            </canvas> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h2>Zoom in on Events</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-md-offset-1">
+        <div class="form-group">
+          <label for="sel1">Select Current Events</label>
+          <select ng-model="selectedCurr" 
+                  ng-options="ongoing as ongoing.title for ongoing in ongoingOrgEvents" 
+                  ng-change="selectedStatEventChanged(selectedCurr)"
+                  class="form-control input-md">
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="sel1">Select Past Events</label>
+          <select ng-model="selectedPast" 
+                  ng-options="past as past.title for past in pastOrgEvents" 
+                  ng-change="selectedStatEventChanged(selectedPast)"
+                  class="form-control input-md">
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5 col-md-offset-1" style="margin-right: 0">
+          <div class="sales-by-event-container chart-card">
+              <h3>Tickets Available vs Sold</h3>
+              <div class="bar-chart-container">
+                <canvas class="chart chart-doughnut" 
+                        chart-data="donutData" 
+                        chart-labels="donutLabels" 
+                        chart-click="donutClick"
+                >
+                </canvas> 
+              </div>
+            </div>
+      </div>
+      <div class="col-md-5">
+          <div class="sales-by-event-container chart-card">
+              <h3>Tickets sold by ticket type</h3>
+              <div class="bar-chart-container">
+                <canvas class="chart chart-bar" 
+                        chart-data="pieData" 
+                        chart-labels="pieLabels" 
+                        chart-click="pieClick"
+                >
+                </canvas> 
+              </div>
+            </div>
+      </div>
+    </div>
+  </section>
+
+    <section id="upcoming-event" ng-show="isSet(2)">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 col-md-7 col-sm-7">
+          <div class="section-title">
+            <h1>Manage Your Events</h1>
+            <div ng-if="!events.length" style="text-align: center">
+              <h3>You have no events yet, add some!</h3>
+              <a ui-sref="create" style="display: block; cursor: pointer; font-size: 2em">create event</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">          
+          <div class="tab-content-wrap row">
+            <div class="col-lg-3 col-md-4 col-sm-6 mix april-14 april-22 hvr-float-shadow wow fadeIn" ng-repeat="event in events track by $index">
+              <a ui-sref="event">
+              <div class="img-holder" id="card-img-holder" style="background-image: url({{event.image}});"><img src="../img/banner-carousel/weed.jpeg" alt={{event.title}}></div>
+              <div class="content-wrap">
+                <img src="img/upcoming-event/author.png" alt="" class="author-img">
+                </a>
+                <div class="meta">
+                  <ul>
+                    <li><span><i class="fa fa-clock-o"></i>{{event.startDateDisplay}} at {{event.startHr}} - {{event.endDateDisplay}} at {{event.endHr}}</span>
+
+                    </li>
+                    <li><a href={{event.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i class="fa fa-map-marker"></i>{{event.location.venue_name}}</span></a>
+                    </li>
+                  </ul>
+                </div>
+                <h4 ng-show="event.organizer.name">{{event.organizer.name}} Presents:</h4>
+                <h3 class="length-limiter">{{event.title}}</h3>
+                <p class="length-limiter">{{event.description}}</p>
+                <div >
+                  <p style="background-color: grey;width:50%;color:white;text-align:center;">{{event.type}}</p>
+                  <p>Ticket Prices</p>
+                </div>
+                <div class="row">
+                  <ul>
+                    <li>
+                      <div class="input-wrap">
+                        <!-- <button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; height: 5%; font-size:18px;">REGISTER</button> -->
+                        <a ui-sref="edit({ eventParam: event, id: event._id })"><button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 100%; margin: 10px; max-height: 5%;font-size:18px;"> <i class="fa fa-pencil-square-o"></i> Edit</button></a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>            
+              </div>
+            </div>
+          </div> <!-- tab-content-wrap -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section ng-show="isSet(3)">
+    <h3>{{ organizerTabs[3] }}</h3>
+  </section>
+
+  <section ng-show="isSet(4)">
+    <h3>{{ organizerTabs[4] }}</h3>
+  </section>
+
+  <section ng-show="isSet(5)">
+    <h3>{{ organizerTabs[5] }}</h3>
+  </section>
+
+</div>

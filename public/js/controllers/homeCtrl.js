@@ -1,6 +1,6 @@
-app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$rootScope', '$scope', '$http', '$window', '$location', function (createService, dankAdService, linkService, $rootScope, $scope, $http, $window, $location) {
+app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$rootScope', '$scope', '$http', '$window', '$location','$state', function (createService, dankAdService, linkService, $rootScope, $scope, $http, $window, $location, $state) {
 
-  this.$onInit = () => {
+  this.$onInit = function() {
     console.log("hello from hoe ctrl");
     homeEventsPrep();
     $scope.socialLinks = linkService.socialLinks;
@@ -39,9 +39,11 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
         $scope.selectedLng = success.coords.longitude;
         $scope.timeStamp = success.timestamp / 1000;
         for (var i = 0; i < $scope.events.length; i++) {
+			if ($scope.events[i].location) {
           $scope.events[i].distance = $scope.getDistanceFromLatLonInMiles($scope.events[i].location.latlng.lat, $scope.events[i].location.latlng.lng, $scope.selectedLat, $scope.selectedLng);
           $scope.events[i].distance = Math.round($scope.events[i].distance * 100) / 100;
           console.log("distance is", $scope.events[i].distance);
+			} 
         }//for 		
         $scope.$apply();
       });//navigator cb  
@@ -90,7 +92,7 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
   }
 
   function getDummyEvents() {
-    let events = [];
+    var events = [];
     for (i = 0; i < 15; i++) {
       events.push({
         name: 'Dank Event!!',
@@ -103,7 +105,7 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
   }
 
   function getDummyBlogs() {
-    let blogs = [];
+    var blogs = [];
     for (i = 0; i < 4; i++) {
       blogs.push({
         name: 'Grow Weed For Free!',
@@ -113,13 +115,10 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
     }
     return blogs;
   }
-  /*$scope.search = function() {
+  $scope.search = function() {
 	  console.log("searcing for",$scope.searchString);
-	  	createService.generalSearch($scope.searchString).then(function(result){
-			console.log("searching for "+$scope.searchString+" yields:");
-			console.log(result);
-		});
+	  $state.go('search', {string:$scope.searchString});	
 	  //TODO: in the future, go to 'search/:searchString state and onInit get results array
-  }*/
+  }
 
 }]);

@@ -33,46 +33,40 @@
 			</div>			
 		</div>
 		<ul class="side-events-list">
-			<li	ng-show="upcomingFlag" 
-					ng-repeat="event in events |orderBy: 'startTime' |limitTo: 20">
-				<a href="">
+			<li	ng-show="upcomingFlag"	ng-repeat="event in events |orderBy: 'startTime' |limitTo: 20">
+				<a ui-sref="event({id: event['_id']})">
 					<p>
-						<span>
-							<a ui-sref="event({id: event['_id']})">
+						<span>							
 								<i style="color: lightcoral" class="fa fa-calendar-o"></i>
-								{{ event.startDateDisplay }}
-							</a>
+								{{ event.startDateDisplay }}							
 						</span>
 					</p>
 					<p>
 						<span>							
-							<a href={{event.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i style="color: lightgreen" class="fa fa-map-marker"></i>{{event.location.locationName}}</span></a>							
+							<span class="length-limiter"><i style="color: lightgreen" class="fa fa-map-marker"></i>{{event.location.venue_name}}</span>				
 						</span>
 					</p>
 					<p>
-							<span>
-								<a ui-sref="event({id: event['_id']})">
-									{{ event.title | uppercase}}
-								</a>
+							<span>								
+									{{ event.title | uppercase}}								
 							</span>
-						</p>
-				</a>
+						</p>	
+				</a>						
 			</li>
+			
 			<li class="local-events"
 					ng-show="localFlag"  
 					ng-repeat="event in events |orderBy: 'distance' |limitTo: 20">
-				<a href="">
+				<a ui-sref="event({id: event['_id']})">
 					<p>
-						<span>
-							<a ui-sref="event({id: event['_id']})">
+						<span>							
 								<i style="color: lightcoral" class="fa fa-calendar-o"></i>
-								{{ event.startDateDisplay }} - {{ event.title | uppercase}}
-							</a>
+								{{ event.startDateDisplay }} - {{ event.title | uppercase}}							
 						</span>
 					</p>
 					<p>
 						<span>							
-							<a href={{event.location.locationMapUrl}} target="_blank"><span class="length-limiter"><i style="color: lightgreen" class="fa fa-map-marker"></i>{{event.location.locationName}}</span></a>							
+							<span class="length-limiter"><i style="color: lightgreen" class="fa fa-map-marker"></i>{{event.location.venue_name}}</span>						
 						</span>
 					</p>
 					<p>
@@ -84,9 +78,33 @@
 			</li>
 		</ul>
 	</aside>	
+
+	<div class="ui-ad-container">
+		<ui-carousel 
+			slides="dummyAds"
+			slides-to-show="1"
+			slides-to-scroll="1"
+			initial-slide="1"
+			autoplay="true"
+			autoplay-speed="4000"
+			dots="false"
+			arrows="false"
+		>
+			
+			<carousel-item>
+				<div class="ad-item-container">
+					<div class="ad-img-container" style="height: 70px">
+						<img ng-src="{{ item.imgURL }}" alt="" style="height: 100%; display: block; margin: 0 auto">
+					</div>
+				</div>
+			</carousel-item>
+		</ui-carousel>
+	</div>
+
 	
 	<main class="main-content">
-		<slick class="slick-ad-banner"
+
+		<!-- <slick class="slick-ad-banner"
 					autoplay="true" 
 					fade="true" 
 					slides-to-show="1" 
@@ -98,10 +116,15 @@
 			<div class="ad-container" ng-repeat="ad in dummyAds">
 				<img ng-src="{{ ad.imgURL }}" alt="{{ ad.name }}">
 			</div>
-		</slick>
+		</slick> -->
 
+		
 		<div class="main-event event-poster animated fadeInRight">
-				<img ng-src="{{ featuredDummyEvent.imgURL }}" class="feature-event-img">
+				<div class="wtf" style="display: flex; justify-content: center">
+					<div class="feature-event-img">
+						<img ng-src="{{ featuredDummyEvent.imgURL }}" style="max-height: 100%">
+					</div>
+				</div>
 				<div class="info">
 					<div class="left">
 						<div class="date">
@@ -126,23 +149,19 @@
 		</div>
 	</main>
 
-	<div class="other-events">
-		<event-list-directive myevents="dummyEvents" mylimit="4"></event-list-directive>
-	</div>
-
 	<!-- grid style - to keep or not to keep? that is the question-->
-	<!-- <section class="other-events">
+	<section class="other-events">
 		<ul class="event-grid-container">
 			<li ng-repeat="event in dummyEvents | limitTo: 4" class="featured-event event-poster">
 				<div class="img-container">
-					<img ng-src="{{ event.imgURL }}" class="">
+					<img ng-src="{{ event.image }}" class="">
 				</div>
 				<div class="info">
 					<div class="date">
 							<a ui-sref="">
 								<span>
 									<i style="color: lightcoral" class="fa fa-calendar-o"></i>
-									{{ event.date }}, {{ event.startTime }}
+									{{ event.startDateDisplay }}, {{ event.startTime }}
 								</span>
 							</a>
 					</div>
@@ -150,15 +169,15 @@
 						<a ui-sref="">
 								<span>
 									<i style="color: lightgreen" class="fa fa-map-marker"></i>
-									{{ event.location }}
+									{{ event.location.locationName }}
 								</span>
 						</a>
 					</div>
-					<div class="name">{{ event.name }}</div>
+					<div class="name">{{ event.title }}</div>
 			</div>
 			</li>
 		</ul>
-	</section> -->
+	</section>
 
 	<aside class="side-content">
 

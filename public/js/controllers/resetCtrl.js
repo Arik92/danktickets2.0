@@ -13,13 +13,13 @@ function (authService, $scope, $window, $stateParams, $state, $timeout, $locatio
   this.passwordUpdated = false;
   this.updateFailed = false;
 
-  this.$onInit = () => {
+  this.$onInit = function() {
     $scope.params = $stateParams;
     console.log($scope.params);
 
   }
 
-  this.resetPassword = () => {
+  this.resetPassword = function() {
 
     // check that password confirmation matches
     // this.doPasswordsMatch = this.comparePasswords(this.resetInfo.password, this.resetInfo.pwConfirm);
@@ -27,16 +27,16 @@ function (authService, $scope, $window, $stateParams, $state, $timeout, $locatio
 
     if (!this.doPasswordsMatch) return;
 
-    authService.updatePassword(this.resetInfo).then((res) => {
+    authService.updatePassword(this.resetInfo).then(function(res) {
       console.log("res after update", res);
       if (res.data.success) {
 
         this.passwordUpdated = true;
 
         // login
-        authService.login(res.data.user).then((result) => {
+        authService.login(res.data.user).then(function(result) {
           console.log("result", result);
-          $timeout(() => {
+          $timeout(function() {
             $location.path('/')
           }, 3000);
         })
@@ -46,7 +46,7 @@ function (authService, $scope, $window, $stateParams, $state, $timeout, $locatio
     })
   } 
 
-this.comparePasswords = (pw1, pw2) => {
+this.comparePasswords = function(pw1, pw2) {
   return pw1 === pw2 ? true : false;
 }
 

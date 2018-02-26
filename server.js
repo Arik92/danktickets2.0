@@ -6,7 +6,7 @@ var express     = require('express');
 //var cors = require('cors');
 var app         = express();
 var server      = require('http').createServer(app);
-var io          = require('socket.io')(server);
+//var io          = require('socket.io')(server);
 var port        = process.env.PORT || '8000';
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
@@ -17,19 +17,98 @@ var eventRoutes = require('./routes/eventRoutes');
 var organizerRoutes = require('./routes/organizerRoutes');
 var passport    = require('./models/passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+
 //var path        = require('path');
 //var social      = require('./passport/passport')(app, passport);
 //var expressSession = require('express-session');
 //var LocalStrategy = require('passport-local').Strategy;
-
-
+/*var cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: process.env.cloudinary_cloud_name, 
+  api_key: process.env.cloudinary_api_key, 
+  api_secret: process.env.cloudinary_api_secret 
+}); */
 
 mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
+/* *****************************************MANUAL PATCH */
+/*var Event = require("./models/eventmodel"); 
+var dummyTickets = [{	  
+		 ticketType: "Paid",
+		 ticketPrice: 77,
+		 ticketName: "dankDummy",
+		 ticketQ: 7,
+		 isFree: false,
+		 ticketsSold: 1		  
+  }];
+  Event.update({},{$set: {"eventTickets": dummyTickets}} ,{multi: true},function(err, events){
+	  if (err) {
+		  throw (err);
+	  } else {
+		  console.log("events",events);
+		  console.log("ticket properties updated");
+	  }//else 
+  });//epdate cb
+
+ /*var Event = require("./models/eventmodel"); 
+  Event.find({}, function(err, events){
+	  if (err) {
+		  throw (err);
+	  } else {
+		  for (var i=0;i<events.length;i++) {
+			  for (var j=0;j<events[i].eventTickets.length;j++) {
+				  events[i].eventTickets[j].ticketsSold = 1;
+			  }//for looping in an event's ticket array 
+		  }//for looping through all events 
+		 events.save(function(err2, savedEvents){
+			  if (err2) {
+				  throw (err2);
+			  } else {
+				  console.log("saved and UPDATED event tickets!");
+			  }//else 
+		  });		  
+	  }//else 
+  });//epdate cb
+ /*var Event = require("./models/eventmodel"); 
+  Event.update({},{$set: {"ongoing": true}} ,{multi: true},function(err, events){
+	  if (err) {
+		  throw (err);
+	  } else {
+		  console.log("events",events);
+		  console.log("all events are ongoing now");
+	  }//else 
+  });//epdate cb
+var Event = require("./models/eventmodel");
+  var currDate = new Date();
+  var currSec = currDate.getTime();
+  console.log("current time in milliseconds", currSec);
+  Event.update({$and: [{"endTime": {$lt: currSec}},{"ongoing": true}]},{$set: {"ongoing": false}},{multi: true} ,function(err, events){
+	  if (err) {
+		  throw (err);
+	  } else {
+		  console.log("updated", events);
+	  }//else 
+  });// 1000 * 60 * 60 * 24 
+/* *****************************************MANUAL PATCH */
+
+ setInterval(function(){ 
+  //	function that checks the db for events who'se time is up and updates them
+  var Event = require("./models/eventmodel");
+  var currDate = new Date();
+  var currSec = currDate.getTime();
+  console.log("current time in milliseconds", currSec);
+  Event.update({$and: [{"endTime": {$lt: currSec}},{"ongoing": true}]},{$set: {"ongoing": false}},{multi: true} ,function(err, events){
+	  if (err) {
+		  throw (err);
+	  } else {
+		  console.log("updated", events);
+	  }//else 
+  });// 1000 * 60 * 60 * 24
+ }, 1000*60*60); //once an hour? day/   */
 app.use(passport.initialize());
 //app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use(express.static('node_modules'));
-app.use(express.static('bower_components'));
+// app.use(express.static('bower_components'));
 app.use(express.static('ui-bootstrap-custom-build'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -50,6 +129,7 @@ app.use(function(req, res, next) {
         next();
   });
 
+  
 
 
 

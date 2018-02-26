@@ -14,7 +14,7 @@ app.controller('browseCtrl',['createService','$scope','$window', function(create
     throw (err)
   })//GET request route
 	 }
-  this.$onInit = () => {
+  this.$onInit = function() {
    eventPrep(); 
   }
 }]);

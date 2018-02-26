@@ -1,7 +1,5 @@
 <h2 class="settings-header page-centering">Profile Settings</h2>
-<hr>
 <div class="profile-settings-container page-centering">
-
   <nav class="settings-nav">
     <ul>
       <li ng-repeat="tab in profileTabs track by $index" ng-class="{ activeSetting: isSet($index) }">
@@ -10,7 +8,9 @@
     </ul>
   </nav>
 
-  <section ng-show="isSet(0)" class="info-section">
+  <section ng-show="isSet(0)" class="info-section" style="margin-bottom: 50px">
+    <h3 class="settings-section-header">Account Info</h3>
+    <hr>
     <div>
       <!-- <h3 class="section-header">Account Info</h3> -->
       <div class="profile-photo-container">
@@ -23,6 +23,11 @@
     </div>
     <div class="container settings-info-container">
       <form>
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+              <h4>General Info</h4>
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-5 col-md-offset-1">
             <div class="form-group">
@@ -87,22 +92,148 @@
         </div>
         <!--  row   -->
 
+        <div class="billing-info" style="margin-top: 1.5rem">
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+              <h4>Billing Info</h4>
+              <div class="form-group">
+                <label for="email">Address</label>
+                <input type="email" class="form-control" id="email" placeholder="email">
+              </div>
+              <div class="form-group">
+                <label for="email">Address 2</label>
+                <input type="email" class="form-control" id="email" placeholder="email">
+              </div>
+              <div class="form-group">
+                <label for="email">City</label>
+                <input type="email" class="form-control" id="email" placeholder="email">
+              </div>
+              <div class="form-group">
+                <label for="email">Country</label>
+                <input type="email" class="form-control" id="email" placeholder="email">
+              </div>
+            </div>
+          </div>
+  
+          <div class="row">
+              <div class="form-group col-md-5 col-md-offset-1">
+                <label for="email">Zip/Postal Code</label>
+                <input type="email" class="form-control" id="email" placeholder="email">
+              </div>
+              <div class="form-group col-md-5">
+                <label for="email">State</label>
+                <input type="email" class="form-control" id="email" placeholder="email">
+              </div>
+          </div>
+        </div>
+
         <button class="btn btn-primary info-save-btn">Save</button>
       </form>
     </div>
   </section>
 
   <!-- Other Sections -->
-  <section ng-show="isSet(1)">
-    <h3 class="section-header">Password Reset</h3>
+  <section ng-show="isSet(1)" class="left-aligned mobile-padder">
+    <h3 class="settings-section-header-left">Password Reset</h3>
+    <hr>
+    <div class="password-container">
+      <form>
+        <div class="form-group">
+          <label for="phone">Old Password</label>
+          <input type="tel" class="form-control" id="phone" placeholder="old password">
+        </div>
+        <div class="form-group">
+          <label for="phone">New Password</label>
+          <input type="tel" class="form-control" id="phone" placeholder="new password">
+        </div>
+        <div class="form-group">
+          <label for="phone">Confirm New Password</label>
+          <input type="tel" class="form-control" id="phone" placeholder="confirm">
+        </div>
+        <button class="btn btn-primary info-save-btn">Save</button>
+      </form>
+    </div>
   </section>
 
-  <section ng-show="isSet(2)">
-    <h3 class="section-header">Email Preferences</h3>
+  <section ng-show=isSet(2) class="left-aligned mobile-padder">
+    <h3 class="settings-section-header-left">Credit/Debit Cards</h3>
+    <hr>
+
+    <div class="row show-hide-message" ng-if="true">
+      <div class="alert alert-info"> No cards currently on file</div>
+    </div>
+    
+
   </section>
 
-  <section ng-show="isSet(3)">
-    <h3 class="section-header">Close Account</h3>
+  <section ng-show="isSet(3)" class="left-aligned mobile-padder">
+    <h3 class="settings-section-header-left">Email Preferences</h3>
+    <hr>
+
+    <form action="">
+      <div class="attendee-options-container" style="margin-bottom: 3rem">
+        <h4>Attending Events</h4>
+        <p>Updates for Attending Events</p>
+        <ul>
+          <li ng-repeat="option in eventMailOptions">
+            <label class="checkbox-container">{{ option.title }}
+              <input type="checkbox" ng-checked="option.selected ? true : false" ng-model="option.selected">
+              <span class="checkmark"></span>
+            </label>
+          </li>
+        </ul>
+        <a href="" ng-click="clearAll(eventMailOptions)">Unsubscribe From All Attendee Emails </a>
+      </div>
+
+      <div class="organizer-options-container">
+        <h4>Organizing Events</h4>
+        <p>Updates and Tips for Organizing Events</p>
+        <ul>
+          <li ng-repeat="option in organizerMailOptions">
+            <label class="checkbox-container">{{ option.title }}
+              <input type="checkbox" ng-checked="option.selected ? true : false" ng-model="option.selected" ng-change="console.log('i changed')">
+              <span class="checkmark"></span>
+            </label>
+          </li>
+        </ul>
+        <a href="" ng-click="clearAll(organizerMailOptions)">Unsubscribe From All Organizer Emails </a>
+      </div>
+      <button class="btn btn-primary info-save-btn">Save Preferences</button>
+    </form>
+
+  </section>
+
+  <section ng-show="isSet(4)" class="left-aligned mobile-padder">
+    <h3 class="settings-section-header-left">Close Account</h3>
+    <hr>
+    <p>Thanks for using Dank Tickets. Sad to see you go.</p>
+    <p>Could you take a second to let us know why you are leaving and help us improve?</p>
+    <form>
+      <div class="radio-options-container">
+        <ul>
+          <li ng-repeat="option in accountClosing">
+            <div class="radio">
+              <label>
+                <input type="radio" ng-model="closingOption.id" ng-value="option.optionId">{{ option.title}}</label>
+            </div>
+            <input ng-if="option.isOther" class="form-control" type="text" placeholder="let us know" ng-model="otherClosingOption">
+          </li>
+        </ul>
+      </div>
+      <div class="confirm-close-container">
+        <p>Please type "CLOSE" and your password below to close your account</p>
+        <div class="close-input-container">
+          <p class="warning-text">Type "Close"</p>
+          <input type="text" class="form-control">
+        </div>
+        <div class="close-input-container">
+          <p class="warning-text">Enter Your Password</p>
+          <input type="text" class="form-control">
+        </div>
+      </div>
+      <button class="btn btn-primary info-save-btn">Close Account</button>
+    </form>
+
   </section>
 
 </div>

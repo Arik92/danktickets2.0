@@ -1,10 +1,40 @@
-var app = angular.module('dankTickets', ['ui.router', 'ngFileUpload', 'slick', 'ui.bootstrap', 'ngAnimate', 'cmelo.angularSticky', 'ngMap', 'angularLoad']);
+var app = angular.module('dankTickets', 
+  ['ui.router', 'ui.carousel', 'ngAnimate', 'cmelo.angularSticky', 'ngMap', 'angularLoad', 'angularSlideables', 'chart.js', 'ngQuill']);
 
-app.config(function ($httpProvider) {
+
+app.config([ 'ngQuillConfigProvider', '$httpProvider', function (ngQuillConfigProvider, $httpProvider) {
   $httpProvider.interceptors.push('authServiceInterceptors');
-})
+  
+  // ng-quill config
+  var config = {
+    modules: {
+      toolbar: [
+        ['bold', 'italic', 'underline'],        // toggled buttons
+        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        // [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+        // [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+        // [{ 'direction': 'rtl' }],                         // text direction
 
-app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
+        // [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+
+        // ['clean'],                                         // remove formatting button
+
+        // ['link', 'image']                         // link and image, video
+      ]
+    },
+    theme: 'snow',
+    placeholder: 'Describe yo Dank Self ...'
+  }
+  ngQuillConfigProvider.set(config);
+}])
+
+app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function ($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/');
   $stateProvider
@@ -14,28 +44,23 @@ app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
       controller: 'homeCtrl'
     })
     .state('home.local', {
-      url: "/local",
+      url: "local",
       templateUrl: './templates/home-mobile/home.local.html',
       controller: 'homeCtrl'
     })
     .state('home.upcoming', {
-      url: "/upcoming",
+      url: "upcoming",
       templateUrl: './templates/home-mobile/home.upcoming.html',
       controller: 'homeCtrl'
     })
     .state('home.favorites', {
-      url: "/favorites",
+      url: "favorites",
       templateUrl: './templates/home-mobile/home.favorites.html',
       controller: function($scope) {
         console.log('hello from the partial');
         $scope.items = ["A", "List", "Of", "Items"];
       }
-    })
-    .state('home.home', {
-      url: "/list",
-      template: "<h1>yoooo we backkk</yo>",
-      controller: 'homeCtrl'
-    })
+    })    
     .state('event', {
       url: '/event/:id',
       templateUrl: '/templates/event.html',
@@ -148,44 +173,51 @@ app.config(function ($locationProvider, $stateProvider, $urlRouterProvider) {
       templateUrl: '/templates/event2.html'
     })
     .state('userprofiles', {
-      url: '/manage-organizers',
+      url: '/organizer-dashboard',
       templateUrl: '/templates/manage-organizers.html',
-      controller: 'manageProfCtrl'
+      controller: 'manageOrganizerCtrl'
     })
     .state('edit', {
       url: '/edit-event/:id',
       templateUrl: '/templates/edit-event.html',
       controller: 'editCtrl'
     })
-    .state('editprofile', {
+    .state('publicprofile', {
+      url: '/public-profile/:name/:id', // /:name/:id
+      templateUrl: '/templates/public-profile.html',
+	   params: {orgParam: null},
+      controller: 'publicProfileCtrl'
+    })
+	.state('editprofile', {
       url: '/edit-profile/:id',
-      templateUrl: '/templates/edit-organizer.html',
+      templateUrl: '/templates/edit-organizer.html',	 
       controller: 'editProfileCtrl'
     })
     .state('auth', {
-      url: '/authorization?token&name',
+      url: '/authorization?token&id',
       controller: function ($stateParams, $state, $rootScope, $http) {
         console.log("state params are", $stateParams);
         if ($stateParams.token) {
           var user = {
-            name: $stateParams.name,
+            id: $stateParams.id,
             token: $stateParams.token
           }
           localStorage.setItem("user", JSON.stringify(user));
-          $rootScope.currentUser = user.name;
-          console.log('rootscope currentUser', $rootScope.currentUser);
+          $rootScope.currentUser = user.id;		  
+          console.log('rootscope currentUser', $rootScope.currentUser);		 
           //$rootScope.$broadcast('fbLogin');
           $http.defaults.headers.common.Authorization = 'Bearer ' + user.token;
           $state.go('home');
         }
       }//controller
     })
-});
-app.run(function ($rootScope, authService) {
+}]);
+
+app.run([ 'authService', '$rootScope', function (authService, $rootScope) {
   var user = JSON.parse(localStorage.getItem("user"));
   if (user) {
-    $rootScope.currentUser = user.name;
-    console.log(localStorage);
+    $rootScope.currentUser = user.id;
+    console.log('user is: ', user);
     //$rootScope.$broadcast('fbLogin');
   }
   // if (authService.isLoggedIn()) {
@@ -212,4 +244,4 @@ app.run(function ($rootScope, authService) {
   //   // $rootScope.loader = true;
   //
   // }
-});
+}]);
