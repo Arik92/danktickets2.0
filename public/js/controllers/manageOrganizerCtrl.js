@@ -47,9 +47,9 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
 		$scope.pastOrgEvents = [];
 		$scope.selectedStatEvent = {};
 		for (var i=0;i<$scope.events.length;i++) {
-			if ($scope.events[i].ongoing) {
+			if (($scope.events[i].ongoing)&&($scope.ongoingOrgEvents.length<10)) {
 				$scope.ongoingOrgEvents.push($scope.events[i]);
-			} else {
+			} else if ($scope.pastOrgEvents.length<10) {
 				$scope.pastOrgEvents.push($scope.events[i]);
 			}//else pushing events to approprate arrays
 		}//for 
@@ -88,12 +88,11 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
 		//console.log("organizer's events", result);
 		$scope.events = result;
 		$scope.ongoingOrgEvents = [];
-		$scope.pastOrgEvents = [];
-		//TODO CAP EVENT LENGTH TO 10 ON BOTH ARRAYS88888888888888888888888888888888888888888888888888888888888
+		$scope.pastOrgEvents = [];		
 		for (var i=0;i<$scope.events.length;i++) {
-			if ($scope.events[i].ongoing) {
+			if (($scope.events[i].ongoing)&&($scope.ongoingOrgEvents.length<10)) {
 				$scope.ongoingOrgEvents.push($scope.events[i]);
-			} else {
+			} else if ($scope.pastOrgEvents.length<10) {
 				$scope.pastOrgEvents.push($scope.events[i]);
 			}//else pushing events to approprate arrays
 		}//for 
@@ -110,8 +109,8 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
 
   //// ===================== tabs stuff ===========================
   function initTabs() {
-    $scope.tab = 1;
-    $scope.organizerTabs = ['Organizer Info', 'Stats', 'Manage Events', 'Add Sub-Organizer', 'Check Attendees', 'Organizer Settings'];
+    $scope.tab = 3;
+    $scope.organizerTabs = ['Organizer Info', 'Stats', 'Manage Events', 'Merchant profile', 'Check Attendees', 'Organizer Settings'];
   }
 
   $scope.setTab = function (newTab) {
@@ -181,7 +180,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
 
   $scope.saveQuill = function() {
     var deltaContents = $scope.editor.getContents();
-    console.log(deltaContents);
+    //console.log(deltaContents);
     localStorage.setItem('deltaContents', JSON.stringify(deltaContents));
   }
 
@@ -191,7 +190,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
   }
 
   $scope.editorCreated = function (editor) {
-      console.log(editor);
+      //console.log(editor);
       $scope.editor = editor;
 
       var existingDelta = getQuillDelta();
@@ -207,5 +206,6 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
       console.log($scope.title);
       console.log('editor: ', editor, 'html: ', html, 'text:', text, 'delta:', delta, 'oldDelta:', oldDelta);
   };
+  //NOTE: Be sure to set mcc to 8111 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 }]);

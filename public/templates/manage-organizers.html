@@ -235,8 +235,133 @@
   </section>
 
   <section ng-show="isSet(3)">
-    <h3>{{ organizerTabs[3] }}</h3>
+    <div class="row">
+	<div><h2>Merchant Profile(re center/align) </h2>
+	</div>	
+      <div class="od-content">	  
+        <div class="col-sm-5 col-sm-offset-1">		
+		 <h3>Business entity(headline pending)</h3>
+          <div class="form-group">
+            <label for="first">Legal Business Name</label>
+            <input type="text" class="form-control" ng-model="entity.name" placeholder="Pick a business Name">
+          </div>
+		  <div class="form-group">
+            <label for="first">Business Type</label>
+            <input type="text" class="form-control" ng-model="entity.type" placeholder="LLC, etc">
+          </div>   
+          <div class="form-group">
+            <label for="first">Federal Tax Identification Number</label>
+            <input type="text" class="form-control" ng-model="entity.ein" placeholder="???">
+          </div>  		   
+          <div class="form-group">
+            <label for="first">Business Website</label>            
+            <input type="text" class="form-control"  ng-model="entity.website" placeholder="Enter your business website">
+          </div>
+		   <div class="form-group">
+            <label for="first">Business Phone</label>            
+            <input type="text" class="form-control"  ng-model="entity.phone" placeholder="+1 234 56789">
+          </div>
+		  <div class="form-group">
+            <label for="first">Business email</label>            
+            <input type="email" class="form-control"  ng-model="entity.email" placeholder="business@insider.com">
+          </div>
+		  <div class="form-group">
+            <label for="first">Business Address</label>            
+            <input type="text" class="form-control"  ng-model="entity.address1" placeholder="Business address">
+            <input type="text" class="form-control"  ng-model="entity.city" placeholder="City">
+            <input type="text" class="form-control"  ng-model="entity.state" placeholder="State">
+            <input type="text" class="form-control"  ng-model="entity.zip" placeholder="Zip">
+            <input type="text" class="form-control"  ng-model="entity.country" placeholder="Country">
+          </div>
+                 <div class="form-group">
+             <label for="first">Is this a new business?</label>
+             <div>	
+			   <input type="radio" ng-model="merchant.new" value="true"> Yes
+               <input type="radio" ng-model="merchant.new" value="false"> No              
+             </div>
+			   <div class="form-group" ng-show="merchant.new">
+            <label for="first">If not, Business' Year of Establishment </label>            
+            <input type="text" class="form-control"  ng-model="merchant.established" placeholder="1969">
+            </div>
+           </div>	
+           <div class="form-group">
+            <label for="first">If Applicable, Business' Annual Credit Card Sales(Only required if business is processing credit cards)</label>            
+            <input type="text" class="form-control"  ng-model="merchant.annualCCSales" placeholder="1 Trillion dollars">
+          </div>
+		  <h3>Banking information</h3>
+		  <div class="form-group">
+            <label for="first">Bank Account Type</label>            
+            <input type="email" class="form-control"  ng-model="bank.method" placeholder="business@insider.com">
+          </div>
+		  <div class="form-group">
+            <label for="first">Bank Routing Number</label>            
+            <input type="number" class="form-control"  ng-model="bank.routing" placeholder="business@insider.com">
+          </div>
+		  <div class="form-group">
+            <label for="first">Bank Account Number</label>            
+            <input type="number" class="form-control"  ng-model="bank.number" placeholder="business@insider.com">
+          </div>
+		  <div class="form-group">
+             <label for="first">Is the the Bank account primary?</label>
+             <div>	
+			   <input type="radio" ng-model="bank.primary" value="true"> Yes
+               <input type="radio" ng-model="bank.primary" value="false"> No              
+             </div>			   
+           </div>
+        </div>
+
+        <div class="col-sm-4 col-sm-offset-1 od-upload-container">
+          <form>
+            <h3 style>Owner information</h3>
+            <div class="form-group">
+            <label for="first">First Name</label>
+            <input type="text" class="form-control" ng-model="owner.first" placeholder="John">
+          </div>
+          <div class="form-group">
+            <label for="first">Last Name</label>
+            <input type="text" class="form-control" ng-model="owner.last" placeholder="Doe">
+          </div>	
+          <div class="form-group">
+            <label for="first">Date of Birth</label>
+            <input type="date" class="form-control" ng-model="owner.dob" placeholder="">
+          </div>
+		  <div class="form-group">
+            <label for="first">Business title</label>
+            <input type="text" class="form-control" ng-model="owner.title" placeholder="CEO">
+          </div>
+          <div class="form-group">
+            <label for="first">Percent of Ownership</label>
+            <input type="number" class="form-control" ng-model="owner.ownership" placeholder="%">
+          </div>	
+          <div class="form-group">
+            <label for="first">SSN</label>
+            <input type="number" class="form-control" ng-model="owner.ssn" placeholder="56743462">
+          </div>
+		  <div class="form-group">
+            <label for="first">Owner's Address</label>            
+            <input type="text" class="form-control"  ng-model="owner.address1" placeholder="Owner's address">
+            <input type="text" class="form-control"  ng-model="owner.city" placeholder="City">
+            <input type="text" class="form-control"  ng-model="owner.state" placeholder="State">
+            <input type="text" class="form-control"  ng-model="owner.zip" placeholder="Zip">
+            <input type="text" class="form-control"  ng-model="owner.country" placeholder="Country">
+          </div>
+          <div class="form-group">
+             <label for="first">Are you the primary owner?</label>
+             <div>	
+			   <input type="radio" ng-model="owner.primary" value="true"> Yes
+               <input type="radio" ng-model="owner.primary" value="false"> No              
+             </div>			   
+           </div>
+           <div class="form-group">
+            <label for="first">Email</label>
+            <input type="email" class="form-control" ng-model="owner.email" placeholder="john.doe@gmail.com">
+          </div>			   
+          </form>
+        </div>
+      </div>
+    </div>
   </section>
+
 
   <section ng-show="isSet(4)">
     <h3>{{ organizerTabs[4] }}</h3>
