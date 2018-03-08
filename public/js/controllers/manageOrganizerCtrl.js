@@ -1,4 +1,4 @@
-app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', '$scope', '$rootScope', function (orService, createService, $timeout, $scope, $rootScope) {
+app.controller('manageOrganizerCtrl', ['orService','createService','merchService' ,'$timeout', '$scope', '$rootScope', function (orService, createService, merchService, $timeout, $scope, $rootScope) {
 
 
   // console.log("root scope usr", $rootScope.currentUser);
@@ -206,6 +206,66 @@ app.controller('manageOrganizerCtrl', ['orService','createService', '$timeout', 
       console.log($scope.title);
       console.log('editor: ', editor, 'html: ', html, 'text:', text, 'delta:', delta, 'oldDelta:', oldDelta);
   };
-  //NOTE: Be sure to set mcc to 8111 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+  
+  var config = require('../config.js');
+  var merchKey = config.MERCHANT_API_KEY;
+  var mcc = config.MERCHANT_MCC;
+  //console.log("merchant key is "+merchKey+" and mcc is "+mcc);
+  $scope.createMerchant = function() {
+	  var mockMerch = {
+		  "isNew": '0',
+		  "established":"20101020",
+		  "annualCCSales": "100000",
+		  "mcc": mcc,
+		  "status":"1", 
+	  }
+	  var mockEntity = {
+          "name": "Lockhead Martin",		  
+		  "type":"1",
+		  "address1": "123 North 12 St",
+		  "city": "Miami",
+		  "state": "FL",
+		  "zip": "33024",
+		  "country": "USA", //gonna be USA for all the them. most likely
+		  "phone": "1234567891",
+		  "email": "support@example.com",
+		  "ein": "123456789",
+		  "website": "http://www.example.com"
+	  };
+	  mockEntity.accounts = [];
+	  mockEntity.accounts[0] = {
+		  "primary": "1",
+		  "account": {
+		  "method": "8",
+		  "number": "023456789012345",
+		  "routing": "063013924"
+		  }//accouts[].account
+	  };
+	  var mockMembers = [];
+	  mockMembers[0] = {
+		  "first": "James",
+		  "last": "Smith",
+		  "title": "CEO",
+		  "dob": "19590122",
+		  "ownership": "8000",
+		  "email": "james.smith@example.com",
+		  "ssn": "123456789",
+		  "address1": "123 Example St.",
+		  "city": "New York",
+		  "state": "NY",
+		  "zip": "10001",
+		  "country": "USA", //always. See entity country		   
+		  "primary": "1"
+	  };
+            /*-d members[0][dl]="123456789" \ DRIVERS LICENSE
+            -d members[0][dlstate]="NY" */
+			//console.log("mcc is"+mcc);
+	merchService.createMerchant(merchKey, mockEntity, mockMembers, mockMerch).then(function(response){
+		  console.log("merchant controller response is", response);
+	  });	  
+	  /*merchService.createMerchat(key, mcc, $scope.entity, $scope.merchant, $scope.bank, $scope.owner).then(function(response){
+		  console.log("merchant controller response is", response);
+	  });*/
+  };
+  $scope.createMerchant();
 }]);
