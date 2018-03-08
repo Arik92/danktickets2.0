@@ -2,7 +2,8 @@
 var config = {
   MAPS_API_KEY: 'AIzaSyBlqLa-v1ZicvzAhvzPyX4p0mbXIzYjGEk',
   STATIC_MAPS_API_KEY: 'AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM',
-  MERCHANT_API_KEY: 'ab5e7c1e7486577a183541f1edad0875',
+  MERCHANT_PUBLIC_API_KEY: 'ab5e7c1e7486577a183541f1edad0875',
+  MERCHANT_PRIVATE_API_KEY: 'bd4e68a283fedaa98e31d9be42472108',
   MERCHANT_MCC: '8111'
 };
 module.exports = config;
@@ -909,8 +910,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		showImage();
 		//$scope.ticketQuantityOptions = initQuantityOptions();
 		//$scope.selectedQuantity = 1;		
-		$scope.ticketSum = 0;
-		$scope.ticketsToAdd = 0;
+		$scope.ticketSum = 0;		
 		$scope.socialLinks = linkService.socialLinks;
 	//	initMap();		
 		$scope.dummyEvents = createService.dummyEvents;	
@@ -953,7 +953,12 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 			var config = require('../config.js');			
 			const staticMapKey = config.STATIC_MAPS_API_KEY;
 			$scope.imgSrc="https://maps.googleapis.com/maps/api/staticmap?center="+$scope.event.location.latlng.lat+","+$scope.event.location.latlng.lng+"&zoom=13&size=1200x500&markers=color:red%7Clabel:C%7C"+$scope.event.location.latlng.lat+","+$scope.event.location.latlng.lng+"&key=AIzaSyDaLn2AKXRJk06q8AUzN11XWQuuKlprlvM";
-			$scope.ticketCart = [];	
+			$scope.eventCart = {
+				"organizer": $scope.event.organizer.name,
+				"merchantId": $scope.event.organizer.merchantId,
+				"tickets": []
+			};			
+			console.log("initial event cart ",$scope.eventCart);			
 			for (var i=0;i<$scope.event.eventTickets.length;i++) {
 				var cartObj = {
 					'ticketName': $scope.event.eventTickets[i].ticketName,
@@ -962,9 +967,9 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 					'title': $scope.event.title,
 					'eventId': $scope.event._id
 				}//ticketCart object
-				$scope.ticketCart.push(cartObj);
-			}//for 			
-			console.log("after loop", $scope.ticketCart);
+				$scope.eventCart.tickets.push(cartObj);
+			}//for             			
+			console.log("after loop", $scope.eventCart.tickets);
 		}//else
 	  });//getEventById
   }//initEvent	
@@ -1007,60 +1012,88 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	  }//else 
   }//addToCart  - cart is for the user to mess with and make his order. this doest buy or reserve them yet! */
 	
-	$scope.cartPlus = function(index) {
-	  console.log("ticket cart", $scope.ticketCart);
-	  $scope.ticketCart[index].howMany++;
-		if ($scope.ticketCart[index].howMany<=$scope.ticketCart[index].ticket.ticketQ) {
+	/*$scope.cartPlus = function(index) {
+	  console.log("ticket cart", $scope.eventCart.tickets);
+	  $scope.eventCart.tickets[index].howMany++;
+	  console.log("what is upp"+$scope.eventCart.tickets[index].howMany );
+		if ($scope.eventCart.tickets[index].howMany<=$scope.eventCart.tickets[index].ticket.ticketQ) {
 	  $scope.updateSum();
 		} else {
-		$scope.ticketCart[index].howMany--;
+		$scope.eventCart.tickets[index].howMany--;
 	 }//else 
 	}//cartplus
 	
    $scope.cartMinus = function(index) {	 
-   if ($scope.ticketCart[index].quantity>0) {	
- $scope.ticketCart[index].howMany--;   
+   if ($scope.eventCart.tickets[index].quantity>0) {	
+          $scope.eventCart.tickets[index].howMany--;   
 	  	  $scope.updateSum();
 	  }//else
-	}//cartMinus
+	}//cartMinus */
 	
 	$scope.updateSum = function() {		
-		console.log("the shopping cart is ", $scope.ticketCart);
-		console.log("the event tickets are ", $scope.event.eventTickets);
-		for (var i=0;i<$scope.ticketCart.length;i++) {
-			if ($scope.ticketCart[i].howMany===undefined) {
+		//console.log("the shopping cart is ",$scope.eventCart.tickets);
+		//console.log("the event tickets are ", $scope.event.eventTickets);
+		for (var i=0;i<$scope.eventCart.tickets.length;i++) {
+			if ($scope.eventCart.tickets[i].howMany===undefined) {
 				alert("cannot add that many tickets");
-				$scope.ticketCart[i].howMany = $scope.event.eventTickets[i].ticketQ;				
+				$scope.eventCart.tickets[i].howMany = $scope.event.eventTickets[i].ticketQ;				
 			}//if cannot purchase that many 
 		}//for 		
 			$scope.ticketSum = 0;
-			for (i=0;i<$scope.ticketCart.length;i++) {				
-				if ($scope.ticketCart[i].howMany>0) {
-				$scope.ticketSum+= $scope.ticketCart[i].ticketPrice*$scope.ticketCart[i].howMany;
+			for (i=0;i<$scope.eventCart.tickets.length;i++) {				
+				if ($scope.eventCart.tickets[i].howMany>0) {
+				$scope.ticketSum+= $scope.eventCart.tickets[i].ticketPrice*$scope.eventCart.tickets[i].howMany;
 				}//if ticket sum is greater than 0 somehow(user bruteforcing negative value
 			}//for 		
 			console.log("the new sum is ", $scope.ticketSum);
 	} //update sum to update any changes made to ticket quantities
 
 	$scope.removeFromCart = function(index) {
-	 $scope.ticketCart.splice(index, 1);
+	 $scope.eventCart.tickets.splice(index, 1);
 	 $scope.updateSum();
 	}//remove from cart
 	
   $scope.checkout = function() {
-	  console.log("final checkout",$scope.ticketCart);
-	  for (var i=0;i<$scope.ticketCart.length;i++) {
-		  if ($scope.ticketCart[i].howMany<=0) {
-			  $scope.ticketCart.splice(i,1);
+	  console.log("final checkout",$scope.eventCart.tickets);
+	  for (var i=0;i<$scope.eventCart.tickets.length;i++) {
+		  if ($scope.eventCart.tickets[i].howMany<=0) {
+			  $scope.eventCart.tickets.splice(i,1);
 		  }//if
-	  }//for cleaning out empty entries	 	  
-	  
-	  purchaseService.saveCart($rootScope.currentUser, $scope.ticketCart).then(function(result){
-		  console.log("ive saved cart for ", $rootScope.currentUser);
+	  }//for cleaning out empty entries	
+ 	  
+	  //get  the cart at this stage!!!!!!!!!!!!!!!!!!!!!!! TODO
+	 
+	  purchaseService.getCart($rootScope.currentUser).then(function(result){
+		        console.log("result before updating the cart", result);
+				if (result) {				
+                for (var i=0;i<result.length;i++) {
+					if (result[i].organizer===$scope.eventCart.organizer) {
+						for (var j=0;j<$scope.eventCart.length;j++) {
+							result[i].tickets.push($scope.eventCart.tickets[j]);
+							console.log("after pushed", results[i].tickets);
+						}//for filling existing org ticets with newer ones
+					}//if organizer is already on the cart 
+				}//for 				
+				result.push($scope.eventCart);
+				purchaseService.saveCart($rootScope.currentUser, result).then(function(result2){
+		        //console.log("ive saved cart for ", $rootScope.currentUser);
 				$timeout(function () {
-              $location.path('/cart');
-            }, 2000);
-			});			   
+                 $location.path('/cart');
+                }, 2000);
+			  });		
+				} 
+				else {
+				  var finalCart = [];
+                  finalCart.push($scope.eventCart);
+	              purchaseService.saveCart($rootScope.currentUser, finalCart).then(function(result2){
+		          //console.log("ive saved cart for ", $rootScope.currentUser);
+				  $timeout(function () {
+                   $location.path('/cart');
+                  }, 2000);
+			    });						 
+			   }								
+			});		
+	  		   
 	  
 	  //$state.go('/cart');
 	//TODO: check that the event has said number of tickets available. if it does, connect to socket and reserve tickets
@@ -1157,6 +1190,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 
   $scope.selectedItemChanged = function (selectedOrganizer) {
     console.log('you picked option:', selectedOrganizer );
+	$scope.selectedOrganizer = selectedOrganizer;
 	createService.getEventsByOrganizer(selectedOrganizer._id).then(function(result){
 		//console.log("organizer's events", result);
 		$scope.events = result;
@@ -1281,19 +1315,19 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
   };
   
   var config = require('../config.js');
-  var merchKey = config.MERCHANT_API_KEY;
+  var merchKey = config.MERCHANT_PRIVATE_API_KEY;
   var mcc = config.MERCHANT_MCC;
   //console.log("merchant key is "+merchKey+" and mcc is "+mcc);
   $scope.createMerchant = function() {
 	  var mockMerch = {
-		  "isNew": '0',
+		  "isNew": "0",
 		  "established":"20101020",
 		  "annualCCSales": "100000",
 		  "mcc": mcc,
 		  "status":"1", 
 	  }
 	  var mockEntity = {
-          "name": "Lockhead Martin",		  
+          "name": "Real OG Kush 2",		  
 		  "type":"1",
 		  "address1": "123 North 12 St",
 		  "city": "Miami",
@@ -1334,12 +1368,105 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
             -d members[0][dlstate]="NY" */
 			//console.log("mcc is"+mcc);
 	merchService.createMerchant(merchKey, mockEntity, mockMembers, mockMerch).then(function(response){
-		  console.log("merchant controller response is", response);
+		  //console.log("merchant controller response is", response.response.data[0]);
+		  //console.log("merhcant id is "+response.response.data[0].id);
+		  $scope.selectedOrganizer.merchantId = response.response.data[0].id;		  
+		  orService.updateOrganizer($scope.selectedOrganizer).then(function(response){
+			  console.log("updated organizer object ",response);
+		  });
 	  });	  
 	  /*merchService.createMerchat(key, mcc, $scope.entity, $scope.merchant, $scope.bank, $scope.owner).then(function(response){
 		  console.log("merchant controller response is", response);
 	  });*/
   };
-  $scope.createMerchant();
+  //$scope.createMerchant();
 }]);
-},{"../config.js":1}]},{},[2,3,4,5]);
+},{"../config.js":1}],6:[function(require,module,exports){
+app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window', '$stateParams', '$state', '$timeout', '$location',
+	function (purchaseService,$rootScope, $scope, $window, $stateParams, $state, $timeout, $location) {
+		this.$onInit = function() {
+			//localStorage.removeItem('dankCart');// PANIC button			
+			console.log("rootScope", $rootScope.currentUser);
+			var config = require('../config.js');
+            Payfields.config.apiKey = config.MERCHANT_PUBLIC_API_KEY;
+			console.log('key?',Payfields.config.apiKey);
+			purchaseService.getCart($rootScope.currentUser).then(function(result){
+				if (result) {
+				$scope.dankCart = result;				
+				} else {
+					$scope.dankCart = [];					
+				}				
+				$scope.showCheckout = false;
+				getDankCartTotal();
+			});						
+		}//onInit 
+		/*$scope.showTickets = function () {
+			console.log("Ticketss", $scope.eventTickets);
+		}*/// ???
+		$scope.remove = function (merchantIndex, ticketIndex) {
+			console.log("tickets to be spliced", $scope.dankCart[merchantIndex].tickets);
+			if($scope.dankCart[merchantIndex].tickets.length>0) {
+			 $scope.dankCart[merchantIndex].tickets.splice(ticketIndex, 1);
+             if ($scope.dankCart[merchantIndex].tickets.length===0){
+				 $scope.dankCart.splice(merchantIndex, 1);
+				 console.log("cart after merchant splice",$scope.dankCart);
+			 }	//if that ticket cart is empty			 
+			 purchaseService.saveCart($rootScope.currentUser, $scope.dankCart).then(function(result){
+			     console.log("updated!");
+				 getDankCartTotal();
+			});			
+			}
+		}
+		$scope.clear = function () {
+			console.log("removing", $scope.dankCart);	
+			$scope.dankCart = [];
+			purchaseService.saveCart($rootScope.currentUser, $scope.dankCart).then(function(result){
+				console.log("cleared");
+				$scope.dankCartTotal = 0;
+			});			
+			
+		}
+		
+		function getDankCartTotal() {
+			var total = 0;
+			console.log("cart now", $scope.dankCart);
+			if ($scope.dankCart.length>0) {
+				for (var i=0;i<$scope.dankCart.length;i++) {
+					for (var j=0;j<$scope.dankCart[i].tickets.length;j++) 
+					{
+						total+= $scope.dankCart[i].tickets[j].howMany*$scope.dankCart[i].tickets[j].ticketPrice;
+					}//for looping tickets 
+				}//for looping merchants
+			}//if
+			$scope.dankCartTotal = total;
+		}
+		function getMerchantSum(tickets) {
+			var sum = 0;
+			for (var i=0;i<tickets.length;i++) {
+				sum+=tickets[i].howMany*tickets[i].ticketPrice;
+			}//for 
+			console.log("merchant sum to be charged", sum);
+			return sum;
+		}//getMerchantSum 
+		
+		$scope.checkout = function(merchant) {
+			console.log("merhcant", merchant);			
+			$scope.showCheckout = true;
+			Payfields.config.merchant = merchant.merchantId;
+			Payfields.config.amount = getMerchantSum(merchant.tickets);
+			// get information about the organizer here
+		}//checkout
+		$scope.pay = function(){
+			console.log("attempting payment");
+			Payfields.submit();
+		}//pay
+		//console.log("control payfields?", Payfields.config.amount);
+		/*$scope.buyTickets = function(){
+			purchaseService.buyCart($scope.dankCart, ).then(function(err, res){
+				console.log("purchased!");
+			}) //cb 
+			console.log('buying tickets');
+		}*/
+
+	}]);
+},{"../config.js":1}]},{},[2,3,4,5,6]);

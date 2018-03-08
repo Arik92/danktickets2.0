@@ -1,3 +1,67 @@
+/*PAYFRAMES*/
+.form-row {
+      height: 73px;
+      width: 300px;
+    }
+.address-row {
+      height: 438px;
+      width: 300px;
+    }
+	 #button {
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      width: 150px;
+      outline: none;
+      height: 30px;
+      background-color: rgb(69,67,67);
+      color: white;
+    }
+/*PAYFRAMES*/
+/* Ticket Modal */
+
+#cart-register-modal .modal-dialog {
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(-100%);
+  margin-bottom: 200px;
+  display: block;
+    position: sticky;
+}
+
+#cart-register-modal .modal-header {
+  text-align: center;
+  font-weight: bold;
+}
+
+#cart-register-modal .cart-info {
+  /*display: flex;
+  justify-content: space-between; */
+  border: solid 1px #424242;
+  padding: 1rem;
+  border-left: 14px #673AB7 solid;
+  margin: 0 2rem 2rem;
+  box-shadow: 3px 4px #424242;
+}
+
+#cart-register-modal .modal-footer {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */ 
+} 
+
+
+#cart-register-modal .footer-ticket-details {
+  display: flex;
+}
+
+#cart-register-modal .footer-ticket-details .ticket-quantity {
+  margin-right: 2rem;
+}
+
+/*modal chnges*/
+
 .checkout-page-container {
   /* max-width: 960px; */
   margin: 0 auto;

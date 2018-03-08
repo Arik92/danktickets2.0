@@ -307,7 +307,7 @@
 			   <input type="radio" ng-model="bank.primary" value="true"> Yes
                <input type="radio" ng-model="bank.primary" value="false"> No              
              </div>			   
-           </div>
+           </div>		  
         </div>
 
         <div class="col-sm-4 col-sm-offset-1 od-upload-container">
@@ -357,9 +357,15 @@
             <input type="email" class="form-control" ng-model="owner.email" placeholder="john.doe@gmail.com">
           </div>			   
           </form>
-        </div>
-      </div>
+        </div>		
+      </div>	  
     </div>
+	<div class="od-content">	  
+        <div class="col-sm-5 col-sm-offset-1">	
+        		<button type="submit" ng-click="reset()" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:33%;background-color:transparent;color:black">Reset</button>
+				<button type="submit" ng-click="createMerchant()" class="hvr-bounce-to-right my-btn" style="margin: 10px; font-size:20px;padding: 6px 0px; width:33%;background-color:black;color:white">Submit</button>
+		</div>
+	</div>
   </section>
 
 

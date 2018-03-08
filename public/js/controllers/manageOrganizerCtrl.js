@@ -84,6 +84,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 
   $scope.selectedItemChanged = function (selectedOrganizer) {
     console.log('you picked option:', selectedOrganizer );
+	$scope.selectedOrganizer = selectedOrganizer;
 	createService.getEventsByOrganizer(selectedOrganizer._id).then(function(result){
 		//console.log("organizer's events", result);
 		$scope.events = result;
@@ -208,19 +209,19 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
   };
   
   var config = require('../config.js');
-  var merchKey = config.MERCHANT_API_KEY;
+  var merchKey = config.MERCHANT_PRIVATE_API_KEY;
   var mcc = config.MERCHANT_MCC;
   //console.log("merchant key is "+merchKey+" and mcc is "+mcc);
   $scope.createMerchant = function() {
 	  var mockMerch = {
-		  "isNew": '0',
+		  "isNew": "0",
 		  "established":"20101020",
 		  "annualCCSales": "100000",
 		  "mcc": mcc,
 		  "status":"1", 
 	  }
 	  var mockEntity = {
-          "name": "Lockhead Martin",		  
+          "name": "Real OG Kush 2",		  
 		  "type":"1",
 		  "address1": "123 North 12 St",
 		  "city": "Miami",
@@ -261,11 +262,16 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
             -d members[0][dlstate]="NY" */
 			//console.log("mcc is"+mcc);
 	merchService.createMerchant(merchKey, mockEntity, mockMembers, mockMerch).then(function(response){
-		  console.log("merchant controller response is", response);
+		  //console.log("merchant controller response is", response.response.data[0]);
+		  //console.log("merhcant id is "+response.response.data[0].id);
+		  $scope.selectedOrganizer.merchantId = response.response.data[0].id;		  
+		  orService.updateOrganizer($scope.selectedOrganizer).then(function(response){
+			  console.log("updated organizer object ",response);
+		  });
 	  });	  
 	  /*merchService.createMerchat(key, mcc, $scope.entity, $scope.merchant, $scope.bank, $scope.owner).then(function(response){
 		  console.log("merchant controller response is", response);
 	  });*/
   };
-  $scope.createMerchant();
+  //$scope.createMerchant();
 }]);
