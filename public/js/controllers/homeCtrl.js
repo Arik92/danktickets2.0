@@ -1,7 +1,7 @@
 app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$rootScope', '$scope', '$http', '$window', '$location','$state', function (createService, dankAdService, linkService, $rootScope, $scope, $http, $window, $location, $state) {
 
   this.$onInit = function() {
-    console.log("hello from hoe ctrl");
+    //console.log("hello from hoe ctrl");
     homeEventsPrep();
     $scope.socialLinks = linkService.socialLinks;
     $scope.dummyEvents = createService.dummyEvents;
@@ -14,7 +14,7 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
       date: 'Friday, January 26, 7:00 PM',
       location: 'Sherman Oaks, CA'
     }
-    console.log($scope.events);
+    //console.log($scope.events);
     $scope.upcomingFlag = true;
     $scope.localFlag = false;
   }

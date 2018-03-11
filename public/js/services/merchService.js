@@ -20,7 +20,7 @@ app.factory('merchService', ['$http', function ($http) {
 	  },//data 
      }
     return $http(req).then(function (result) {
-      //console.log("service result");
+      //console.log("service result", result);
       return result.data;
     }, function (error) {
       console.error(error);

@@ -10,7 +10,8 @@ var profileSchema = new Schema({
   website: String,
   facebook: String,
   twitter: String,
-  instagram: String
+  instagram: String,
+  merchantId: String,
 });
 
 var profile = mongoose.model("Profile", profileSchema);
