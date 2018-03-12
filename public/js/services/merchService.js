@@ -7,7 +7,8 @@ app.factory('merchService', ['$http', function ($http) {
       url: 'https://test-api.splashpayments.com/merchants',	    
       headers: {
       'Content-Type': 'application/json',      
-	  'APIKEY': key	  
+	  'APIKEY': key,
+      'Authorization': undefined	  
       },
       data: { 
 	      "new": merchant.isNew,
