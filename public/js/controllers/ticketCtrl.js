@@ -1,11 +1,10 @@
 app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window', '$stateParams', '$state', '$timeout', '$location',
 	function (purchaseService,$rootScope, $scope, $window, $stateParams, $state, $timeout, $location) {
-		this.$onInit = function() {
+		this.$onInit = function() {			
 			//localStorage.removeItem('dankCart');// PANIC button			
-			console.log("rootScope", $rootScope.currentUser);
+			//console.log("rootScope", $rootScope.currentUser);
 			var config = require('../config.js');
-            Payfields.config.apiKey = config.MERCHANT_PUBLIC_API_KEY;
-			console.log('key?',Payfields.config.apiKey);
+            Payfields.config.apiKey = config.MERCHANT_PUBLIC_API_KEY;			
 			purchaseService.getCart($rootScope.currentUser).then(function(result){
 				if (result) {
 				$scope.dankCart = result;				
@@ -13,6 +12,52 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 					$scope.dankCart = [];					
 				}				
 				$scope.showCheckout = false;
+				Payfields.fields = [
+    {
+      type: "number",
+      element: "#number",
+    },
+    {
+      type: "cvv",
+      element: "#cvv",
+    },
+    {
+      type: "name",
+      element: "#name",
+    },
+    {
+      type: "address",
+      element: "#address",
+    },
+    {
+      type: "expiration",
+      element: "#expiration",
+    }
+  ];  
+  Payfields.customizations = {
+    style: {
+      // All address fields class.
+      ".address-input": {
+        borderColor: "rgb(119,136,153)",
+        borderStyle: "solid",
+        borderBottomWidth: "1px"
+      },
+      // All fields
+      ".input": {
+        borderColor: "rgb(69,67,67)",
+        borderStyle: "solid",
+        borderBottomWidth: "1px"
+      },
+      // All error spans
+      ".form-error": {
+        color: "rgb(255, 0, 128)"
+      },
+      // Address error spans
+      ".address-form-error": {
+        color: "rgb(0,139,139)"
+      }
+    }
+  };    
 				getDankCartTotal();
 			});						
 		}//onInit 
@@ -61,13 +106,14 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 			for (var i=0;i<tickets.length;i++) {
 				sum+=tickets[i].howMany*tickets[i].ticketPrice;
 			}//for 
+			sum*=100;// converting from cents to dollars
 			console.log("merchant sum to be charged", sum);
 			return sum;
 		}//getMerchantSum 
 		
 		$scope.checkout = function(merchant) {
-			console.log("merhcant", merchant);			
-			$scope.showCheckout = true;
+			console.log("merhcant", merchant); 
+			$scope.showCheckout = true;		
 			Payfields.config.merchant = merchant.merchantId;
 			Payfields.config.amount = getMerchantSum(merchant.tickets);
 			// get information about the organizer here

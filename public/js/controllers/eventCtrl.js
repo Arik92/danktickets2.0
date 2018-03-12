@@ -163,22 +163,22 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		  if ($scope.eventCart.tickets[i].howMany<=0) {
 			  $scope.eventCart.tickets.splice(i,1);
 		  }//if
-	  }//for cleaning out empty entries	
- 	  
-	  //get  the cart at this stage!!!!!!!!!!!!!!!!!!!!!!! TODO
-	 
+	  }//for cleaning out empty entries	 
 	  purchaseService.getCart($rootScope.currentUser).then(function(result){
-		        console.log("result before updating the cart", result);
+                var organizerFlag = false;		  
+				console.log("event cart is", $scope.eventCart);
 				if (result) {				
-                for (var i=0;i<result.length;i++) {
-					if (result[i].organizer===$scope.eventCart.organizer) {
-						for (var j=0;j<$scope.eventCart.length;j++) {
-							result[i].tickets.push($scope.eventCart.tickets[j]);
-							console.log("after pushed", results[i].tickets);
+                for (var i=0;i<result.length;i++) {		                    			
+					if (result[i].organizer.localeCompare($scope.eventCart.organizer)===0) {						
+						for (var j=0;j<$scope.eventCart.tickets.length;j++) {
+							result[i].tickets.push($scope.eventCart.tickets[j]);		
+                            organizerFlag = true;							
 						}//for filling existing org ticets with newer ones
 					}//if organizer is already on the cart 
 				}//for 				
-				result.push($scope.eventCart);
+				 if (!organizerFlag) {
+					 result.push($scope.eventCart);
+				 }
 				purchaseService.saveCart($rootScope.currentUser, result).then(function(result2){
 		        //console.log("ive saved cart for ", $rootScope.currentUser);
 				$timeout(function () {
