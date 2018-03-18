@@ -40,7 +40,7 @@ app.factory('authService', ['$http', 'authToken', function($http, authToken){
 
   //authService.isLoggedIn()
   authFactory.isLoggedIn = function() {
-    console.log('hello from isLoggedIn authFactory');
+    //console.log('hello from isLoggedIn authFactory');
     if (authToken.getToken()) {
       return true;
     } else {

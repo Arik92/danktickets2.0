@@ -13,8 +13,7 @@ app.factory('createService', ['$http', function ($http) {
 
   var getEvents = function () {
     return $http.get('/events').then(function (result) {
-      console.log("result from create service: ");
-      console.log(result.data);
+      //console.log("result from create service: ", result.data);     
       return result.data;
     }, function (error) {
       console.error(error);
@@ -24,7 +23,7 @@ app.factory('createService', ['$http', function ($http) {
   // Do they want to view past events?
 
   var getEventsByOwner = function (id) {
-    console.log("id by service is", id);
+    //console.log("id by service is", id);
     return $http.get('/events/findByOwner/' + id)
       .then(function (response) {
         return response.data;
@@ -44,7 +43,7 @@ app.factory('createService', ['$http', function ($http) {
 
   var postEvent = function (event) {
     return $http.post('/events', event).then(function (result) {
-      console.log("service result");
+      //console.log("service result");
       return result.data;
     }, function (error) {
       console.error(error);

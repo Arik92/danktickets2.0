@@ -2,10 +2,10 @@ app.controller('footerCtrl', ['linkService', '$scope', function (linkService, $s
   
 
     this.$onInit = function() {
-      console.log("hello from footer ctrl");
+      //console.log("hello from footer ctrl");
       $scope.socialLinks = linkService.socialLinks;
       $scope.footerLinks = linkService.footerLinks;
-      console.log($scope.socialLinks);
+      //console.log($scope.socialLinks);
     }
 
 

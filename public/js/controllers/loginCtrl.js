@@ -8,7 +8,7 @@ app.controller('loginCtrl', ['authService', 'userService', '$timeout', '$locatio
    $scope.showCreation = false;
    if ($rootScope.currentUser) {
 	   userService.getUserByName($rootScope.currentUser).then(function(result){
-    console.log("user details: ",result);
+    //console.log("user details: ",result);
     $scope.navProfile = result;   
 	/*if ($scope.navProfile.profiles)	{
 		$scope.
@@ -22,7 +22,7 @@ app.controller('loginCtrl', ['authService', 'userService', '$timeout', '$locatio
   msg.loader = false;
   //video part 8 35:22 https://www.youtube.com/watch?v=fRPwKuIz8Os&t=1114s
   $rootScope.$on('fbLogin', function() {
-    console.log("I have reached fblogin event, and rootscope current fb user is", $rootScope.currentUser);
+    //console.log("I have reached fblogin event, and rootscope current fb user is", $rootScope.currentUser);
     if ($rootScope.currentUser) {
         msg.username =$rootScope.currentUser;
       }
@@ -30,7 +30,7 @@ app.controller('loginCtrl', ['authService', 'userService', '$timeout', '$locatio
   });
 
   $rootScope.$on('$locationChangeStart', function() {
-    console.log("I have reached logincrtl, and rootscope current fb user is", $rootScope.currentUser);
+    //console.log("I have reached logincrtl, and rootscope current fb user is", $rootScope.currentUser);
     if (authService.isLoggedIn()) {
 		authService.getUser().then(function(data) {
 		console.log("data ", data);
@@ -62,7 +62,7 @@ app.controller('loginCtrl', ['authService', 'userService', '$timeout', '$locatio
       } else {
         msg.username =$rootScope.currentUser;
 		userService.getUserByName($rootScope.currentUser).then(function(result){
-    console.log("user details: ",result);
+    //console.log("user details: ",result);
     $scope.navProfile = result;    
   }, function(err){
     throw (err)
