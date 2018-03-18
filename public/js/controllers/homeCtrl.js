@@ -7,7 +7,7 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
     $scope.dummyEvents = createService.dummyEvents;
     $scope.dummyAds = dankAdService.dummyAds;
     $scope.dummyBlogs = getDummyBlogs();
-    console.log($scope.dummyAds);
+    //console.log($scope.dummyAds);
     $scope.featuredDummyEvent = {
       imgURL: "../../img/wide-posters/cannabis-cup.png",
       name: 'Cannabis Cup',
@@ -77,7 +77,7 @@ app.controller('homeCtrl', ['createService', 'dankAdService', 'linkService', '$r
 
   function homeEventsPrep() {
     createService.getEvents().then(function (result) {
-      console.log("All events: ", result);
+      //console.log("All events: ", result);
       $scope.events = result;
     }, function (err) {
       throw (err)

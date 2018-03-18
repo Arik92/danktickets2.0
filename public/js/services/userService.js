@@ -8,7 +8,7 @@ app.factory('userService', ['$http', function($http){
 
   userFactory.getUserByName = function(userName) {
     return $http.get('/users/searchByName/'+userName).then(function(result){
-      console.log("result from the factory is", result);
+      //console.log("result from the factory is", result);
       return result.data;
     });
   };
