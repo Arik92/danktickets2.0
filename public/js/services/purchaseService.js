@@ -9,7 +9,7 @@ app.factory('purchaseService', ['$http', function($http){
   }//buyCart
   purchaseFactory.getCart = function(userId) {
 	return $http.get('/users/shoppingCart/'+userId).then(function(result){
-		console.log("cart from service", result);
+		console.log("cart from service", result.data);
 		return result.data;
 	}, function(error) {
 		throw (error);

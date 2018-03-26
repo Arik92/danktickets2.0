@@ -1,16 +1,19 @@
 var ticketSchema = new Schema({
-  event: { type: Schema.Types.ObjectId, ref:"Event" },  
-  type: String,
-  price: Number,
-  name: String,
-  isFree: Boolean
+  event_id: { type: Schema.Types.ObjectId, ref:"Event" },  
+  owner: { type: Schema.Types.ObjectId, ref:"User" },
+  ticketType: String,
+  ticketPrice: Number,
+  ticketName: String,
+  ticketQ: Number,
+  pci: String, // barcode string/number? TODO: find out how to store this
+  checkedIn: Boolean // was this ticket checked in. Another option is to splice
+  //it from the event purchased tickets array
+  //isFree: Boolean
   //seat?
   //id or serial number. aside from mongoID
-  description: String //NOTE: special notes to guests?
+  //description: String //NOTE: special notes to guests?
 });
-/* NOTE this model might need to be split: one side for the events so an event knows what type of possible tickets are there and
-  how many of each type are left.
-  The 'user' side wants to have 'ticket' references, each being an instance of a ticket object */
+
 
 var ticket = mongoose.model("Ticket", ticketSchema);
 module.exports = ticket;

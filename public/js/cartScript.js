@@ -8,7 +8,7 @@ Payfields.config.apiKey = "init";
   // the type of field and element needs to be passed. Values are optional
   // and those inputs will be filled with the values, they will be
   // disabled
-  Payfields.fields = [
+  /*Payfields.fields = [
     {
       type: "number",
       element: "#number",
@@ -53,7 +53,7 @@ Payfields.config.apiKey = "init";
         color: "rgb(0,139,139)"
       }
     }
-  };  
+  };  */
   /*$("#button").on("click", function(){
     // Disable the button to avoid multiple calls
     $(this).prop("disabled", true);
