@@ -1388,6 +1388,7 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 			//localStorage.removeItem('dankCart');// PANIC button			
 			var config = require('../config.js');
             Payfields.config.apiKey = config.MERCHANT_PUBLIC_API_KEY;			
+			console.log("user id ", $rootScope.currentUser);
 			purchaseService.getCart($rootScope.currentUser).then(function(result){
 				if (result) {
 				$scope.dankCart = result;				
@@ -1502,7 +1503,11 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 			return sum;
 		}//getMerchantSum 
 		
-		$scope.checkout = function(merchant) {			
+		$scope.checkout = function(merchant) {		
+            //console.log("merchant is", merchant);
+            $scope.purchasedTickets = merchant.tickets;	
+            console.log("purchased tickets ", $scope.purchasedTickets);
+			
 			//Payfields.appendIframe();
 			Payfields.reload();
 			console.log("Payfields is", PayFields);
@@ -1552,10 +1557,7 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
         color: "rgb(0,139,139)"
       }
     }
-  };                    */            
-            	
-               
-			console.log("merhcant", merchant); 
+  };                    */                          			
 			$scope.showCheckout = !$scope.showCheckout;	          		
 			Payfields.config.merchant = merchant.merchantId;
 			Payfields.config.amount = getMerchantSum(merchant.tickets);
@@ -1572,11 +1574,21 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
       $("#button").text("Success");
       $("#button").css(
       {"backgroundColor": "rgb(79,138,16)", "transition": "2s"}
+	  );
 	  // TODO: GET MERCHANT TICKET INFO
+	  
+	  for (var i=0;i<$scope.purchasedTickets.length;i++) {
+		  $scope.purchasedTickets[i].owner = $rootScope.currentUser;
+	  }//for imprinting purchaser
+	  //post tickets to collection on mongo 
+	  purchaseService.addTickets($scope.purchasedTickets).then(function(result){
+		 console.log("ticket addition result", result); 
+	  });
+	  
 	  // PRINT RECIPT
 	  // 
 	  
-     );
+     
 	}// payment success CB		
 	}]);
 },{"../config.js":1}]},{},[2,3,4,5,6]);

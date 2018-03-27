@@ -1,7 +1,7 @@
 app.factory('purchaseService', ['$http', function($http){
   purchaseFactory = {};
-  purchaseFactory.buyCart = function(dankcart, id){
-	  return $http.put('/events/buyTicket/'+id, dankCart).then(function(result){
+  purchaseFactory.addTickets = function(tickets){
+	  return $http.post('/tickets/', tickets).then(function(result){
 		  return result.data;
 	  }, function(error){
 		 throw (error); 

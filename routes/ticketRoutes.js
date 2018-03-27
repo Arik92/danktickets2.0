@@ -16,9 +16,9 @@ function toObjectId(string) {
 
 //  1. get all of an associated event's tickets
 router.get('/eventTickets/:id', function(req, res, next){
-  var idQuery = toObjectId(req.params.id);
+  var eventQuery = toObjectId(req.params.id);
   // populate owner field to get username and email
-  Ticket.find({event_id: organizerQuery}).populate('owner').exec(function(err, tickets){
+  Ticket.find({event_id: eventQuery}).populate('owner').exec(function(err, tickets){
     if (err) {
       console.error(err);
     } else {         	 
@@ -29,12 +29,13 @@ router.get('/eventTickets/:id', function(req, res, next){
 
 // 2. get all of a user's tickets
  router.get('/userTickets/:id', function(req, res, next){
-  var idQuery = toObjectId(req.params.id);
+  var userQuery = toObjectId(req.params.id);
   // might need to populate event
-  Ticket.find({owner: organizerQuery}).populate('event_id').exec(function(err, tickets){
+  Ticket.find({owner: userQuery}).populate('event_id').exec(function(err, tickets){
     if (err) {
       console.error(err);
     } else {         	 
+	  console.log("reached result route with", tickets);
       res.send(tickets);
     }
   })//exec()
@@ -46,21 +47,23 @@ router.post('/', function (req, res1, next) {
  var tempTick;
  for (var i=0;i<req.body.length;i++) {
 	 tempTick = new Ticket(req.body[i]);
+	 console.log("pushing "+tempTick+" into docs");
 	 docs.push(tempTick);
  }//for initializing docs	 
  //var e = new Event(req.body);
- Ticket.insertMany(docs, function(error, result){
+ console.log("request body: ", req.body);
+ Ticket.insertMany(req.body, function(error, result){
  if (error) {
  console.log("reached error route");
  console.log(error);
   } else {
-    console.log("reached result route");
+    console.log("added tickets? result is", result);
     // res.send(result);
     res1.send(result);
     }//else
   });
  
- e.save(function(error, result){
+ /*e.save(function(error, result){
  if (error) {
  console.log("reached error route");
  console.log(error);
@@ -69,7 +72,7 @@ router.post('/', function (req, res1, next) {
     // res.send(result);
     res1.send(result);
     }//else
-  });
+  }); */
 })//regular uploads(no pic provided)
 
 router.delete('/:id',function(req,res){

@@ -96,7 +96,7 @@ var Event = require("./models/eventmodel");
   var Event = require("./models/eventmodel");
   var currDate = new Date();
   var currSec = currDate.getTime();
-  console.log("current time in milliseconds", currSec);
+  //console.log("current time in milliseconds", currSec);
   Event.update({$and: [{"endTime": {$lt: currSec}},{"ongoing": true}]},{$set: {"ongoing": false}},{multi: true} ,function(err, events){
 	  if (err) {
 		  throw (err);

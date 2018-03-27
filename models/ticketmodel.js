@@ -1,6 +1,12 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var Event = require("./eventmodel");
+var User = require("./usermodel");
+
 var ticketSchema = new Schema({
-  event_id: { type: Schema.Types.ObjectId, ref:"Event" },  
+  eventId: { type: Schema.Types.ObjectId, ref:"Event" },  
   owner: { type: Schema.Types.ObjectId, ref:"User" },
+  title: String,
   ticketType: String,
   ticketPrice: Number,
   ticketName: String,
