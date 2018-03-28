@@ -3,18 +3,13 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 		this.$onInit = function() {			
 			//localStorage.removeItem('dankCart');// PANIC button			
 			var config = require('../config.js');
-            Payfields.config.apiKey = config.MERCHANT_PUBLIC_API_KEY;			
-			console.log("user id ", $rootScope.currentUser);
+            Payfields.config.apiKey = config.MERCHANT_PUBLIC_API_KEY;						
 			purchaseService.getCart($rootScope.currentUser).then(function(result){
 				if (result) {
 				$scope.dankCart = result;				
 				} else {
 					$scope.dankCart = [];					
-				}						
-				//Payfields.reload();
-				//Payfields.restore();                
-                //console.log("errors?", Payfields.appendErrors());				
-				//Payfields.restore();
+				}										
 				Payfields.fields = [
     {
       type: "number",
@@ -62,16 +57,11 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
     } 
   }
 	            PayFields.appendIframe();
-                //console.log("errors?", Payfields.appendErrors());
-                //Payfields.restore();
-               //Payfields.reload();
+                //console.log("errors?", Payfields.appendErrors());               
                $scope.showCheckout = false;
 				getDankCartTotal();
 			});						
-		}//onInit 
-		/*$scope.showTickets = function () {
-			console.log("Ticketss", $scope.eventTickets);
-		}*/// ???
+		}//onInit 		
 		$scope.remove = function (merchantIndex, ticketIndex) {
 			console.log("tickets to be spliced", $scope.dankCart[merchantIndex].tickets);
 			if($scope.dankCart[merchantIndex].tickets.length>0) {
@@ -92,10 +82,8 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 			purchaseService.saveCart($rootScope.currentUser, $scope.dankCart).then(function(result){
 				console.log("cleared");
 				$scope.dankCartTotal = 0;
-			});			
-			
-		}
-		
+			});				
+		}		
 		function getDankCartTotal() {
 			var total = 0;
 			console.log("cart now", $scope.dankCart);
@@ -122,6 +110,7 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 		$scope.checkout = function(merchant) {		
             //console.log("merchant is", merchant);
             $scope.purchasedTickets = merchant.tickets;	
+			$scope.merchId = merchant.merchantId;
             console.log("purchased tickets ", $scope.purchasedTickets);
 			
 			//Payfields.appendIframe();
@@ -185,25 +174,27 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 			Payfields.submit();
 		}//pay
 	Payfields.onSuccess = function(response) {
-     // We will flash success response on button and clear the iframe
-     // inputs
+     // We will flash success response on button and clear the iframe inputs     
       $("#button").text("Success");
       $("#button").css(
       {"backgroundColor": "rgb(79,138,16)", "transition": "2s"}
-	  );
-	  // TODO: GET MERCHANT TICKET INFO
-	  
+	  );	  
 	  for (var i=0;i<$scope.purchasedTickets.length;i++) {
 		  $scope.purchasedTickets[i].owner = $rootScope.currentUser;
 	  }//for imprinting purchaser
 	  //post tickets to collection on mongo 
-	  purchaseService.addTickets($scope.purchasedTickets).then(function(result){
+	  purchaseService.addTickets($scope.purchasedTickets).then(function(result){		 
 		 console.log("ticket addition result", result); 
-	  });
-	  
-	  // PRINT RECIPT
-	  // 
-	  
-     
+		 for (i=0;i<$scope.dankCart.length;i++) {
+			 if ($scope.merchId===$scope.dankCart[i].merchantId) {
+				 $scope.dankCart.splice(i, 1);
+			 }// if splicing merchant after payment 
+		 }// 
+		 purchaseService.saveCart($rootScope.currentUser, $scope.dankCart).then(function(result){
+			     //console.log("spliced the cart!");
+				 getDankCartTotal();
+			});	
+	  });	  
+	  // PRINT RECIPT     
 	}// payment success CB		
 	}]);

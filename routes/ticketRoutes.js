@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Ticket = require("../models/ticketmodel");
 var User = require("../models/usermodel");
-//var Event = require("../models/eventmodel"); //do I want to populate an event? 
+var Event = require("../models/eventmodel"); //do I want to populate an event? 
 //var Profile = require("../models/") should I tie the ticket to an organizer or event, alongside the user
 
 function toObjectId(string) {
@@ -18,10 +18,11 @@ function toObjectId(string) {
 router.get('/eventTickets/:id', function(req, res, next){
   var eventQuery = toObjectId(req.params.id);
   // populate owner field to get username and email
-  Ticket.find({event_id: eventQuery}).populate('owner').exec(function(err, tickets){
+  Ticket.find({eventId: eventQuery}).populate('owner').exec(function(err, tickets){
     if (err) {
       console.error(err);
-    } else {         	 
+    } else {        
+	  console.log("reached result route with", tickets);	
       res.send(tickets);
     }
   })//exec()
@@ -31,7 +32,7 @@ router.get('/eventTickets/:id', function(req, res, next){
  router.get('/userTickets/:id', function(req, res, next){
   var userQuery = toObjectId(req.params.id);
   // might need to populate event
-  Ticket.find({owner: userQuery}).populate('event_id').exec(function(err, tickets){
+  Ticket.find({owner: userQuery}).populate('eventId').exec(function(err, tickets){
     if (err) {
       console.error(err);
     } else {         	 
