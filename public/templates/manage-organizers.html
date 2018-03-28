@@ -371,6 +371,46 @@
 
   <section ng-show="isSet(4)">
     <h3>{{ organizerTabs[4] }}</h3>
+	<div class="row">
+      <div class="col-md-3 col-md-offset-1">
+        <div class="form-group">
+          <label for="sel1">Select Current Events</label>
+          <select ng-model="selectedCurrAttends" 
+                  ng-options="ongoing as ongoing.title for ongoing in ongoingOrgEvents" 
+                  ng-change="selectedAttendingEventChanged(selectedCurrAttends)"
+                  class="form-control input-md">
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="sel1">Select Past Events</label>
+          <select ng-model="selectedPastAttends" 
+                  ng-options="past as past.title for past in pastOrgEvents" 
+                  ng-change="selectedAttendingEventChanged(selectedPastAttends)"
+                  class="form-control input-md">
+          </select>
+        </div>
+      </div>
+    </div>
+	<table class="table checkout-tbl" ng-repeat ="ticket in tickets track by $index">		  		  
+            <tr>
+              <th>Name</th>
+			  <th>Email</th>
+              <th >Ticket Type</th>
+              <th>Price(Howmany)</th>              
+              <th>
+                <b>Remove</b>
+              </th>
+			  <th><button class="btn btn-success tickets-btn" ng-click="checkout(merchant)">Checkout </button></th>
+            </tr>
+            <tr>              
+			  <td>{{ticket.owner.username}}</td>
+              <td >{{ticket.owner.email}}</td>			  
+              <td>{{ticket.ticketName}}</td>   
+              <td>{{ticket.ticketPrice}}</td>   			  
+            </tr>			
+          </table>
   </section>
 
   <section ng-show="isSet(5)">

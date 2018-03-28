@@ -106,11 +106,19 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 	  $scope.selectedStatEvent = evt;
 	  setDonutData();
 	  setPieData();
-  }//when event changes 
+  }//when event changes for STATS 
+  
+   $scope.selectedAttendingEventChanged = function(evt) {
+	  createService.getAttendees(evt._id).then(function(result){
+		  $scope.tickets = result;
+		  console.log("found tickets", $scope.tickets);
+	  })
+  }//when event changes for STATS 
+  //$scope.selectedAttendingEventChanged();
 
   //// ===================== tabs stuff ===========================
   function initTabs() {
-    $scope.tab = 3;
+    $scope.tab = 4;
     $scope.organizerTabs = ['Organizer Info', 'Stats', 'Manage Events', 'Merchant profile', 'Check Attendees', 'Organizer Settings'];
   }
 
@@ -156,8 +164,8 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 		  $scope.pieLabels[i] = $scope.selectedStatEvent.eventTickets[i].ticketType;
 		  $scope.pieData[i] = $scope.selectedStatEvent.eventTickets[i].ticketsSold;
 	  }	  
-	  $scope.donutData[0] = totalSold;
-	  $scope.donutData[1] = total;
+	  //$scope.donutData[0] = totalSold;
+	  //$scope.donutData[1] = total;
   }//setDonutData 
   $scope.donutLabels = ["sold", "available"];
   //$scope.barLabels = ["dank sesh", "chalice palace", "toker heaven", "sativa-sesh", "smoke break", "cali-greens", "tacos and titties"];
@@ -178,18 +186,15 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
   //// ===================== ng-quill stuff ===========================
   $scope.title = '';
   $scope.changeDetected = false;
-
   $scope.saveQuill = function() {
     var deltaContents = $scope.editor.getContents();
     //console.log(deltaContents);
     localStorage.setItem('deltaContents', JSON.stringify(deltaContents));
   }
-
   function getQuillDelta() {
     var deltaContents = JSON.parse(localStorage.getItem('deltaContents'));
     return deltaContents;
   }
-
   $scope.editorCreated = function (editor) {
       //console.log(editor);
       $scope.editor = editor;
@@ -207,7 +212,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
       console.log($scope.title);
       console.log('editor: ', editor, 'html: ', html, 'text:', text, 'delta:', delta, 'oldDelta:', oldDelta);
   };
-  
+  //////////////////////******************************** MERCHANT STUFF *******************************//////////////
   var config = require('../config.js');
   var merchKey = config.MERCHANT_PRIVATE_API_KEY;
   var mcc = config.MERCHANT_MCC;

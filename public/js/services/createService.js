@@ -19,8 +19,7 @@ app.factory('createService', ['$http', function ($http) {
       console.error(error);
       // throw (error);
     }) // add promise
-  } // get all current events. NOTE: In the future its possible to have event states like voutr. should that be wanted.
-  // Do they want to view past events?
+  } // get all current events. 
 
   var getEventsByOwner = function (id) {
     //console.log("id by service is", id);
@@ -40,6 +39,15 @@ app.factory('createService', ['$http', function ($http) {
         console.error(err);
       });
   }// getting events by a certain publisher
+  
+  var getAttendees = function (id) {    
+    return $http.get('/tickets/eventTickets/' + id)
+      .then(function (response) {
+        return response.data;
+      }, function (err) {
+        console.error(err);
+      });
+  }// getting tickets for a specific event
 
   var postEvent = function (event) {
     return $http.post('/events', event).then(function (result) {
@@ -67,9 +75,9 @@ app.factory('createService', ['$http', function ($http) {
     }) //promise callbacks
   } // delete an event
 
-  var getTickets = function (id) {
+  var getEventTickets = function (id) {
     return $http.get('/events/eventTickets/' + id).then(function (result) {
-      console.log("service result", result);
+      //console.log("service result", result);
       return result.data;
     }, function (error) {
       throw (error);
@@ -168,9 +176,10 @@ app.factory('createService', ['$http', function ($http) {
     getEventsByOwner: getEventsByOwner,
     updateEvent: updateEvent,
     deleteEvent: deleteEvent,
-    getEventById: getEventById,
-    getTickets: getTickets,
+    getEventById: getEventById,    
     generalSearch: generalSearch,
+	getEventTickets: getEventTickets,
+	getAttendees: getAttendees,
 	getEventsByOrganizer: getEventsByOrganizer
   };
 }]);

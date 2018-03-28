@@ -15,6 +15,7 @@ var router      = express.Router();
 var userRoutes  = require('./routes/userRoutes')(router); // why the router call?
 var eventRoutes = require('./routes/eventRoutes');
 var organizerRoutes = require('./routes/organizerRoutes');
+var ticketRoutes = require('./routes/ticketRoutes');
 var passport    = require('./models/passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
@@ -95,7 +96,7 @@ var Event = require("./models/eventmodel");
   var Event = require("./models/eventmodel");
   var currDate = new Date();
   var currSec = currDate.getTime();
-  console.log("current time in milliseconds", currSec);
+  //console.log("current time in milliseconds", currSec);
   Event.update({$and: [{"endTime": {$lt: currSec}},{"ongoing": true}]},{$set: {"ongoing": false}},{multi: true} ,function(err, events){
 	  if (err) {
 		  throw (err);
@@ -118,6 +119,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/events', eventRoutes);
 app.use('/users', userRoutes);
 app.use('/organizers', organizerRoutes);
+app.use('/tickets', ticketRoutes);
 
 //mongoose.connect(process.env.CONNECTION_STRING||"mongodb://localhost/dankTickets");
 

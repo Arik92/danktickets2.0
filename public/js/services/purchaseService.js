@@ -1,7 +1,7 @@
 app.factory('purchaseService', ['$http', function($http){
   purchaseFactory = {};
-  purchaseFactory.buyCart = function(dankcart, id){
-	  return $http.put('/events/buyTicket/'+id, dankCart).then(function(result){
+  purchaseFactory.addTickets = function(tickets){
+	  return $http.post('/tickets/', tickets).then(function(result){
 		  return result.data;
 	  }, function(error){
 		 throw (error); 
@@ -9,7 +9,7 @@ app.factory('purchaseService', ['$http', function($http){
   }//buyCart
   purchaseFactory.getCart = function(userId) {
 	return $http.get('/users/shoppingCart/'+userId).then(function(result){
-		console.log("cart from service", result);
+		console.log("cart from service", result.data);
 		return result.data;
 	}, function(error) {
 		throw (error);
