@@ -28,8 +28,8 @@ app.controller('profileCtrl',['userService','$scope','$window','$rootScope', fun
 
   //// ===================== tabs stuff ===========================
   function initTabs() {
-    $scope.tab = 0;    
-    $scope.profileTabs = ['Account Info', 'Password Reset', 'Credit/Debit Cards', 'Email Preferences', 'Close Account'];
+    $scope.tab = 1;    
+    $scope.profileTabs = ['Account Info','Purchase History', 'Password Reset', 'Credit/Debit Cards', 'Email Preferences', 'Close Account'];
   }
 
   $scope.setTab = function(newTab){

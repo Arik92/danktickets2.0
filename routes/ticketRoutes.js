@@ -18,7 +18,10 @@ function toObjectId(string) {
 router.get('/eventTickets/:id', function(req, res, next){
   var eventQuery = toObjectId(req.params.id);
   // populate owner field to get username and email
-  Ticket.find({eventId: eventQuery}).populate('owner').exec(function(err, tickets){
+  Ticket.find({eventId: eventQuery}).populate({
+	  path: 'owner',
+	  select: 'username email'
+	  }).exec(function(err, tickets){
     if (err) {
       console.error(err);
     } else {        
@@ -32,7 +35,11 @@ router.get('/eventTickets/:id', function(req, res, next){
  router.get('/userTickets/:id', function(req, res, next){
   var userQuery = toObjectId(req.params.id);
   // might need to populate event
-  Ticket.find({owner: userQuery}).populate('eventId').exec(function(err, tickets){
+  Ticket.find({owner: userQuery}).populate({
+	  path: 'eventId', 
+	  select: 'title startDateDisplay'
+	  }
+  ).exec(function(err, tickets){
     if (err) {
       console.error(err);
     } else {         	 

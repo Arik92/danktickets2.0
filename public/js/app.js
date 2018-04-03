@@ -1,10 +1,8 @@
 var app = angular.module('dankTickets', 
   ['ui.router', 'ui.carousel', 'ngAnimate', 'cmelo.angularSticky', 'ngMap', 'angularLoad', 'angularSlideables', 'chart.js', 'ngQuill']);
 
-
 app.config([ 'ngQuillConfigProvider', '$httpProvider', function (ngQuillConfigProvider, $httpProvider) {
-  $httpProvider.interceptors.push('authServiceInterceptors');
-  
+  $httpProvider.interceptors.push('authServiceInterceptors');  
   // ng-quill config
   var config = {
     modules: {
@@ -15,16 +13,12 @@ app.config([ 'ngQuillConfigProvider', '$httpProvider', function (ngQuillConfigPr
         // [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
         // [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
         // [{ 'direction': 'rtl' }],                         // text direction
-
         // [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
         [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
         [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
         [{ 'font': [] }],
         [{ 'align': [] }],
-
         // ['clean'],                                         // remove formatting button
-
         // ['link', 'image']                         // link and image, video
       ]
     },
@@ -76,6 +70,11 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       templateUrl: '/templates/ticket-cart.html',
       controller: 'ticketCtrl'
     })
+	/*.state('checkIn', {
+      url: '/checkIn/:ticketId',
+      templateUrl: '/templates/checkIn.html',
+      controller: 'checkInCtrl'
+    })*/ //When checking in through QR, they would go to this state
     .state('profile', {
       url: '/profile',
       templateUrl: '/templates/profile.html',

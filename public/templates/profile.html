@@ -134,6 +134,13 @@
 
   <!-- Other Sections -->
   <section ng-show="isSet(1)" class="left-aligned mobile-padder">
+    <h3 class="settings-section-header-left">Purchase history</h3>
+    <hr>
+    <div class="container">
+     <div>List of previously purchased tickets: </div>
+    </div>
+  </section>
+  <section ng-show="isSet(2)" class="left-aligned mobile-padder">
     <h3 class="settings-section-header-left">Password Reset</h3>
     <hr>
     <div class="password-container">
@@ -155,7 +162,7 @@
     </div>
   </section>
 
-  <section ng-show=isSet(2) class="left-aligned mobile-padder">
+  <section ng-show="isSet(3)" class="left-aligned mobile-padder">
     <h3 class="settings-section-header-left">Credit/Debit Cards</h3>
     <hr>
 
@@ -166,7 +173,7 @@
 
   </section>
 
-  <section ng-show="isSet(3)" class="left-aligned mobile-padder">
+  <section ng-show="isSet(4)" class="left-aligned mobile-padder">
     <h3 class="settings-section-header-left">Email Preferences</h3>
     <hr>
 
@@ -203,7 +210,7 @@
 
   </section>
 
-  <section ng-show="isSet(4)" class="left-aligned mobile-padder">
+  <section ng-show="isSet(5)" class="left-aligned mobile-padder">
     <h3 class="settings-section-header-left">Close Account</h3>
     <hr>
     <p>Thanks for using Dank Tickets. Sad to see you go.</p>

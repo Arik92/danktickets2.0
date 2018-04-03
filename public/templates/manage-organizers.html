@@ -393,18 +393,17 @@
         </div>
       </div>
     </div>
-	<table class="table checkout-tbl" ng-repeat ="ticket in tickets track by $index">		  		  
+	<table class="table checkout-tbl" >		  		  
             <tr>
               <th>Name</th>
 			  <th>Email</th>
               <th >Ticket Type</th>
-              <th>Price(Howmany)</th>              
-              <th>
-                <b>Remove</b>
-              </th>
+              <th>Price(Howmany)</th>
+              <th>Checked In</th>              
+              <th><b>Remove</b></th>			  
 			  <th><button class="btn btn-success tickets-btn" ng-click="checkout(merchant)">Checkout </button></th>
             </tr>
-            <tr>              
+            <tr ng-repeat ="ticket in tickets track by $index">              
 			  <td>{{ticket.owner.username}}</td>
               <td >{{ticket.owner.email}}</td>			  
               <td>{{ticket.ticketName}}</td>   

@@ -1,16 +1,12 @@
-app.controller('manageOrganizerCtrl', ['orService','createService','merchService' ,'$timeout', '$scope', '$rootScope', function (orService, createService, merchService, $timeout, $scope, $rootScope) {
-
-
+app.controller('manageOrganizerCtrl', ['orService','createService','merchService' , '$scope', '$rootScope', function (orService, createService, merchService, $scope, $rootScope) {
   // console.log("root scope usr", $rootScope.currentUser);
-
   this.$onInit = function() {
     checkUser();
     initTabs();
     initSocialForms();
     organizerPrep();
     // setImageCropStuff();    
-  }
-
+  };
   
   $scope.initUploader = function() {
 	  cloudinary.openUploadWidget({ cloud_name: 'newoldroad-com',
@@ -23,13 +19,16 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 	  sources: ['local', 'url', 'facebook', 'instagram', 'dropbox']
 	  }, 
       function(error, result) { 
-	  console.log(result);
+	  if (error) {
+		  throw (error);
+	  } else {
+		  console.log(result);
+	  }	  
 	  // for HTTPS $scope.previewImg = result.secure_url;
 	  $scope.previewImg = result[0].url;
 	$scope.$apply();	  
 	  });
-  }//initUploader
-  
+  };//initUploader  
 
   function checkUser() {
     $scope.isUserSignedIn = $rootScope.currentUser;
@@ -64,8 +63,8 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 		console.log("this organizer's current events",$scope.ongoingOrgEvents);
 	});
     }, function (err) {
-      throw (err)
-    })//GET request route 
+      throw (err);
+    });//GET request route 
   }
 
   function initSocialForms() {
@@ -75,12 +74,12 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
       { name: 'Snapchat', model: $scope.scInput },
       { name: 'Twitter', model: $scope.twitInput },
       { name: 'LinkedIn', model: $scope.liInput },
-    ]
+    ];
   }
   
   $scope.showOrg = function() {
 	  console.log("selected organizer", $scope.selectedOrganizer);
-  }
+  };
 
   $scope.selectedItemChanged = function (selectedOrganizer) {
     console.log('you picked option:', selectedOrganizer );
@@ -99,21 +98,21 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 		}//for 
 		$scope.setBarData($scope.ongoingOrgEvents);
 	});
-  }//when organizer changes 
+  };//when organizer changes 
   
   $scope.selectedStatEventChanged = function(evt) {
 	  console.log("selected event: ", evt);
 	  $scope.selectedStatEvent = evt;
 	  setDonutData();
 	  setPieData();
-  }//when event changes for STATS 
+  };//when event changes for STATS 
   
    $scope.selectedAttendingEventChanged = function(evt) {
 	  createService.getAttendees(evt._id).then(function(result){
 		  $scope.tickets = result;
 		  console.log("found tickets", $scope.tickets);
-	  })
-  }//when event changes for STATS 
+	  });
+  };//when event changes for STATS 
   //$scope.selectedAttendingEventChanged();
 
   //// ===================== tabs stuff ===========================
@@ -128,12 +127,9 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 
   $scope.isSet = function (tabNum) {
     return $scope.tab === tabNum;
-  }
+  };
   
-  //// ===================== chart stuff ===========================
-  function getRandomColor() {
-
-  }
+  //// ===================== chart stuff ===========================  
   $scope.setBarData = function(evts) {
 	   $scope.barData = [];
 	  $scope.barLabels = [];
@@ -145,7 +141,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 		  }// for event tickets 
 	  }//for evts 
 	  console.log("bar data", $scope.barData);
-  }//set bar data
+  };//set bar data
   setDonutData = function() {
 	  $scope.donutData = [];
 	  var totalSold = 0;
@@ -156,24 +152,22 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 	  }	  
 	  $scope.donutData[0] = totalSold;
 	  $scope.donutData[1] = total;
-  }//setDonutData 
+  };//setDonutData 
   setPieData = function() {
 	  $scope.pieData = [];
 	  $scope.pieLabels = [];	  
 	  for (var i=0;i<$scope.selectedStatEvent.eventTickets.length;i++) {
 		  $scope.pieLabels[i] = $scope.selectedStatEvent.eventTickets[i].ticketType;
 		  $scope.pieData[i] = $scope.selectedStatEvent.eventTickets[i].ticketsSold;
-	  }	  
-	  //$scope.donutData[0] = totalSold;
-	  //$scope.donutData[1] = total;
-  }//setDonutData 
+	  }	  	  
+  };//setDonutData 
   $scope.donutLabels = ["sold", "available"];
   //$scope.barLabels = ["dank sesh", "chalice palace", "toker heaven", "sativa-sesh", "smoke break", "cali-greens", "tacos and titties"];
   /*$scope.barData = [
     [65, 59, 80, 57, 96, 58, 85],
   ];*/
 
-  $scope.barColors = ['', 'orange', 'red', 'green', 'blue', 'lightgrey', ]
+  $scope.barColors = ['', 'orange', 'red', 'green', 'blue', 'lightgrey', ];
 
   $scope.barClick = function (points, evt) {
     console.log(points, evt);
@@ -190,7 +184,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
     var deltaContents = $scope.editor.getContents();
     //console.log(deltaContents);
     localStorage.setItem('deltaContents', JSON.stringify(deltaContents));
-  }
+  };
   function getQuillDelta() {
     var deltaContents = JSON.parse(localStorage.getItem('deltaContents'));
     return deltaContents;
@@ -224,7 +218,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 		  "annualCCSales": "100000",
 		  "mcc": mcc,
 		  "status":"1", 
-	  }
+	  };
 	  var mockEntity = {
           "name": "Real OG Kush 2",		  
 		  "type":"1",

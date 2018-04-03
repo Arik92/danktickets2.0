@@ -11,7 +11,7 @@ var profileSchema = new Schema({
   facebook: String,
   twitter: String,
   instagram: String,
-  merchantId: String,
+  merchantId: String  
 });
 
 var profile = mongoose.model("Profile", profileSchema);

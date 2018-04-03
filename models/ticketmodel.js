@@ -9,9 +9,9 @@ var ticketSchema = new Schema({
   title: String,
   ticketType: String,
   ticketPrice: Number,
-  ticketName: String,
-  ticketQ: Number,
+  ticketName: String,  
   pci: String, // barcode string/number? TODO: find out how to store this
+  ticketQ: Number,
   checkedIn: Boolean // was this ticket checked in. Another option is to splice
   //it from the event purchased tickets array
   //isFree: Boolean
