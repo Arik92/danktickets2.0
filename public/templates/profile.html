@@ -113,8 +113,7 @@
                 <input type="email" class="form-control" id="email" placeholder="email">
               </div>
             </div>
-          </div>
-  
+          </div>  
           <div class="row">
               <div class="form-group col-md-5 col-md-offset-1">
                 <label for="email">Zip/Postal Code</label>
@@ -126,7 +125,6 @@
               </div>
           </div>
         </div>
-
         <button class="btn btn-primary info-save-btn">Save</button>
       </form>
     </div>
@@ -135,10 +133,23 @@
   <!-- Other Sections -->
   <section ng-show="isSet(1)" class="left-aligned mobile-padder">
     <h3 class="settings-section-header-left">Purchase history</h3>
-    <hr>
-    <div class="container">
+    <hr>    
      <div>List of previously purchased tickets: </div>
-    </div>
+	 <table class="table checkout-tbl">		  		  
+            <tr>
+              <th>Event</th>
+			  <th>Date</th>
+              <th >Location</th>
+              <th>Attended(checked in)</th>                              
+            </tr>
+            <tr ng-repeat ="ticket in userTickets track by $index"> 
+              <td> <a ui-sref="event({id: ticket.eventId._id})">{{ticket.eventId.title}}</a></td>			
+			  <td>{{ticket.eventId.startDateDisplay}}</td>
+              <td><a href={{ticket.eventId.location.locationMapUrl}} target="_blank">{{ticket.eventId.location.venue_name}}</a></td>			  
+              <td>{{ticket.checkedIn}}</td>   			  
+            </tr>			
+          </table>
+    
   </section>
   <section ng-show="isSet(2)" class="left-aligned mobile-padder">
     <h3 class="settings-section-header-left">Password Reset</h3>

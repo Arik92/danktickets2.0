@@ -1,11 +1,10 @@
 app.factory('pdfService', [function(){
   var pdfService = {};
 
-  pdfService.printTickets = function(tickets) { //,userNAME optionally,
-  // OPTIONAL: get user's details through the userService, and serve that as its details 
-  // Also optinoal: after printing, add the tickets to the user's inventory?
+  pdfService.printTickets = function(tickets) { //,userNAME optionally,  
   // Recipt - Who bought it, for how much, user's name; etc'
-  //  
+    for (var i=0;i<tickets.length;i++) {
+      //var imgData = 'data:image/jpeg;base64,/'+tickets[i].imgName?;
       //var str = userName+'.pdf'; //optinoally name the reciept after the user. or after first ticket?
 	  var doc = new jsPDF();
 			//doc.text('Reciept for events by: '+ merchant.organizer+' for: ', 10, 10);			
@@ -15,9 +14,10 @@ app.factory('pdfService', [function(){
               " Price: " + ticket.ticketPrice +
 			  " Quantity: " + ticket.howMany)
              });
-            //doc.text('Hello world!', 10, 10);
-            doc.save('merchantTickets.pdf'); 	
-  }	  
+            //doc.text('Hello world!', 10, 10);            	
+	}//for printing ticets
+	doc.save('merchantTickets.pdf'); 
+  }//printing ticket array	  
 
   return pdfService;
 }]);

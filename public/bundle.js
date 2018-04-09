@@ -915,7 +915,6 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	//	initMap();		
 		$scope.dummyEvents = createService.dummyEvents;	
 		console.log($scope.dummyEvents);
-
 		// setMapSrc();
 	} //initialization  
 	
@@ -1515,24 +1514,14 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 	   var individualTickets = [];
 	  for (var i=0;i<$scope.purchasedTickets.length;i++) {
 		  $scope.purchasedTickets[i].owner = $rootScope.currentUser;
+		  $scope.purchasedTickets[i].merchantId = $scope.merchId;
 		  $scope.purchasedTickets[i].checkedIn = false;
-		  $scope.purchasedTickets[i].pci = '';
+		  $scope.purchasedTickets[i].imgName = '';
 		  for (var j=0;j<$scope.purchasedTickets[i].howMany;j++) {
 			  individualTickets.push($scope.purchasedTickets[i]);
 		     }//for 
-		   }//for init imprinting
-		   
-		 /* var currPurchase = {
-			  'owner': $rootScope.currentUser,
-			  'checkedIn'; false, 
-			  eventId: { type: Schema.Types.ObjectId, ref:"Event" },               
-              title: String,
-              ticketType: String,
-              ticketPrice: Number,
-              ticketName: $scope.purchasedTickets[i].ticketName,  
-              pci: '', // barcode string/number? TODO: find out how to store this			  
-		  }//initializing ticket module 
-		  individualTickets.push(currPurchase);*/	 
+		   }//for init imprinting// splitting to individual tickets		   
+		 
 	  purchaseService.addTickets(individualTickets).then(function(result){		 
 		 console.log("ticket addition result", result); 
 		 for (i=0;i<$scope.dankCart.length;i++) {

@@ -70,11 +70,11 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       templateUrl: '/templates/ticket-cart.html',
       controller: 'ticketCtrl'
     })
-	/*.state('checkIn', {
+	.state('checkIn', {
       url: '/checkIn/:ticketId',
       templateUrl: '/templates/checkIn.html',
       controller: 'checkInCtrl'
-    })*/ //When checking in through QR, they would go to this state
+    }) //When checking in through QR, they would go to this state
     .state('profile', {
       url: '/profile',
       templateUrl: '/templates/profile.html',

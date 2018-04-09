@@ -19,7 +19,6 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	//	initMap();		
 		$scope.dummyEvents = createService.dummyEvents;	
 		console.log($scope.dummyEvents);
-
 		// setMapSrc();
 	} //initialization  
 	

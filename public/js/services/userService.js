@@ -11,7 +11,13 @@ app.factory('userService', ['$http', function($http){
       //console.log("result from the factory is", result);
       return result.data;
     });
-  };
-
+  };//getting users details via ID
+  
+  userFactory.getUserTickets = function(userId) {
+	return $http.get('/tickets/userTickets/'+userId).then(function(result){
+      //console.log("result from the factory is", result);
+      return result.data;
+    });//cb 
+  }// get a user's purchased tickets 
   return userFactory;
 }]);

@@ -3,7 +3,11 @@ app.controller('profileCtrl',['userService','$scope','$window','$rootScope', fun
 		 console.log("user request", $rootScope.currentUser);
   userService.getUserByName($rootScope.currentUser).then(function(result){
     console.log("user details: ",result);
-    $scope.userProfile = result;    
+    $scope.userProfile = result;
+    userService.getUserTickets($rootScope.currentUser).then(function(result){
+	  $scope.userTickets = result;
+      console.log("found user tickets", $scope.userTickets);
+	  }); 
   }, function(err){
     throw (err)
   })//GET request route

@@ -1,16 +1,24 @@
 var express = require('express');
 var router = express.Router();
+var qrImage = require('qr-image');
+var fs = require('fs');
 var Ticket = require("../models/ticketmodel");
 var User = require("../models/usermodel");
 var Event = require("../models/eventmodel"); //do I want to populate an event? 
 //var Profile = require("../models/") should I tie the ticket to an organizer or event, alongside the user
+ var checkInURL;
+ if (process.env.NODE_ENV === 'production') {
+   checkInURL = "https://danktickets.herokuapp.com/checkIn/";
+  } else {
+   checkInURL = "http://localhost:8000/checkIn/";
+  }
 
 function toObjectId(string) {
 	var ObjectId = (require('mongoose').Types.ObjectId);
     return new ObjectId(string);
 } // var organizerQuery = toObjectId(req.params.id); use case example
 
-/* TODO:  So which functionalities do I want? 
+/* TODO:  
  4. delete ticket~. Not yet sure how and when
 */
 
@@ -37,7 +45,7 @@ router.get('/eventTickets/:id', function(req, res, next){
   // might need to populate event
   Ticket.find({owner: userQuery}).populate({
 	  path: 'eventId', 
-	  select: 'title startDateDisplay'
+	  select: 'title startDateDisplay location.venue_name location.'
 	  }
   ).exec(function(err, tickets){
     if (err) {
@@ -49,18 +57,24 @@ router.get('/eventTickets/:id', function(req, res, next){
   })//exec()
 }) // get tickets by event id 
 
-router.post('/', function (req, res1, next) {
- // INPUT: I assume at this point that req.body is an array of tickets already defined with all needed objectID's
+router.post('/', function (req, res1, next) {	
  var docs = [];
- var tempTick;
+ var tempTick; 
+ var currUrl;
  for (var i=0;i<req.body.length;i++) {
+	 currUrl = checkInURL;
 	 tempTick = new Ticket(req.body[i]);
+	 tempTick.imgName = "./public/img/qr/"+tempTick._id+".png";
+	 currURL = checkInURL+tempTick._id;
+	 qrImage
+     .image(currURL, {type:'png', size: 20})
+	 .pipe(fs.createWriteStream(tempTick.imgName));		
 	 console.log("pushing "+tempTick+" into docs");
 	 docs.push(tempTick);
  }//for initializing docs	 
  //var e = new Event(req.body);
- console.log("request body: ", req.body);
- Ticket.insertMany(req.body, function(error, result){
+ //console.log("request body: ", req.body);
+ Ticket.insertMany(docs, function(error, result){
  if (error) {
  console.log("reached error route");
  console.log(error);
@@ -82,7 +96,17 @@ router.post('/', function (req, res1, next) {
     }//else
   }); */
 })//regular uploads(no pic provided)
-
+router.put('/checkIn/:ticketId/:orgId', function(req, res) {	
+	var ticketQuery = toObjectId(req.params.ticketId);
+	Ticket.findOneAndUpdate({$and: [{_id: ticketQuery},{'merchantId': req.params.orgId}]},{$set: {'checkedIn': true}} ,function(err, ticket){
+	if (err) {
+      console.log(err);
+      res.send(err);
+	 }  else {   
+      res.send(ticket);
+		}
+	});
+})//tickets check in route for scanning tickets 
 router.delete('/:id',function(req,res){
   //TODO: delete associated image. make sure the image address is passed
   Event.findOneAndRemove({ _id: req.params.id }, function(err, event) {
