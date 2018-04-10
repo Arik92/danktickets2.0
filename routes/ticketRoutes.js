@@ -45,7 +45,7 @@ router.get('/eventTickets/:id', function(req, res, next){
   // might need to populate event
   Ticket.find({owner: userQuery}).populate({
 	  path: 'eventId', 
-	  select: 'title startDateDisplay location.venue_name location.'
+	  select: 'title startDateDisplay location.venue_name location.locationMapUrl'
 	  }
   ).exec(function(err, tickets){
     if (err) {
@@ -64,11 +64,11 @@ router.post('/', function (req, res1, next) {
  for (var i=0;i<req.body.length;i++) {
 	 currUrl = checkInURL;
 	 tempTick = new Ticket(req.body[i]);
-	 tempTick.imgName = "./public/img/qr/"+tempTick._id+".png";
+	 tempTick.imgName = "/img/qr/"+tempTick._id+".png";
 	 currURL = checkInURL+tempTick._id;
 	 qrImage
      .image(currURL, {type:'png', size: 20})
-	 .pipe(fs.createWriteStream(tempTick.imgName));		
+	 .pipe(fs.createWriteStream('./public'+tempTick.imgName));		
 	 console.log("pushing "+tempTick+" into docs");
 	 docs.push(tempTick);
  }//for initializing docs	 
