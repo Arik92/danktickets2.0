@@ -15,12 +15,13 @@ var ticketSchema = new Schema({
   qrCode: String, 
   imgName: String,  
   //pci: String, // barcode string/number? TODO: find out how to store this
-  ticketQ: Number,
+  //ticketQ: Number, this will represent a single ticket
   checkedIn: Boolean // was this ticket checked in. Another option is to splice
   //it from the event purchased tickets array
   //isFree: Boolean
   //seat?
   //id or serial number. aside from mongoID
+  //style=
   //description: String //NOTE: special notes to guests?
 });
 

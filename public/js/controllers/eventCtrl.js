@@ -195,10 +195,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
                   }, 2000);
 			    });						 
 			   }								
-			});		
-	  		   
-	  
-	  //$state.go('/cart');
+			});		 
 	//TODO: check that the event has said number of tickets available. if it does, connect to socket and reserve tickets
 	// have a request to update the db about and reserve said tickets 
 	//

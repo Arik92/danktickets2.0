@@ -7,8 +7,15 @@ app.factory('purchaseService', ['$http', function($http){
 		 throw (error); 
 	  })//error route 
   }//buyCart
+  purchaseFactory.getSingleTicket = function(ticketId){
+	  return $http.get('/tickets/singleTicket/'+ ticketId).then(function(result){
+		  return result.data;
+	  }, function(error){
+		 throw (error); 
+	  })//error route 
+  }//buyCart
   purchaseFactory.checkIn = function(ticketId, organizerId) {
-	  return $http.put('/tickets/checkIn').then(function(result){
+	  return $http.put('/tickets/checkIn/'+ticketId+'/'+organizerId).then(function(result){
 		  return result.data;
 	  }, function(error){
 		  throw (error);

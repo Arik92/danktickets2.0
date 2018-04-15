@@ -40,6 +40,16 @@ app.factory('createService', ['$http', function ($http) {
       });
   }// getting events by a certain publisher
   
+   var getTicketsByMerchant = function (id) {    
+    return $http.get('/tickets/merchTickets/' + id)
+      .then(function (response) {
+        return response.data;
+      }, function (err) {
+        console.error(err);
+      });
+  }// getting events by a certain publisher
+  
+  
   var getAttendees = function (id) {    
     return $http.get('/tickets/eventTickets/' + id)
       .then(function (response) {
@@ -180,6 +190,7 @@ app.factory('createService', ['$http', function ($http) {
     generalSearch: generalSearch,
 	getEventTickets: getEventTickets,
 	getAttendees: getAttendees,
-	getEventsByOrganizer: getEventsByOrganizer
+	getEventsByOrganizer: getEventsByOrganizer,
+	getTicketsByMerchant: getTicketsByMerchant
   };
 }]);

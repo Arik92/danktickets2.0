@@ -23,8 +23,20 @@ function toObjectId(string) {
 */
 
 //  1. get all of an associated event's tickets
+router.get('/singleTicket/:id', function(req, res, next){
+	console.log("id param is ",req.params.id)
+  var ticketQuery = toObjectId(req.params.id);  
+  Ticket.findOne({_id: ticketQuery},'checkedIn',function(err, foundTicket){
+    if (err) {
+      console.error(err);
+    } else {        
+	  console.log("reached result route with", foundTicket);	
+      res.send(foundTicket);
+    }
+  })//exec()
+}) // get tickets by event id 
 router.get('/eventTickets/:id', function(req, res, next){
-  var eventQuery = toObjectId(req.params.id);
+  var ticketQuery = toObjectId(req.params.id);
   // populate owner field to get username and email
   Ticket.find({eventId: eventQuery}).populate({
 	  path: 'owner',
@@ -38,6 +50,21 @@ router.get('/eventTickets/:id', function(req, res, next){
     }
   })//exec()
 }) // get tickets by event id 
+
+router.get('/merchTickets/:id', function(req, res, next){  
+  // populate owner field to get username and email
+  Ticket.find({"merchantId": req.params.id}).populate({
+	  path: 'eventId',
+	  select: 'title ongoing'
+	  }).exec(function(err, tickets){
+    if (err) {
+      console.error(err);
+    } else {        
+	  console.log("reached result route with", tickets);	
+      res.send(tickets);
+    }
+  })//exec()
+}) // get tickets by merchant id - use case: dashboard
 
 // 2. get all of a user's tickets
  router.get('/userTickets/:id', function(req, res, next){
@@ -71,19 +98,54 @@ router.post('/', function (req, res1, next) {
 	 .pipe(fs.createWriteStream('./public'+tempTick.imgName));		
 	 console.log("pushing "+tempTick+" into docs");
 	 docs.push(tempTick);
- }//for initializing docs	 
- //var e = new Event(req.body);
- //console.log("request body: ", req.body);
- Ticket.insertMany(docs, function(error, result){
+ }//for initializing docs	  
+ 
+    //A. write insert opertaion into tickets
+	var bulkTicketInserts = docs.map(function (ticket) { 
+    return { 
+        "insertOne": {  "document":  ticket }  //insertOne         
+    }   //return  
+}); 
+    Ticket.bulkWrite(bulkTicketInserts, function(err, tickets){
+	  var bulkEventUpdates = docs.map(function (ticket) { //collection might actually be tickets
+      return { 
+        "updateOne": { 
+          "filter": { "_id": ticket.eventId } ,              
+          "update": { "$push": {"purchasedTickets":ticket._id} , "$inc":{"numTickets": -1}} 
+        }//updateOne          
+      }    //return
+    });
+		Event.bulkWrite(bulkEventUpdates, function(eventErr, events){
+			if (eventErr) {
+				throw eventErr;
+			} else {
+				res1.send(events);
+			}//else 
+		});
+	})
+	//B. update events collection. Each iteration: 1. push ticket._id into purchased tickets.
+	//and 2. $dec numRemaining by 1 for each purchase	
+
+ 
+ 
+ /*Ticket.insertMany(docs, function(error, result){
  if (error) {
  console.log("reached error route");
  console.log(error);
   } else {
     console.log("added tickets? result is", result);
+	var idQuery = toObjectId(result[0]._id);
+	var ids = [];
+	var priceSum = 0;
+	for (var i=0;i<result.length;i++) {
+		ids.push(result[i]._id);
+		priceSum+=result[i].ticketPrice;
+	}//for gathering ids and total revenue
+	//Event.findOneAndUpdate
     // res.send(result);
     res1.send(result);
     }//else
-  });
+  });*/
  
  /*e.save(function(error, result){
  if (error) {
@@ -103,6 +165,7 @@ router.put('/checkIn/:ticketId/:orgId', function(req, res) {
       console.log(err);
       res.send(err);
 	 }  else {   
+	 console.log("reached result route with ", ticket);
       res.send(ticket);
 		}
 	});

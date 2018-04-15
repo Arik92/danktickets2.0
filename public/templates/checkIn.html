@@ -1,0 +1,14 @@
+<section>
+  <div class="container">
+    <div class="row">
+	<h1>Check in</h1>
+      <div class="col-md-6 col-md-offset-3" ng-show="!ticket.checkedIn">	   
+		<form ng-submit="checkout()">
+		Enter Merchant code to check in: <input type="text" ng-model="merchId">
+		<button ng-click="checkIn(merchId)">Check In</button>
+		</form>
+	  </div>
+	  <div ng-show="ticket.checkedIn">This one has already checked In!</div>
+	</div>
+  </div>
+</section>

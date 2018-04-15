@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var User = require("./usermodel");
-
+var Profile = require("./profilemodel");
+var ticket = require("./ticketmodel");
  /*var ticketSchema = new Schema({
   type: String,
   price: Number,
@@ -34,10 +35,11 @@ var eventSchema = new Schema({
 		 ticketPrice: Number,
 		 ticketName: String,
 		 ticketQ: Number,
-		 isFree: Boolean,
-		 ticketsSold: Number	
+		 isFree: Boolean
+		 //ticketsSold: Number  - 2 sources of truth. no good
 	  }	  
   ], //o  
+  purchasedTickets: [{type: Schema.Types.ObjectId, ref:"Ticket" }],
   numTickets: Number, //tickets remaining
   isPrivate: Boolean,
   showRemainingTicks: Boolean,

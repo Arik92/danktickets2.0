@@ -1091,10 +1091,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
                   }, 2000);
 			    });						 
 			   }								
-			});		
-	  		   
-	  
-	  //$state.go('/cart');
+			});		 
 	//TODO: check that the event has said number of tickets available. if it does, connect to socket and reserve tickets
 	// have a request to update the db about and reserve said tickets 
 	//
@@ -1144,6 +1141,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
       console.log("All profiles by ", $rootScope.currentUser, result);
       $scope.profiles = result;
       $scope.selectedOrganizer = result[0];
+	  initTickets();  
 	  createService.getEventsByOrganizer($scope.selectedOrganizer._id).then(function(result){
 		//console.log("organizer's events", result);
 		$scope.events = result;
@@ -1222,7 +1220,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 
   //// ===================== tabs stuff ===========================
   function initTabs() {
-    $scope.tab = 4;
+    $scope.tab = 1;
     $scope.organizerTabs = ['Organizer Info', 'Stats', 'Manage Events', 'Merchant profile', 'Check Attendees', 'Organizer Settings'];
   }
 
@@ -1234,7 +1232,15 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
     return $scope.tab === tabNum;
   };
   
-  //// ===================== chart stuff ===========================  
+  //// ===================== chart stuff =========================== 
+  function initTickets() {
+	  //console.log("request id for ticketv  is", $scope.selectedOrganizer.merchantId);
+	  createService.getTicketsByMerchant($scope.selectedOrganizer.merchantId).then(function(response){
+		  $scope.tickets = response;
+		  console.log("fetching merchant's tickets yielded", response);
+	  });
+  }
+  
   $scope.setBarData = function(evts) {
 	   $scope.barData = [];
 	  $scope.barLabels = [];

@@ -131,10 +131,10 @@
   </section>
 
   <!-- Other Sections -->
-  <section ng-show="isSet(1)" class="left-aligned mobile-padder">
+  <section ng-show="isSet(1)" class="left-aligned mobile-padder ">
     <h3 class="settings-section-header-left">Purchase history</h3>
     <hr>    
-     <div>List of previously purchased tickets: </div>
+     <div >List of previously purchased tickets: </div>
 	 <table class="table checkout-tbl">		  		  
             <tr>
               <th>Event</th>
@@ -149,7 +149,7 @@
 			  <td>{{ticket.eventId.startDateDisplay}}</td>
               <td><a href={{ticket.eventId.location.locationMapUrl}} target="_blank">{{ticket.eventId.location.venue_name}}</a></td>			  
               <td>{{ticket.checkedIn}}</td>
-			  <td><img id={{$index}} style="height:120px; width:120px" src={{ticket.imgName}}></td>
+			  <td><img style="max-width:none;" height="120px" width="120px" src={{ticket.imgName+'?noresize'}}></td>
               <td><button ng-click="printSingle(ticket)">Print</button></td>   			  
             </tr>			
           </table>
