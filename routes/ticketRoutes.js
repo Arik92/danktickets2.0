@@ -5,6 +5,8 @@ var fs = require('fs');
 var Ticket = require("../models/ticketmodel");
 var User = require("../models/usermodel");
 var Event = require("../models/eventmodel"); //do I want to populate an event? 
+var EventTicket = require("../models/eventticketmodel");
+
 //var Profile = require("../models/") should I tie the ticket to an organizer or event, alongside the user
  var checkInURL;
  if (process.env.NODE_ENV === 'production') {
@@ -37,13 +39,14 @@ router.get('/singleTicket/:id', function(req, res, next){
 }) // get tickets by event id 
 router.get('/eventTickets/:id', function(req, res, next){
   var ticketQuery = toObjectId(req.params.id);
+  console.log("getting there");
   // populate owner field to get username and email
-  Ticket.find({eventId: eventQuery}).populate({
+  Ticket.find({eventId: ticketQuery}).populate({
 	  path: 'owner',
 	  select: 'username email'
 	  }).exec(function(err, tickets){
     if (err) {
-      console.error(err);
+      throw (err);
     } else {        
 	  console.log("reached result route with", tickets);	
       res.send(tickets);
@@ -51,7 +54,7 @@ router.get('/eventTickets/:id', function(req, res, next){
   })//exec()
 }) // get tickets by event id 
 
-router.get('/merchTickets/:id', function(req, res, next){  
+/*router.get('/merchTickets/:id', function(req, res, next){  
   // populate owner field to get username and email
   Ticket.find({"merchantId": req.params.id}).populate({
 	  path: 'eventId',
@@ -64,7 +67,7 @@ router.get('/merchTickets/:id', function(req, res, next){
       res.send(tickets);
     }
   })//exec()
-}) // get tickets by merchant id - use case: dashboard
+}) // get tickets by merchant id - use case: dashboard*/
 
 // 2. get all of a user's tickets
  router.get('/userTickets/:id', function(req, res, next){
@@ -96,32 +99,45 @@ router.post('/', function (req, res1, next) {
 	 qrImage
      .image(currURL, {type:'png', size: 20})
 	 .pipe(fs.createWriteStream('./public'+tempTick.imgName));		
-	 console.log("pushing "+tempTick+" into docs");
+	 //console.log("pushing "+tempTick+" into docs");
 	 docs.push(tempTick);
  }//for initializing docs	  
  
     //A. write insert opertaion into tickets
 	var bulkTicketInserts = docs.map(function (ticket) { 
     return { 
-        "insertOne": {  "document":  ticket }  //insertOne         
+        "insertOne": {  "document":  ticket }           
     }   //return  
 }); 
     Ticket.bulkWrite(bulkTicketInserts, function(err, tickets){
+		if (err) {
+			throw (err);
+		} else {
 	  var bulkEventUpdates = docs.map(function (ticket) { //collection might actually be tickets
-      return { 
+	  //console.log("the value that ticket has", ticket);
+	  //console.log("The before eventTicket id: "+ticket.eventTicketId+" and it is a "+typeof(ticket.eventTicketId));
+	  //var eventTicketQuery = toObjectId(ticket.eventTicketId);
+	  //console.log("The after eventTicket id: "+eventTicketQuery+" and it is a "+typeof(eventTicketQuery));
+      return { 	     
         "updateOne": { 
-          "filter": { "_id": ticket.eventId } ,              
-          "update": { "$push": {"purchasedTickets":ticket._id} , "$inc":{"numTickets": -1}} 
-        }//updateOne          
-      }    //return
+          "filter": { "_id": ticket.eventTicketId } ,              
+          "update": { 
+		  "$push": {"purchasedTickets":ticket._id},
+		  "$inc": {"ticketQ": -1}
+		  //"$inc": {"eventTickets[ticket.ticketIndex].ticketQ": -1}
+		  }//update  query
+        }//updateOne obj          
+      }//return
     });
-		Event.bulkWrite(bulkEventUpdates, function(eventErr, events){
+		EventTicket.bulkWrite(bulkEventUpdates, function(eventErr, events){
 			if (eventErr) {
 				throw eventErr;
 			} else {
+				//console.log("wrote", events);
 				res1.send(events);
-			}//else 
+			}//else update success
 		});
+		}//else ticket creation success 
 	})
 	//B. update events collection. Each iteration: 1. push ticket._id into purchased tickets.
 	//and 2. $dec numRemaining by 1 for each purchase	
@@ -171,7 +187,7 @@ router.put('/checkIn/:ticketId/:orgId', function(req, res) {
 	});
 })//tickets check in route for scanning tickets 
 router.delete('/:id',function(req,res){
-  //TODO: delete associated image. make sure the image address is passed
+  //TODO: delete associated  qr image. make sure the image address is passed
   Event.findOneAndRemove({ _id: req.params.id }, function(err, event) {
     if (err) {
       console.log(err);

@@ -59,8 +59,9 @@ app.factory('createService', ['$http', function ($http) {
       });
   }// getting tickets for a specific event
 
-  var postEvent = function (event) {
-    return $http.post('/events', event).then(function (result) {
+  var postEvent = function (evt) {
+	  console.log("Im submitting", evt);
+    return $http.post('/events', evt).then(function (result) {
       //console.log("service result");
       return result.data;
     }, function (error) {
@@ -69,8 +70,8 @@ app.factory('createService', ['$http', function ($http) {
     }) // add promise
   }// post event
 
-  var updateEvent = function (event) {
-    return $http.put('/events/' + event._id, event).then(function (result) {
+  var updateEvent = function (evt) {
+    return $http.put('/events/' + evt._id, evt).then(function (result) {
       return result.data;
     }, function (error) {
       throw error;

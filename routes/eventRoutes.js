@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var Event = require("../models/eventmodel");
 var User = require("../models/usermodel");
+var EventTicket = require("../models/eventticketmodel");
+
 //var Profile = require("../models/")
 
 function toObjectId(string) {
@@ -53,17 +55,23 @@ router.get('/findByOwner/:id', function(req, res, next){
 
 router.get('/findByOrganizer/:id', function(req, res, next){
 	var organizerQuery = toObjectId(req.params.id);
-  Event.find({organizer: organizerQuery}, function(err, events){
+  Event.find({organizer: organizerQuery}).populate({
+	  path: 'eventTickets',
+	  populate: {
+		  path: 'purchasedTickets'
+		  }
+  }).exec(function(err, events){
     if (err) {
       console.error(err);
-    } else {         	 
+    } else {
+      		
       res.send(events);
     }
   })//exec()
 }) // get event by Organizer name.
 
 router.get('/findById/:id', function(req, res, next){
-  Event.find({_id: req.params.id}).populate('organizer').exec(function(err,foundEvent){
+  Event.find({_id: req.params.id}).populate('organizer eventTickets').exec(function(err,foundEvent){
     if (err) {
       console.error(err);
     } else {
@@ -144,7 +152,7 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
 	})// event cb 	
 }) //NOTE: get event by a specific type criteria. for future use
 
-router.post('/upload', function (req, res1, next) {
+/*router.post('/upload', function (req, res1, next) {
   upload(req,res1,function(err){
              if(err){
                   res1.json({error_code:1,err_desc:err});
@@ -167,21 +175,33 @@ router.post('/upload', function (req, res1, next) {
                 }//else
               });
          })
-     });// path for regular uploads
+     });// path for regular uploads */ // REDUNDANT. We use cloudinary and regular /post now
 
-router.post('/', function (req, res1, next) {
- var e = new Event(req.body);
- //e.image = req.file.filename; //TODO: save some default image
- e.save(function(error, result){
- if (error) {
- console.log("reached error route");
- console.log(error);
-  } else {
-    console.log("reached result route");
-    // res.send(result);
-    res1.send(result);
-    }//else
-  });
+router.post('/', function (req, res1, next) {	
+  req.body.eventTickets = [];
+  var tempEventTicket;
+  var docs = [];
+  for (var i=0;i<req.body.ticketDefs.length;i++) {
+	//create new eventTicket object
+	tempEventTicket = new EventTicket(req.body.ticketDefs[i]);
+	docs.push(tempEventTicket);
+	req.body.eventTickets.push(tempEventTicket._id);
+  }//for creating eventTickets. inb4 insertMany
+  EventTicket.insertMany(docs, function(manyError, manyRes){
+    //eventTicks initiated. create actua event
+	var e = new Event(req.body);
+    //e.image = req.file.filename; //TODO: save some default image
+    e.save(function(error, result){
+      if (error) {
+        console.log("reached error route");
+        console.log(error);
+      } else {
+        console.log("reached result route");
+        // res.send(result);
+        res1.send(result);
+      }//else
+    });
+  })//insertmany callback 
 })//regular uploads(no pic provided)
 
 router.delete('/:id',function(req,res){

@@ -68,7 +68,8 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 					'ticketPrice': $scope.event.eventTickets[i].ticketPrice,					
 					'howMany': 0,
 					'title': $scope.event.title,
-					'eventId': $scope.event._id
+					'eventId': $scope.event._id,
+					'eventTicketId': $scope.event.eventTickets[i]._id					
 				}//ticketCart object
 				$scope.eventCart.tickets.push(cartObj);
 			}//for             			

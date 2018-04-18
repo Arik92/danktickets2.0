@@ -39,7 +39,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
       console.log("All profiles by ", $rootScope.currentUser, result);
       $scope.profiles = result;
       $scope.selectedOrganizer = result[0];
-	  initTickets();  
+	    
 	  createService.getEventsByOrganizer($scope.selectedOrganizer._id).then(function(result){
 		//console.log("organizer's events", result);
 		$scope.events = result;
@@ -53,15 +53,10 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 				$scope.pastOrgEvents.push($scope.events[i]);
 			}//else pushing events to approprate arrays
 		}//for 
-		/*$scope.selectedCurr = $scope.ongoingOrgEvents[0];
-		$scope.selectedPast = $scope.pastOrgEvents[0];
-		if ($scope.selectedCurr) {
-			$scope.selectedStatEvent = $scope.selectedCurr;
-		} else {
-			$scope.selectedStatEvent = $scope.selectedPast;
-		}//else */
+		
 		$scope.setBarData($scope.ongoingOrgEvents);
 		console.log("this organizer's current events",$scope.ongoingOrgEvents);
+		initTickets();
 	});
     }, function (err) {
       throw (err);
@@ -118,7 +113,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 
   //// ===================== tabs stuff ===========================
   function initTabs() {
-    $scope.tab = 1;
+    $scope.tab = 4;
     $scope.organizerTabs = ['Organizer Info', 'Stats', 'Manage Events', 'Merchant profile', 'Check Attendees', 'Organizer Settings'];
   }
 
@@ -131,9 +126,16 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
   };
   
   //// ===================== chart stuff =========================== 
-  function initTickets() {
+  function initTickets() {	  
+	  if ($scope.ongoingOrgEvents.length>0) {
+	  $scope.attendeeEventId = $scope.ongoingOrgEvents[0]._id;
+	  $scope.selectedCurrAttends = $scope.ongoingOrgEvents[0];
+	  } else {
+		  $scope.attendeeEventId = $scope.events[0]._id;
+		  $scope.selectedPastAttends = $scope.pastOrgEvents[0];
+	  }
 	  //console.log("request id for ticketv  is", $scope.selectedOrganizer.merchantId);
-	  createService.getTicketsByMerchant($scope.selectedOrganizer.merchantId).then(function(response){
+	  createService.getAttendees($scope.attendeeEventId).then(function(response){
 		  $scope.tickets = response;
 		  console.log("fetching merchant's tickets yielded", response);
 	  });
@@ -146,7 +148,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 		  $scope.barLabels[i] = evts[i].title;
 		  $scope.barData[i] = 0;
 		  for (var j=0;j<evts[i].eventTickets.length;j++) {
-			  $scope.barData[i] +=evts[i].eventTickets[j].ticketsSold*evts[i].eventTickets[j].ticketPrice;
+			  $scope.barData[i] +=evts[i].eventTickets[j].purchasedTickets.length*evts[i].eventTickets[j].ticketPrice;
 		  }// for event tickets 
 	  }//for evts 
 	  console.log("bar data", $scope.barData);
@@ -154,20 +156,20 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
   setDonutData = function() {
 	  $scope.donutData = [];
 	  var totalSold = 0;
-	  var total = 0;
+	  var available = 0;
 	  for (var i=0;i<$scope.selectedStatEvent.eventTickets.length;i++) {
-		  totalSold+= $scope.selectedStatEvent.eventTickets[i].ticketsSold;
-		  total+= $scope.selectedStatEvent.eventTickets[i].ticketQ;
+		  totalSold+= $scope.selectedStatEvent.eventTickets[i].purchasedTickets.length;
+		  available+= $scope.selectedStatEvent.eventTickets[i].ticketQ;
 	  }	  
 	  $scope.donutData[0] = totalSold;
-	  $scope.donutData[1] = total;
+	  $scope.donutData[1] = available;
   };//setDonutData 
   setPieData = function() {
 	  $scope.pieData = [];
 	  $scope.pieLabels = [];	  
 	  for (var i=0;i<$scope.selectedStatEvent.eventTickets.length;i++) {
 		  $scope.pieLabels[i] = $scope.selectedStatEvent.eventTickets[i].ticketType;
-		  $scope.pieData[i] = $scope.selectedStatEvent.eventTickets[i].ticketsSold;
+		  $scope.pieData[i] = $scope.selectedStatEvent.eventTickets[i].purchasedTickets.length;
 	  }	  	  
   };//setDonutData 
   $scope.donutLabels = ["sold", "available"];
