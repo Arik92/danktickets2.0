@@ -4,7 +4,7 @@ var Event = require("./eventmodel");
 
 var eventTicketSchema = new Schema({
   version: Number,
-  //eventId: { type: Schema.Types.ObjectId, ref:"Event" },// 
+  eventId: { type: Schema.Types.ObjectId, ref:"Event" },// 
   title: String,  
   ticketType: String,
   ticketPrice: Number,

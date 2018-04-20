@@ -94,6 +94,24 @@ app.factory('createService', ['$http', function ($http) {
       throw (error);
     })//get ticet CB
   }//get event tickets by ID
+  
+   var updateEventTickets = function (id) {
+    return $http.put('/events/eventTickets/' + id).then(function (result) {
+      //console.log("service result", result);
+      return result.data;
+    }, function (error) {
+      throw (error);
+    })//get ticet CB
+  }//get event tickets by ID
+  
+   var deleteEventTickets = function (id) {
+    return $http.del('/events/eventTickets/' + id).then(function (result) {
+      //console.log("service result", result);
+      return result.data;
+    }, function (error) {
+      throw (error);
+    })//get ticet CB
+  }//get event tickets by ID
 
   var generalSearch = function (searchQuery) {
 	  //searchQuery = '/'+searchQuery+'/'+i;

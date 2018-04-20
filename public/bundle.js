@@ -506,12 +506,12 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 			addScript(mapSrc); 		
 	}//onInit	  
 	
-	$scope.deleteTempTick = function(index) {
-    $scope.event.eventTickets.splice(index, 1);
+	$scope.deleteEventTick = function(index) {    
 	$scope.updateQ();// $scope.event.numTickets - 
   }
   
   $scope.resetTickets = function() {
+	  //TODO: route to delete all tickets
     $scope.event.eventTickets = [];
   }
   $scope.add = function (type) {
@@ -1236,6 +1236,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 	  $scope.selectedCurrAttends = $scope.ongoingOrgEvents[0];
 	  } else {
 		  $scope.attendeeEventId = $scope.events[0]._id;
+		  $scope.selectedPastAttends = $scope.pastOrgEvents[0];
 	  }
 	  //console.log("request id for ticketv  is", $scope.selectedOrganizer.merchantId);
 	  createService.getAttendees($scope.attendeeEventId).then(function(response){

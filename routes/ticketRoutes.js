@@ -54,22 +54,7 @@ router.get('/eventTickets/:id', function(req, res, next){
   })//exec()
 }) // get tickets by event id 
 
-/*router.get('/merchTickets/:id', function(req, res, next){  
-  // populate owner field to get username and email
-  Ticket.find({"merchantId": req.params.id}).populate({
-	  path: 'eventId',
-	  select: 'title ongoing'
-	  }).exec(function(err, tickets){
-    if (err) {
-      console.error(err);
-    } else {        
-	  console.log("reached result route with", tickets);	
-      res.send(tickets);
-    }
-  })//exec()
-}) // get tickets by merchant id - use case: dashboard*/
 
-// 2. get all of a user's tickets
  router.get('/userTickets/:id', function(req, res, next){
   var userQuery = toObjectId(req.params.id);
   // might need to populate event
@@ -186,6 +171,9 @@ router.put('/checkIn/:ticketId/:orgId', function(req, res) {
 		}
 	});
 })//tickets check in route for scanning tickets 
+///////////////////////// EVENT TICKETS/ TICKET DEFS SUB-ROUTES ///////////////////////////////////////
+
+
 router.delete('/:id',function(req,res){
   //TODO: delete associated  qr image. make sure the image address is passed
   Event.findOneAndRemove({ _id: req.params.id }, function(err, event) {

@@ -144,6 +144,7 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
     .state('signin', {
       url: '/sign-in',
       templateUrl: '/templates/login.html'
+	   //controller: 'Ctrl',
     })
     .state('dashboard', {
       url: '/dashboard',
