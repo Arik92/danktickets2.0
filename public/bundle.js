@@ -344,9 +344,10 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
 	  image: $scope.previewImg,
 	  ongoing: true
     };// event post object
-    evt.eventTickets = [];
+    evt.ticketDefs = [];
     for (var i = 0; i < $scope.currentTickets.length; i++) {
-      evt.eventTickets.push($scope.currentTickets[i]);
+		$scope.currentTickets[i].purchasedTickets = [];
+      evt.ticketDefs.push($scope.currentTickets[i]);
     }// for filling ticket array
     var isLegit = validator();
     if (isLegit.localeCompare("ok") === 0) {
@@ -505,12 +506,12 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 			addScript(mapSrc); 		
 	}//onInit	  
 	
-	$scope.deleteTempTick = function(index) {
-    $scope.event.eventTickets.splice(index, 1);
+	$scope.deleteEventTick = function(index) {    
 	$scope.updateQ();// $scope.event.numTickets - 
   }
   
   $scope.resetTickets = function() {
+	  //TODO: route to delete all tickets
     $scope.event.eventTickets = [];
   }
   $scope.add = function (type) {
@@ -915,7 +916,6 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	//	initMap();		
 		$scope.dummyEvents = createService.dummyEvents;	
 		console.log($scope.dummyEvents);
-
 		// setMapSrc();
 	} //initialization  
 	
@@ -965,7 +965,8 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 					'ticketPrice': $scope.event.eventTickets[i].ticketPrice,					
 					'howMany': 0,
 					'title': $scope.event.title,
-					'eventId': $scope.event._id
+					'eventId': $scope.event._id,
+					'eventTicketId': $scope.event.eventTickets[i]._id					
 				}//ticketCart object
 				$scope.eventCart.tickets.push(cartObj);
 			}//for             			
@@ -1092,10 +1093,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
                   }, 2000);
 			    });						 
 			   }								
-			});		
-	  		   
-	  
-	  //$state.go('/cart');
+			});		 
 	//TODO: check that the event has said number of tickets available. if it does, connect to socket and reserve tickets
 	// have a request to update the db about and reserve said tickets 
 	//
@@ -1104,19 +1102,15 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 }]);
 
 },{"../config.js":1}],5:[function(require,module,exports){
-app.controller('manageOrganizerCtrl', ['orService','createService','merchService' ,'$timeout', '$scope', '$rootScope', function (orService, createService, merchService, $timeout, $scope, $rootScope) {
-
-
+app.controller('manageOrganizerCtrl', ['orService','createService','merchService' , '$scope', '$rootScope', function (orService, createService, merchService, $scope, $rootScope) {
   // console.log("root scope usr", $rootScope.currentUser);
-
   this.$onInit = function() {
     checkUser();
     initTabs();
     initSocialForms();
     organizerPrep();
     // setImageCropStuff();    
-  }
-
+  };
   
   $scope.initUploader = function() {
 	  cloudinary.openUploadWidget({ cloud_name: 'newoldroad-com',
@@ -1129,13 +1123,16 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 	  sources: ['local', 'url', 'facebook', 'instagram', 'dropbox']
 	  }, 
       function(error, result) { 
-	  console.log(result);
+	  if (error) {
+		  throw (error);
+	  } else {
+		  console.log(result);
+	  }	  
 	  // for HTTPS $scope.previewImg = result.secure_url;
 	  $scope.previewImg = result[0].url;
 	$scope.$apply();	  
 	  });
-  }//initUploader
-  
+  };//initUploader  
 
   function checkUser() {
     $scope.isUserSignedIn = $rootScope.currentUser;
@@ -1146,6 +1143,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
       console.log("All profiles by ", $rootScope.currentUser, result);
       $scope.profiles = result;
       $scope.selectedOrganizer = result[0];
+	    
 	  createService.getEventsByOrganizer($scope.selectedOrganizer._id).then(function(result){
 		//console.log("organizer's events", result);
 		$scope.events = result;
@@ -1159,19 +1157,14 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 				$scope.pastOrgEvents.push($scope.events[i]);
 			}//else pushing events to approprate arrays
 		}//for 
-		/*$scope.selectedCurr = $scope.ongoingOrgEvents[0];
-		$scope.selectedPast = $scope.pastOrgEvents[0];
-		if ($scope.selectedCurr) {
-			$scope.selectedStatEvent = $scope.selectedCurr;
-		} else {
-			$scope.selectedStatEvent = $scope.selectedPast;
-		}//else */
+		
 		$scope.setBarData($scope.ongoingOrgEvents);
 		console.log("this organizer's current events",$scope.ongoingOrgEvents);
+		initTickets();
 	});
     }, function (err) {
-      throw (err)
-    })//GET request route 
+      throw (err);
+    });//GET request route 
   }
 
   function initSocialForms() {
@@ -1181,12 +1174,12 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
       { name: 'Snapchat', model: $scope.scInput },
       { name: 'Twitter', model: $scope.twitInput },
       { name: 'LinkedIn', model: $scope.liInput },
-    ]
+    ];
   }
   
   $scope.showOrg = function() {
 	  console.log("selected organizer", $scope.selectedOrganizer);
-  }
+  };
 
   $scope.selectedItemChanged = function (selectedOrganizer) {
     console.log('you picked option:', selectedOrganizer );
@@ -1205,21 +1198,21 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 		}//for 
 		$scope.setBarData($scope.ongoingOrgEvents);
 	});
-  }//when organizer changes 
+  };//when organizer changes 
   
   $scope.selectedStatEventChanged = function(evt) {
 	  console.log("selected event: ", evt);
 	  $scope.selectedStatEvent = evt;
 	  setDonutData();
 	  setPieData();
-  }//when event changes for STATS 
+  };//when event changes for STATS 
   
    $scope.selectedAttendingEventChanged = function(evt) {
 	  createService.getAttendees(evt._id).then(function(result){
 		  $scope.tickets = result;
 		  console.log("found tickets", $scope.tickets);
-	  })
-  }//when event changes for STATS 
+	  });
+  };//when event changes for STATS 
   //$scope.selectedAttendingEventChanged();
 
   //// ===================== tabs stuff ===========================
@@ -1234,12 +1227,24 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 
   $scope.isSet = function (tabNum) {
     return $scope.tab === tabNum;
+  };
+  
+  //// ===================== chart stuff =========================== 
+  function initTickets() {	  
+	  if ($scope.ongoingOrgEvents.length>0) {
+	  $scope.attendeeEventId = $scope.ongoingOrgEvents[0]._id;
+	  $scope.selectedCurrAttends = $scope.ongoingOrgEvents[0];
+	  } else {
+		  $scope.attendeeEventId = $scope.events[0]._id;
+		  $scope.selectedPastAttends = $scope.pastOrgEvents[0];
+	  }
+	  //console.log("request id for ticketv  is", $scope.selectedOrganizer.merchantId);
+	  createService.getAttendees($scope.attendeeEventId).then(function(response){
+		  $scope.tickets = response;
+		  console.log("fetching merchant's tickets yielded", response);
+	  });
   }
   
-  //// ===================== chart stuff ===========================
-  function getRandomColor() {
-
-  }
   $scope.setBarData = function(evts) {
 	   $scope.barData = [];
 	  $scope.barLabels = [];
@@ -1247,39 +1252,37 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 		  $scope.barLabels[i] = evts[i].title;
 		  $scope.barData[i] = 0;
 		  for (var j=0;j<evts[i].eventTickets.length;j++) {
-			  $scope.barData[i] +=evts[i].eventTickets[j].ticketsSold*evts[i].eventTickets[j].ticketPrice;
+			  $scope.barData[i] +=evts[i].eventTickets[j].purchasedTickets.length*evts[i].eventTickets[j].ticketPrice;
 		  }// for event tickets 
 	  }//for evts 
 	  console.log("bar data", $scope.barData);
-  }//set bar data
+  };//set bar data
   setDonutData = function() {
 	  $scope.donutData = [];
 	  var totalSold = 0;
-	  var total = 0;
+	  var available = 0;
 	  for (var i=0;i<$scope.selectedStatEvent.eventTickets.length;i++) {
-		  totalSold+= $scope.selectedStatEvent.eventTickets[i].ticketsSold;
-		  total+= $scope.selectedStatEvent.eventTickets[i].ticketQ;
+		  totalSold+= $scope.selectedStatEvent.eventTickets[i].purchasedTickets.length;
+		  available+= $scope.selectedStatEvent.eventTickets[i].ticketQ;
 	  }	  
 	  $scope.donutData[0] = totalSold;
-	  $scope.donutData[1] = total;
-  }//setDonutData 
+	  $scope.donutData[1] = available;
+  };//setDonutData 
   setPieData = function() {
 	  $scope.pieData = [];
 	  $scope.pieLabels = [];	  
 	  for (var i=0;i<$scope.selectedStatEvent.eventTickets.length;i++) {
 		  $scope.pieLabels[i] = $scope.selectedStatEvent.eventTickets[i].ticketType;
-		  $scope.pieData[i] = $scope.selectedStatEvent.eventTickets[i].ticketsSold;
-	  }	  
-	  //$scope.donutData[0] = totalSold;
-	  //$scope.donutData[1] = total;
-  }//setDonutData 
+		  $scope.pieData[i] = $scope.selectedStatEvent.eventTickets[i].purchasedTickets.length;
+	  }	  	  
+  };//setDonutData 
   $scope.donutLabels = ["sold", "available"];
   //$scope.barLabels = ["dank sesh", "chalice palace", "toker heaven", "sativa-sesh", "smoke break", "cali-greens", "tacos and titties"];
   /*$scope.barData = [
     [65, 59, 80, 57, 96, 58, 85],
   ];*/
 
-  $scope.barColors = ['', 'orange', 'red', 'green', 'blue', 'lightgrey', ]
+  $scope.barColors = ['', 'orange', 'red', 'green', 'blue', 'lightgrey', ];
 
   $scope.barClick = function (points, evt) {
     console.log(points, evt);
@@ -1296,7 +1299,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
     var deltaContents = $scope.editor.getContents();
     //console.log(deltaContents);
     localStorage.setItem('deltaContents', JSON.stringify(deltaContents));
-  }
+  };
   function getQuillDelta() {
     var deltaContents = JSON.parse(localStorage.getItem('deltaContents'));
     return deltaContents;
@@ -1330,7 +1333,7 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 		  "annualCCSales": "100000",
 		  "mcc": mcc,
 		  "status":"1", 
-	  }
+	  };
 	  var mockEntity = {
           "name": "Real OG Kush 2",		  
 		  "type":"1",
@@ -1388,9 +1391,9 @@ app.controller('manageOrganizerCtrl', ['orService','createService','merchService
 }]);
 },{"../config.js":1}],6:[function(require,module,exports){
 app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window', '$stateParams', '$state', '$timeout', '$location',
-	function (purchaseService,$rootScope, $scope, $window, $stateParams, $state, $timeout, $location) {
-		this.$onInit = function() {			
-			//localStorage.removeItem('dankCart');// PANIC button			
+	function (purchaseService,$rootScope, $scope) {
+		// consider $state, $timeout for navigation after purchase
+		this.$onInit = function() {								
 			var config = require('../config.js');
             Payfields.config.apiKey = config.MERCHANT_PUBLIC_API_KEY;						
 			purchaseService.getCart($rootScope.currentUser).then(function(result){
@@ -1444,13 +1447,13 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
         color: "rgb(0,139,139)"
       }
     } 
-  }
+  };
 	            PayFields.appendIframe();
                 //console.log("errors?", Payfields.appendErrors());               
                $scope.showCheckout = false;
 				getDankCartTotal();
 			});						
-		}//onInit 		
+		};//onInit 		
 		$scope.remove = function (merchantIndex, ticketIndex) {
 			console.log("tickets to be spliced", $scope.dankCart[merchantIndex].tickets);
 			if($scope.dankCart[merchantIndex].tickets.length>0) {
@@ -1460,11 +1463,11 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 				 console.log("cart after merchant splice",$scope.dankCart);
 			 }	//if that ticket cart is empty			 
 			 purchaseService.saveCart($rootScope.currentUser, $scope.dankCart).then(function(result){
-			     console.log("updated!");
+			     console.log("updated!, purchased", result);
 				 getDankCartTotal();
 			});			
 			}
-		}
+		};
 		$scope.clear = function () {
 			console.log("removing", $scope.dankCart);	
 			$scope.dankCart = [];
@@ -1472,7 +1475,7 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 				console.log("cleared");
 				$scope.dankCartTotal = 0;
 			});				
-		}		
+		};		
 		function getDankCartTotal() {
 			var total = 0;
 			console.log("cart now", $scope.dankCart);
@@ -1500,79 +1503,36 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
             //console.log("merchant is", merchant);
             $scope.purchasedTickets = merchant.tickets;	
 			$scope.merchId = merchant.merchantId;
-            console.log("purchased tickets ", $scope.purchasedTickets);
-			
-			//Payfields.appendIframe();
+            console.log("purchased tickets ", $scope.purchasedTickets);						
 			Payfields.reload();
-			console.log("Payfields is", PayFields);
-			//Payfields.reload();
-			/*Payfields.fields = [
-    {
-      type: "number",
-      element: "#number",
-    },
-    {
-      type: "cvv",
-      element: "#cvv",
-    },
-    {
-      type: "name",
-      element: "#name",
-    },
-    {
-      type: "address",
-      element: "#address",
-    },
-    {
-      type: "expiration",
-      element: "#expiration",
-    }
-  ];  
-  Payfields.customizations = {
-    style: {
-      // All address fields class.
-      ".address-input": {
-        borderColor: "rgb(119,136,153)",
-        borderStyle: "solid",
-        borderBottomWidth: "1px"
-      },
-      // All fields
-      ".input": {
-        borderColor: "rgb(69,67,67)",
-        borderStyle: "solid",
-        borderBottomWidth: "1px"
-      },
-      // All error spans
-      ".form-error": {
-        color: "rgb(255, 0, 128)"
-      },
-      // Address error spans
-      ".address-form-error": {
-        color: "rgb(0,139,139)"
-      }
-    }
-  };                    */                          			
+			console.log("Payfields is", PayFields);                        			
 			$scope.showCheckout = !$scope.showCheckout;	          		
 			Payfields.config.merchant = merchant.merchantId;
-			Payfields.config.amount = getMerchantSum(merchant.tickets);
-			// get information about the organizer here
-  }//checkout
+			Payfields.config.amount = getMerchantSum(merchant.tickets);			
+  };//checkout
 		$scope.pay = function(){
 			console.log("attempting payment");
 			console.log("field contents?", Payfields);
 			Payfields.submit();
-		}//pay
+		};//pay
 	Payfields.onSuccess = function(response) {
      // We will flash success response on button and clear the iframe inputs     
       $("#button").text("Success");
       $("#button").css(
       {"backgroundColor": "rgb(79,138,16)", "transition": "2s"}
 	  );	  
+	   var individualTickets = [];
 	  for (var i=0;i<$scope.purchasedTickets.length;i++) {
 		  $scope.purchasedTickets[i].owner = $rootScope.currentUser;
-	  }//for imprinting purchaser
-	  //post tickets to collection on mongo 
-	  purchaseService.addTickets($scope.purchasedTickets).then(function(result){		 
+		  $scope.purchasedTickets[i].merchantId = $scope.merchId;
+		  $scope.purchasedTickets[i].checkedIn = false;
+		  $scope.purchasedTickets[i].imgName = '';
+		  for (var j=0;j<$scope.purchasedTickets[i].howMany;j++) {
+			  individualTickets.push($scope.purchasedTickets[i]);
+		     }//for 
+		   }//for init imprinting// splitting to individual tickets		   
+		 
+	  purchaseService.addTickets(individualTickets).then(function(result){		 
 		 console.log("ticket addition result", result); 
 		 for (i=0;i<$scope.dankCart.length;i++) {
 			 if ($scope.merchId===$scope.dankCart[i].merchantId) {
@@ -1582,9 +1542,10 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 		 purchaseService.saveCart($rootScope.currentUser, $scope.dankCart).then(function(result){
 			     //console.log("spliced the cart!");
 				 getDankCartTotal();
+				  $scope.showCheckout = false;
 			});	
 	  });	  
 	  // PRINT RECIPT     
-	}// payment success CB		
+	};// payment success CB		
 	}]);
 },{"../config.js":1}]},{},[2,3,4,5,6]);

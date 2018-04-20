@@ -373,7 +373,7 @@
     <h3>{{ organizerTabs[4] }}</h3>
 	<div class="row">
       <div class="col-md-3 col-md-offset-1">
-        <div class="form-group">
+        <div class="form-group ">
           <label for="sel1">Select Current Events</label>
           <select ng-model="selectedCurrAttends" 
                   ng-options="ongoing as ongoing.title for ongoing in ongoingOrgEvents" 
@@ -393,22 +393,24 @@
         </div>
       </div>
     </div>
-	<table class="table checkout-tbl" ng-repeat ="ticket in tickets track by $index">		  		  
+	<table class="table checkout-tbl ">		  		  
             <tr>
               <th>Name</th>
 			  <th>Email</th>
               <th >Ticket Type</th>
-              <th>Price(Howmany)</th>              
-              <th>
-                <b>Remove</b>
-              </th>
-			  <th><button class="btn btn-success tickets-btn" ng-click="checkout(merchant)">Checkout </button></th>
+              <th>Price(Howmany)</th>
+              <th>Checked In</th>              
+              <th><b>Manual check in</b></th>			  			  
             </tr>
-            <tr>              
+            <tr ng-repeat ="ticket in tickets track by $index">              
 			  <td>{{ticket.owner.username}}</td>
               <td >{{ticket.owner.email}}</td>			  
               <td>{{ticket.ticketName}}</td>   
-              <td>{{ticket.ticketPrice}}</td>   			  
+              <td>{{ticket.ticketPrice}}</td>
+              <td>{{ticket.checkedIn}}</td>
+              <td><a ui-sref="checkIn({ticketId: ticket._id})">
+                      <button type="submit" class="hvr-bounce-to-right my-btn" style="max-width: 40%; margin: 10px; height: 5%; font-size:18px;">Manual</button>
+                    </a></td>  
             </tr>			
           </table>
   </section>

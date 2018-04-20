@@ -19,7 +19,6 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	//	initMap();		
 		$scope.dummyEvents = createService.dummyEvents;	
 		console.log($scope.dummyEvents);
-
 		// setMapSrc();
 	} //initialization  
 	
@@ -69,7 +68,8 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 					'ticketPrice': $scope.event.eventTickets[i].ticketPrice,					
 					'howMany': 0,
 					'title': $scope.event.title,
-					'eventId': $scope.event._id
+					'eventId': $scope.event._id,
+					'eventTicketId': $scope.event.eventTickets[i]._id					
 				}//ticketCart object
 				$scope.eventCart.tickets.push(cartObj);
 			}//for             			
@@ -196,10 +196,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
                   }, 2000);
 			    });						 
 			   }								
-			});		
-	  		   
-	  
-	  //$state.go('/cart');
+			});		 
 	//TODO: check that the event has said number of tickets available. if it does, connect to socket and reserve tickets
 	// have a request to update the db about and reserve said tickets 
 	//

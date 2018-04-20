@@ -28,12 +28,12 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 			addScript(mapSrc); 		
 	}//onInit	  
 	
-	$scope.deleteTempTick = function(index) {
-    $scope.event.eventTickets.splice(index, 1);
+	$scope.deleteEventTick = function(index) {    
 	$scope.updateQ();// $scope.event.numTickets - 
   }
   
   $scope.resetTickets = function() {
+	  //TODO: route to delete all tickets
     $scope.event.eventTickets = [];
   }
   $scope.add = function (type) {

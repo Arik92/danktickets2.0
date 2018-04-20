@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var Event = require("../models/eventmodel");
 var User = require("../models/usermodel");
+var EventTicket = require("../models/eventticketmodel");
+
 //var Profile = require("../models/")
 
 function toObjectId(string) {
@@ -53,17 +55,23 @@ router.get('/findByOwner/:id', function(req, res, next){
 
 router.get('/findByOrganizer/:id', function(req, res, next){
 	var organizerQuery = toObjectId(req.params.id);
-  Event.find({organizer: organizerQuery}, function(err, events){
+  Event.find({organizer: organizerQuery}).populate({
+	  path: 'eventTickets',
+	  populate: {
+		  path: 'purchasedTickets'
+		  }
+  }).exec(function(err, events){
     if (err) {
       console.error(err);
-    } else {         	 
+    } else {
+      		
       res.send(events);
     }
   })//exec()
 }) // get event by Organizer name.
 
 router.get('/findById/:id', function(req, res, next){
-  Event.find({_id: req.params.id}).populate('organizer').exec(function(err,foundEvent){
+  Event.find({_id: req.params.id}).populate('organizer eventTickets').exec(function(err,foundEvent){
     if (err) {
       console.error(err);
     } else {
@@ -72,6 +80,7 @@ router.get('/findById/:id', function(req, res, next){
     }
   })//exec()
 }) // get event by OWNER id.
+
 router.get('/eventTickets/:id', function(req, res, next){
   Event.findOne({_id: req.params.id}, function(err, resultEvent){
 	  if (err) {
@@ -144,7 +153,7 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
 	})// event cb 	
 }) //NOTE: get event by a specific type criteria. for future use
 
-router.post('/upload', function (req, res1, next) {
+/*router.post('/upload', function (req, res1, next) {
   upload(req,res1,function(err){
              if(err){
                   res1.json({error_code:1,err_desc:err});
@@ -167,43 +176,91 @@ router.post('/upload', function (req, res1, next) {
                 }//else
               });
          })
-     });// path for regular uploads
+     });// path for regular uploads */ // REDUNDANT. We use cloudinary and regular /post now
 
-router.post('/', function (req, res1, next) {
- var e = new Event(req.body);
- //e.image = req.file.filename; //TODO: save some default image
- e.save(function(error, result){
- if (error) {
- console.log("reached error route");
- console.log(error);
-  } else {
-    console.log("reached result route");
-    // res.send(result);
-    res1.send(result);
-    }//else
-  });
+router.post('/', function (req, res1, next) {	
+  req.body.eventTickets = [];
+  var tempEventTicket;
+  var docs = [];
+  for (var i=0;i<req.body.ticketDefs.length;i++) {
+	//create new eventTicket object
+	tempEventTicket = new EventTicket(req.body.ticketDefs[i]);
+	docs.push(tempEventTicket);
+	req.body.eventTickets.push(tempEventTicket._id);
+  }//for creating eventTickets. inb4 insertMany  
+    //eventTicks initiated. create actua event
+	var e = new Event(req.body);
+    //e.image = req.file.filename; //TODO: save some default image
+    e.save(function(error, result){
+      if (error) {
+        console.log("reached error route");
+        console.log(error);
+      } else {
+		  for (i=0;i<docs.length;i++) {
+			  docs[i].eventId = result._id;
+		  }
+		  EventTicket.insertMany(docs, function(manyError, manyRes){
+			   res1.send(result);
+			   })//insertmany callback 
+        console.log("reached result route");
+        // res.send(result);
+       
+      }//else
+    });
+ 
 })//regular uploads(no pic provided)
 
 router.delete('/:id',function(req,res){
   //TODO: delete associated image. make sure the image address is passed
-  Event.findOneAndRemove({ _id: req.params.id }, function(err, event) {
+  Event.findOneAndRemove({ _id: req.params.id }, function(err, evt) {
     if (err) {
       console.log(err);
       res.send(err);
 	 }  else {
+		 EventTicket.remove({"eventId": req.params.id}, function(delErr, delTicks){
+			 if (delErr) {
+				 throw (delErr)
+			 } else {
+				 console.log("deleted event and eventTickets");
+				 res.send(evt);
+			 }
+		 })
      	  //delete associated image 	   
-	   var fs = require('fs');	   
+	   /*var fs = require('fs');	   
 	   console.log(event.image);
        var addressToDelete = 'public'+event.image;
 	   fs.unlink(addressToDelete,function(response){
 		   console.log("deleted event ", response);
         //res.send({error_code:0,err_desc:null});
-        }); //TODO: need the path for the file
+        }); //TODO: need the path for the file*/
 	   
       res.send(event);
-		}
+		}//else
 	});
 });
+router.delete('/eventTicket/:id',function(req,res){  
+  EventTicket.findOneAndRemove({ _id: req.params.id }, function(err, tick) {
+    if (err) {
+      console.log(err);
+      res.send(err);
+	 }  else {
+        Event.findOnceAndUpdate({_id: tick._id},{$pull: {"eventTickets._id": req.params.id}},{new:true} ,function(updateErr, updateRes){
+			 res.send(tick);
+		})		      
+		}//else
+	})
+}); //deleting a single EVENT-ticket
+router.put('/eventTicket/:id',function(req,res){  
+  EventTicket.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, function(err, tick) {
+    if (err) {
+      console.log(err);
+      res.send(err);
+	 }  else {	     	  	   
+      res.send(tick);
+		}//else
+})
+});  //updating a single EVENT-ticket
+
 router.post('/deleteAndUpload', function(req, res1, next) {
   //TODO: check if the image has changed. if it did, delete and replace it with the new one
   upload(req,res1,function(err){
@@ -237,39 +294,16 @@ router.post('/deleteAndUpload', function(req, res1, next) {
 
 router.put('/:id', function(req, res1, next) {
   console.log("request body is", req.body);
-  Event.findByIdAndUpdate(req.body._id, req.body, { new: true }, function(error, event) {
+  Event.findByIdAndUpdate(req.body._id, req.body, { new: true }, function(error, evt) {
     if (error) {
      console.error(error)
      return next(error);
     } else {
-     res1.send(event);
+     res1.send(evt);
    }//else
   });//mongo CB
 })// put route - without updating pictures
-router.put('/buyTicket/:id', function(req, res, next) {// the id == the id of the user/ buyer
-  console.log("request body is", req.body); // req.body == the dank cart.
-  for (var i=0;i<req.body.dankCart.length;i++) {
-  Event.find({id: req.body.dankCart[i].eventId}, function(error, foundEvent){
-		  if (error) {
-			  throw (error)
-		  } else {
-			  console.log("found ",foundEvent);	
-			  if (i===req.body.dankCart.length) {
-				  res.send("done");
-			  }
-		  }//else 
-	  });
-  }//for 
- 
-  /*Event.findByIdAndUpdate(req.body._id, req.body, { new: true }, function(error, event) {
-    if (error) {
-     console.error(error)
-     return next(error);
-    } else {
-     res1.send(event);
-   }//else
-  });//mongo CB */
-})// put route - without updating pictures
+
 module.exports = router;
 
 // var express = require('express');

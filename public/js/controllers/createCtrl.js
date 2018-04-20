@@ -334,9 +334,10 @@ app.controller('createCtrl', ['createService', 'orService', 'userService', '$sco
 	  image: $scope.previewImg,
 	  ongoing: true
     };// event post object
-    evt.eventTickets = [];
+    evt.ticketDefs = [];
     for (var i = 0; i < $scope.currentTickets.length; i++) {
-      evt.eventTickets.push($scope.currentTickets[i]);
+		$scope.currentTickets[i].purchasedTickets = [];
+      evt.ticketDefs.push($scope.currentTickets[i]);
     }// for filling ticket array
     var isLegit = validator();
     if (isLegit.localeCompare("ok") === 0) {

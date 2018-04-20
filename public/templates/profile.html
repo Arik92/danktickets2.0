@@ -113,8 +113,7 @@
                 <input type="text" class="form-control" id="email" placeholder="email">
               </div>
             </div>
-          </div>
-  
+          </div>  
           <div class="row">
               <div class="form-group col-md-5 col-md-offset-1">
                 <label for="zip">Zip/Postal Code</label>
@@ -126,14 +125,37 @@
               </div>
           </div>
         </div>
-
         <button class="btn btn-primary info-save-btn">Save</button>
       </form>
     </div>
   </section>
 
   <!-- Other Sections -->
-  <section ng-show="isSet(1)" class="left-aligned mobile-padder">
+  <section ng-show="isSet(1)" class="left-aligned mobile-padder ">
+    <h3 class="settings-section-header-left">Purchase history</h3>
+    <hr>    
+     <div >List of previously purchased tickets: </div>
+	 <table class="table checkout-tbl">		  		  
+            <tr>
+              <th>Event</th>
+			  <th>Date</th>
+              <th >Location</th>
+              <th>Attended(checked in)</th>
+			  <th>QR</th>
+              <th>Print this</th>			  
+            </tr>
+            <tr ng-repeat ="ticket in userTickets track by $index"> 
+              <td> <a ui-sref="event({id: ticket.eventId._id})">{{ticket.eventId.title}}</a></td>			
+			  <td>{{ticket.eventId.startDateDisplay}}</td>
+              <td><a href={{ticket.eventId.location.locationMapUrl}} target="_blank">{{ticket.eventId.location.venue_name}}</a></td>			  
+              <td>{{ticket.checkedIn}}</td>
+			  <td><img style="max-width:none;" height="120px" width="120px" src={{ticket.imgName+'?noresize'}}></td>
+              <td><button ng-click="printSingle(ticket)">Print</button></td>   			  
+            </tr>			
+          </table>
+    
+  </section>
+  <section ng-show="isSet(2)" class="left-aligned mobile-padder">
     <h3 class="settings-section-header-left">Password Reset</h3>
     <hr>
     <div class="password-container">
@@ -155,7 +177,7 @@
     </div>
   </section>
 
-  <section ng-show=isSet(2) class="left-aligned mobile-padder">
+  <section ng-show="isSet(3)" class="left-aligned mobile-padder">
     <h3 class="settings-section-header-left">Credit/Debit Cards</h3>
     <hr>
 
@@ -166,7 +188,7 @@
 
   </section>
 
-  <section ng-show="isSet(3)" class="left-aligned mobile-padder">
+  <section ng-show="isSet(4)" class="left-aligned mobile-padder">
     <h3 class="settings-section-header-left">Email Preferences</h3>
     <hr>
 
@@ -203,7 +225,7 @@
 
   </section>
 
-  <section ng-show="isSet(4)" class="left-aligned mobile-padder">
+  <section ng-show="isSet(5)" class="left-aligned mobile-padder">
     <h3 class="settings-section-header-left">Close Account</h3>
     <hr>
     <p>Thanks for using Dank Tickets. Sad to see you go.</p>

@@ -40,6 +40,16 @@ app.factory('createService', ['$http', function ($http) {
       });
   }// getting events by a certain publisher
   
+   var getTicketsByMerchant = function (id) {    
+    return $http.get('/tickets/merchTickets/' + id)
+      .then(function (response) {
+        return response.data;
+      }, function (err) {
+        console.error(err);
+      });
+  }// getting events by a certain publisher
+  
+  
   var getAttendees = function (id) {    
     return $http.get('/tickets/eventTickets/' + id)
       .then(function (response) {
@@ -49,8 +59,9 @@ app.factory('createService', ['$http', function ($http) {
       });
   }// getting tickets for a specific event
 
-  var postEvent = function (event) {
-    return $http.post('/events', event).then(function (result) {
+  var postEvent = function (evt) {
+	  console.log("Im submitting", evt);
+    return $http.post('/events', evt).then(function (result) {
       //console.log("service result");
       return result.data;
     }, function (error) {
@@ -59,8 +70,8 @@ app.factory('createService', ['$http', function ($http) {
     }) // add promise
   }// post event
 
-  var updateEvent = function (event) {
-    return $http.put('/events/' + event._id, event).then(function (result) {
+  var updateEvent = function (evt) {
+    return $http.put('/events/' + evt._id, evt).then(function (result) {
       return result.data;
     }, function (error) {
       throw error;
@@ -77,6 +88,24 @@ app.factory('createService', ['$http', function ($http) {
 
   var getEventTickets = function (id) {
     return $http.get('/events/eventTickets/' + id).then(function (result) {
+      //console.log("service result", result);
+      return result.data;
+    }, function (error) {
+      throw (error);
+    })//get ticet CB
+  }//get event tickets by ID
+  
+   var updateEventTickets = function (id) {
+    return $http.put('/events/eventTickets/' + id).then(function (result) {
+      //console.log("service result", result);
+      return result.data;
+    }, function (error) {
+      throw (error);
+    })//get ticet CB
+  }//get event tickets by ID
+  
+   var deleteEventTickets = function (id) {
+    return $http.del('/events/eventTickets/' + id).then(function (result) {
       //console.log("service result", result);
       return result.data;
     }, function (error) {
@@ -180,6 +209,7 @@ app.factory('createService', ['$http', function ($http) {
     generalSearch: generalSearch,
 	getEventTickets: getEventTickets,
 	getAttendees: getAttendees,
-	getEventsByOrganizer: getEventsByOrganizer
+	getEventsByOrganizer: getEventsByOrganizer,
+	getTicketsByMerchant: getTicketsByMerchant
   };
 }]);

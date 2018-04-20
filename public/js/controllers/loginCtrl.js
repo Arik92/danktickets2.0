@@ -84,9 +84,10 @@ app.controller('loginCtrl', ['authService', 'userService', '$timeout', '$locatio
   //// ===================== normal login ===========================
   
   this.doLogin = function (loginData) {
-	  //console.log("login data looks like", loginData);
+	  console.log("login data looks like", loginData);
     msg.loading = true;
     msg.errorMsg = false;
+	console.log("login email is ", loginData.email);
 	loginData.email = loginData.email.toLowerCase();
     authService.login(msg.loginData).then(function(data) {
       if (data.data.success) { 
