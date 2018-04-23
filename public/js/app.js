@@ -215,9 +215,11 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
 
 app.run([ 'authService', '$rootScope', function (authService, $rootScope) {
   var user = JSON.parse(localStorage.getItem("user"));
-  if (user) {
+  if ($rootScope.userDetails.id) {
+	  $rootScope.currentUser = $rootScope.userDetails.id;
+  } else if (user) {
     $rootScope.currentUser = user.id;
-    //console.log('user is: ', user);
+    console.log('user is: ', user);
     //$rootScope.$broadcast('fbLogin');
   }  
   // if (authService.isLoggedIn()) {
