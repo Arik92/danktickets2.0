@@ -215,7 +215,8 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
 
 app.run([ 'authService', '$rootScope', function (authService, $rootScope) {
   var user = JSON.parse(localStorage.getItem("user"));
-  console.log($rootScope.Scope);
+  console.log($rootScope);
+  console.log($rootScope.$scope);
   if ($rootScope.userDetails) {
 	  console.log("I see userdetails exists");
 	  $rootScope.currentUser = $rootScope.userDetails.id;
