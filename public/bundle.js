@@ -909,8 +909,6 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		}); */			
 		initEvent();
 		showImage();
-		//$scope.ticketQuantityOptions = initQuantityOptions();
-		//$scope.selectedQuantity = 1;		
 		$scope.ticketSum = 0;		
 		$scope.socialLinks = linkService.socialLinks;
 	//	initMap();		
@@ -918,14 +916,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		console.log($scope.dummyEvents);
 		// setMapSrc();
 	} //initialization  
-	
-	function initQuantityOptions() {
-		const ticketQuantityOptions = [];
-		for (i=1; i < 11; i++) {
-			ticketQuantityOptions.push(i);
-		}
-		return ticketQuantityOptions;
-	}
+
 
 	function initMap() {
 	NgMap.getMap().then(function(map) {
@@ -1062,6 +1053,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 		  }//if
 	  }//for cleaning out empty entries	 
 	  purchaseService.getCart($rootScope.currentUser).then(function(result){
+		  console.log("current user when getting that cart", $rootScope.currentUser);
                 var organizerFlag = false;		  
 				console.log("event cart is", $scope.eventCart);
 				if (result) {				

@@ -13,6 +13,11 @@ const sendNodeMail = require('./nodeMailing');
 
 module.exports = function (router) {
 
+function toObjectId(string) {
+	var ObjectId = (require('mongoose').Types.ObjectId);
+    return new ObjectId(string);
+} // var organizerQuery = toObjectId(req.params.id); use case example
+
   router.get('/searchByName/:name', function (req, res, next) {
     User.findOne({ _id: req.params.name }, function (err, user) {
       if (err) {
@@ -56,7 +61,8 @@ module.exports = function (router) {
     }
   });
   router.get('/shoppingCart/:id', function (req, res, next) {
-	       User.findOne({ _id: req.params.id }, function (err, user) {
+	  var idQuery = toObjectId(req.params.id);
+	       User.findOne({ _id: idQuery }, function (err, user) {
       if (err) {
         console.log(err);
       } else {		  
@@ -68,9 +74,10 @@ module.exports = function (router) {
       }//else
     })//findCb
   }) // get a user's shopping cart
-  router.put('/shoppingCart/:id', function (req, res, next) {	 
+  router.put('/shoppingCart/:id', function (req, res, next) {
+  	  var idQuery = toObjectId(req.params.id);	  
   console.log("shoppeing cart ", req.body);
-  User.findOneAndUpdate({ _id: req.params.id },{$set: {'shoppingCart': req.body}}, {new: true}, function (err, user) {
+  User.findOneAndUpdate({ _id: idQuery },{$set: {'shoppingCart': req.body}}, {new: true}, function (err, user) {
       if (err) {
         console.log(err);
       } else {
