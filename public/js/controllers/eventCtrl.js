@@ -155,8 +155,9 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 			  $scope.eventCart.tickets.splice(i,1);
 		  }//if
 	  }//for cleaning out empty entries	 
+	   console.log("current user when getting that cart", $rootScope.currentUser);
 	  purchaseService.getCart($rootScope.currentUser).then(function(result){
-		  console.log("current user when getting that cart", $rootScope.currentUser);
+		 
                 var organizerFlag = false;		  
 				console.log("event cart is", $scope.eventCart);
 				if (result) {				
