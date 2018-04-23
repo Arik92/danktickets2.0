@@ -3,7 +3,10 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 		// consider $state, $timeout for navigation after purchase
 		this.$onInit = function() {								
 			var config = require('../config.js');
-            Payfields.config.apiKey = config.MERCHANT_PUBLIC_API_KEY;						
+            Payfields.config.apiKey = config.MERCHANT_PUBLIC_API_KEY;
+            if ($rootScope.userDetails) {
+			$rootScope.currentUser = $rootScope.userDetails.id;
+		}// patching non-fb users			
 			purchaseService.getCart($rootScope.currentUser).then(function(result){
 				if (result) {
 				$scope.dankCart = result;				

@@ -899,6 +899,9 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	console.log("state param for event", $stateParams);	
 	//console.log("rootScope curren user is", $rootScope);
 	this.$onInit = function() {
+		if ($rootScope.userDetails) {
+			$rootScope.currentUser = $rootScope.userDetails.id;
+		}// patching non-fb users
 		//var socket = io(); //might move someplace else
 		var config = require('../config.js');
 		$scope.mapKey = config.MAPS_API_KEY;		
@@ -1390,7 +1393,10 @@ app.controller('ticketCtrl', ['purchaseService','$rootScope','$scope', '$window'
 		// consider $state, $timeout for navigation after purchase
 		this.$onInit = function() {								
 			var config = require('../config.js');
-            Payfields.config.apiKey = config.MERCHANT_PUBLIC_API_KEY;						
+            Payfields.config.apiKey = config.MERCHANT_PUBLIC_API_KEY;
+            if ($rootScope.userDetails) {
+			$rootScope.currentUser = $rootScope.userDetails.id;
+		}// patching non-fb users			
 			purchaseService.getCart($rootScope.currentUser).then(function(result){
 				if (result) {
 				$scope.dankCart = result;				
