@@ -2,8 +2,10 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	console.log("state param for event", $stateParams);	
 	//console.log("rootScope curren user is", $rootScope);
 	this.$onInit = function() {
+		$scope.usersId = $rootScope.currentUser;
 		if ($rootScope.userDetails) {
-			$rootScope.currentUser = $rootScope.userDetails.id;
+			$scope.usersId = $rootScope.userDetails.id;
+			console.log("users id ", $scope.usersId);
 		}// patching non-fb users
 		//var socket = io(); //might move someplace else
 		var config = require('../config.js');
@@ -152,16 +154,15 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	 $scope.updateSum();
 	}//remove from cart
 	
-  $scope.checkout = function() {
-	  console.log("do I have user details in here", $rootScope.userDetails);
+  $scope.checkout = function() {	  
 	  console.log("final checkout",$scope.eventCart.tickets);
 	  for (var i=0;i<$scope.eventCart.tickets.length;i++) {
 		  if ($scope.eventCart.tickets[i].howMany<=0) {
 			  $scope.eventCart.tickets.splice(i,1);
 		  }//if
 	  }//for cleaning out empty entries	 
-	   console.log("current user when getting that cart", $rootScope.currentUser);
-	  purchaseService.getCart($rootScope.currentUser).then(function(result){
+	   console.log("current user when getting that cart",$scope.usersId);
+	  purchaseService.getCart($scope.usersId).then(function(result){
 		 
                 var organizerFlag = false;		  
 				console.log("event cart is", $scope.eventCart);
@@ -177,7 +178,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 				 if (!organizerFlag) {
 					 result.push($scope.eventCart);
 				 }
-				purchaseService.saveCart($rootScope.currentUser, result).then(function(result2){
+				purchaseService.saveCart($scope.usersId, result).then(function(result2){
 		        //console.log("ive saved cart for ", $rootScope.currentUser);
 				$timeout(function () {
                  $location.path('/cart');
@@ -187,7 +188,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 				else {
 				  var finalCart = [];
                   finalCart.push($scope.eventCart);
-	              purchaseService.saveCart($rootScope.currentUser, finalCart).then(function(result2){
+	              purchaseService.saveCart($scope.usersId, finalCart).then(function(result2){
 		          //console.log("ive saved cart for ", $rootScope.currentUser);
 				  $timeout(function () {
                    $location.path('/cart');
