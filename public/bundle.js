@@ -1047,6 +1047,7 @@ app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService
 	}//remove from cart
 	
   $scope.checkout = function() {
+	  console.log("do I have user details in here", $rootScope.userDetails);
 	  console.log("final checkout",$scope.eventCart.tickets);
 	  for (var i=0;i<$scope.eventCart.tickets.length;i++) {
 		  if ($scope.eventCart.tickets[i].howMany<=0) {
