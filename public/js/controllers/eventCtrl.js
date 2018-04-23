@@ -1,6 +1,6 @@
 app.controller('eventCtrl',['$scope' ,'$rootScope','$stateParams','createService', 'purchaseService', '$document','NgMap','angularLoad', '$timeout','$state','$location', function($scope,$rootScope, $stateParams, createService, purchaseService, $document, NgMap, angularLoad, $timeout, $state, $location){
 	console.log("state param for event", $stateParams);	
-	console.log("rootScope curren user is", $rootScope);
+	//console.log("rootScope curren user is", $rootScope);
 	this.$onInit = function() {
 		//var socket = io(); //might move someplace else
 		var config = require('../config.js');
