@@ -223,6 +223,7 @@ app.run([ 'authService', '$rootScope', function (authService, $rootScope) {
     console.log('user is: ', user);
     //$rootScope.$broadcast('fbLogin');
   }  
+  console.log("after an app.run run, currentUser is",$rootScope.currentUser );
   // if (authService.isLoggedIn()) {
   //   authService.getUser().then(function(data) {
   //
