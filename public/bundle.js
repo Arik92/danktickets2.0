@@ -487,12 +487,16 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 			console.log("error fetching specific event by id");
 		} else {
 			console.log("fetched event is", res[0]);
+			$scope.currentTickets = [];
 			$scope.event = res[0];			
-    $scope.profiles = [];
-    console.log("initial profs for ",$rootScope.currentUser);    
+            $scope.profiles = [];
+			$scope.eventTicketSum = 0;
+	        $scope.currentTicketSum = 0;
+    //console.log("initial profs for ",$rootScope.currentUser);    
       orService.getOrganizersByUser($rootScope.currentUser).then(function(data2){
-        console.log("data 2", data2);
+        //console.log("data 2", data2);
         $scope.profiles = data2;
+		$scope.selectedName = $scope.event.organizer.name;
 		initStartDatePicker();
 		initEndDatePicker();
       })//get organizers  
@@ -505,16 +509,25 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 			initEventAndProfs();			
 			addScript(mapSrc); 		
 	}//onInit	  
-	
-	$scope.deleteEventTick = function(index) {    
-	$scope.updateQ();// $scope.event.numTickets - 
-  }
-  
-  $scope.resetTickets = function() {
-	  //TODO: route to delete all tickets
-    $scope.event.eventTickets = [];
-  }
-  $scope.add = function (type) {
+	//////////////////////////////////////// TICKET INTERFACE ////////////////////////////////////////////
+	$scope.deleteEventTicket = function(index) {
+		createService.deleteEventTicket($scope.eventTickets[index]._id).then(function(result){
+			console.log("ticket deletion successful", result);
+			$scope.event.eventTickets.splice(index, 1);
+			$scope.updateQ();
+		})//cb
+	}//deleteCurrentTick
+	$scope.updateEventTicket = function(ticket) {
+		createService.updateEventTicket(ticket).then(function(result){
+			console.log("ticket update successful", result);	
+            $scope.updateQ();			
+		})//cb
+	}//deleteCurrentTick
+	$scope.deleteCurrentTicket = function(index) {    
+	$scope.currentTickets.splice(index, 1);// $scope.event.numTickets - 
+	$scope.updateQ();
+  }  
+   $scope.add = function (type) {
     var isFree = false;
     if (type === 'Free') {
       isFree = true;
@@ -527,17 +540,24 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
       isFree: isFree
     }
     console.log("added ticket is ", ticket);
-    $scope.event.eventTickets.push(ticket);
-	$scope.updateQ();
-    
-  }
+    $scope.currentTickets.push(ticket);  
+    $scope.updateQ();	
+  }// adding additional ticket
   
-  $scope.updateQ = function () {
-    $scope.event.numTickets = 0;
-    for (var i = 0; i < $scope.event.eventTickets.length; i++) {
-      $scope.event.numTickets += $scope.event.eventTickets[i].ticketQ;
-    }//for
-  }//updateQ
+   $scope.updateQ = function () {
+	  $scope.eventTicketSum = 0;
+	  $scope.currentTicketSum = 0;
+    for (var i=0;i<$scope.event.eventTickets.length;i++) {
+		$scope.eventTicketSum+=$scope.event.eventTickets[i].ticketQ;
+	}//for event ticket loop
+	 for (i=0;i<$scope.currentTickets.length;i++) {
+		$scope.currentTicketSum+=$scope.currentTickets[i].ticketQ;
+	}//for event ticket loop
+  }//updateQ - updates both sums for the display of event and currentTicks
+  
+	//////////////////////////////////////// TICKET INTERFACE ////////////////////////////////////////////
+  
+ 
   
   $scope.selectProf = function(){
     console.log("selected profile is", $scope.selectedName);
@@ -580,7 +600,7 @@ app.controller('editCtrl',['createService','orService', 'userService', '$scope' 
 	  console.log(result);
 	  // for HTTPS $scope.previewImg = result.secure_url;
 	  $scope.previewImg = result[0].url;
-$scope.$apply();	  
+      $scope.$apply();	  
 	  });
   }//initUploader
   
@@ -588,7 +608,8 @@ $scope.$apply();
               //TODO: check if from is valid
               //TODO: Now I check if the image file has been changed.            
                 console.log("added event would be", $scope.event);
-                createService.updateEvent($scope.event).then(function(res){
+				console.log(" and tickets ", $scope.currentTickets);
+                createService.updateEvent($scope.event, $scope.currentTickets).then(function(res){
                   console.log("update event successfully!");
                   $scope.showRedirect = true;
                   $timeout(function() {

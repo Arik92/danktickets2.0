@@ -215,20 +215,20 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
 
 app.run([ 'authService', '$rootScope', function (authService, $rootScope) {
   var user = JSON.parse(localStorage.getItem("user"));
-  console.log($rootScope);
-  console.log($rootScope.$scope);
+  //console.log($rootScope);
+  //console.log($rootScope.$scope);
   if ($rootScope.userDetails) {
-	  console.log("I see userdetails exists");
+	  //console.log("I see userdetails exists");
 	  $rootScope.currentUser = $rootScope.userDetails.id;
-	  console.log("currentUser should be", $rootScope.currentUser);
+	  //console.log("currentUser should be", $rootScope.currentUser);
   } else {
 	  if (user) {
     $rootScope.currentUser = user.id;
-    console.log('user is: ', user);
+    //console.log('user is: ', user);
     //$rootScope.$broadcast('fbLogin');
 	  }
   }  
-  console.log("after an app.run run, currentUser is",$rootScope.currentUser );
+  //console.log("after an app.run run, currentUser is",$rootScope.currentUser );
   // if (authService.isLoggedIn()) {
   //   authService.getUser().then(function(data) {
   //

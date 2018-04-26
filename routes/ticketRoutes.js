@@ -29,7 +29,7 @@ router.get('/singleTicket/:id', function(req, res, next){
 	console.log("id param is ",req.params.id)
   var ticketQuery = toObjectId(req.params.id);  
   Ticket.findOne({_id: ticketQuery},'checkedIn',function(err, foundTicket){
-    if (err) {
+    if (err) { //////////////// Is this even used? 
       console.error(err);
     } else {        
 	  console.log("reached result route with", foundTicket);	

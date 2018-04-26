@@ -70,8 +70,12 @@ app.factory('createService', ['$http', function ($http) {
     }) // add promise
   }// post event
 
-  var updateEvent = function (evt) {
-    return $http.put('/events/' + evt._id, evt).then(function (result) {
+  var updateEvent = function (evt, newTickets) {
+	  var obj = {
+		  "event": evt,
+		  "newTickets": newTickets
+	  }//obj/req.body definition
+    return $http.put('/events/' + evt._id, obj).then(function (result) {
       return result.data;
     }, function (error) {
       throw error;
@@ -94,9 +98,9 @@ app.factory('createService', ['$http', function ($http) {
       throw (error);
     })//get ticet CB
   }//get event tickets by ID
-  
-   var updateEventTickets = function (id) {
-    return $http.put('/events/eventTickets/' + id).then(function (result) {
+ 
+   var updateEventTicket = function (ticket) {
+    return $http.put('/events/eventTickets/' + ticket._id, ticket).then(function (result) {
       //console.log("service result", result);
       return result.data;
     }, function (error) {
@@ -104,8 +108,8 @@ app.factory('createService', ['$http', function ($http) {
     })//get ticet CB
   }//get event tickets by ID
   
-   var deleteEventTickets = function (id) {
-    return $http.del('/events/eventTickets/' + id).then(function (result) {
+   var deleteEventTicket = function (id) {
+    return $http.delete('/events/eventTickets/' + id).then(function (result) {
       //console.log("service result", result);
       return result.data;
     }, function (error) {
@@ -210,6 +214,8 @@ app.factory('createService', ['$http', function ($http) {
 	getEventTickets: getEventTickets,
 	getAttendees: getAttendees,
 	getEventsByOrganizer: getEventsByOrganizer,
-	getTicketsByMerchant: getTicketsByMerchant
+	getTicketsByMerchant: getTicketsByMerchant,
+	updateEventTicket: updateEventTicket,
+	deleteEventTicket: deleteEventTicket
   };
 }]);
