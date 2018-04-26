@@ -10,20 +10,6 @@ function toObjectId(string) {
 	var ObjectId = (require('mongoose').Types.ObjectId);
     return new ObjectId(string);
 }
-/////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
-var multer = require('multer');
-
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './public/img/uploads')
-    },
-    filename: function (req, file, cb) {
-            var datetimestamp = Date.now();
-            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
-        }
-});
-var upload = multer({ storage: storage }).single('file');
-/////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
 
 router.get('/', function (req, res, next) {
   Event.find({"ongoing": true}).populate('organizer').exec(function(err, events){
@@ -35,20 +21,13 @@ router.get('/', function (req, res, next) {
   })//exec()
 });//get all events that are ongoing(have not ended and have tickets) and populate the publisher field
 
-router.get('/findByOwner/:id', function(req, res, next){
-  Event.find().populate('owner organizer').exec(function(err, events){
+router.get('/findByOwner/:id', function(req, res, next){ //optional: edit only ongoing events
+	var idQuery = toObjectId(req.params.id);
+  Event.find({owner: idQuery}).populate('owner organizer').exec(function(err, events){
     if (err) {
       console.error(err);
-    } else {
-      //console.log("found events(route)", events);
-      var result = [];
-      for (var i=0;i<events.length;i++) {
-        console.log("comparing *"+ req.params.id+"* and *"+ events[i].owner._id+"*");
-		if (events[i].owner._id==req.params.id) {
-				  result.push(events[i]);
-			  }
-      }//for	 
-      res.send(result);
+    } else {      
+      res.send(events);
     }
   })//exec()
 }) // get event by OWNER ID.
@@ -153,31 +132,6 @@ router.get('/generalSearch/:searchQuery', function(req, res, next){
 	})// event cb 	
 }) //NOTE: get event by a specific type criteria. for future use
 
-/*router.post('/upload', function (req, res1, next) {
-  upload(req,res1,function(err){
-             if(err){
-                  res1.json({error_code:1,err_desc:err});
-                  return;
-             }
-             //console.log("request to work with is", req.body);
-             console.log("file name:", req.file.filename);
-              var e = new Event(req.body.event);		
-             console.log("e is", e);			  
-              e.image = '/img/uploads/'+req.file.filename;
-              e.save(function(error, result){
-                if (error) {
-                  console.log("reached error route");
-                  res1.send(error);
-                } else {
-                  console.log("reached result route");
-
-                  // res.send(result);
-                  res1.send({error_code:0,err_desc:null, file_name: req.file.filename});
-                }//else
-              });
-         })
-     });// path for regular uploads */ // REDUNDANT. We use cloudinary and regular /post now
-
 router.post('/', function (req, res1, next) {	
   req.body.eventTickets = [];
   var tempEventTicket;
@@ -238,19 +192,20 @@ router.delete('/:id',function(req,res){
 		}//else
 	});
 });
-router.delete('/eventTicket/:id',function(req,res){  
+router.delete('/eventTickets/:id',function(req,res){  
   EventTicket.findOneAndRemove({ _id: req.params.id }, function(err, tick) {
     if (err) {
       console.log(err);
       res.send(err);
 	 }  else {
-        Event.findOnceAndUpdate({_id: tick._id},{$pull: {"eventTickets._id": req.params.id}},{new:true} ,function(updateErr, updateRes){
+        Event.findOneAndUpdate({_id: tick._id},{$pull: {"eventTickets._id": req.params.id}},{new:true} ,function(updateErr, updateRes){
 			 res.send(tick);
 		})		      
 		}//else
 	})
 }); //deleting a single EVENT-ticket
-router.put('/eventTicket/:id',function(req,res){  
+
+router.put('/eventTickets/:id',function(req,res){  
   EventTicket.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, function(err, tick) {
     if (err) {
       console.log(err);
@@ -261,69 +216,28 @@ router.put('/eventTicket/:id',function(req,res){
 })
 });  //updating a single EVENT-ticket
 
-router.post('/deleteAndUpload', function(req, res1, next) {
-  //TODO: check if the image has changed. if it did, delete and replace it with the new one
-  upload(req,res1,function(err){
-           if(err){
-                res.json({error_code:1,err_desc:err});
-                return;
-           }
-           console.log("request to work with is", req.body);
-           if (req.body.event.imgPath!="/img/uploads/undefined") {
-           var fs = require('fs');
-           var addressToDelete = req.body.event.image;
-         }//if there's no image, there is nothing to delete. TODO: change to default picture
-           console.log("file name:", req.file.filename);
-           req.body.event.image = '/img/uploads/'+req.file.filename;
-           Event.findByIdAndUpdate(req.body.event._id, req.body.event, { new: true }, function(error, event) {
-             if (error) {
-               console.error(error)
-               return next(error);
-             } else {
-               if (addressToDelete) {
-                 fs.unlink(addressToDelete,function(response){
-                   res1.send({error_code:0,err_desc:null, file_name: req.file.filename});
-                 }); //TODO: need the path for the file
-               } else {
-               res1.send({error_code:0,err_desc:null, file_name: req.file.filename});
-             }//else file wasnt deleted
-            }//else mongo
-           });
-         }); // path for updates
-       })// put request for also updating image
-
 router.put('/:id', function(req, res1, next) {
-  console.log("request body is", req.body);
-  Event.findByIdAndUpdate(req.body._id, req.body, { new: true }, function(error, evt) {
+	var tempEventTicket;
+    var docs = [];
+    for (var i=0;i<req.body.newTickets.length;i++) {
+	//create new eventTicket object
+	tempEventTicket = new EventTicket(req.body.newTickets[i]);
+	docs.push(tempEventTicket);
+	req.body.event.eventTickets.push(tempEventTicket._id);
+  }//for creating eventTickets. inb4 insertMany          
+  Event.findByIdAndUpdate(req.params.id, req.body.event, { new: true }, function(error, evt) {
     if (error) {
      console.error(error)
      return next(error);
     } else {
-     res1.send(evt);
+		EventTicket.insertMany(docs, function(manyError, manyRes){
+			   res1.send(evt);
+			   })//insertmany callback      
    }//else
   });//mongo CB
 })// put route - without updating pictures
 
 module.exports = router;
-
-// var express = require('express');
-// var router = express.Router();
-// var Event = require("../models/eventmodel");
-
-// /////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
-// var multer = require('multer');
-
-// var storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, './public/img/uploads')
-//     },
-//     filename: function (req, file, cb) {
-//             var datetimestamp = Date.now();
-//             cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
-//         }
-// });
-// var upload = multer({ storage: storage }).single('file');
-// /////////////////////////////////////////////////////multer/////////////////////////////////////////////////////////
 
 // router.get('/', function (req, res, next) {
 //   Event.find(function(error, result){

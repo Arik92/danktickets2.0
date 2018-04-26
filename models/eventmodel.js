@@ -22,8 +22,7 @@ var eventSchema = new Schema({
   eventTickets: [
     {type: Schema.Types.ObjectId, ref:"EventTicket"}
   ], //o  
-  //purchasedTickets: [{type: Schema.Types.ObjectId, ref:"Ticket" }],
-  numTickets: Number, //tickets remaining
+  //purchasedTickets: [{type: Schema.Types.ObjectId, ref:"Ticket" }],  
   isPrivate: Boolean,
   showRemainingTicks: Boolean,
   ongoing: Boolean

@@ -76,21 +76,21 @@
              <label class="control-label" for="source_name"><h1>Event Location: </h1></label>
              <div>
               <p>Enter a location venue</p>
-                <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter venue" required>
+                <input id="autocomplete" type="text" autocomplete="off" placeholder="Enter venue" ng-model="event.location.venue_name" required>
              </div>
 			 <div> 
 			 <p>type a location: </p>
 			 <div class="map-container">
 			<h5>Event Map</h5>
-			<a href={{location.locationMapUrl}} target="_blank">
-		<img id="static-map-img" src={{imgSrc}} alt="">
+			<a href={{event.location.locationMapUrl}} target="_blank">
+		<img id="static-map-img" src={{event.location.locationMapUrl}} alt="">
 		</a>
 		</div>
-			 <input type="text" placeholder="venue name" ng-model="location.venue_name" required>
-			 <input type="text" placeholder="address2" ng-model="location.address2">
-			 <input type="text" placeholder="city" ng-model="location.city" required>
-			 <input type="text" placeholder="zip" ng-model="location.zip">
-			 <input type="text" placeholder="country" ng-model="location.country">
+			 <input type="text" placeholder="venue name" ng-model="event.location.venue_name" required>
+			 <input type="text" placeholder="address2" ng-model="event.location.address2">
+			 <input type="text" placeholder="city" ng-model="event.location.city" required>
+			 <input type="text" placeholder="zip" ng-model="event.location.zip">
+			 <input type="text" placeholder="country" ng-model="event.location.country">
 			 </div>
            </div>
            </div>
@@ -106,12 +106,8 @@
            <br /><!--input -->
            <div class="page-header"><h2>Event Tickets</h2></div>
            <div class="form-group">
-             <label class="control-label" for="source_name">Choose a ticket type:</label>
-             <div>
-               <button type="submit" ng-click="add('Free')"class="hvr-bounce-to-right my-btn" id="tickets-btn"> Free</button>
-               <button type="submit" ng-click="add('Paid')" class="hvr-bounce-to-right my-btn" id="tickets-btn"> Paid</button>
-               <button type="submit" ng-click="add('Donation')" class="hvr-bounce-to-right my-btn" id="tickets-btn"> Donation</button>
-               <ul class="list-unstyled list-group" float="left">
+		                  <ul class="list-unstyled list-group" float="left">
+						  <label>Current event tickets</label>
                  <li ng-repeat="ticket in event.eventTickets track by $index" >
                    <br />
                    <div class="row">
@@ -125,15 +121,43 @@
                     <div class="col-md-3"><input  ng-hide="ticket.isFree" ng-model="ticket.ticketPrice" type="number"  min="0" placeHolder="Price" class="form-control input-md">
                     <input  ng-show="ticket.isFree" type="text" placeHolder="free" class="form-control input-md" disabled></div>
                     <div class="col-md-3"><input ng-model="ticket.ticketQ" type="number" placeHolder="How many?" min="0" class="form-control input-md" ng-change="updateQ()"></div>
-                    <div class="col-md-3"><button class="btn btn-danger" ng-click="deleteTempTick($index)"><i class="fa fa-trash-o " aria-hidden="true"></i></button></div>
+                    <div class="col-md-3"><button class="btn btn-danger" ng-click="deleteEventTicket(ticket)"><i class="fa fa-trash-o " aria-hidden="true"></i></button></div>
+					<div class="col-md-3"><button class="btn btn-warning" ng-click="updateEventTicket(ticket)">Apply Changes</button></div>
                     </div>
                    <br />
                  </li>
                  <div class="row">
-                 <div class="col-md-12">Total Ticket amount: {{event.numTickets}}</div>
+                 <div class="col-md-12">Total Ticket amount: {{eventTicketSum}}</div>
                </div>
                </ul>
+             <label class="control-label" for="source_name">Add additional tickets:</label>
+             <div>
+               <button type="submit" ng-click="add('Free')"class="hvr-bounce-to-right my-btn" id="tickets-btn"> Free</button>
+               <button type="submit" ng-click="add('Paid')" class="hvr-bounce-to-right my-btn" id="tickets-btn"> Paid</button>
+               <button type="submit" ng-click="add('Donation')" class="hvr-bounce-to-right my-btn" id="tickets-btn"> Donation</button>
              </div>
+			 <ul class="list-unstyled list-group" float="left">						 
+                 <li ng-repeat="currentTicket in currentTickets track by $index" >
+                   <br />
+                   <div class="row">
+                   <div class="col-md-3">(additional) Ticket name: </div>
+                   <div class="col-md-3">Price:   </div>
+                   <div class="col-md-3">Quantity:</div>
+                   <div class="col-md-3"></div>
+                   </div>
+                    <div class="row">
+                    <div class="col-md-3"><input ng-model="currentTicket.ticketName" type="text" placeHolder="Ticket name" class="form-control input-md"></div>
+                    <div class="col-md-3"><input  ng-hide="currentTicket.isFree" ng-model="currentTicket.ticketPrice" type="number"  min="0" placeHolder="Price" class="form-control input-md">
+                    <input  ng-show="currentTicket.isFree" type="text" placeHolder="free" class="form-control input-md" disabled></div>
+                    <div class="col-md-3"><input ng-model="currentTicket.ticketQ" type="number" placeHolder="How many?" min="0" class="form-control input-md" ng-change="updateQ()"></div>
+                    <div class="col-md-3"><button class="btn btn-danger" ng-click="deleteCurrentTicket($index)"><i class="fa fa-trash-o " aria-hidden="true"></i></button></div>
+                    </div>
+                   <br />
+                 </li>
+                 <div class="row">
+                 <div class="col-md-12">Total Ticket amount: {{currentTicketSum}}</div>
+               </div>
+               </ul>
            </div>
            <div class="form-group">
              <div>
